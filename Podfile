@@ -21,6 +21,7 @@ def pods
     pod 'Eureka', '5.3.4'
     pod 'Toaster', :git => 'https://github.com/devxoul/Toaster.git', :branch => 'master'
     pod 'Charts'
+    pod 'SnapKit'
     
     # Rx
     pod 'RxSwift'

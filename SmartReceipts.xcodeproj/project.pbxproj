@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03B4AB7527668DC600958B33 /* SubscriptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7427668DC600958B33 /* SubscriptionsViewController.swift */; };
+		03B4AB7727668E2000958B33 /* SubscriptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7627668E2000958B33 /* SubscriptionsViewModel.swift */; };
+		03B4AB7927668E3700958B33 /* SubscriptionsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7827668E3700958B33 /* SubscriptionsDataSource.swift */; };
+		03B4AB7B27668E5B00958B33 /* SubscriptionsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7A27668E5B00958B33 /* SubscriptionsRouter.swift */; };
+		03B4AB7D27668E6F00958B33 /* SubscriptionsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7C27668E6F00958B33 /* SubscriptionsAssembly.swift */; };
+		03B4AB802766AA6700958B33 /* SubscriptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7F2766AA6700958B33 /* SubscriptionCollectionViewCell.swift */; };
+		03B4AB8227691F6200958B33 /* SubscriptionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB8127691F6200958B33 /* SubscriptionAPI.swift */; };
+		03B4AB8427691FD900958B33 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB8327691FD900958B33 /* Subscription.swift */; };
 		4D004BB71D272836004DBB19 /* SmartReceiptsFormattableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D004BB61D272836004DBB19 /* SmartReceiptsFormattableString.swift */; };
 		4D29DE84216CEDBA00591F7B /* SharedLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D29DE67216CEDB900591F7B /* SharedLocalizable.strings */; };
 		4D29DE85216CEDBA00591F7B /* SharedLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D29DE6A216CEDB900591F7B /* SharedLocalizable.strings */; };
@@ -649,6 +657,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03B4AB7427668DC600958B33 /* SubscriptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsViewController.swift; sourceTree = "<group>"; };
+		03B4AB7627668E2000958B33 /* SubscriptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsViewModel.swift; sourceTree = "<group>"; };
+		03B4AB7827668E3700958B33 /* SubscriptionsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsDataSource.swift; sourceTree = "<group>"; };
+		03B4AB7A27668E5B00958B33 /* SubscriptionsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsRouter.swift; sourceTree = "<group>"; };
+		03B4AB7C27668E6F00958B33 /* SubscriptionsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsAssembly.swift; sourceTree = "<group>"; };
+		03B4AB7F2766AA6700958B33 /* SubscriptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCollectionViewCell.swift; sourceTree = "<group>"; };
+		03B4AB8127691F6200958B33 /* SubscriptionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAPI.swift; sourceTree = "<group>"; };
+		03B4AB8327691FD900958B33 /* Subscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		174672DE3D4A50AEEE7F4B57 /* Pods-SmartReceiptsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartReceiptsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartReceiptsTests/Pods-SmartReceiptsTests.release.xcconfig"; sourceTree = "<group>"; };
 		3A00E20F6F7D842A0665F496 /* Pods_SmartReceiptsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartReceiptsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		495B4DADAB22A37B88E4F4B8 /* Pods-SmartReceipts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartReceipts.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartReceipts/Pods-SmartReceipts.release.xcconfig"; sourceTree = "<group>"; };
@@ -1414,6 +1430,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03B4AB7227668D4700958B33 /* Subscriptions */ = {
+			isa = PBXGroup;
+			children = (
+				03B4AB7E2766A92600958B33 /*  Cells */,
+				03B4AB7427668DC600958B33 /* SubscriptionsViewController.swift */,
+				03B4AB7627668E2000958B33 /* SubscriptionsViewModel.swift */,
+				03B4AB7827668E3700958B33 /* SubscriptionsDataSource.swift */,
+				03B4AB7A27668E5B00958B33 /* SubscriptionsRouter.swift */,
+				03B4AB7C27668E6F00958B33 /* SubscriptionsAssembly.swift */,
+			);
+			path = Subscriptions;
+			sourceTree = "<group>";
+		};
+		03B4AB7E2766A92600958B33 /*  Cells */ = {
+			isa = PBXGroup;
+			children = (
+				03B4AB7F2766AA6700958B33 /* SubscriptionCollectionViewCell.swift */,
+			);
+			path = " Cells";
+			sourceTree = "<group>";
+		};
 		4D29DE66216CEDB900591F7B /* uk.lproj */ = {
 			isa = PBXGroup;
 			children = (
@@ -1727,6 +1764,7 @@
 				713B7F6B219786CF007220EC /* Responses */,
 				718A1C9621A2123500E010A2 /* Models */,
 				715606721FAF9BE500E09760 /* SmartReceiptsAPI.swift */,
+				03B4AB8127691F6200958B33 /* SubscriptionAPI.swift */,
 				710D4589219384F9005463F7 /* APIProvider.swift */,
 				7100F7751F5EF20300D4B4D9 /* AuthService.swift */,
 				7104A37422E8E4120027C5D9 /* OrganizationsService.swift */,
@@ -1961,6 +1999,7 @@
 				718A1C9721A2134A00E010A2 /* Recognition.swift */,
 				718A1C9921A368F100E010A2 /* RecognitionNotification.swift */,
 				7104A37622E902C00027C5D9 /* OrganizationModel.swift */,
+				03B4AB8327691FD900958B33 /* Subscription.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2079,6 +2118,7 @@
 		71AEDDD41EDF7F3300BAC0DD /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				03B4AB7227668D4700958B33 /* Subscriptions */,
 				71AEDDE61EDF823D00BAC0DD /* AppModules.swift */,
 				7190B90C1F6041D400F6CE7F /* Auth */,
 				71AEDDD51EDF7FB900BAC0DD /* Trip Distances */,
@@ -3319,6 +3359,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework",
 				"${BUILT_PRODUCTS_DIR}/Viperit/Viperit.framework",
@@ -3357,6 +3398,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toaster.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Viperit.framework",
@@ -3545,6 +3587,7 @@
 				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Toaster/Toaster.framework",
 				"${BUILT_PRODUCTS_DIR}/Viperit/Viperit.framework",
@@ -3586,6 +3629,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toaster.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Viperit.framework",
@@ -3737,7 +3781,9 @@
 				EA07BF4A1AF40066004D17F6 /* DatabaseTableNames.m in Sources */,
 				719B1FE01EF603190049BD71 /* ReceiptsRouter.swift in Sources */,
 				71F468371EEEDB03009F6CE7 /* EditTripView.swift in Sources */,
+				03B4AB7927668E3700958B33 /* SubscriptionsDataSource.swift in Sources */,
 				71E2E57D20DFD88700BDE501 /* SyncState.swift in Sources */,
+				03B4AB8427691FD900958B33 /* Subscription.swift in Sources */,
 				716138C71FD1E29300C73FB9 /* TripReportHeader.swift in Sources */,
 				7190B9151F60427200F6CE7F /* AuthInteractor.swift in Sources */,
 				718714FC224FDEB70061D493 /* DatabaseUpgradeToVersion16.swift in Sources */,
@@ -3794,6 +3840,7 @@
 				EA36DE511B0118EE0034CC2D /* Database+Hints.m in Sources */,
 				84A6C82B18F510B6003B876F /* GDataXMLNode.m in Sources */,
 				71888DBE247714AD003AD429 /* PieChart.swift in Sources */,
+				03B4AB802766AA6700958B33 /* SubscriptionCollectionViewCell.swift in Sources */,
 				EA8EB10A1B0A4AC400780BA3 /* ReceiptColumnReportCostCenter.m in Sources */,
 				71C014231F1AB14A005472B3 /* CategoriesDisplayData.swift in Sources */,
 				5705159B1E02B58500BB8FE4 /* DataPoint.swift in Sources */,
@@ -3853,6 +3900,7 @@
 				71ABEBE022FCC70700F07596 /* SubscriptionCell.swift in Sources */,
 				718AAC112120382E00290183 /* SyncableTableCell.swift in Sources */,
 				EAE9DAFA1AF8EAC000F4FE76 /* DistanceDateColumn.m in Sources */,
+				03B4AB7727668E2000958B33 /* SubscriptionsViewModel.swift in Sources */,
 				716D58A5219C8E1E00D6A6EA /* ImagePicker.swift in Sources */,
 				EA8ABE421B1A1D1700DBFA29 /* Database+Categories.m in Sources */,
 				71136ACF243899A2003CFC67 /* GraphsRouter.swift in Sources */,
@@ -3872,6 +3920,7 @@
 				EA07BF4D1AF400CA004D17F6 /* Database+Distances.m in Sources */,
 				714DE8A3205319FF0066EA6F /* HorizontalPickerItemCell.swift in Sources */,
 				719310471EDDC3120065B5AD /* WBImageStampler.m in Sources */,
+				03B4AB7D27668E6F00958B33 /* SubscriptionsAssembly.swift in Sources */,
 				EAE9DAF11AF8EA8300F4FE76 /* DistanceDistanceColumn.m in Sources */,
 				71C014251F1AB14A005472B3 /* CategoriesPresenter.swift in Sources */,
 				719B1FEB1EF6032D0049BD71 /* EditReceiptPresenter.swift in Sources */,
@@ -3882,6 +3931,7 @@
 				71F468331EEEDB03009F6CE7 /* EditTripDisplayData.swift in Sources */,
 				71F6252020FBE39C009B777C /* SyncService.swift in Sources */,
 				7190B9171F60427200F6CE7F /* AuthRouter.swift in Sources */,
+				03B4AB7527668DC600958B33 /* SubscriptionsViewController.swift in Sources */,
 				EA8D81911AEA7BF600BAC943 /* ReceiptColumnReportStartDate.m in Sources */,
 				716F07E22034AFDF00166D63 /* BackupView.swift in Sources */,
 				719B1FDF1EF603190049BD71 /* ReceiptsPresenter.swift in Sources */,
@@ -3893,6 +3943,7 @@
 				A7D554D31CFF118700169FD2 /* RefreshTripPriceHandler.swift in Sources */,
 				7111ADA81F0EC38100DF77ED /* SettingsPresenter.swift in Sources */,
 				71AEDDE11EDF7FF400BAC0DD /* TripDistancesRouter.swift in Sources */,
+				03B4AB7B27668E5B00958B33 /* SubscriptionsRouter.swift in Sources */,
 				A7F05BE11CFD95390079F1AD /* FMDatabase+Functions.swift in Sources */,
 				716F07E12034AFDF00166D63 /* BackupInteractor.swift in Sources */,
 				71673D58246B43C3008FFA50 /* UIButton+Extensions.swift in Sources */,
@@ -3997,6 +4048,7 @@
 				71B4A5DD22F389C9005E5FB2 /* View+Style.swift in Sources */,
 				71859DCE2010F97B00156B40 /* UpsellBannerAdView.swift in Sources */,
 				71871506224FDEB70061D493 /* DatabaseCreateAtVersion11.swift in Sources */,
+				03B4AB8227691F6200958B33 /* SubscriptionAPI.swift in Sources */,
 				71C014241F1AB14A005472B3 /* CategoriesInteractor.swift in Sources */,
 				714104E61FF43D7700C334C5 /* SuggestionView.m in Sources */,
 				71AF49E81EFDCC010022B2E2 /* ReceiptImageViewerView.swift in Sources */,

@@ -20,6 +20,12 @@ class MainMenuActionSheet: ActionSheet, Disposable {
         
         bag.insert(self)
         
+        addAction(title: "Subscriptions", image: #imageLiteral(resourceName: "subscriptions"))
+            .debug()
+            .subscribe(onNext: { [weak self] in
+                self?.openSubscriptions()
+            }).disposed(by: bag)
+        
         addAction(title: LocalizedString("menu_main_settings"), image: #imageLiteral(resourceName: "settings"))
             .debug()
             .subscribe(onNext: { [weak self] in
@@ -72,6 +78,11 @@ class MainMenuActionSheet: ActionSheet, Disposable {
                     self?.openAutoScans()
                 }).disposed(by: bag)
         }
+    }
+    
+    private func openSubscriptions() {
+        let vc = SubscriptionsViewController()
+        viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func openSettings() {

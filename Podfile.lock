@@ -162,6 +162,7 @@ PODS:
   - RxSwift (4.5.0)
   - RxTest (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
+  - SnapKit (5.0.1)
   - SwiftyStoreKit (0.15.0)
   - Toaster (2.3.0)
   - Viperit (1.3.2)
@@ -194,6 +195,7 @@ DEPENDENCIES:
   - RxOptional
   - RxSwift
   - RxTest
+  - SnapKit
   - SwiftyStoreKit
   - Toaster (from `https://github.com/devxoul/Toaster.git`, branch `master`)
   - Viperit
@@ -241,6 +243,7 @@ SPEC REPOS:
     - RxOptional
     - RxSwift
     - RxTest
+    - SnapKit
     - SwiftyStoreKit
     - Viperit
     - Zip
@@ -296,11 +299,12 @@ SPEC CHECKSUMS:
   RxOptional: 80426a0ddbd092573e4c482d8cc13302078c4d5e
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   RxTest: 3ccb66bfbace0bf7df1c43a7c75d046f8ce60372
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
   Toaster: 33d27524fb6829cdb6b247c924beab0cfa001b3e
   Viperit: a3dac14fdb04cd6fefe5fe44b5b6a4931a6d05da
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 52b8c140de4c6d10a6a68155634b949ef4102eb9
+PODFILE CHECKSUM: 91bf02f5e3ccb961bf0a0806e9d8a8d522c6e37c
 
 COCOAPODS: 1.11.2
