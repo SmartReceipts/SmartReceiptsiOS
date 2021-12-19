@@ -9,9 +9,9 @@
 import Foundation
 import RxSwift
 
-protocol SubscriptionsViewModelProtocol {
+protocol SubscriptionViewModelProtocol {
     func moduleDidLoad()
-    var dataSet: Observable<SubscriptionDateSet> { get }
+    var dataSet: Observable<PlanDateSet> { get }
 }
 
 class SubscriptionViewModel {}

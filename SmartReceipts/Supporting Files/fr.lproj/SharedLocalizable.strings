@@ -10,6 +10,8 @@
 "sr_app_name" = "Smart Receipts";
 
 /* ================ Main Menu Options ================== */
+"menu_main_subscriptions" = "Abonnements";
+
 "menu_main_settings" = "Paramètres";
 
 "menu_main_categories" = "Catégories";
@@ -108,6 +110,36 @@
 "subscriptions_label" = "Vos abonnements:";
 
 "subscription_expiration" = "Date d'expiration: %@";
+
+/* ============= Subscription ============= */
+"subscription_title" = "Abonnement";
+
+"subscription_plan_label" = "Elija plan";
+
+"subscription_first_function" = "Scannez automatiquement vos reçus";
+
+"subscription_second_function" = "Sauvegardez vos données en toute sécurité";
+
+"subscription_third_function" = "Personnalisation complète du rapport";
+
+"subscription_first_function_active" = "Reconnaissance des reçus";
+
+"subscription_second_function_active" = "Sauvegardes automatiques";
+
+"subscription_third_function_active" = "Paramètres d'exportation avancés";
+
+"subscription_cancel_plan" = "Vous pouvez annuler votre forfait à tout moment dans les paramètres";
+
+"subscription_price" = "par mois";
+
+"subscription_your_plan" = "Votre plan";
+
+/* ============= Success Page =============*/
+"success_title" = "Succès!";
+
+"success_purchased_title" = "Le plan a été acheté avec succès";
+
+"success_continue" = "Continuez";
 
 /* ================ No More Ads ================= */
 "missing_ad_suggest_removal_upsell" = "Marre des pubs ? Cliquez pour commencer un essai sans pub";

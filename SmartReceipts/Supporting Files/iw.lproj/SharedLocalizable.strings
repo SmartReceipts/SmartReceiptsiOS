@@ -10,6 +10,8 @@
 "sr_app_name" = "Smart Receipts";
 
 /* ================ Main Menu Options ================== */
+"menu_main_subscriptions" = "מנויים";
+
 "menu_main_settings" = "הגדרות";
 
 "menu_main_categories" = "קטגוריות";
@@ -108,6 +110,36 @@
 "subscriptions_label" = "המנויים שלך:";
 
 "subscription_expiration" = " תאריך תפוגה: %@";
+
+/* ============= Subscription ============= */
+"subscription_title" = "מִנוּי";
+
+"subscription_plan_label" = "בחר תוכנית";
+
+"subscription_first_function" = "סרוק אוטומטית את הקבלות שלך";
+
+"subscription_second_function" = "גיבוי בטוח של הנתונים שלך";
+
+"subscription_third_function" = "התאמה אישית מלאה של הדוח";
+
+"subscription_first_function_active" = "הכרה בקבלות";
+
+"subscription_second_function_active" = "גיבויים אוטומטיים";
+
+"subscription_third_function_active" = "הגדרות ייצוא מתקדמות";
+
+"subscription_cancel_plan" = "אתה יכול לבטל את התוכנית שלך בכל עת בהגדרות";
+
+"subscription_price" = "לחודש";
+
+"subscription_your_plan" = "התוכנית שלך";
+
+/* ============= Success Page =============*/
+"success_title" = "הַצלָחָה!";
+
+"success_purchased_title" = "התוכנית נרכשה בהצלחה";
+
+"success_continue" = "לְהַמשִׁיך";
 
 /* ================ No More Ads ================= */
 "missing_ad_suggest_removal_upsell" = "נמאס לך מפרסומות? לחץ להתחלת תקופת נסיון ללא פרסומות";

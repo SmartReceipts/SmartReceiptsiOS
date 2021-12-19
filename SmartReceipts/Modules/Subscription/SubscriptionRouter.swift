@@ -6,4 +6,10 @@
 //  Copyright © 2021 Will Baumann. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+protocol SubscriptionRouterProtocol {
+    func openSuccessPlan()
+}
+
+class SubscriptionRouter {}

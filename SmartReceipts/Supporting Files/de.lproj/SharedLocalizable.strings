@@ -10,6 +10,8 @@
 "sr_app_name" = "Smart Receipts";
 
 /* ================ Main Menu Options ================== */
+"menu_main_subscriptions" = "Abonnements";
+
 "menu_main_settings" = "Einstellungen";
 
 "menu_main_categories" = "Kategorien";
@@ -108,6 +110,36 @@
 "subscriptions_label" = "Ihre Abonnements:";
 
 "subscription_expiration" = "Haltbarkeitsdatum: %@";
+
+/* ============= Subscription ============= */
+"subscription_title" = "Abonnement";
+
+"subscription_plan_label" = "Wählen Sie einen Plan";
+
+"subscription_first_function" = "Scannen Sie Ihre Belege automatisch";
+
+"subscription_second_function" = "Sichern Sie Ihre Daten sicher";
+
+"subscription_third_function" = "Vollständige Berichtanpassung";
+
+"subscription_first_function_active" = "Anerkennung von Belegen";
+
+"subscription_second_function_active" = "Automatische Backups";
+
+"subscription_third_function_active" = "Erweiterte Exporteinstellungen";
+
+"subscription_cancel_plan" = "Du kannst deinen Plan jederzeit in den Einstellungen kündigen";
+
+"subscription_price" = "pro Monat";
+
+"subscription_your_plan" = "Dein Plan";
+
+/* ============= Success Page =============*/
+"success_title" = "Erfolg!";
+
+"success_purchased_title" = "Der Plan wurde erfolgreich gekauft";
+
+"success_continue" = "Fortsetzen";
 
 /* ================ No More Ads ================= */
 "missing_ad_suggest_removal_upsell" = "Werbung entfernen? Tippen Sie, um eine anzeigenfreie Testversion zu starten";
