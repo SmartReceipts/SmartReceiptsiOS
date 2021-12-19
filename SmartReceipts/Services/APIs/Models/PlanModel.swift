@@ -1,5 +1,5 @@
 //
-//  Subscription.swift
+//  PlanModel.swift
 //  SmartReceipts
 //
 //  Created by Азамат Агатаев on 14.12.2021.
@@ -13,9 +13,10 @@ enum Kind {
     case premium
 }
 
-struct Subscription {
+struct PlanModel {
     let name: String
     let kind: Kind
-    let price: Float
+    let price: Double
+    let isPurchased: Bool
     let functionDescription: String
 }

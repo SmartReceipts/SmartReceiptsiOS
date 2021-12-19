@@ -10,6 +10,8 @@
 "sr_app_name" = "Смарт Чеки";
 
 /* ================ Main Menu Options ================== */
+"menu_main_subscriptions" = "Підписки";
+
 "menu_main_settings" = "Налаштування";
 
 "menu_main_categories" = "Категорії";
@@ -108,6 +110,36 @@
 "subscriptions_label" = "Ваші підписки:";
 
 "subscription_expiration" = "Дата закінчення дії: %@";
+
+/* ============= Subscription ============= */
+"subscription_title" = "Підписка";
+
+"subscription_plan_label" = "Виберіть План";
+
+"subscription_first_function" = "Автоматично сканувати квитанції";
+
+"subscription_second_function" = "Надійно створюйте резервні копії даних";
+
+"subscription_third_function" = "Повна настройка звіту";
+
+"subscription_first_function_active" = "Визнання квитанцій";
+
+"subscription_second_function_active" = "Автоматичні резервні копії";
+
+"subscription_third_function_active" = "Розширені налаштування експорту";
+
+"subscription_cancel_plan" = "Ви можете будь-коли скасувати свій план у налаштуваннях";
+
+"subscription_price" = "на місяць";
+
+"subscription_your_plan" = "Ваш план";
+
+/* ============= Success Page =============*/
+"success_title" = "Успішно!";
+
+"success_purchased_title" = "План успішно придбано";
+
+"success_continue" = "Продовжити";
 
 /* ================ No More Ads ================= */
 "missing_ad_suggest_removal_upsell" = "Втомились від реклами? Натисніть, щоб спробувати версію без реклами";

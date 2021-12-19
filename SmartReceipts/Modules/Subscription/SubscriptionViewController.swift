@@ -10,16 +10,17 @@ import UIKit
 import SnapKit
 import RxSwift
 
-class SubscriptionsViewController: UIViewController {
+class SubscriptionViewController: UIViewController {
     private let bag = DisposeBag()
-    private let subscriptionDataSource = SubscriptionsDataSource()
-    private let subscriptions = SubscriptionAPI.getSubscriptions()
+    private let subscriptionDataSource = SubscriptionDataSource()
+    private let plans = PlanAPI.getPlans()
+    
     
     private lazy var choosePlanLabel: UILabel = {
         choosePlanLabel = UILabel(frame: .zero)
         choosePlanLabel.font = .bold40
         choosePlanLabel.textColor = .white
-        choosePlanLabel.text = "Choose Plan"
+        choosePlanLabel.text = LocalizedString("subscription_plan_label")
         
         return choosePlanLabel
     }()
@@ -63,7 +64,7 @@ class SubscriptionsViewController: UIViewController {
         firstFunctionLabel = UILabel(frame: .zero)
         firstFunctionLabel.font = .regular16
         firstFunctionLabel.textColor = .white
-        firstFunctionLabel.text = "Automatically scan your receipts"
+        firstFunctionLabel.text = LocalizedString("subscription_first_function")
         
         return firstFunctionLabel
     }()
@@ -72,7 +73,7 @@ class SubscriptionsViewController: UIViewController {
         secondFunctionLabel = UILabel(frame: .zero)
         secondFunctionLabel.font = .regular16
         secondFunctionLabel.textColor = .white
-        secondFunctionLabel.text = "Safely backup your data"
+        secondFunctionLabel.text = LocalizedString("subscription_second_function")
         
         return secondFunctionLabel
     }()
@@ -81,7 +82,7 @@ class SubscriptionsViewController: UIViewController {
         thirdFunctionLabel = UILabel(frame: .zero)
         thirdFunctionLabel.font = .regular16
         thirdFunctionLabel.textColor = .white
-        thirdFunctionLabel.text = "Full report customization"
+        thirdFunctionLabel.text = LocalizedString("subscription_third_function")
         
         return thirdFunctionLabel
     }()
@@ -103,21 +104,39 @@ class SubscriptionsViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .srViolet
         
         return collectionView
+    }()
+    
+    private lazy var cancelPlanLabel: UILabel = {
+        cancelPlanLabel = UILabel(frame: .zero)
+        cancelPlanLabel.font = .regular12
+        cancelPlanLabel.textColor = .white
+        cancelPlanLabel.textAlignment = .center
+        cancelPlanLabel.alpha = 0.5
+        cancelPlanLabel.isHidden = true
+        cancelPlanLabel.numberOfLines = 0
+        let text = LocalizedString("subscription_cancel_plan")
+        let attributedText = NSMutableAttributedString(string: text)
+        attributedText.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 37, length: 15))
+        cancelPlanLabel.attributedText = attributedText
+        
+        return cancelPlanLabel
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dataSet = SubscriptionDateSet(subscriptions: subscriptions)
-        subscriptionDataSource.update(dataSet: dataSet)
+        let dataSet = PlanDateSet(plans: plans)
+        subscriptionDataSource.update(with: dataSet)
                 
         view.addSubviews([
             choosePlanLabel,
             imageStackView,
             labelStackView,
-            collectionView
+            collectionView,
+            cancelPlanLabel
         ])
         
         commonInit()
@@ -126,15 +145,20 @@ class SubscriptionsViewController: UIViewController {
     private func commonInit() {
         setupViews()
         setupLayout()
+        setupWithPurchasedPlan()
     }
     
     private func setupViews() {
-        title = "Subscription"
+        title = LocalizedString("subscription_title")
         view.backgroundColor = .srViolet
         
         collectionView.dataSource = subscriptionDataSource
         collectionView.delegate = self
-        collectionView.register(SubscriptionCollectionViewCell.self, forCellWithReuseIdentifier: SubscriptionCollectionViewCell.identifier)
+        
+        collectionView.register(
+            PlanCollectionViewCell.self,
+            forCellWithReuseIdentifier: PlanCollectionViewCell.identifier
+        )
     }
     
     private func setupLayout() {
@@ -173,25 +197,46 @@ class SubscriptionsViewController: UIViewController {
             make.top.equalTo(labelStackView.snp.bottom).offset(25.5)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.width.equalTo(343)
-            make.height.equalTo(103)
+            make.bottom.equalToSuperview()
+        }
+        
+        cancelPlanLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(40)
+            make.trailing.equalToSuperview().offset(-40)
+            make.bottom.equalToSuperview().offset(-15)
         }
     }
 }
 
-extension SubscriptionsViewController: UICollectionViewDelegateFlowLayout {
+extension SubscriptionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = round(UIScreen.main.bounds.width -  2 * .padding)
-        return CGSize(width: 343, height: 103)
+        return CGSize(width: width, height: round(width / 3.33))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return .spacing
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return .spacing
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let successVc = SuccessPlanViewController()
+        successVc.modalPresentationStyle = .fullScreen
+        present(successVc, animated: true, completion: nil)
+    }
+}
+
+extension SubscriptionViewController {
+    
+    private func setupWithPurchasedPlan() {
+        let isPurchased = plans.contains { $0.isPurchased == true }
+        
+        if isPurchased == true {
+            firstFunctionLabel.text = LocalizedString("subscription_first_function_active")
+            secondFunctionLabel.text = LocalizedString("subscription_second_function_active")
+            thirdFunctionLabel.text = LocalizedString("subscription_third_function_active")
+            cancelPlanLabel.isHidden = !isPurchased
+        }
     }
 }
 

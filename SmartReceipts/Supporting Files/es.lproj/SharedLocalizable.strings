@@ -10,6 +10,8 @@
 "sr_app_name" = "Smart Receipts";
 
 /* ================ Main Menu Options ================== */
+"menu_main_subscriptions" = "Suscripciones";
+
 "menu_main_settings" = "Ajustes";
 
 "menu_main_categories" = "Categorías";
@@ -108,6 +110,36 @@
 "subscriptions_label" = "Sus Suscripciones:";
 
 "subscription_expiration" = "Fecha de caducidad: %@";
+
+/* ============= Subscription ============= */
+"subscription_title" = "Suscripción";
+
+"subscription_plan_label" = "Elija plan";
+
+"subscription_first_function" = "Escanee automáticamente sus recibos";
+
+"subscription_second_function" = "Haga una copia de seguridad de sus datos de forma segura";
+
+"subscription_third_function" = "Personalización completa del informe";
+
+"subscription_first_function_active" = "Reconocimiento de recibos";
+
+"subscription_second_function_active" = "Copias de seguridad automáticas";
+
+"subscription_third_function_active" = "Configuración de exportación avanzada";
+
+"subscription_cancel_plan" = "Puedes cancelar tu plan en cualquier momento en la configuración";
+
+"subscription_price" = "por mes";
+
+"subscription_your_plan" = "Tu plan";
+
+/* ============= Success Page =============*/
+"success_title" = "¡Éxito!";
+
+"success_purchased_title" = "El plan se ha comprado con éxito";
+
+"success_continue" = "Continuar";
 
 /* ================ No More Ads ================= */
 "missing_ad_suggest_removal_upsell" = "¿Cansado de los anuncios? Toca para comenzar una prueba gratuita sin anuncios";

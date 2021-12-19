@@ -6,4 +6,6 @@
 //  Copyright © 2021 Will Baumann. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class SubscriptionAssembly: ModuleAssembly {}

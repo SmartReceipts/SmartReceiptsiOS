@@ -1,5 +1,5 @@
 //
-//  StandardCollectionViewCell.swift
+//  PlanCollectionViewCell.swift
 //  SmartReceipts
 //
 //  Created by Азамат Агатаев on 13.12.2021.
@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import SnapKit
 
-class SubscriptionCollectionViewCell: UICollectionViewCell {
+class PlanCollectionViewCell: UICollectionViewCell {
     private let bag = DisposeBag()
     
     static var identifier: String {
@@ -58,13 +58,12 @@ class SubscriptionCollectionViewCell: UICollectionViewCell {
         priceLabel.textColor = .white
         priceLabel.backgroundColor = .srViolet
         priceLabel.numberOfLines = 0
+        priceLabel.lineBreakMode = .byWordWrapping
         priceLabel.textAlignment = .center
         
         priceLabel.clipsToBounds = true
         priceLabel.layer.cornerRadius = 12
-        
-        priceLabel.textInsets = UIEdgeInsets(top: 7, left: 31, bottom: 7, right: 31)
-        
+                
         return priceLabel
     }()
     
@@ -90,10 +89,10 @@ class SubscriptionCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        contentView.backgroundColor = .white
+        backgroundColor = .white
         
         clipsToBounds = true
-        layer.cornerRadius = 20
+        layer.cornerRadius = 24
     }
     
     private func setupLayout() {
@@ -115,23 +114,39 @@ class SubscriptionCollectionViewCell: UICollectionViewCell {
         priceLabel.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top).offset(25)
             make.leading.equalTo(premiumImageView.snp.trailing).offset(22)
-            make.trailing.equalToSuperview().offset(-24)
-            make.bottom.equalToSuperview().offset(-26)
-            make.width.equalTo(126)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-24)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-26)
         }
     }
     
-    func configureCell(with subscription: Subscription) {
-        switch subscription.kind {
+    func configureCell(with planModel: PlanModel) -> Self {
+        nameLabel.text = planModel.name
+        
+        if planModel.isPurchased == true {
+            priceLabel.backgroundColor = UIColor.init(red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
+            priceLabel.text = LocalizedString("subscription_your_plan")
+            priceLabel.textColor = .srViolet
+            priceLabel.font = .bold22
+        } else {
+            let doublePriceStr = String(format: "%.2f", planModel.price)
+            priceLabel.setAttributedTitle(
+                bigText: "$\(doublePriceStr)",
+                smallText: LocalizedString("subscription_price")
+            )
+        }
+        
+        switch planModel.kind {
         case .standard:
-            nameLabel.text = subscription.name
-            functionLabel.text = subscription.functionDescription
-            priceLabel.text = "$\(subscription.price) per month"
+            functionLabel.text = planModel.functionDescription
+            premiumImageView.isHidden = true
         case .premium:
-            nameLabel.text = subscription.name
-            functionLabel.text = subscription.functionDescription
-            priceLabel.text = "$\(subscription.price) per month"
+            functionLabel.setAttributedImage(
+                leftImage: UIImage(named: "plus"),
+                with: planModel.functionDescription
+            )
             premiumImageView.isHidden = false
         }
+        
+        return self
     }
 }

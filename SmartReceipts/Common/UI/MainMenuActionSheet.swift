@@ -20,7 +20,7 @@ class MainMenuActionSheet: ActionSheet, Disposable {
         
         bag.insert(self)
         
-        addAction(title: "Subscriptions", image: #imageLiteral(resourceName: "subscriptions"))
+        addAction(title: LocalizedString("menu_main_subscriptions"), image: #imageLiteral(resourceName: "subscriptions"))
             .debug()
             .subscribe(onNext: { [weak self] in
                 self?.openSubscriptions()
@@ -81,7 +81,7 @@ class MainMenuActionSheet: ActionSheet, Disposable {
     }
     
     private func openSubscriptions() {
-        let vc = SubscriptionsViewController()
+        let vc = SubscriptionViewController()
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     

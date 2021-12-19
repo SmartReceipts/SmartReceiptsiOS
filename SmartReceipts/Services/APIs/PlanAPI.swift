@@ -1,5 +1,5 @@
 //
-//  SubscriptionAPI.swift
+//  PlanAPI.swift
 //  SmartReceipts
 //
 //  Created by Азамат Агатаев on 14.12.2021.
@@ -8,24 +8,26 @@
 
 import Foundation
 
-class SubscriptionAPI {
+class PlanAPI {
     
-    static func getSubscriptions() -> [Subscription] {
-        let subscriptions = [
-            Subscription(
+    static func getPlans() -> [PlanModel] {
+        let plans = [
+            PlanModel(
                 name: "Standard",
                 kind: .standard,
                 price: 2.99,
+                isPurchased: false,
                 functionDescription: "Main functions"
             ),
-            Subscription(
+            PlanModel(
                 name: "Premium",
                 kind: .premium,
                 price: 3.99,
+                isPurchased: true,
                 functionDescription: "Disable all ads"
             )
         ]
         
-        return subscriptions
+        return plans
     }
 }
