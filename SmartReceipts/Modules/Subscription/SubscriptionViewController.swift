@@ -9,12 +9,18 @@
 import UIKit
 import SnapKit
 import RxSwift
+import RxCocoa
 
-class SubscriptionViewController: UIViewController {
-    private let bag = DisposeBag()
-    private let subscriptionDataSource = SubscriptionDataSource()
-    private let plans = PlanAPI.getPlans()
+final class SubscriptionViewController: UIViewController {
+    var output: Driver<SubscriptionViewModel.Action> { outputEvents.asDriver(onErrorDriveWith: .empty()) }
+    private let outputEvents = PublishRelay<SubscriptionViewModel.Action>()
+
+
+
+    private let viewModel: SubscriptionViewModel
+    private let dataSource: SubscriptionDataSource
     
+    private let bag = DisposeBag()
     
     private lazy var choosePlanLabel: UILabel = {
         choosePlanLabel = UILabel(frame: .zero)
@@ -103,9 +109,10 @@ class SubscriptionViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
+        layout.sectionInset = .init(top: .zero, left: .zero, bottom: .spacing, right: .zero)
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .srViolet
-        
+        collectionView.contentInset = .init(top: .spacing, left: .padding, bottom: .spacing, right: .padding)
         return collectionView
     }()
     
@@ -117,19 +124,23 @@ class SubscriptionViewController: UIViewController {
         cancelPlanLabel.alpha = 0.5
         cancelPlanLabel.isHidden = true
         cancelPlanLabel.numberOfLines = 0
-        let text = LocalizedString("subscription_cancel_plan")
-        let attributedText = NSMutableAttributedString(string: text)
-        attributedText.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 37, length: 15))
-        cancelPlanLabel.attributedText = attributedText
+        cancelPlanLabel.text = LocalizedString("subscription_cancel_plan")
         
         return cancelPlanLabel
     }()
-
+    
+    init(viewModel: SubscriptionViewModel, dataSource: SubscriptionDataSource) {
+        self.viewModel = viewModel
+        self.dataSource = dataSource
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let dataSet = PlanDateSet(plans: plans)
-        subscriptionDataSource.update(with: dataSet)
                 
         view.addSubviews([
             choosePlanLabel,
@@ -140,6 +151,8 @@ class SubscriptionViewController: UIViewController {
         ])
         
         commonInit()
+        bindCollectionView()
+        viewModel.accept(.viewDidLoad)
     }
     
     private func commonInit() {
@@ -151,10 +164,7 @@ class SubscriptionViewController: UIViewController {
     private func setupViews() {
         title = LocalizedString("subscription_title")
         view.backgroundColor = .srViolet
-        
-        collectionView.dataSource = subscriptionDataSource
-        collectionView.delegate = self
-        
+                
         collectionView.register(
             PlanCollectionViewCell.self,
             forCellWithReuseIdentifier: PlanCollectionViewCell.identifier
@@ -195,8 +205,8 @@ class SubscriptionViewController: UIViewController {
         
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(labelStackView.snp.bottom).offset(25.5)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
         }
         
@@ -205,6 +215,21 @@ class SubscriptionViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-40)
             make.bottom.equalToSuperview().offset(-15)
         }
+    }
+    
+    private func bindCollectionView() {
+        collectionView.rx
+            .setDelegate(self)
+            .disposed(by: bag)
+                
+        viewModel.items
+            .map { $0 }
+            .drive(collectionView.rx.items(dataSource: dataSource))
+            .disposed(by: bag)
+    }
+    
+    private func bind() {
+        
     }
 }
 
@@ -220,23 +245,30 @@ extension SubscriptionViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let successVc = SuccessPlanViewController()
-        successVc.modalPresentationStyle = .fullScreen
-        present(successVc, animated: true, completion: nil)
+        let item = dataSource.sectionModels[indexPath.section].items[indexPath.item]
+        viewModel.accept(.didSelect(item))
     }
 }
 
 extension SubscriptionViewController {
     
     private func setupWithPurchasedPlan() {
-        let isPurchased = plans.contains { $0.isPurchased == true }
-        
-        if isPurchased == true {
-            firstFunctionLabel.text = LocalizedString("subscription_first_function_active")
-            secondFunctionLabel.text = LocalizedString("subscription_second_function_active")
-            thirdFunctionLabel.text = LocalizedString("subscription_third_function_active")
-            cancelPlanLabel.isHidden = !isPurchased
-        }
+        viewModel.items
+            .asObservable()
+            .subscribe(onNext: { [weak self] plans in
+                guard let self = self else { return }
+                for plan in plans {
+                    for item in plan.items {
+                        if item.isPurchased {
+                            self.firstFunctionLabel.text = LocalizedString("subscription_first_function_active")
+                            self.secondFunctionLabel.text = LocalizedString("subscription_second_function_active")
+                            self.thirdFunctionLabel.text = LocalizedString("subscription_third_function_active")
+                            self.cancelPlanLabel.isHidden = !item.isPurchased
+                        }
+                    }
+                }
+            })
+            .disposed(by: bag)
     }
 }
 

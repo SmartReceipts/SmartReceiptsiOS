@@ -11,10 +11,7 @@
 		03B4AB7727668E2000958B33 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7627668E2000958B33 /* SubscriptionViewModel.swift */; };
 		03B4AB7927668E3700958B33 /* SubscriptionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7827668E3700958B33 /* SubscriptionDataSource.swift */; };
 		03B4AB7B27668E5B00958B33 /* SubscriptionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7A27668E5B00958B33 /* SubscriptionRouter.swift */; };
-		03B4AB7D27668E6F00958B33 /* SubscriptionAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7C27668E6F00958B33 /* SubscriptionAssembly.swift */; };
 		03B4AB802766AA6700958B33 /* PlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7F2766AA6700958B33 /* PlanCollectionViewCell.swift */; };
-		03B4AB8227691F6200958B33 /* PlanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB8127691F6200958B33 /* PlanAPI.swift */; };
-		03B4AB8427691FD900958B33 /* PlanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB8327691FD900958B33 /* PlanModel.swift */; };
 		03DE1EAA276C519D00DB7A37 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE1EA9276C519D00DB7A37 /* UILabel+Extensions.swift */; };
 		03DE1EAD276C5E7500DB7A37 /* SuccessPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE1EAC276C5E7500DB7A37 /* SuccessPlanViewController.swift */; };
 		4D004BB71D272836004DBB19 /* SmartReceiptsFormattableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D004BB61D272836004DBB19 /* SmartReceiptsFormattableString.swift */; };
@@ -645,6 +642,12 @@
 		EAE9DAFD1AF8EAD100F4FE76 /* DistanceCommentColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE9DAFC1AF8EAD100F4FE76 /* DistanceCommentColumn.m */; };
 		EAF6FE121B543ABB0005E2CE /* PDFImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF6FE111B543ABB0005E2CE /* PDFImageView.xib */; };
 		EAF9ADDE1AECD2D20000AC84 /* ReportGeneratorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF9ADDD1AECD2D20000AC84 /* ReportGeneratorTest.m */; };
+		F398080027F0393400BDC207 /* PurchasesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39807FF27F0393400BDC207 /* PurchasesResponse.swift */; };
+		F398080227F0495200BDC207 /* SuccessPlanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398080127F0495200BDC207 /* SuccessPlanRouter.swift */; };
+		F398080427F04AA100BDC207 /* SuccessPlanBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398080327F04AA100BDC207 /* SuccessPlanBuilder.swift */; };
+		F398080627F04B1000BDC207 /* SuccessPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398080527F04B1000BDC207 /* SuccessPlanViewModel.swift */; };
+		F398080827F05B5B00BDC207 /* SubscriptionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398080727F05B5B00BDC207 /* SubscriptionBuilder.swift */; };
+		F398080A27F0859800BDC207 /* PlanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398080927F0859800BDC207 /* PlanModel.swift */; };
 		FC6ADCCA2D4701B4B53E5370 /* Pods_SmartReceipts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B397BE168915C982926C4BC /* Pods_SmartReceipts.framework */; };
 /* End PBXBuildFile section */
 
@@ -663,10 +666,7 @@
 		03B4AB7627668E2000958B33 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
 		03B4AB7827668E3700958B33 /* SubscriptionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDataSource.swift; sourceTree = "<group>"; };
 		03B4AB7A27668E5B00958B33 /* SubscriptionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionRouter.swift; sourceTree = "<group>"; };
-		03B4AB7C27668E6F00958B33 /* SubscriptionAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionAssembly.swift; sourceTree = "<group>"; };
 		03B4AB7F2766AA6700958B33 /* PlanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCollectionViewCell.swift; sourceTree = "<group>"; };
-		03B4AB8127691F6200958B33 /* PlanAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanAPI.swift; sourceTree = "<group>"; };
-		03B4AB8327691FD900958B33 /* PlanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanModel.swift; sourceTree = "<group>"; };
 		03DE1EA9276C519D00DB7A37 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		03DE1EAC276C5E7500DB7A37 /* SuccessPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPlanViewController.swift; sourceTree = "<group>"; };
 		174672DE3D4A50AEEE7F4B57 /* Pods-SmartReceiptsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartReceiptsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartReceiptsTests/Pods-SmartReceiptsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1399,6 +1399,12 @@
 		EAE9DAFC1AF8EAD100F4FE76 /* DistanceCommentColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistanceCommentColumn.m; sourceTree = "<group>"; };
 		EAF6FE111B543ABB0005E2CE /* PDFImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFImageView.xib; sourceTree = "<group>"; };
 		EAF9ADDD1AECD2D20000AC84 /* ReportGeneratorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportGeneratorTest.m; sourceTree = "<group>"; };
+		F39807FF27F0393400BDC207 /* PurchasesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesResponse.swift; sourceTree = "<group>"; };
+		F398080127F0495200BDC207 /* SuccessPlanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPlanRouter.swift; sourceTree = "<group>"; };
+		F398080327F04AA100BDC207 /* SuccessPlanBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPlanBuilder.swift; sourceTree = "<group>"; };
+		F398080527F04B1000BDC207 /* SuccessPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPlanViewModel.swift; sourceTree = "<group>"; };
+		F398080727F05B5B00BDC207 /* SubscriptionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionBuilder.swift; sourceTree = "<group>"; };
+		F398080927F0859800BDC207 /* PlanModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1442,7 +1448,8 @@
 				03B4AB7627668E2000958B33 /* SubscriptionViewModel.swift */,
 				03B4AB7827668E3700958B33 /* SubscriptionDataSource.swift */,
 				03B4AB7A27668E5B00958B33 /* SubscriptionRouter.swift */,
-				03B4AB7C27668E6F00958B33 /* SubscriptionAssembly.swift */,
+				F398080727F05B5B00BDC207 /* SubscriptionBuilder.swift */,
+				F398080927F0859800BDC207 /* PlanModel.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -1459,6 +1466,9 @@
 			isa = PBXGroup;
 			children = (
 				03DE1EAC276C5E7500DB7A37 /* SuccessPlanViewController.swift */,
+				F398080127F0495200BDC207 /* SuccessPlanRouter.swift */,
+				F398080327F04AA100BDC207 /* SuccessPlanBuilder.swift */,
+				F398080527F04B1000BDC207 /* SuccessPlanViewModel.swift */,
 			);
 			path = "Success Plan";
 			sourceTree = "<group>";
@@ -1656,6 +1666,7 @@
 				718A1C9221A086E300E010A2 /* AuthResponses.swift */,
 				718A1C9421A211EB00E010A2 /* RecognitionResposnse.swift */,
 				710EEE1422EA641D0025435A /* OrganizationsResponse.swift */,
+				F39807FF27F0393400BDC207 /* PurchasesResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -1776,7 +1787,6 @@
 				713B7F6B219786CF007220EC /* Responses */,
 				718A1C9621A2123500E010A2 /* Models */,
 				715606721FAF9BE500E09760 /* SmartReceiptsAPI.swift */,
-				03B4AB8127691F6200958B33 /* PlanAPI.swift */,
 				710D4589219384F9005463F7 /* APIProvider.swift */,
 				7100F7751F5EF20300D4B4D9 /* AuthService.swift */,
 				7104A37422E8E4120027C5D9 /* OrganizationsService.swift */,
@@ -2011,7 +2021,6 @@
 				718A1C9721A2134A00E010A2 /* Recognition.swift */,
 				718A1C9921A368F100E010A2 /* RecognitionNotification.swift */,
 				7104A37622E902C00027C5D9 /* OrganizationModel.swift */,
-				03B4AB8327691FD900958B33 /* PlanModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3792,13 +3801,13 @@
 				EA8D81971AEA7C1E00BAC943 /* ReceiptColumnImageName.m in Sources */,
 				710D999024623A1D004DAA6C /* GraphsPaymentMethodsDataSet.swift in Sources */,
 				713572B022F6F1E30069C9F5 /* ServiceFactory.swift in Sources */,
+				F398080227F0495200BDC207 /* SuccessPlanRouter.swift in Sources */,
 				710DCEA71F7444C000C08C43 /* User.swift in Sources */,
 				EA07BF4A1AF40066004D17F6 /* DatabaseTableNames.m in Sources */,
 				719B1FE01EF603190049BD71 /* ReceiptsRouter.swift in Sources */,
 				71F468371EEEDB03009F6CE7 /* EditTripView.swift in Sources */,
 				03B4AB7927668E3700958B33 /* SubscriptionDataSource.swift in Sources */,
 				71E2E57D20DFD88700BDE501 /* SyncState.swift in Sources */,
-				03B4AB8427691FD900958B33 /* PlanModel.swift in Sources */,
 				716138C71FD1E29300C73FB9 /* TripReportHeader.swift in Sources */,
 				7190B9151F60427200F6CE7F /* AuthInteractor.swift in Sources */,
 				718714FC224FDEB70061D493 /* DatabaseUpgradeToVersion16.swift in Sources */,
@@ -3903,6 +3912,7 @@
 				71E8F3F71FA12452005BD447 /* OCRConfigurationPresenter.swift in Sources */,
 				716F07E02034AFDF00166D63 /* BackupRouter.swift in Sources */,
 				7109B00F1F61C35F0043AE04 /* UserDefaults+Extensions.swift in Sources */,
+				F398080427F04AA100BDC207 /* SuccessPlanBuilder.swift in Sources */,
 				71AD6368219AD86200515A5E /* EurekaWhitespaceWorkaround.swift in Sources */,
 				A78214F71CFFE60000FD644A /* OpenExchangeRates.swift in Sources */,
 				71E890A422EF6D02002957CC /* AccountViewModel.swift in Sources */,
@@ -3936,7 +3946,6 @@
 				EA07BF4D1AF400CA004D17F6 /* Database+Distances.m in Sources */,
 				714DE8A3205319FF0066EA6F /* HorizontalPickerItemCell.swift in Sources */,
 				719310471EDDC3120065B5AD /* WBImageStampler.m in Sources */,
-				03B4AB7D27668E6F00958B33 /* SubscriptionAssembly.swift in Sources */,
 				EAE9DAF11AF8EA8300F4FE76 /* DistanceDistanceColumn.m in Sources */,
 				71C014251F1AB14A005472B3 /* CategoriesPresenter.swift in Sources */,
 				719B1FEB1EF6032D0049BD71 /* EditReceiptPresenter.swift in Sources */,
@@ -3967,6 +3976,7 @@
 				EA4C5CBE1AF2866E0083FDD7 /* UIView+LoadHelpers.m in Sources */,
 				71871502224FDEB70061D493 /* DatabaseUpgradeToVersion17.swift in Sources */,
 				A7F05B9A1CFB49590079F1AD /* Priced.swift in Sources */,
+				F398080027F0393400BDC207 /* PurchasesResponse.swift in Sources */,
 				71C1E0EF2485B81F00596106 /* GraphsInfoCell.swift in Sources */,
 				71572D861F15EA41001A1301 /* ColumnsDisplayData.swift in Sources */,
 				711E81CF1FD45C5200708056 /* ReportGenerator.swift in Sources */,
@@ -3986,6 +3996,7 @@
 				714042081FF18A230011A0F6 /* ReceiptColumnExchangedPriceMinusTax.swift in Sources */,
 				716138C91FD1E6E600C73FB9 /* PDFReportTable.swift in Sources */,
 				71AF49E31EFDA4810022B2E2 /* ReceiptImageViewerRouter.swift in Sources */,
+				F398080627F04B1000BDC207 /* SuccessPlanViewModel.swift in Sources */,
 				71B4A5DB22F388CE005E5FB2 /* Button+Style.swift in Sources */,
 				716C04221F685467007F9CD2 /* CognitoService.swift in Sources */,
 				71871503224FDEB70061D493 /* DatabaseUpgradeToVersion14.swift in Sources */,
@@ -4064,13 +4075,13 @@
 				71B4A5DD22F389C9005E5FB2 /* View+Style.swift in Sources */,
 				71859DCE2010F97B00156B40 /* UpsellBannerAdView.swift in Sources */,
 				71871506224FDEB70061D493 /* DatabaseCreateAtVersion11.swift in Sources */,
-				03B4AB8227691F6200958B33 /* PlanAPI.swift in Sources */,
 				71C014241F1AB14A005472B3 /* CategoriesInteractor.swift in Sources */,
 				714104E61FF43D7700C334C5 /* SuggestionView.m in Sources */,
 				71AF49E81EFDCC010022B2E2 /* ReceiptImageViewerView.swift in Sources */,
 				71D7596B23EB416F00EBFD45 /* MainMenuActionSheet.swift in Sources */,
 				71E3CCE4207E9E8900C7FF2D /* TimeInterval+Extensions.swift in Sources */,
 				710D999224662011004DAA6C /* GraphsDaysDataSet.swift in Sources */,
+				F398080A27F0859800BDC207 /* PlanModel.swift in Sources */,
 				EA8D81BB1AEA861400BAC943 /* ReceiptUnknownColumn.m in Sources */,
 				71F6251E20FBE395009B777C /* GoogleSyncService.swift in Sources */,
 				71D8005323B9161B002CBC9E /* GenerateReportHeaderView.swift in Sources */,
@@ -4117,6 +4128,7 @@
 				71E8F3F81FA12452005BD447 /* OCRConfigurationRouter.swift in Sources */,
 				71AF49E01EFDA4810022B2E2 /* ReceiptImageViewerDisplayData.swift in Sources */,
 				7120099D1F12D0DE0049927E /* TickTock.swift in Sources */,
+				F398080827F05B5B00BDC207 /* SubscriptionBuilder.swift in Sources */,
 				71762E781FD46F4800AC1388 /* ReportPDFGenerator.swift in Sources */,
 				71C1E0ED2485A34D00596106 /* GraphsInfoViewController.swift in Sources */,
 				7165509C218E133E007B55FF /* StatusBar+Extensions.swift in Sources */,

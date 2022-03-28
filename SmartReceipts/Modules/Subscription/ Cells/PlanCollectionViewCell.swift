@@ -10,11 +10,18 @@ import UIKit
 import RxSwift
 import SnapKit
 
-class PlanCollectionViewCell: UICollectionViewCell {
+final class PlanCollectionViewCell: UICollectionViewCell {
     private let bag = DisposeBag()
     
     static var identifier: String {
         return String(describing: self)
+    }
+    
+    private var model: PlanModel! {
+        didSet {
+            model.isPurchased ? updateStateCellPurchased() : updateStateCellNotPurchased()
+            updateState()
+        }
     }
 
     private lazy var nameLabel: UILabel = {
@@ -48,7 +55,6 @@ class PlanCollectionViewCell: UICollectionViewCell {
     private lazy var premiumImageView: UIImageView = {
         premiumImageView = UIImageView(frame: .zero)
         premiumImageView.image = UIImage(named: "premium_icon")
-        premiumImageView.isHidden = true
         
         return premiumImageView
     }()
@@ -119,34 +125,36 @@ class PlanCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(with planModel: PlanModel) -> Self {
-        nameLabel.text = planModel.name
-        
-        if planModel.isPurchased == true {
-            priceLabel.backgroundColor = UIColor.init(red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
-            priceLabel.text = LocalizedString("subscription_your_plan")
-            priceLabel.textColor = .srViolet
-            priceLabel.font = .bold22
-        } else {
-            let doublePriceStr = String(format: "%.2f", planModel.price)
-            priceLabel.setAttributedTitle(
-                bigText: "$\(doublePriceStr)",
-                smallText: LocalizedString("subscription_price")
-            )
-        }
-        
-        switch planModel.kind {
+    private func updateState() {
+        switch model.kind {
         case .standard:
-            functionLabel.text = planModel.functionDescription
+            functionLabel.text = model.functionDescription
             premiumImageView.isHidden = true
         case .premium:
             functionLabel.setAttributedImage(
                 leftImage: UIImage(named: "plus"),
-                with: planModel.functionDescription
+                with: model.functionDescription
             )
             premiumImageView.isHidden = false
         }
-        
-        return self
+    }
+    
+    private func updateStateCellPurchased() {
+        priceLabel.backgroundColor = UIColor.init(red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
+        priceLabel.text = LocalizedString("subscription_your_plan")
+        priceLabel.textColor = .srViolet
+        priceLabel.font = .bold22
+    }
+    
+    private func updateStateCellNotPurchased() {
+        priceLabel.setAttributedTitle(
+            bigText: model.price,
+            smallText: LocalizedString("subscription_price")
+        )
+    }
+    
+    func configure(with model: PlanModel) {
+        self.model = model
+        nameLabel.text = model.name
     }
 }

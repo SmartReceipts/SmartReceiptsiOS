@@ -8,16 +8,19 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
-class SuccessPlanViewController: UIViewController {
+final class SuccessPlanViewController: UIViewController {
+    private let viewModel: SuccessPlanViewModel
+    private let bag = DisposeBag()
     
-    private lazy var leftButton: UIButton = {
-        leftButton = UIButton(frame: .zero)
-        leftButton.setImage(UIImage(named: "close_circle_icon"), for: .normal)
-        leftButton.alpha = 0.5
-        leftButton.addTarget(self, action: #selector(closeTapButton), for: .touchUpInside)
+    private lazy var closeButton: UIButton = {
+        closeButton = UIButton(frame: .zero)
+        closeButton.setImage(UIImage(named: "close_circle_icon"), for: .normal)
+        closeButton.alpha = 0.5
         
-        return leftButton
+        return closeButton
     }()
     
     private lazy var backgroundImageView: UIImageView = {
@@ -71,12 +74,21 @@ class SuccessPlanViewController: UIViewController {
         return continueButton
     }()
     
+    init(viewModel: SuccessPlanViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.addSubviews([
-            leftButton,
+            closeButton,
             backgroundImageView,
             successLabel,
             purchasedLabel,
@@ -84,6 +96,7 @@ class SuccessPlanViewController: UIViewController {
         ])
         
         commonInit()
+        bind()
     }
     
     private func commonInit() {
@@ -97,7 +110,7 @@ class SuccessPlanViewController: UIViewController {
     }
     
     private func setupLayout() {
-        leftButton.snp.makeConstraints { make in
+        closeButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(36)
             make.leading.equalToSuperview().offset(16)
             make.width.equalTo(30)
@@ -133,10 +146,16 @@ class SuccessPlanViewController: UIViewController {
             make.height.equalTo(50)
         }
     }
-}
-
-extension SuccessPlanViewController {
-    @objc func closeTapButton() {
-        dismiss(animated: true)
+    
+    private func bind() {
+        closeButton.rx
+            .tap
+            .bind { [weak self] in self?.viewModel.accept(.closeDidTap) }
+            .disposed(by: bag)
+        
+        continueButton.rx
+            .tap
+            .bind { [weak self] in self?.viewModel.accept(.continueDidTap) }
+            .disposed(by: bag)
     }
 }

@@ -7,31 +7,33 @@
 //
 
 import UIKit
+import Differentiator
+import RxDataSources
 
-class SubscriptionDataSource: NSObject, UICollectionViewDataSource {
-    private var plans: [PlanModel] = []
-    
-    func update(with dataSet: PlanDateSet) {
-        plans = dataSet.plans
-    }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return plans.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = plans[indexPath.row]
-        
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: PlanCollectionViewCell.identifier,
-            for: indexPath) as? PlanCollectionViewCell else {
-                return UICollectionViewCell()
+final class SubscriptionDataSource: RxCollectionViewSectionedReloadDataSource<PlanSectionItem> {
+    init() {
+        super.init(
+            configureCell: { ds, collectionView, indexPath, item in
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: PlanCollectionViewCell.identifier,
+                    for: indexPath) as? PlanCollectionViewCell else { return UICollectionViewCell() }
+                cell.configure(with: item)
+                return cell
             }
-        
-        return cell.configureCell(with: item)
+        )
     }
 }
 
-struct PlanDateSet {
-    let plans: [PlanModel]
+
+struct PlanSectionItem {
+    var items: [Item]
+}
+
+extension PlanSectionItem: SectionModelType {
+    typealias Item = PlanModel
+    
+    init(original: PlanSectionItem, items: [Item]) {
+        self = original
+        self.items = items
+    }
 }
