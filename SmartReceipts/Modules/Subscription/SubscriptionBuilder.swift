@@ -47,13 +47,13 @@ public enum SubscriptionBuilder {
     private static func convert(
         state: SubscriptionViewModel.State
     ) -> SubscriptionViewController.ViewState {
-        switch state {
-        case .content(let products):
-            return .content([PlanSectionItem(items: products)])
-        case .loading:
-            return .loading
-        case .error:
-            return .error
+        let plans = state.plans
+        var purchaseViewState: SubscriptionViewController.PurchaseViewState = .notPurchased
+        plans.forEach { model in
+            if model.isPurchased {
+                purchaseViewState = .purchased
+            }
         }
+        return .init(collection: [PlanSectionItem(items: plans)], purchaseViewState: purchaseViewState)
     }
 }

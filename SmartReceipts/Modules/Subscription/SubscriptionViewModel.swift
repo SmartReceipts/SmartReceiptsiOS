@@ -14,11 +14,8 @@ import SwiftyStoreKit
 import Toaster
 
 final class SubscriptionViewModel {
-    enum State {
-        case loading
-        case content([PlanModel])
-        case error
-        
+    struct State {
+        var plans: [PlanModel]
     }
     
     enum Action {
@@ -29,7 +26,8 @@ final class SubscriptionViewModel {
     var output: Driver<State> { state.asDriver() }
         
     private let environment: SubscriptionEnvironment
-    private let state = BehaviorRelay<State>.init(value: .loading)
+    private let state = BehaviorRelay<State>.init(value: State(plans: []))
+    private let isPurchasedRelay = BehaviorRelay<Bool>.init(value: false)
     private var isAuthorizedRelay = BehaviorRelay<Bool>(value: false)
     private let bag = DisposeBag()
     
@@ -41,22 +39,52 @@ final class SubscriptionViewModel {
         switch action {
         case .viewDidLoad:
             getPlanSectionItems()
-        case .didSelect(_):
-            ()
+        case .didSelect(let model):
+            isHasPurchased()
+            isPurchasedRelay
+                .asObservable()
+                .subscribe(onNext: { [weak self] isPurchased in
+                    guard let self = self else { return }
+                    if !isPurchased { self.purchase(productId: model.id) }
+                })
+                .disposed(by: bag)
         }
     }
     
+    
+    
     private func getPlanSectionItems() {
-        if environment.authService.isLoggedIn {
-            environment.router.openLogin()
-        }
-
-        environment.purchaseService.requestMobilePurchasesV2()
+        let hud = PendingHUDView.showFullScreen()
+        environment.purchaseService.getPlansWithPurchases()
             .map { $0.sorted { plan, _ in plan.kind == .standard } }
-            .subscribe(onSuccess: { [weak self] plans in
-                guard let self = self else { return }
-                self.state.update { $0 = .content(plans) }
-            }).disposed(by: bag)
+            .subscribe(
+                onSuccess: { [weak self] plans in
+                    hud.hide()
+                    guard let self = self else { return }
+                    self.state.update { $0.plans = plans }
+                },
+                onError: { [weak self] error in
+                    hud.hide()
+                    guard let error = error as? PurchaseError else { return }
+                    switch error {
+                    case .authError: self?.openLogin()
+                    }
+                }).disposed(by: bag)
+    }
+    
+    private func isHasPurchased() {
+        environment.purchaseService.getPlans()
+            .map { $0.sorted { plan, _ in plan.kind == .standard } }
+            .subscribe(
+                onSuccess: { [weak self] plans in
+                    guard let self = self else { return }
+                    plans.forEach { plan in
+                        if plan.isPurchased {
+                            self.isPurchasedRelay.accept(true)
+                        }
+                    }
+                })
+            .disposed(by: bag)
     }
     
     private func purchase(productId: String) {
@@ -69,5 +97,9 @@ final class SubscriptionViewModel {
             }, onCompleted: { [weak self] in
                 self?.environment.router.openSuccessPage()
             }).disposed(by: bag)
+    }
+    
+    private func openLogin() {
+        environment.router.openLogin()
     }
 }

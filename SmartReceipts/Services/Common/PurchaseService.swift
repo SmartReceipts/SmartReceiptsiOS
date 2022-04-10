@@ -314,32 +314,55 @@ class PurchaseService {
             }).disposed(by: bag)
     }
     
-    func requestMobilePurchasesV2() -> Single<[PlanModel]> {
-        guard let receiptString = appStoreReceipt() else { return .error(PurchaseError.storeReceiptNotFound) }
-        return getProducts().flatMap({ [weak self] products in
+    func requestMobilePurchasesV2(
+        _ receiptString: String,
+        _ standardPrice: String,
+        _ premiumPrice: String
+    ) -> Single<[PlanModel]> {
+        return apiProvider.request(.mobileAppPurchasesV2(receipt: receiptString))
+            .mapModel(PurchasesResponse.self)
+            .map({ response -> [PlanModel] in
+                response.purchases
+                .sorted(by: { $0.purchasedTime < $1.purchasedTime })
+                .map({
+                    PlanModel(
+                        kind: $0.productId == PRODUCT_STANDARD_SUB ? .standard : .premium,
+                        price: $0.productId == PRODUCT_STANDARD_SUB ? standardPrice : premiumPrice,
+                        isPurchased: $0.subscriptionActive
+                    )
+                })
+            })
+    }
+    
+    func getPlansWithPurchases() -> Single<[PlanModel]> {
+        guard AuthService.shared.isLoggedIn else { return .error(PurchaseError.authError) }
+        guard let receiptString = appStoreReceipt() else { return getPlans() }
+        return getProducts().flatMap({ [weak self] products -> Single<[PlanModel]> in
             guard let self = self else { return .never() }
             let standardPrice = products.first(where: { $0.productIdentifier == PRODUCT_STANDARD_SUB })?.localizedPrice
-            let premiunPrice = products.first(where: { $0.productIdentifier == PRODUCT_PREMIUM_SUB })?.localizedPrice
+            let premiumPrice = products.first(where: { $0.productIdentifier == PRODUCT_PREMIUM_SUB })?.localizedPrice
             
-            return self.apiProvider.request(.mobileAppPurchasesV2(receipt: receiptString))
-                .mapModel(PurchasesResponse.self)
-                .map({ response -> [PlanModel] in
-                    response.purchases
-                    .sorted(by: { $0.purchasedTime < $1.purchasedTime })
-                    .map({
-                        PlanModel(
-                            kind: $0.productId == PRODUCT_STANDARD_SUB ? .standard : .premium,
-                            price: $0.productId == PRODUCT_STANDARD_SUB ? standardPrice : premiunPrice,
-                            isPurchased: $0.subscriptionActive
-                        )
-                    })
-                })
+            return self.requestMobilePurchasesV2(
+                receiptString,
+                standardPrice ?? "",
+                premiumPrice ?? ""
+            )
         })
-        
-        
-        
     }
-
+    
+    func getPlans() -> Single<[PlanModel]> {
+        return getProducts()
+            .map { $0.sorted { product, _ in product.productIdentifier == PRODUCT_STANDARD_SUB } }
+            .map { products -> [PlanModel] in
+                return products.compactMap { product in
+                    PlanModel(
+                        kind: product.productIdentifier == PRODUCT_STANDARD_SUB ? .standard : .premium,
+                        price: product.localizedPrice,
+                        isPurchased: false
+                    )
+                }
+            }
+    }
     
     //MARK: - PurchaseService and Subscription
     
@@ -447,5 +470,5 @@ extension SKProduct {
 }
 
 enum PurchaseError: Error {
-    case storeReceiptNotFound
+    case authError
 }

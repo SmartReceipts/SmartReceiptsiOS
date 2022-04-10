@@ -134,13 +134,13 @@
 
 "subscription_your_plan" = "Ваш план";
 
-"subscription_main_functions" = "Funcao";
+"subscription_main_functions" = "Основні функції";
 
-"subscription_disable_all_ads" = "Desativar todos os anúncios";
+"subscription_disable_all_ads" = "Відключити всю рекламу";
 
-"subscription_standart" = "Standart";
+"subscription_standart" = "Стандартний";
 
-"subscription_premium" = "Premio";
+"subscription_premium" = "Преміум";
 
 /* ============= Success Page =============*/
 "success_title" = "Успішно!";

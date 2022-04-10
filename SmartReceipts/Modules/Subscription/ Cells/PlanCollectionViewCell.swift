@@ -156,9 +156,5 @@ final class PlanCollectionViewCell: UICollectionViewCell {
     func configure(with model: PlanModel) {
         self.model = model
         nameLabel.text = model.name
-        
-        if model.isPurchased {
-            
-        }
     }
 }

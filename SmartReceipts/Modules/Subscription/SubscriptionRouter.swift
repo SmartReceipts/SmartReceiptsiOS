@@ -14,9 +14,10 @@ final class SubscriptionRouter {
     
     func openLogin() {
         let module = AppModules.auth.build()
-        module.router.show(from: moduleViewController, embedInNavController: true)
+        let nc = UINavigationController(rootViewController: module.view.viewController)
+        moduleViewController.present(nc, animated: true, completion: nil)
     }
-     
+    
     func openSuccessPage() {
         let successPlanVc = SuccessPlanBuilder.build() as! SuccessPlanViewController
         successPlanVc.modalPresentationStyle = .fullScreen

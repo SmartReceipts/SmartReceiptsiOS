@@ -69,7 +69,7 @@ final class SubscriptionViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.font = .regular16
         label.textColor = .white
-        label.text = LocalizedString("subscription_first_function")
+        label.numberOfLines = 1
         
         return label
     }()
@@ -78,7 +78,7 @@ final class SubscriptionViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.font = .regular16
         label.textColor = .white
-        label.text = LocalizedString("subscription_second_function")
+        label.numberOfLines = 1
         
         return label
     }()
@@ -87,7 +87,7 @@ final class SubscriptionViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.font = .regular16
         label.textColor = .white
-        label.text = LocalizedString("subscription_third_function")
+        label.numberOfLines = 1
         
         return label
     }()
@@ -198,6 +198,7 @@ final class SubscriptionViewController: UIViewController {
         labelStackView.snp.makeConstraints { make in
             make.leading.equalTo(imageStackView.snp.trailing).offset(12)
             make.top.equalTo(choosePlanLabel.snp.bottom).offset(9.5)
+            make.trailing.equalToSuperview().offset(-12)
         }
         
         collectionView.snp.makeConstraints { make in
@@ -218,29 +219,24 @@ final class SubscriptionViewController: UIViewController {
         collectionView.rx
             .setDelegate(self)
             .disposed(by: bag)
-        
-        viewState
-            .asObservable()
-            .subscribe(onNext: { [weak self] viewState in
-                self?.renderState(viewState)
-                self?.collectionView.reloadData()
-            }).disposed(by: bag)
                 
         viewState.map(\.collection)
             .drive(collectionView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
+        
+        viewState.map(\.purchaseViewState)
+            .drive(onNext: { [weak self] state in
+                guard let self = self else { return }
+                self.configurePurchaseViewState(state: state)
+            })
+            .disposed(by: bag)
     }
     
-    private func renderState(_ viewState: SubscriptionViewController.ViewState) {
-        let hud = PendingHUDView.showFullScreen()
-        switch viewState {
-        case .content:
-            hud.hide()
-        case .loading:
-            hud.hide()
-        case .error:
-            hud.hide()
-        }
+    private func configurePurchaseViewState(state: PurchaseViewState) {
+        firstFunctionLabel.text = state.firstFunctionTitle
+        secondFunctionLabel.text = state.secondFunctionTitle
+        thirdFunctionLabel.text = state.thirdFunctionTitle
+        cancelPlanLabel.isHidden = !state.cancelPlanHidden
     }
 }
 
@@ -257,30 +253,8 @@ extension SubscriptionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = dataSource.sectionModels[indexPath.section].items[indexPath.item]
-//        viewModel.accept(.didSelect(item))
+        outputReplay.accept(.didSelect(item))
     }
-}
-
-extension SubscriptionViewController {
-    
-//    private func setupWithPurchasedPlan() {
-//        viewModel.items
-//            .asObservable()
-//            .subscribe(onNext: { [weak self] plans in
-//                guard let self = self else { return }
-//                for plan in plans {
-//                    for item in plan.items {
-//                        if item.isPurchased {
-//                            self.firstFunctionLabel.text = LocalizedString("subscription_first_function_active")
-//                            self.secondFunctionLabel.text = LocalizedString("subscription_second_function_active")
-//                            self.thirdFunctionLabel.text = LocalizedString("subscription_third_function_active")
-//                            self.cancelPlanLabel.isHidden = !item.isPurchased
-//                        }
-//                    }
-//                }
-//            })
-//            .disposed(by: bag)
-//    }
 }
 
 private extension CGFloat {

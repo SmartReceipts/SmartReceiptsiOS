@@ -9,17 +9,48 @@
 import Foundation
 
 extension SubscriptionViewController {
-    enum ViewState {
-        case content([PlanSectionItem])
-        case loading
-        case error
+    struct ViewState {
+        let collection: [PlanSectionItem]
+        var purchaseViewState: PurchaseViewState
+    }
+    
+    enum PurchaseViewState {
+        case notPurchased
+        case purchased
         
-        var collection: [PlanSectionItem] {
+        var firstFunctionTitle: String {
             switch self {
-            case .content(let sections):
-                return sections
-            case .loading, .error:
-                return []
+            case .notPurchased:
+                return LocalizedString("subscription_first_function")
+            case .purchased:
+                return LocalizedString("subscription_first_function_active")
+            }
+        }
+        
+        var secondFunctionTitle: String {
+            switch self {
+            case .notPurchased:
+                return LocalizedString("subscription_second_function")
+            case .purchased:
+                return LocalizedString("subscription_second_function_active")
+            }
+        }
+        
+        var thirdFunctionTitle: String {
+            switch self {
+            case .notPurchased:
+                return LocalizedString("subscription_third_function")
+            case .purchased:
+                return LocalizedString("subscription_third_function_active")
+            }
+        }
+        
+        var cancelPlanHidden: Bool {
+            switch self {
+            case .notPurchased:
+                return false
+            case .purchased:
+                return true
             }
         }
     }
