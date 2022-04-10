@@ -49,17 +49,7 @@ public enum SubscriptionBuilder {
     ) -> SubscriptionViewController.ViewState {
         switch state {
         case .content(let products):
-            let collection = products.compactMap { product -> PlanSectionItem in
-                return PlanSectionItem(
-                    items: [
-                        PlanModel(
-                        kind: product.productIdentifier == PRODUCT_STANDARD_SUB ? .standard : .premium,
-                        price: product.localizedPrice,
-                        isPurchased: product.productIdentifier == PRODUCT_STANDARD_SUB ? true : false )
-                    ]
-                )
-            }
-            return .content(collection)
+            return .content([PlanSectionItem(items: products)])
         case .loading:
             return .loading
         case .error:

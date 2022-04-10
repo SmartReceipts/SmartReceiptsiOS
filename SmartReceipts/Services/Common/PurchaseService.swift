@@ -314,20 +314,30 @@ class PurchaseService {
             }).disposed(by: bag)
     }
     
-    func requestMobilePurchasesV2(receiptString: String) -> Single<[PlanModel]> {
-        apiProvider.request(.mobileAppPurchasesV2(receipt: receiptString))
-            .mapModel(PurchasesResponse.self)
-            .map({ response -> [PlanModel] in
-                response.purchases
-                .sorted(by: { $0.purchasedTime < $1.purchasedTime })
-                .map({
-                    PlanModel(
-                        kind: $0.productId == PRODUCT_STANDARD_SUB ? .standard : .premium,
-                        price: "0",
-                        isPurchased: $0.subscriptionActive
-                    )
+    func requestMobilePurchasesV2() -> Single<[PlanModel]> {
+        guard let receiptString = appStoreReceipt() else { return .error(PurchaseError.storeReceiptNotFound) }
+        return getProducts().flatMap({ [weak self] products in
+            guard let self = self else { return .never() }
+            let standardPrice = products.first(where: { $0.productIdentifier == PRODUCT_STANDARD_SUB })?.localizedPrice
+            let premiunPrice = products.first(where: { $0.productIdentifier == PRODUCT_PREMIUM_SUB })?.localizedPrice
+            
+            return self.apiProvider.request(.mobileAppPurchasesV2(receipt: receiptString))
+                .mapModel(PurchasesResponse.self)
+                .map({ response -> [PlanModel] in
+                    response.purchases
+                    .sorted(by: { $0.purchasedTime < $1.purchasedTime })
+                    .map({
+                        PlanModel(
+                            kind: $0.productId == PRODUCT_STANDARD_SUB ? .standard : .premium,
+                            price: $0.productId == PRODUCT_STANDARD_SUB ? standardPrice : premiunPrice,
+                            isPurchased: $0.subscriptionActive
+                        )
+                    })
                 })
-            })
+        })
+        
+        
+        
     }
 
     
@@ -434,4 +444,8 @@ extension SKProduct {
         formatter.locale = self.priceLocale
         return formatter.string(from: self.price)!
     }
+}
+
+enum PurchaseError: Error {
+    case storeReceiptNotFound
 }

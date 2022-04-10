@@ -16,7 +16,7 @@ import Toaster
 final class SubscriptionViewModel {
     enum State {
         case loading
-        case content([SKProduct])
+        case content([PlanModel])
         case error
         
     }
@@ -46,33 +46,16 @@ final class SubscriptionViewModel {
         }
     }
     
-    func isAvailable() {
-        guard let receiptString = environment.purchaseService.appStoreReceipt() else {
-            return
-        }
-
-        environment.purchaseService.requestMobilePurchasesV2(receiptString: receiptString)
-            .subscribe(onSuccess: { planModels in
-                print(planModels)
-                Logger.debug("Purchase Models")
-            })
-            .disposed(by: bag)
-    }
-    
     private func getPlanSectionItems() {
         if environment.authService.isLoggedIn {
             environment.router.openLogin()
         }
 
-        environment.purchaseService.getProducts()
-            .map({ product in
-                return product.sorted { (product1, product2) -> Bool in
-                    return product1.localizedPrice < product2.localizedPrice
-                }
-            })
-            .subscribe(onSuccess: { [weak self] products in
+        environment.purchaseService.requestMobilePurchasesV2()
+            .map { $0.sorted { plan, _ in plan.kind == .standard } }
+            .subscribe(onSuccess: { [weak self] plans in
                 guard let self = self else { return }
-                self.state.update { $0 = .content(products) }
+                self.state.update { $0 = .content(plans) }
             }).disposed(by: bag)
     }
     
