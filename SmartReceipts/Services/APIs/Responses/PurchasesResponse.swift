@@ -16,16 +16,12 @@ struct PurchaseModel: Codable {
     private(set) var id: Int
     private(set) var productId: String
     private(set) var purchasedTime: Date
-    private(set) var errors: [ErrorModel]?
+    private(set) var subscriptionActive: Bool
 
     enum CodingKeys: String, CodingKey {
         case id
         case productId = "product_id"
         case purchasedTime = "purchased_time"
-        case errors
+        case subscriptionActive = "subscription_active"
     }
-}
-
-struct ErrorModel: Codable {
-    private(set) var errorString: String
 }

@@ -642,6 +642,8 @@
 		EAE9DAFD1AF8EAD100F4FE76 /* DistanceCommentColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE9DAFC1AF8EAD100F4FE76 /* DistanceCommentColumn.m */; };
 		EAF6FE121B543ABB0005E2CE /* PDFImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EAF6FE111B543ABB0005E2CE /* PDFImageView.xib */; };
 		EAF9ADDE1AECD2D20000AC84 /* ReportGeneratorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF9ADDD1AECD2D20000AC84 /* ReportGeneratorTest.m */; };
+		F306DB3A280191FF00EA3DC9 /* SubscriptionViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F306DB39280191FF00EA3DC9 /* SubscriptionViewState.swift */; };
+		F306DB3C28019A9700EA3DC9 /* BahavierRelay+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F306DB3B28019A9700EA3DC9 /* BahavierRelay+Extensions.swift */; };
 		F398080027F0393400BDC207 /* PurchasesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39807FF27F0393400BDC207 /* PurchasesResponse.swift */; };
 		F398080227F0495200BDC207 /* SuccessPlanRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398080127F0495200BDC207 /* SuccessPlanRouter.swift */; };
 		F398080427F04AA100BDC207 /* SuccessPlanBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F398080327F04AA100BDC207 /* SuccessPlanBuilder.swift */; };
@@ -1399,6 +1401,8 @@
 		EAE9DAFC1AF8EAD100F4FE76 /* DistanceCommentColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistanceCommentColumn.m; sourceTree = "<group>"; };
 		EAF6FE111B543ABB0005E2CE /* PDFImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFImageView.xib; sourceTree = "<group>"; };
 		EAF9ADDD1AECD2D20000AC84 /* ReportGeneratorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportGeneratorTest.m; sourceTree = "<group>"; };
+		F306DB39280191FF00EA3DC9 /* SubscriptionViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewState.swift; sourceTree = "<group>"; };
+		F306DB3B28019A9700EA3DC9 /* BahavierRelay+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BahavierRelay+Extensions.swift"; sourceTree = "<group>"; };
 		F39807FF27F0393400BDC207 /* PurchasesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesResponse.swift; sourceTree = "<group>"; };
 		F398080127F0495200BDC207 /* SuccessPlanRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPlanRouter.swift; sourceTree = "<group>"; };
 		F398080327F04AA100BDC207 /* SuccessPlanBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPlanBuilder.swift; sourceTree = "<group>"; };
@@ -1450,6 +1454,7 @@
 				03B4AB7A27668E5B00958B33 /* SubscriptionRouter.swift */,
 				F398080727F05B5B00BDC207 /* SubscriptionBuilder.swift */,
 				F398080927F0859800BDC207 /* PlanModel.swift */,
+				F306DB39280191FF00EA3DC9 /* SubscriptionViewState.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -2685,6 +2690,7 @@
 				711DFF89243140240068FFF1 /* Locale+Extensions.swift */,
 				71D7596823EB3B8A00EBFD45 /* NotificationName+Extensions.swift */,
 				71D7FA352304AA73001F36E1 /* UI */,
+				F306DB3B28019A9700EA3DC9 /* BahavierRelay+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3867,6 +3873,7 @@
 				03B4AB802766AA6700958B33 /* PlanCollectionViewCell.swift in Sources */,
 				EA8EB10A1B0A4AC400780BA3 /* ReceiptColumnReportCostCenter.m in Sources */,
 				71C014231F1AB14A005472B3 /* CategoriesDisplayData.swift in Sources */,
+				F306DB3A280191FF00EA3DC9 /* SubscriptionViewState.swift in Sources */,
 				5705159B1E02B58500BB8FE4 /* DataPoint.swift in Sources */,
 				71DC2F3D244CC30800A48BBF /* BarChart.swift in Sources */,
 				71808E4E23A6371700DFF3BA /* ReceiptActionSheet.swift in Sources */,
@@ -3982,6 +3989,7 @@
 				711E81CF1FD45C5200708056 /* ReportGenerator.swift in Sources */,
 				7185AEFA1EFC1CC90038ED2A /* ReceiptMoveCopyView.swift in Sources */,
 				7190B9181F60427200F6CE7F /* AuthView.swift in Sources */,
+				F306DB3C28019A9700EA3DC9 /* BahavierRelay+Extensions.swift in Sources */,
 				EA69EF151AEFC81A00276B70 /* Database.m in Sources */,
 				718A1C9321A086E300E010A2 /* AuthResponses.swift in Sources */,
 				718714FF224FDEB70061D493 /* DatabaseUpgradeToVersion15.swift in Sources */,
@@ -4541,7 +4549,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartReceipts/SmartReceipts-Prefix.pch";
 				INFOPLIST_FILE = "SmartReceipts/SmartReceipts-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.21.0;
@@ -4598,7 +4606,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartReceipts/SmartReceipts-Prefix.pch";
 				INFOPLIST_FILE = "SmartReceipts/SmartReceipts-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.21.0;

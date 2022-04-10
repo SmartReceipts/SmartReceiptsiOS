@@ -25,23 +25,23 @@ final class PlanCollectionViewCell: UICollectionViewCell {
     }
 
     private lazy var nameLabel: UILabel = {
-        nameLabel = UILabel(frame: .zero)
-        nameLabel.font = .bold28
-        nameLabel.textColor = .srViolet
+        let label = UILabel(frame: .zero)
+        label.font = .bold28
+        label.textColor = .srViolet
         
-        return nameLabel
+        return label
     }()
     
     private lazy var functionLabel: UILabel = {
-        functionLabel = UILabel(frame: .zero)
-        functionLabel.font = .regular14
-        functionLabel.textColor = .srViolet
+        let label = UILabel(frame: .zero)
+        label.font = .regular14
+        label.textColor = .srViolet
 
-        return functionLabel
+        return label
     }()
     
     private lazy var stackView: UIStackView = {
-        stackView = UIStackView(arrangedSubviews: [
+        let stackView = UIStackView(arrangedSubviews: [
             nameLabel,
             functionLabel
         ])
@@ -53,24 +53,24 @@ final class PlanCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var premiumImageView: UIImageView = {
-        premiumImageView = UIImageView(frame: .zero)
-        premiumImageView.image = UIImage(named: "premium_icon")
+        let imageView = UIImageView(frame: .zero)
+        imageView.image = UIImage(named: "premium_icon")
         
-        return premiumImageView
+        return imageView
     }()
     
     private lazy var priceLabel: BorderedLabel = {
-        priceLabel = BorderedLabel(frame: .zero)
-        priceLabel.textColor = .white
-        priceLabel.backgroundColor = .srViolet
-        priceLabel.numberOfLines = 0
-        priceLabel.lineBreakMode = .byWordWrapping
-        priceLabel.textAlignment = .center
+        let label = BorderedLabel(frame: .zero)
+        label.textColor = .white
+        label.backgroundColor = .srViolet
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .center
         
-        priceLabel.clipsToBounds = true
-        priceLabel.layer.cornerRadius = 12
+        label.clipsToBounds = true
+        label.layer.cornerRadius = 12
                 
-        return priceLabel
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -156,5 +156,9 @@ final class PlanCollectionViewCell: UICollectionViewCell {
     func configure(with model: PlanModel) {
         self.model = model
         nameLabel.text = model.name
+        
+        if model.isPurchased {
+            
+        }
     }
 }

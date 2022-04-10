@@ -267,6 +267,22 @@ class PurchaseService {
         }
     }
     
+    func getProducts() -> Single<[SKProduct]> {
+        let ids: Set = [PRODUCT_STANDARD_SUB, PRODUCT_PREMIUM_SUB]
+        return Single<[SKProduct]>.create { single in
+            SwiftyStoreKit.retrieveProductsInfo(ids) { result in
+                if let error = result.error {
+                    single(.error(error))
+                    let errorEvent = ErrorEvent(error: error)
+                    AnalyticsManager.sharedManager.record(event: errorEvent)
+                } else {
+                    single(.success(Array(result.retrievedProducts)))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
     // MARK: - Purchase and API
     
     func sendReceipt() {
@@ -298,6 +314,22 @@ class PurchaseService {
             }).disposed(by: bag)
     }
     
+    func requestMobilePurchasesV2(receiptString: String) -> Single<[PlanModel]> {
+        apiProvider.request(.mobileAppPurchasesV2(receipt: receiptString))
+            .mapModel(PurchasesResponse.self)
+            .map({ response -> [PlanModel] in
+                response.purchases
+                .sorted(by: { $0.purchasedTime < $1.purchasedTime })
+                .map({
+                    PlanModel(
+                        kind: $0.productId == PRODUCT_STANDARD_SUB ? .standard : .premium,
+                        price: "0",
+                        isPurchased: $0.subscriptionActive
+                    )
+                })
+            })
+    }
+
     
     //MARK: - PurchaseService and Subscription
     

@@ -134,6 +134,14 @@
 
 "subscription_your_plan" = "Your Plan";
 
+"subscription_main_functions" = "Основні функції";
+
+"subscription_disable_all_ads" = "Відключити всю рекламу";
+
+"subscription_standart" = "Стандартний";
+
+"subscription_premium" = "Преміум";
+
 /* ============= Success Plan =============*/
 "success_title" = "Success!";
 

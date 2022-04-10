@@ -7,22 +7,19 @@
 //
 
 import UIKit
+import RxSwift
 
 final class SubscriptionRouter {
     weak var moduleViewController: UIViewController!
     
-    enum Route {
-//        case showLogin
-        case showSuccessPage
+    func openLogin() {
+        let module = AppModules.auth.build()
+        module.router.show(from: moduleViewController, embedInNavController: true)
     }
-    
-    func open(route: Route) {
-        switch route {
-//        case .showLogin:
-        case .showSuccessPage:
-            let successPlanVc = SuccessPlanBuilder.build() as! SuccessPlanViewController
-            successPlanVc.modalPresentationStyle = .fullScreen
-            moduleViewController.present(successPlanVc, animated: true)
-        }
+     
+    func openSuccessPage() {
+        let successPlanVc = SuccessPlanBuilder.build() as! SuccessPlanViewController
+        successPlanVc.modalPresentationStyle = .fullScreen
+        moduleViewController.present(successPlanVc, animated: true)
     }
 }

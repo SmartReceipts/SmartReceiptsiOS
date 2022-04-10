@@ -19,6 +19,7 @@ enum SmartReceiptsAPI {
     case recognition(id: String)
     case recognize(url: URL, incognito: Bool)
     case mobileAppPurchases(receipt: String)
+    case mobileAppPurchasesV2(receipt: String)
     case organizations
     case saveOrganization(OrganizationModel)
 }
@@ -40,6 +41,7 @@ extension SmartReceiptsAPI: TargetType {
         case .recognition(let id): return "/recognitions/\(id)"
         case .recognize: return "/recognitions"
         case .mobileAppPurchases: return "/mobile_app_purchases"
+        case .mobileAppPurchasesV2: return "/mobile_app_purchases"
         case .organizations: return "/organizations"
         case .saveOrganization(let organization): return "/organizations/\(organization.id)"
         }
@@ -56,6 +58,7 @@ extension SmartReceiptsAPI: TargetType {
         case .recognition: return .get
         case .recognize: return .post
         case .mobileAppPurchases: return .post
+        case .mobileAppPurchasesV2: return .post
         case .organizations: return .get
         case .saveOrganization: return .put
         }
@@ -75,6 +78,8 @@ extension SmartReceiptsAPI: TargetType {
             return ["recognition": [ "s3_path" : "ocr/\(url.lastPathComponent)", "incognito" : incognito] ]
         case .mobileAppPurchases(let receipt):
             return ["encoded_receipt": receipt, "pay_service": "Apple Store", "goal": "Recognition"]
+        case .mobileAppPurchasesV2(let receipt):
+            return ["encoded_receipt": receipt, "pay_service": "Apple Store"]
         case .saveOrganization(let organization):
             let jsonData = try! JSONEncoder().encode(organization)
             let jsonString = String(data: jsonData, encoding: .utf8)
@@ -104,6 +109,7 @@ extension SmartReceiptsAPI: TargetType {
         case .recognition: return URLEncoding.httpBody
         case .recognize: return JSONEncoding.default
         case .mobileAppPurchases: return JSONEncoding.default
+        case .mobileAppPurchasesV2: return JSONEncoding.default
         case .organizations: return JSONEncoding.default
         case .saveOrganization: return JSONEncoding.default
         }
@@ -117,6 +123,7 @@ extension SmartReceiptsAPI: TargetType {
              .recognize,
              .recognition,
              .mobileAppPurchases,
+             .mobileAppPurchasesV2,
              .logout,
              .organizations:
             return ["auth_params[token]": AuthService.shared.token, "auth_params[id]": AuthService.shared.id]

@@ -134,6 +134,14 @@
 
 "subscription_your_plan" = "התוכנית שלך";
 
+"subscription_main_functions" = "פונקציות עיקריות";
+
+"subscription_disable_all_ads" = "השבת את כל המודעות";
+
+"subscription_standart" = "סטנדארט";
+
+"subscription_premium" = "פרימיום";
+
 /* ============= Success Page =============*/
 "success_title" = "הַצלָחָה!";
 

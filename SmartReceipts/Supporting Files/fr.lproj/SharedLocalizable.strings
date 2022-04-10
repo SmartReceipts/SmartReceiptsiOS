@@ -134,6 +134,14 @@
 
 "subscription_your_plan" = "Votre plan";
 
+"subscription_main_functions" = "Fonctions principales";
+
+"subscription_disable_all_ads" = "Désactiver toutes les annonces";
+
+"subscription_standart" = "Standard";
+
+"subscription_premium" = "Prime";
+
 /* ============= Success Page =============*/
 "success_title" = "Succès!";
 

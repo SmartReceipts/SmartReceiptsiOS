@@ -26,9 +26,9 @@ struct PlanModel {
     var name: String {
         switch kind {
         case .standard:
-            return LocalizedString("Standart")
+            return LocalizedString("subscription_standart")
         case .premium:
-            return LocalizedString("Premium")
+            return LocalizedString("subscription_premium")
         }
     }
     let price: String
@@ -36,9 +36,9 @@ struct PlanModel {
     var functionDescription: String {
         switch kind {
         case .standard:
-            return LocalizedString("Main fiunctions")
+            return LocalizedString("subscription_main_functions")
         case .premium:
-            return LocalizedString("Disable all ads")
+            return LocalizedString("subscription_disable_all_ads")
         }
     }
 }

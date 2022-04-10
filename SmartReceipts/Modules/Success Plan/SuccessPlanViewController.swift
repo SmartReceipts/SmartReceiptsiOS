@@ -16,38 +16,38 @@ final class SuccessPlanViewController: UIViewController {
     private let bag = DisposeBag()
     
     private lazy var closeButton: UIButton = {
-        closeButton = UIButton(frame: .zero)
-        closeButton.setImage(UIImage(named: "close_circle_icon"), for: .normal)
-        closeButton.alpha = 0.5
+        let button = UIButton(frame: .zero)
+        button.setImage(UIImage(named: "close_circle_icon"), for: .normal)
+        button.alpha = 0.5
         
-        return closeButton
+        return button
     }()
     
     private lazy var backgroundImageView: UIImageView = {
-        backgroundImageView = UIImageView(frame: .zero)
-        backgroundImageView.image = UIImage(named: "background_image")
-        backgroundImageView.contentMode = .scaleAspectFit
+        let imageView = UIImageView(frame: .zero)
+        imageView.image = UIImage(named: "background_image")
+        imageView.contentMode = .scaleAspectFit
         
-        return backgroundImageView
+        return imageView
     }()
     
     private lazy var successLabel: UILabel = {
-        successLabel = UILabel(frame: .zero)
-        successLabel.text = LocalizedString("success_title")
-        successLabel.textColor = .white
-        successLabel.textAlignment = .center
-        successLabel.font = .bold40
+        let label = UILabel(frame: .zero)
+        label.text = LocalizedString("success_title")
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = .bold40
         
-        return successLabel
+        return label
     }()
     
     private lazy var purchasedLabel: UILabel = {
-        purchasedLabel = UILabel(frame: .zero)
-        purchasedLabel.alpha = 0.5
-        purchasedLabel.textColor = .white
-        purchasedLabel.font = .regular16
-        purchasedLabel.numberOfLines = 0
-        purchasedLabel.lineBreakMode = .byWordWrapping
+        let label = UILabel(frame: .zero)
+        label.alpha = 0.5
+        label.textColor = .white
+        label.font = .regular16
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         let attributedString = NSMutableAttributedString(string: LocalizedString("success_purchased_title"))
         var paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineHeightMultiple = 1.1
@@ -55,23 +55,23 @@ final class SuccessPlanViewController: UIViewController {
         style.alignment = NSTextAlignment.center
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributedString.length))
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: style,  range: NSRange(location: 0, length: attributedString.length))
-        purchasedLabel.attributedText = attributedString
+        label.attributedText = attributedString
         
-        return purchasedLabel
+        return label
     }()
     
     private lazy var continueButton: UIButton = {
-        continueButton = UIButton(frame: .zero)
-        continueButton.setTitle(LocalizedString("success_continue"), for: .normal)
-        continueButton.setTitleColor(.black, for: .normal)
-        continueButton.backgroundColor = .white
-        continueButton.titleLabel?.font = .semibold15
-        continueButton.titleLabel?.textAlignment = .center
+        let button = UIButton(frame: .zero)
+        button.setTitle(LocalizedString("success_continue"), for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.titleLabel?.font = .semibold15
+        button.titleLabel?.textAlignment = .center
         
-        continueButton.clipsToBounds = true
-        continueButton.layer.cornerRadius = 12
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 12
         
-        return continueButton
+        return button
     }()
     
     init(viewModel: SuccessPlanViewModel) {

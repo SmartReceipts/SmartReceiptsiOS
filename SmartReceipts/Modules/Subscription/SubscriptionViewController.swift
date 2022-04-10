@@ -12,125 +12,124 @@ import RxSwift
 import RxCocoa
 
 final class SubscriptionViewController: UIViewController {
-    var output: Driver<SubscriptionViewModel.Action> { outputEvents.asDriver(onErrorDriveWith: .empty()) }
-    private let outputEvents = PublishRelay<SubscriptionViewModel.Action>()
+    var output: Driver<SubscriptionViewModel.Action> {
+        outputReplay.asDriver(onErrorDriveWith: .empty())
+    }
+    
+    private let outputReplay = PublishRelay<SubscriptionViewModel.Action>()
+    let bag = DisposeBag()
 
-
-
-    private let viewModel: SubscriptionViewModel
     private let dataSource: SubscriptionDataSource
-    
-    private let bag = DisposeBag()
-    
-    private lazy var choosePlanLabel: UILabel = {
-        choosePlanLabel = UILabel(frame: .zero)
-        choosePlanLabel.font = .bold40
-        choosePlanLabel.textColor = .white
-        choosePlanLabel.text = LocalizedString("subscription_plan_label")
         
-        return choosePlanLabel
+    private lazy var choosePlanLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.font = .bold40
+        label.textColor = .white
+        label.text = LocalizedString("subscription_plan_label")
+        
+        return label
     }()
     
     private lazy var firstCheckImageView: UIImageView = {
-        firstCheckImageView = UIImageView(frame: .zero)
-        firstCheckImageView.image = #imageLiteral(resourceName: "check_icon")
+        let imageView = UIImageView(frame: .zero)
+        imageView.image = #imageLiteral(resourceName: "check_icon")
         
-        return firstCheckImageView
+        return imageView
     }()
     
     private lazy var secondCheckImageView: UIImageView = {
-        secondCheckImageView = UIImageView(frame: .zero)
-        secondCheckImageView.image = #imageLiteral(resourceName: "check_icon")
+        let imageView = UIImageView(frame: .zero)
+        imageView.image = #imageLiteral(resourceName: "check_icon")
         
-        return secondCheckImageView
+        return imageView
     }()
     
     private lazy var thirdCheckImageView: UIImageView = {
-        thirdCheckImageView = UIImageView(frame: .zero)
-        thirdCheckImageView.image = #imageLiteral(resourceName: "check_icon")
+        let imageView = UIImageView(frame: .zero)
+        imageView.image = #imageLiteral(resourceName: "check_icon")
         
-        return thirdCheckImageView
+        return imageView
     }()
     
     private lazy var imageStackView: UIStackView = {
-        imageStackView = UIStackView(arrangedSubviews: [
+        let stackView = UIStackView(arrangedSubviews: [
             firstCheckImageView,
             secondCheckImageView,
             thirdCheckImageView
         ])
-        imageStackView.axis = .vertical
-        imageStackView.spacing = 8
-        imageStackView.distribution = .fillProportionally
-        imageStackView.alignment = .fill
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .fill
         
-        return imageStackView
+        return stackView
     }()
     
     private lazy var firstFunctionLabel: UILabel = {
-        firstFunctionLabel = UILabel(frame: .zero)
-        firstFunctionLabel.font = .regular16
-        firstFunctionLabel.textColor = .white
-        firstFunctionLabel.text = LocalizedString("subscription_first_function")
+        let label = UILabel(frame: .zero)
+        label.font = .regular16
+        label.textColor = .white
+        label.text = LocalizedString("subscription_first_function")
         
-        return firstFunctionLabel
+        return label
     }()
     
     private lazy var secondFunctionLabel: UILabel = {
-        secondFunctionLabel = UILabel(frame: .zero)
-        secondFunctionLabel.font = .regular16
-        secondFunctionLabel.textColor = .white
-        secondFunctionLabel.text = LocalizedString("subscription_second_function")
+        let label = UILabel(frame: .zero)
+        label.font = .regular16
+        label.textColor = .white
+        label.text = LocalizedString("subscription_second_function")
         
-        return secondFunctionLabel
+        return label
     }()
     
     private lazy var thirdFunctionLabel: UILabel = {
-        thirdFunctionLabel = UILabel(frame: .zero)
-        thirdFunctionLabel.font = .regular16
-        thirdFunctionLabel.textColor = .white
-        thirdFunctionLabel.text = LocalizedString("subscription_third_function")
+        let label = UILabel(frame: .zero)
+        label.font = .regular16
+        label.textColor = .white
+        label.text = LocalizedString("subscription_third_function")
         
-        return thirdFunctionLabel
+        return label
     }()
     
     private lazy var labelStackView: UIStackView = {
-        labelStackView = UIStackView(arrangedSubviews: [
+        let stackView = UIStackView(arrangedSubviews: [
             firstFunctionLabel,
             secondFunctionLabel,
             thirdFunctionLabel
         ])
-        labelStackView.axis = .vertical
-        labelStackView.spacing = 11
-        labelStackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 11
+        stackView.distribution = .fillEqually
         
-        return labelStackView
+        return stackView
     }()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.sectionInset = .init(top: .zero, left: .zero, bottom: .spacing, right: .zero)
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .srViolet
         collectionView.contentInset = .init(top: .spacing, left: .padding, bottom: .spacing, right: .padding)
+        
         return collectionView
     }()
     
     private lazy var cancelPlanLabel: UILabel = {
-        cancelPlanLabel = UILabel(frame: .zero)
-        cancelPlanLabel.font = .regular12
-        cancelPlanLabel.textColor = .white
-        cancelPlanLabel.textAlignment = .center
-        cancelPlanLabel.alpha = 0.5
-        cancelPlanLabel.isHidden = true
-        cancelPlanLabel.numberOfLines = 0
-        cancelPlanLabel.text = LocalizedString("subscription_cancel_plan")
+        let label = UILabel(frame: .zero)
+        label.font = .regular12
+        label.textColor = .white
+        label.textAlignment = .center
+        label.alpha = 0.5
+        label.isHidden = true
+        label.numberOfLines = 0
+        label.text = LocalizedString("subscription_cancel_plan")
         
-        return cancelPlanLabel
+        return label
     }()
     
-    init(viewModel: SubscriptionViewModel, dataSource: SubscriptionDataSource) {
-        self.viewModel = viewModel
+    init(dataSource: SubscriptionDataSource) {
         self.dataSource = dataSource
         super.init(nibName: nil, bundle: nil)
     }
@@ -151,14 +150,12 @@ final class SubscriptionViewController: UIViewController {
         ])
         
         commonInit()
-        bindCollectionView()
-        viewModel.accept(.viewDidLoad)
+        outputReplay.accept(.viewDidLoad)
     }
     
     private func commonInit() {
         setupViews()
         setupLayout()
-        setupWithPurchasedPlan()
     }
     
     private func setupViews() {
@@ -217,19 +214,33 @@ final class SubscriptionViewController: UIViewController {
         }
     }
     
-    private func bindCollectionView() {
+    func bind(_ viewState: Driver<SubscriptionViewController.ViewState>) {
         collectionView.rx
             .setDelegate(self)
             .disposed(by: bag)
+        
+        viewState
+            .asObservable()
+            .subscribe(onNext: { [weak self] viewState in
+                self?.renderState(viewState)
+                self?.collectionView.reloadData()
+            }).disposed(by: bag)
                 
-        viewModel.items
-            .map { $0 }
+        viewState.map(\.collection)
             .drive(collectionView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
     }
     
-    private func bind() {
-        
+    private func renderState(_ viewState: SubscriptionViewController.ViewState) {
+        let hud = PendingHUDView.showFullScreen()
+        switch viewState {
+        case .content:
+            hud.hide()
+        case .loading:
+            hud.hide()
+        case .error:
+            hud.hide()
+        }
     }
 }
 
@@ -246,30 +257,30 @@ extension SubscriptionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = dataSource.sectionModels[indexPath.section].items[indexPath.item]
-        viewModel.accept(.didSelect(item))
+//        viewModel.accept(.didSelect(item))
     }
 }
 
 extension SubscriptionViewController {
     
-    private func setupWithPurchasedPlan() {
-        viewModel.items
-            .asObservable()
-            .subscribe(onNext: { [weak self] plans in
-                guard let self = self else { return }
-                for plan in plans {
-                    for item in plan.items {
-                        if item.isPurchased {
-                            self.firstFunctionLabel.text = LocalizedString("subscription_first_function_active")
-                            self.secondFunctionLabel.text = LocalizedString("subscription_second_function_active")
-                            self.thirdFunctionLabel.text = LocalizedString("subscription_third_function_active")
-                            self.cancelPlanLabel.isHidden = !item.isPurchased
-                        }
-                    }
-                }
-            })
-            .disposed(by: bag)
-    }
+//    private func setupWithPurchasedPlan() {
+//        viewModel.items
+//            .asObservable()
+//            .subscribe(onNext: { [weak self] plans in
+//                guard let self = self else { return }
+//                for plan in plans {
+//                    for item in plan.items {
+//                        if item.isPurchased {
+//                            self.firstFunctionLabel.text = LocalizedString("subscription_first_function_active")
+//                            self.secondFunctionLabel.text = LocalizedString("subscription_second_function_active")
+//                            self.thirdFunctionLabel.text = LocalizedString("subscription_third_function_active")
+//                            self.cancelPlanLabel.isHidden = !item.isPurchased
+//                        }
+//                    }
+//                }
+//            })
+//            .disposed(by: bag)
+//    }
 }
 
 private extension CGFloat {

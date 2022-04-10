@@ -14,104 +14,77 @@ import SwiftyStoreKit
 import Toaster
 
 final class SubscriptionViewModel {
-    var items: Driver<[PlanSectionItem]> { itemsReplay.asDriver() }
-    var isPurchased: Driver<Bool> { isPurchasedReplay.asDriver() }
-    
-    private let purchaseService: PurchaseService
-    private let router: SubscriptionRouter
-    
-    private var itemsReplay = BehaviorRelay<[PlanSectionItem]>(value: [])
-    private var isPurchasedReplay = BehaviorRelay<Bool>(value: false)
-    private(set) var plans = [PlanSectionItem]()
-    private let bag = DisposeBag()
-    
-    init(purchaseService: PurchaseService, router: SubscriptionRouter) {
-        self.purchaseService = purchaseService
-        self.router = router
-    }
-    
-    func accept(_ action: Action) {
-        switch action {
-        case .viewDidLoad:
-            getPlanSectionItems()
-        case .didSelect(let model):
-            isPurchased
-                .asObservable()
-                .subscribe(onNext: { [weak self] isPurchased in
-                    if !isPurchased { self?.purchase(productId: model.id) }
-                })
-                .disposed(by: bag)
-        }
-    }
-    
-    private func getProducts() -> Single<[SKProduct]> {
-        let ids: Set = [PRODUCT_STANDARD_SUB, PRODUCT_PREMIUM_SUB]
-        return Single<[SKProduct]>.create { single in
-            SwiftyStoreKit.retrieveProductsInfo(ids) { result in
-                if let error = result.error {
-                    single(.error(error))
-                    let errorEvent = ErrorEvent(error: error)
-                    AnalyticsManager.sharedManager.record(event: errorEvent)
-                } else {
-                    single(.success(Array(result.retrievedProducts)))
-                }
-            }
-            return Disposables.create()
-        }
-    }
-    
-    private func getPlanSectionItems() {
-        let hud = PendingHUDView.showFullScreen()
-        getProducts()
-            .map({ product in
-                return product.sorted { (product1, product2) -> Bool in
-                    return product1.localizedPrice < product2.localizedPrice
-                }
-            })
-            .subscribe(onSuccess: { [weak self] in
-                hud.hide()
-
-                guard let self = self else { return }
-                self.plans = $0.compactMap { product in
-                    PlanSectionItem(
-                        items: [
-                            PlanModel(
-                            kind: product.productIdentifier == PRODUCT_STANDARD_SUB ? .standard : .premium,
-                            price: product.localizedPrice,
-                            isPurchased: product.productIdentifier == PRODUCT_STANDARD_SUB ? true : false )
-                    ])
-                }
-                
-                self.itemsReplay.accept(self.plans)
-            }, onError: { error in
-                hud.hide()
-                Logger.error(String(describing: error))
-            })
-            .disposed(by: bag)
-    }
-    
-    private func purchase(productId: String) {
-        let hud = PendingHUDView.showFullScreen()
-        purchaseService.purchase(prodcutID: productId)
-            .subscribe(onNext: { _ in
-                hud.hide()
-                self.isPurchasedReplay.accept(true)
-                self.router.open(route: .showSuccessPage)
-            }, onError: { error in
-                hud.hide()
-            })
-            .disposed(by: bag)
-    }
-}
-
-extension SubscriptionViewModel {
     enum State {
         case loading
-        case loaded
+        case content([SKProduct])
+        case error
+        
     }
     
     enum Action {
         case viewDidLoad
         case didSelect(PlanModel)
+    }
+    
+    var output: Driver<State> { state.asDriver() }
+        
+    private let environment: SubscriptionEnvironment
+    private let state = BehaviorRelay<State>.init(value: .loading)
+    private var isAuthorizedRelay = BehaviorRelay<Bool>(value: false)
+    private let bag = DisposeBag()
+    
+    init(environment: SubscriptionEnvironment) {
+        self.environment = environment
+    }
+    
+    func accept(action: Action) {
+        switch action {
+        case .viewDidLoad:
+            getPlanSectionItems()
+        case .didSelect(_):
+            ()
+        }
+    }
+    
+    func isAvailable() {
+        guard let receiptString = environment.purchaseService.appStoreReceipt() else {
+            return
+        }
+
+        environment.purchaseService.requestMobilePurchasesV2(receiptString: receiptString)
+            .subscribe(onSuccess: { planModels in
+                print(planModels)
+                Logger.debug("Purchase Models")
+            })
+            .disposed(by: bag)
+    }
+    
+    private func getPlanSectionItems() {
+        if environment.authService.isLoggedIn {
+            environment.router.openLogin()
+        }
+
+        environment.purchaseService.getProducts()
+            .map({ product in
+                return product.sorted { (product1, product2) -> Bool in
+                    return product1.localizedPrice < product2.localizedPrice
+                }
+            })
+            .subscribe(onSuccess: { [weak self] products in
+                guard let self = self else { return }
+                self.state.update { $0 = .content(products) }
+            }).disposed(by: bag)
+    }
+    
+    private func purchase(productId: String) {
+        let hud = PendingHUDView.showFullScreen()
+        environment.purchaseService.purchase(prodcutID: productId)
+            .subscribe(onNext: { _ in
+                hud.hide()
+            }, onError: { error in
+                hud.hide()
+            }, onCompleted: { [weak self] in
+                self?.environment.router.openSuccessPage()
+            }).disposed(by: bag)
     }
 }
