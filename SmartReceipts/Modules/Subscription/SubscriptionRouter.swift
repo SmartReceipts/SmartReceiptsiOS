@@ -14,8 +14,8 @@ final class SubscriptionRouter {
     
     func openLogin() {
         let module = AppModules.auth.build()
-        let nc = UINavigationController(rootViewController: module.view.viewController)
-        moduleViewController.present(nc, animated: true, completion: nil)
+        let vc = module.view.viewController
+        moduleViewController.present(vc, animated: true, completion: nil)
     }
     
     func openSuccessPage() {

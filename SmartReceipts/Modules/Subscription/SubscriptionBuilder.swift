@@ -36,11 +36,11 @@ public enum SubscriptionBuilder {
         let viewModel = SubscriptionViewModel(environment: environment)
         let dataSource = SubscriptionDataSource()
         let vc = SubscriptionViewController(dataSource: dataSource)
+        router.moduleViewController = vc
         vc.output.drive(onNext: {
             viewModel.accept(action: $0)
         }).disposed(by: vc.bag)
         vc.bind(viewModel.output.map(convert(state:)))
-        router.moduleViewController = vc
         return vc
     }
     
