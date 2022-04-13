@@ -13,7 +13,7 @@ struct SubscriptionsResponse: Codable {
 }
 
 struct SubscriptionModel: Codable {
-    private(set) var id: Int
+    private(set) var id: String
     private(set) var subscriptionProvider: String
     private(set) var productName: String
     private(set) var purchasedAt: Date

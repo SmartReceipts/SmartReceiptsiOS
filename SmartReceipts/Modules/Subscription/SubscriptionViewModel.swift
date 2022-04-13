@@ -102,4 +102,29 @@ final class SubscriptionViewModel {
     private func openLogin() {
         environment.router.openLogin()
     }
+    
+    private func getPlansWithPurchases() -> Single<[PlanModel]> {
+        guard AuthService.shared.isLoggedIn else { return .error(PurchaseError.authError) }
+        return environment.purchaseService.getProducts().flatMap({ [weak self] products -> Single<[PlanModel]> in
+            guard let self = self else { return .never() }
+            let standardPrice = products.first(where: { $0.productIdentifier == PRODUCT_STANDARD_SUB })?.localizedPrice
+            let premiumPrice = products.first(where: { $0.productIdentifier == PRODUCT_PREMIUM_SUB })?.localizedPrice
+            
+            return self.requestMobilePurchasesV2()
+        })
+    }
+    
+    private func getPlans() -> Single<[PlanModel]> {
+        return environment.purchaseService.getProducts()
+            .map { $0.sorted { product, _ in product.productIdentifier == PRODUCT_STANDARD_SUB } }
+            .map { products -> [PlanModel] in
+                return products.compactMap { product in
+                    PlanModel(
+                        kind: product.productIdentifier == PRODUCT_STANDARD_SUB ? .standard : .premium,
+                        price: product.localizedPrice,
+                        isPurchased: false
+                    )
+                }
+            }
+    }
 }
