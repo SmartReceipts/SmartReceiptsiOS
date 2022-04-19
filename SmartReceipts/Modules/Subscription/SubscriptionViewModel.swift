@@ -51,40 +51,16 @@ final class SubscriptionViewModel {
         }
     }
     
-    
-    
     private func getPlanSectionItems() {
         let hud = PendingHUDView.showFullScreen()
-        environment.purchaseService.getPlansWithPurchases()
+        getPlansWithPurchases()
             .map { $0.sorted { plan, _ in plan.kind == .standard } }
             .subscribe(
                 onSuccess: { [weak self] plans in
                     hud.hide()
                     guard let self = self else { return }
                     self.state.update { $0.plans = plans }
-                },
-                onError: { [weak self] error in
-                    hud.hide()
-                    guard let error = error as? PurchaseError else { return }
-                    switch error {
-                    case .authError: self?.openLogin()
-                    }
                 }).disposed(by: bag)
-    }
-    
-    private func isHasPurchased() {
-        environment.purchaseService.getPlans()
-            .map { $0.sorted { plan, _ in plan.kind == .standard } }
-            .subscribe(
-                onSuccess: { [weak self] plans in
-                    guard let self = self else { return }
-                    plans.forEach { plan in
-                        if plan.isPurchased {
-                            self.isPurchasedRelay.accept(true)
-                        }
-                    }
-                })
-            .disposed(by: bag)
     }
     
     private func purchase(productId: String) {
@@ -98,23 +74,47 @@ final class SubscriptionViewModel {
                 self?.environment.router.openSuccessPage()
             }).disposed(by: bag)
     }
-    
-    private func openLogin() {
-        environment.router.openLogin()
-    }
-    
+}
+
+extension SubscriptionViewModel {
     private func getPlansWithPurchases() -> Single<[PlanModel]> {
-        guard AuthService.shared.isLoggedIn else { return .error(PurchaseError.authError) }
-        return environment.purchaseService.getProducts().flatMap({ [weak self] products -> Single<[PlanModel]> in
-            guard let self = self else { return .never() }
-            let standardPrice = products.first(where: { $0.productIdentifier == PRODUCT_STANDARD_SUB })?.localizedPrice
-            let premiumPrice = products.first(where: { $0.productIdentifier == PRODUCT_PREMIUM_SUB })?.localizedPrice
-            
-            return self.requestMobilePurchasesV2()
-        })
+        auth()
+        guard let receiptString = environment.purchaseService.appStoreReceipt() else {
+            return getPlansByProducts()
+        }
+        return environment.purchaseService.getProducts()
+            .flatMap({ [weak self] products -> Single<[PlanModel]> in
+                guard let self = self else { return .never() }
+                let standardPrice = products.first(where: { $0.productIdentifier == PRODUCT_STANDARD_SUB })?.localizedPrice
+                let premiumPrice = products.first(where: { $0.productIdentifier == PRODUCT_PREMIUM_SUB })?.localizedPrice
+                return self.getPlansByMobilePurchases(
+                    standardPrice: standardPrice ?? "0",
+                    premiumPrice: premiumPrice ?? "0",
+                    receiptString: receiptString
+                )
+            })
     }
     
-    private func getPlans() -> Single<[PlanModel]> {
+    private func getPlansByMobilePurchases(
+        standardPrice: String,
+        premiumPrice: String,
+        receiptString: String
+    ) -> Single<[PlanModel]> {
+        return environment.purchaseService.requestMobilePurchasesV2(receiptString: receiptString)
+            .map({ purchasesModel -> [PlanModel] in
+                purchasesModel
+                    .sorted(by: { $0.purchasedTime < $1.purchasedTime })
+                    .map({
+                        PlanModel(
+                            kind: $0.productId == PRODUCT_STANDARD_SUB ? .standard : .premium,
+                            price: $0.productId == PRODUCT_STANDARD_SUB ? standardPrice : premiumPrice,
+                            isPurchased: $0.subscriptionActive
+                        )
+                    })
+            })
+    }
+    
+    private func getPlansByProducts() -> Single<[PlanModel]> {
         return environment.purchaseService.getProducts()
             .map { $0.sorted { product, _ in product.productIdentifier == PRODUCT_STANDARD_SUB } }
             .map { products -> [PlanModel] in
@@ -126,5 +126,29 @@ final class SubscriptionViewModel {
                     )
                 }
             }
+    }
+    
+    private func isHasPurchased() {
+        getPlansWithPurchases()
+            .map { $0.sorted { plan, _ in plan.kind == .standard } }
+            .subscribe(
+                onSuccess: { [weak self] plans in
+                    guard let self = self else { return }
+                    plans.forEach { plan in
+                        if plan.isPurchased {
+                            self.isPurchasedRelay.accept(true)
+                        }
+                    }
+                })
+            .disposed(by: bag)
+    }
+    
+    private func auth() {
+        if !environment.authService.isLoggedIn {
+            environment.router.openLogin()
+                .subscribe { event in
+                    print(event)
+                }.disposed(by: bag)
+        }
     }
 }

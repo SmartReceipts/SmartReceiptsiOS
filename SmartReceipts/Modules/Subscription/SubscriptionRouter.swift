@@ -12,10 +12,19 @@ import RxSwift
 final class SubscriptionRouter {
     weak var moduleViewController: UIViewController!
     
-    func openLogin() {
+    func openLogin() -> Completable {
         let module = AppModules.auth.build()
-        let vc = module.view.viewController
-        moduleViewController.present(vc, animated: true, completion: nil)
+        module.router.show(from: moduleViewController, embedInNavController: true)
+        
+        let interface = module.interface(AuthModuleInterface.self)
+        return Completable.create { [weak interface] event -> Disposable in
+                _ = interface?.successAuth.subscribe(onNext: {
+                    event(.completed)
+                })
+                return Disposables.create()
+            }.do(onCompleted: {
+                module.view.viewController.dismiss(animated: true, completion: nil)
+            })
     }
     
     func openSuccessPage() {

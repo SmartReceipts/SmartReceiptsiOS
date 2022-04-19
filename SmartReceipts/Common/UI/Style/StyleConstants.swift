@@ -18,6 +18,8 @@ extension UIFont {
     static var bold40: UIFont = .systemFont(ofSize: 40, weight: .bold)
     static var bold28: UIFont = .systemFont(ofSize: 28, weight: .bold)
     static var bold22: UIFont = .systemFont(ofSize: 22, weight: .bold)
+    static var bold20: UIFont = .systemFont(ofSize: 20, weight: .bold)
+    static var bold14: UIFont = .systemFont(ofSize: 14, weight: .bold)
     
     static var semibold11: UIFont = .systemFont(ofSize: 11, weight: .semibold)
     static var semibold15: UIFont = .systemFont(ofSize: 15, weight: .semibold)

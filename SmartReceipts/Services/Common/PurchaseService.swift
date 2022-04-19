@@ -314,8 +314,7 @@ class PurchaseService {
             }).disposed(by: bag)
     }
     
-    func requestMobilePurchasesV2() -> Single<[PurchaseModel]> {
-        guard let receiptString = appStoreReceipt() else { return .error(PurchaseError.receiptNotFound) }
+    func requestMobilePurchasesV2(receiptString: String) -> Single<[PurchaseModel]> {
         return apiProvider
             .request(.mobileAppPurchasesV2(receipt: receiptString))
             .mapModel(PurchasesResponse.self)
@@ -429,6 +428,5 @@ extension SKProduct {
 }
 
 enum PurchaseError: Error {
-    case authError
     case receiptNotFound
 }
