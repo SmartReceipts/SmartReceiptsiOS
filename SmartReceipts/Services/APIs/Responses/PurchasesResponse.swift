@@ -13,15 +13,15 @@ struct PurchasesResponse: Codable {
 }
 
 struct PurchaseModel: Codable {
-    private(set) var id: Int
+    private(set) var id: String
     private(set) var productId: String
-    private(set) var purchasedTime: Date
+    private(set) var purchaseTime: Date
     private(set) var subscriptionActive: Bool
 
     enum CodingKeys: String, CodingKey {
         case id
         case productId = "product_id"
-        case purchasedTime = "purchased_time"
+        case purchaseTime = "purchase_time"
         case subscriptionActive = "subscription_active"
     }
 }
