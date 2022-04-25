@@ -269,9 +269,6 @@ class PurchaseService {
     
     func getProducts() -> Single<[SKProduct]> {
         let ids: Set = [PRODUCT_STANDARD_SUB, PRODUCT_PREMIUM_SUB]
-        if !AuthService.shared.isLoggedIn {
-            return .error(PurchaseError.authFailed)
-        }
         return Single<[SKProduct]>.create { single in
             SwiftyStoreKit.retrieveProductsInfo(ids) { result in
                 if let error = result.error {
@@ -318,9 +315,6 @@ class PurchaseService {
     }
     
     func requestMobilePurchasesV2(receiptString: String) -> Single<[PurchaseModel]> {
-        if !AuthService.shared.isLoggedIn {
-            return .error(PurchaseError.authFailed)
-        }
         return apiProvider
             .request(.mobileAppPurchasesV2(receipt: receiptString))
             .mapModel(PurchasesResponse.self)
@@ -431,8 +425,4 @@ extension SKProduct {
         formatter.locale = self.priceLocale
         return formatter.string(from: self.price)!
     }
-}
-
-enum PurchaseError: Error {
-    case authFailed
 }

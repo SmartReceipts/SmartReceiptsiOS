@@ -28,7 +28,6 @@ final class SubscriptionViewModel {
     private let environment: SubscriptionEnvironment
     private let state = BehaviorRelay<State>.init(value: State(plans: []))
     private let isPurchasedRelay = BehaviorRelay<Bool>.init(value: false)
-    private var isAuthorizedRelay = BehaviorRelay<Bool>(value: false)
     private let bag = DisposeBag()
     
     init(environment: SubscriptionEnvironment) {
@@ -64,16 +63,9 @@ final class SubscriptionViewModel {
                             self.isPurchasedRelay.accept(true)
                         }
                     }
-                    
-                },
-                onError: { [weak self] error in
-                    guard let error = error as? PurchaseError else { return }
-                    switch error {
-                    case .authFailed:
-                        self?.openLogin()
-                    }
                 }
             ).disposed(by: bag)
+        hud.hide()
     }
     
     private func purchase(productId: String) {
@@ -81,7 +73,8 @@ final class SubscriptionViewModel {
         environment.purchaseService.purchase(prodcutID: productId)
             .subscribe(onNext: { [weak self] purchase in
                 hud.hide()
-                self?.environment.router.openSuccessPage()
+                guard let self = self else { return }
+                self.environment.router.openSuccessPage(updateState: self.getPlanSectionItems)
                 Logger.debug("Successuful payment: \(purchase.productId)")
             }, onError: { error in
                 hud.hide()
@@ -92,6 +85,10 @@ final class SubscriptionViewModel {
 
 extension SubscriptionViewModel {
     private func getPlansWithPurchases() -> Single<[PlanModel]> {
+        if !environment.authService.isLoggedIn {
+            openLogin()
+        }
+        
         guard let receiptString = environment.purchaseService.appStoreReceipt() else {
             return getPlansByProducts()
         }
@@ -152,8 +149,10 @@ extension SubscriptionViewModel {
     
     private func openLogin() {
         environment.router.openLogin()
-            .subscribe { event in
+            .subscribe { [weak self] event in
                 print(event)
-            }.disposed(by: bag)
+                self?.getPlanSectionItems()
+            }
+            .disposed(by: bag)
     }
 }

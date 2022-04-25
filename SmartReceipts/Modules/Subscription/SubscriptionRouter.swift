@@ -27,9 +27,9 @@ final class SubscriptionRouter {
             })
     }
     
-    func openSuccessPage() {
+    func openSuccessPage(updateState: @escaping (() -> Void)) {
         let successPlanVc = SuccessPlanBuilder.build() as! SuccessPlanViewController
         successPlanVc.modalPresentationStyle = .fullScreen
-        moduleViewController.present(successPlanVc, animated: true)
+        moduleViewController.present(successPlanVc, animated: true, completion: { updateState() })
     }
 }
