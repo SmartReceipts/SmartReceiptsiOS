@@ -65,7 +65,6 @@ final class SubscriptionViewModel {
                     }
                 }
             ).disposed(by: bag)
-        hud.hide()
     }
     
     private func purchase(productId: String) {
