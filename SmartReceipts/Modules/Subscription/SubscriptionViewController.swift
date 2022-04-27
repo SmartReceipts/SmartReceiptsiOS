@@ -155,8 +155,6 @@ final class SubscriptionViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        outputReplay.accept(.viewDidLoad)
     }
     
     private func commonInit() {

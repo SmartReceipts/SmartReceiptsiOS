@@ -37,7 +37,17 @@ final class SubscriptionViewModel {
     func accept(action: Action) {
         switch action {
         case .viewDidLoad:
-            getPlanSectionItems()
+            if environment.authService.isLoggedIn {
+                updatePlanSectionItems()
+                return
+            }
+            environment.router.openLogin()
+                .subscribe { [weak self] in
+                    self?.updatePlanSectionItems()
+                } onError: { error in
+                    Logger.error(error.localizedDescription)
+                }.disposed(by: bag)
+            
         case .didSelect(let model):
             isPurchasedRelay
                 .asObservable()
@@ -49,7 +59,7 @@ final class SubscriptionViewModel {
         }
     }
     
-    private func getPlanSectionItems() {
+    private func updatePlanSectionItems() {
         let hud = PendingHUDView.showFullScreen()
         getPlansWithPurchases()
             .map { $0.sorted { plan, _ in plan.kind == .standard } }
@@ -63,6 +73,9 @@ final class SubscriptionViewModel {
                             self.isPurchasedRelay.accept(true)
                         }
                     }
+                }, onError: { error in
+                    hud.hide()
+                    Logger.error(error.localizedDescription)
                 }
             ).disposed(by: bag)
     }
@@ -73,7 +86,7 @@ final class SubscriptionViewModel {
             .subscribe(onNext: { [weak self] purchase in
                 hud.hide()
                 guard let self = self else { return }
-                self.environment.router.openSuccessPage(updateState: self.getPlanSectionItems)
+                self.environment.router.openSuccessPage(updateState: self.updatePlanSectionItems)
                 Logger.debug("Successuful payment: \(purchase.productId)")
             }, onError: { error in
                 hud.hide()
@@ -84,10 +97,6 @@ final class SubscriptionViewModel {
 
 extension SubscriptionViewModel {
     private func getPlansWithPurchases() -> Single<[PlanModel]> {
-        if !environment.authService.isLoggedIn {
-            openLogin()
-        }
-        
         guard let receiptString = environment.purchaseService.appStoreReceipt() else {
             return getPlansByProducts()
         }
@@ -144,14 +153,5 @@ extension SubscriptionViewModel {
                     )
                 }
             }
-    }
-    
-    private func openLogin() {
-        environment.router.openLogin()
-            .subscribe { [weak self] event in
-                print(event)
-                self?.getPlanSectionItems()
-            }
-            .disposed(by: bag)
     }
 }
