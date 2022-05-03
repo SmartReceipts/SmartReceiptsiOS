@@ -20,11 +20,13 @@ class MainMenuActionSheet: ActionSheet, Disposable {
         
         bag.insert(self)
         
-        addAction(title: LocalizedString("menu_main_subscriptions"), image: #imageLiteral(resourceName: "subscriptions"))
-            .debug()
-            .subscribe(onNext: { [weak self] in
-                self?.openSubscriptions()
-            }).disposed(by: bag)
+        if FeatureFlags.newSubscription.isEnabled {
+            addAction(title: LocalizedString("menu_main_subscriptions"), image: #imageLiteral(resourceName: "subscriptions"))
+                .debug()
+                .subscribe(onNext: { [weak self] in
+                    self?.openSubscriptions()
+                }).disposed(by: bag)
+        }
         
         addAction(title: LocalizedString("menu_main_settings"), image: #imageLiteral(resourceName: "settings"))
             .debug()

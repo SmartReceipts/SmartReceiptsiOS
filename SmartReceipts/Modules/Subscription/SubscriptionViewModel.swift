@@ -39,6 +39,7 @@ final class SubscriptionViewModel {
         case .viewDidLoad:
             if environment.authService.isLoggedIn {
                 updatePlanSectionItems()
+                return
             }
             environment.router.openLogin()
                 .subscribe { [weak self] in

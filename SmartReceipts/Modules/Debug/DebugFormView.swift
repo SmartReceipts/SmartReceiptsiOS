@@ -66,6 +66,13 @@ class DebugFormView: FormViewController {
             FeatureFlags.useProdEndpoints = Feature(row.value!)
         })
         
+        <<< SwitchRow() { row in
+            row.title = "Use new subscription"
+            row.value = FeatureFlags.newSubscription.isEnabled
+        }.onChange({ row in
+            FeatureFlags.newSubscription = Feature(row.value!)
+        })
+        
         +++ Section("Amazon S3")
         <<< ButtonRow() {row in
             row.title = "Upload Test Image"
