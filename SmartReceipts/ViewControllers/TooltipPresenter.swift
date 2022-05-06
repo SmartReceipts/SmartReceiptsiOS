@@ -34,7 +34,7 @@ class TooltipPresenter {
         
         BackupProvidersManager.shared.getCriticalSyncErrorStream()
             .filter({ $0 != .unknownError })
-            .delay(0.1, scheduler: MainScheduler.instance)
+            .delay(.milliseconds(100), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] syncError in
                 self.presentSyncError(syncError)
             }).disposed(by: bag)

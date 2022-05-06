@@ -103,7 +103,7 @@ extension SmartReceiptsAPI: TargetType {
         case .signup: return URLEncoding.httpBody
         case .login: return URLEncoding.httpBody
         case .logout: return URLEncoding.httpBody
-        case .user: return URLEncoding.httpBody
+        case .user: return URLEncoding.queryString
         case .subscriptions: return URLEncoding.httpBody
         case .saveDevice: return JSONEncoding.default
         case .recognition: return URLEncoding.httpBody
@@ -135,8 +135,13 @@ extension SmartReceiptsAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .organizations: return .requestParameters(parameters: authParams, encoding: URLEncoding.queryString)
-        default: return .requestCompositeParameters(bodyParameters: parameters, bodyEncoding: parameterEncoding, urlParameters: authParams)
+        case .organizations,
+             .recognition,
+             .user:
+            return .requestParameters(parameters: authParams, encoding: URLEncoding.queryString)
+            
+        default:
+            return .requestCompositeParameters(bodyParameters: parameters, bodyEncoding: parameterEncoding, urlParameters: authParams)
         }
         
     }

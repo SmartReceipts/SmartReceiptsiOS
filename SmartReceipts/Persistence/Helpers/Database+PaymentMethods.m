@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Will Baumann. All rights reserved.
 //
 
-#import <FMDB/FMDatabaseAdditions.h>
+@import FMDB;
 #import "Database+PaymentMethods.h"
 #import "DatabaseTableNames.h"
 #import "FetchedModelAdapter.h"

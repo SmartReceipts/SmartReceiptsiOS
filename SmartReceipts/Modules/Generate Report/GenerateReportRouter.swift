@@ -11,19 +11,30 @@ import Viperit
 import GoogleMobileAds
 
 class GenerateReportRouter: Router {
-    private var interstitial: GADInterstitial?
-    private var inerstitialDelegate: InerstitialDelegate?
+    private var interstitial: GADInterstitialAd?
+    private var intersttialDelegate: InerstitialDelegate?
     
     func prepareAds() {
         guard !PurchaseService.hasValidPlusSubscriptionValue else { return }
-        let updateBlock = { [weak self] in
-            self?.interstitial = GADInterstitial(adUnitID: AD_UNIT_ID_INTERSTITIAL)
-            self?.interstitial?.delegate = self?.inerstitialDelegate
-            self?.interstitial?.load(.init())
-        }
-        inerstitialDelegate = .init(updateClosure: updateBlock)
-        updateBlock()
+        updateAd()
     }
+
+    func updateAd() {
+        intersttialDelegate = InerstitialDelegate(updateClosure: updateAd)
+        let request = GADRequest()
+        GADInterstitialAd.load(
+            withAdUnitID: AD_UNIT_ID_INTERSTITIAL,
+            request: request,
+            completionHandler: { [weak self] ad, error in
+                if let error = error {
+                    Logger.debug("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: { self?.updateAd() })
+                    return
+                }
+                self?.interstitial = ad
+            })
+    }
+
     
     func close() {
         _view.viewController.dismiss(animated: true, completion: nil)
@@ -66,6 +77,7 @@ class GenerateReportRouter: Router {
     
     func openInterstitialAd() {
         guard !PurchaseService.hasValidPlusSubscriptionValue else { return }
+        interstitial?.fullScreenContentDelegate = intersttialDelegate
         interstitial?.present(fromRootViewController: _view.viewController)
     }
 }
@@ -77,14 +89,14 @@ private extension GenerateReportRouter {
     }
 }
 
-private class InerstitialDelegate: NSObject, GADInterstitialDelegate {
+private class InerstitialDelegate: NSObject, GADFullScreenContentDelegate {
     private var updateClosure: VoidBlock
     
     init(updateClosure: @escaping VoidBlock) {
         self.updateClosure = updateClosure
     }
     
-    func interstitialWillDismissScreen(_ ad: GADInterstitial) {
+    func interstitialWillDismissScreen(_ ad: GADInterstitialAd) {
         updateClosure()
     }
 }

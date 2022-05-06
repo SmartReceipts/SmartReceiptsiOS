@@ -8,7 +8,7 @@
 
 import Foundation
 import GoogleSignIn
-import GoogleAPIClientForREST
+import GoogleAPIClientForREST_Drive
 import GTMAppAuth
 import RxSwift
 
@@ -16,7 +16,7 @@ fileprivate let GOOGLE_CLIENT_ID = "718869294394-6p4ic33brhs8nd4rgvu72q76o5mfvft
 
 fileprivate let FOLDER_MIME_TYPE = "application/vnd.google-apps.folder"
 
-class GoogleDriveService: NSObject, GIDSignInDelegate {
+class GoogleDriveService: NSObject {
     static let shared = GoogleDriveService()
     
     private let gDriveService = GTLRDriveService()
@@ -39,45 +39,59 @@ class GoogleDriveService: NSObject, GIDSignInDelegate {
     }
     
     func initialize() {
-        GIDSignIn.sharedInstance().scopes = authScopes
-        GIDSignIn.sharedInstance().clientID = GOOGLE_CLIENT_ID
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
+        if let viewController = UIApplication.shared.topViewCtonroller {
+            GIDSignIn.sharedInstance.addScopes(
+                authScopes,
+                presenting: viewController,
+                callback: signInHandler
+            )
+        }
+        GIDSignIn.sharedInstance.restorePreviousSignIn(callback: signInHandler)
     }
     
-    func signInSilently() -> Observable<Void> {
-        GIDSignIn.sharedInstance().scopes = authScopes
-        signInSubject.dispose()
-        signInSubject = PublishSubject<Void>()
-        defer { GIDSignIn.sharedInstance()?.restorePreviousSignIn() }
-        return signInSubject
-    }
-    
-    func signIn() -> Observable<Void> {
-        GIDSignIn.sharedInstance().scopes = authScopes
-        signInSubject.dispose()
-        signInSubject = PublishSubject<Void>()
-        return signInSubject.do(onSubscribed: {
-            GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.topViewCtonroller
-            GIDSignIn.sharedInstance().signIn()
-        })
-    }
-    
-    func signOut() -> Observable<Void> {
-        signOutSubject.dispose()
-        signOutSubject = PublishSubject<Void>()
-        return signOutSubject.do(onSubscribed: { GIDSignIn.sharedInstance().disconnect() })
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+    private func signInHandler(_ user: GIDGoogleUser?, error: Error?) {
         guard let sUser = user else {
-            signInSubject.onError(error)
+            signInSubject.onError(error!)
             return
         }
         gDriveService.authorizer = sUser.authentication.fetcherAuthorizer()
         signInSubject.onNext(())
         signInSubject.onCompleted()
         BackupProvidersManager.shared.markErrorResolved(syncErrorType: .userRevokedRemoteRights)
+    }
+    
+    func signIn() -> Observable<Void> {
+        guard let viewController = UIApplication.shared.topViewCtonroller else { return .never() }
+        signInSubject.dispose()
+        signInSubject = PublishSubject<Void>()
+        return signInSubject.do(onSubscribed: { [weak self] in
+            guard let self = self else { return }
+            GIDSignIn.sharedInstance.addScopes(
+                self.authScopes,
+                presenting: viewController,
+                callback: self.signInHandler
+            )
+            GIDSignIn.sharedInstance.signIn(
+                with: .init(clientID: GOOGLE_CLIENT_ID),
+                presenting: viewController,
+                callback: self.signInHandler
+            )
+        })
+    }
+    
+    func signOut() -> Observable<Void> {
+        signOutSubject.dispose()
+        signOutSubject = PublishSubject<Void>()
+        return signOutSubject.do(onSubscribed: {
+            GIDSignIn.sharedInstance.disconnect(callback: { [weak self] error in
+                guard let self = self else { return }
+                if let error = error {
+                    self.signOutSubject.onError(error)
+                } else {
+                    self.signOutSubject.onNext()
+                }
+            })
+        })
     }
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
@@ -95,7 +109,7 @@ class GoogleDriveService: NSObject, GIDSignInDelegate {
         return Single<GTLRDrive_File>.create(subscribe: { [unowned self] single in
             self.gDriveService.executeQuery(query) { (ticket: GTLRServiceTicket, object: Any?, error: Error?) in
                 if let queryError = error {
-                    single(.error(queryError))
+                    single(.failure(queryError))
                 } else if let filelist = object as? GTLRDrive_FileList, let file = filelist.files?.first {
                     single(.success(file))
                 }
@@ -113,7 +127,7 @@ class GoogleDriveService: NSObject, GIDSignInDelegate {
         return Single<GTLRDrive_FileList>.create(subscribe: { [unowned self] single in
             self.gDriveService.executeQuery(query) { (ticket: GTLRServiceTicket, object: Any?, error: Error?) in
                 if let queryError = error {
-                    single(.error(queryError))
+                    single(.failure(queryError))
                 } else if let filelist = object as? GTLRDrive_FileList {
                     single(.success(filelist))
                 }
@@ -128,7 +142,7 @@ class GoogleDriveService: NSObject, GIDSignInDelegate {
         return Single<GTLRDrive_File>.create(subscribe: { [unowned self] single in
             self.gDriveService.executeQuery(query) { (ticket: GTLRServiceTicket, object: Any?, error: Error?) in
                 if let queryError = error {
-                    single(.error(queryError))
+                    single(.failure(queryError))
                 } else if let file = object as? GTLRDrive_File {
                     single(.success(file))
                 }
@@ -142,7 +156,7 @@ class GoogleDriveService: NSObject, GIDSignInDelegate {
         return Single<GTLRDataObject>.create(subscribe: { [unowned self] single in
             self.gDriveService.executeQuery(query) { (ticket: GTLRServiceTicket, object: Any?, error: Error?) in
                 if let queryError = error {
-                    single(.error(queryError))
+                    single(.failure(queryError))
                 } else if let data = object as? GTLRDataObject {
                     single(.success(data))
                 }
@@ -174,7 +188,7 @@ class GoogleDriveService: NSObject, GIDSignInDelegate {
         return Single<GTLRDrive_FileList>.create(subscribe: { [unowned self] single in
             self.gDriveService.executeQuery(query) { (ticket: GTLRServiceTicket, object: Any?, error: Error?) in
                 if let queryError = error {
-                    single(.error(queryError))
+                    single(.failure(queryError))
                 } else if let filelist = object as? GTLRDrive_FileList {
                     single(.success(filelist))
                 }
@@ -200,7 +214,7 @@ class GoogleDriveService: NSObject, GIDSignInDelegate {
         return Single<GTLRDrive_File>.create(subscribe: { [unowned self] single in
             self.gDriveService.executeQuery(query) { (ticket: GTLRServiceTicket, object: Any?, error: Error?) in
                 if let queryError = error {
-                    single(.error(queryError))
+                    single(.failure(queryError))
                 } else if let file = object as? GTLRDrive_File {
                     single(.success(file))
                 }
@@ -220,7 +234,7 @@ class GoogleDriveService: NSObject, GIDSignInDelegate {
         return Single<GTLRDrive_File>.create(subscribe: { [unowned self] single in
             self.gDriveService.executeQuery(query) { (ticket: GTLRServiceTicket, object: Any?, error: Error?) in
                 if let queryError = error {
-                    single(.error(queryError))
+                    single(.failure(queryError))
                 } else if let file = object as? GTLRDrive_File {
                     single(.success(file))
                 }

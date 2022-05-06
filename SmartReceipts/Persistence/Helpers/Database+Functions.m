@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Will Baumann. All rights reserved.
 //
 
-#import <FMDB/FMDatabaseAdditions.h>
+@import FMDB;
 #import "Database+Functions.h"
 #import "Constants.h"
 #import "DatabaseQueryBuilder.h"

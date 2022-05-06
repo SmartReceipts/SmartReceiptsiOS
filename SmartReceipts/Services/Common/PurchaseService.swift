@@ -75,9 +75,9 @@ class PurchaseService {
     
     func cacheProducts() {
         requestProducts().toArray()
-        .do(onNext: { products in
+        .do(onSuccess: { products in
             Logger.debug("Available purchases: \(products)")
-        }).subscribe(onNext: { products in
+        }).subscribe(onSuccess: { products in
             PurchaseService.cachedProducts = products
         }).disposed(by: bag)
     }
@@ -150,6 +150,9 @@ class PurchaseService {
                 case .success(let purchase):
                     Logger.debug("Purchase Success: \(purchase.productId)")
                     observer.onNext(purchase)
+                case .deferred(let purchase):
+                    Logger.debug("Purchase Deferred: \(purchase.productId)")
+                    observer.onError(PurchaseError.deferredPurchase)
                 case .error(let error):
                     switch error.code {
                     case .unknown: Logger.error("Unknown error. Please contact support")
@@ -272,7 +275,7 @@ class PurchaseService {
         return Single<[SKProduct]>.create { single in
             SwiftyStoreKit.retrieveProductsInfo(ids) { result in
                 if let error = result.error {
-                    single(.error(error))
+                    single(.failure(error))
                     let errorEvent = ErrorEvent(error: error)
                     AnalyticsManager.sharedManager.record(event: errorEvent)
                 } else {
@@ -425,4 +428,8 @@ extension SKProduct {
         formatter.locale = self.priceLocale
         return formatter.string(from: self.price)!
     }
+}
+
+enum PurchaseError: Error {
+    case deferredPurchase
 }

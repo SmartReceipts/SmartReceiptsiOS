@@ -12,7 +12,7 @@ import RxCocoa
 let BackgroundScheduler = ConcurrentDispatchQueueScheduler(qos: .default)
 
 extension AnyObserver {
-    init(onNext: ((E) -> Swift.Void)? = nil, onError: ((Error) -> Swift.Void)? = nil, onCompleted: (() -> Swift.Void)? = nil) {
+    init(onNext: ((Element) -> Swift.Void)? = nil, onError: ((Error) -> Swift.Void)? = nil, onCompleted: (() -> Swift.Void)? = nil) {
         self.init { event in
             switch event {
             case .next(let element):
@@ -35,8 +35,8 @@ extension Observable {
         return map({ _ -> Void in })
     }
     
-    func delayEach(seconds: RxTimeInterval, scheduler: SchedulerType) -> Observable<Element> {
-        return RxSwift.Observable.zip(self, Observable<Int>.interval(seconds, scheduler: scheduler)).map({ $0.0 })
+    func delayEach(_ interval: RxTimeInterval, scheduler: SchedulerType) -> Observable<Element> {
+        return RxSwift.Observable.zip(self, Observable<Int>.interval(interval, scheduler: scheduler)).map({ $0.0 })
     }
 }
 
@@ -46,7 +46,7 @@ extension Completable {
             let subscribe = self.subscribe(onCompleted: {
                 single(.success(()))
             }, onError: {
-                single(.error($0))
+                single(.failure($0))
             })
             return Disposables.create([subscribe])
         })
@@ -71,14 +71,14 @@ extension Observable where Element == Void {
     }
 }
 
-extension ObserverType where E == Void {
+extension ObserverType where Element == Void {
     func onNext() {
         on(.next(()))
     }
 }
 
-extension ObservableType where E: Equatable {
-    func filterCases(cases: E...) -> Observable<E> {
+extension ObservableType where Element: Equatable {
+    func filterCases(cases: Element...) -> Observable<Element> {
         return filter { cases.contains($0) }
     }
 }

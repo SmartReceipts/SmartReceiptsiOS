@@ -40,11 +40,11 @@ class SyncService {
         center.addObserver(self, selector: #selector(didUpdate(_:)), name: .DatabaseDidUpdateModel, object: nil)
         center.addObserver(self, selector: #selector(didDelete(_:)), name: .DatabaseDidDeleteModel, object: nil)
         
-        GoogleDriveService.shared.signInSilently()
+        GoogleDriveService.shared.signIn()
             .subscribe({ _ in
                 self.updateSyncServiceIfNeeded()
                 self.configurePreferencesListeners()
-                self.configureNetworkListener()
+                self.startListeningNetwork()
             }).disposed(by: bag)
     }
     
@@ -64,16 +64,16 @@ class SyncService {
             }).disposed(by: bag)
     }
     
-    private func configureNetworkListener() {
-        network?.listener = { status in
+    private func startListeningNetwork() {
+        network?.startListening(onUpdatePerforming: { status in
             switch status {
-            case .reachable(.wwan):
+            case .reachable(.cellular):
                 if !WBPreferences.autobackupWifiOnly() { self.syncReceipts() }
             case .reachable(.ethernetOrWiFi):
                 self.syncReceipts()
             default: break
             }
-        }
+        })
     }
     
     func trySyncData() {
@@ -106,7 +106,7 @@ class SyncService {
             .filter { !$0.isMarkedForDeletion(syncProvider: .current) }
             .filter { !$0.isSynced }
             // Added to avoid Google Drive requests rate
-            .delayEach(seconds: 0.3, scheduler: BackgroundScheduler)
+            .delayEach(.milliseconds(300), scheduler: BackgroundScheduler)
             .subscribe(onNext: { [unowned self] receipt in
                 guard let trip = Database.sharedInstance().tripBy(id: receipt.parentKey) else { return }
                 receipt.trip = trip
@@ -134,7 +134,7 @@ class SyncService {
         switch SyncProvider.current {
         case .googleDrive:
             syncService = GoogleSyncService()
-            network?.startListening()
+            startListeningNetwork()
         case .none:
             syncService = nil
             network?.stopListening()

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import GoogleAPIClientForREST
+import GoogleAPIClientForREST_Drive
 
 fileprivate typealias GoogleDriveErrorType = [String: [String: [[String: String]]?]]
 

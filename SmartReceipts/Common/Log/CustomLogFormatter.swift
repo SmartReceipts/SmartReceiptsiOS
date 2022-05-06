@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CocoaLumberjack.Swift
+import CocoaLumberjackSwift
 
 /**
  * For more information about creating custom formatters, see the wiki article:

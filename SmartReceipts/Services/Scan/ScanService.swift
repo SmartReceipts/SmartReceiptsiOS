@@ -9,8 +9,8 @@
 import RxSwift
 import Toaster
 
-fileprivate let PUSH_TIMEOUT: RxTimeInterval = 15
-fileprivate let NETWORK_TIMEOUT: RxTimeInterval = 10
+fileprivate let PUSH_TIMEOUT: RxTimeInterval = .seconds(15)
+fileprivate let NETWORK_TIMEOUT: RxTimeInterval = .seconds(10)
 fileprivate let RECOGNITION_KEY = "recognition"
 
 class ScanService {
@@ -43,7 +43,7 @@ class ScanService {
     }
     
     var status: Observable<ScanStatus> {
-        return statusSubject.asObservable()
+        return statusSubject.observe(on: MainScheduler.instance).asObservable()
     }
     
     func scan(image: UIImage) -> Single<ScanResult> {
@@ -75,12 +75,9 @@ class ScanService {
     private func scanFrom(uploading: Observable<URL>, document: ReceiptDocument) -> Single<ScanResult> {
         return uploading
             .do(onSubscribed: { AnalyticsManager.sharedManager.record(event: Event.ocrRequestStarted()) })
-            .catchError({ _ -> Observable<URL> in
+            .catch({ _ -> Observable<URL> in
                 return AuthService.shared.getUser()
-                    .do(onSuccess: {
-                        CognitoService().clear()
-                        CognitoService().saveCognitoData(user: $0)
-                    })
+                    .do(onSuccess: { CognitoService.saveCognitoData(user: $0) })
                     .do(onError: { [weak self] in self?.handle(error: $0) })
                     .asObservable()
                     .flatMap({ _ in uploading })
@@ -113,7 +110,7 @@ class ScanService {
                         ScansPurchaseTracker.shared.decrementRemainingScans()
                     })
             })
-            .catchError({ error -> Single<ScanResult> in
+            .catch({ error -> Single<ScanResult> in
                 return .just(ScanResult(filepath: document.localURL!))
             })
     }

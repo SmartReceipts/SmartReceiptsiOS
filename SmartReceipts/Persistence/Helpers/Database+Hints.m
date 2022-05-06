@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Will Baumann. All rights reserved.
 //
 
-#import <FMDB/FMResultSet.h>
+@import FMDB;
 #import "Database+Hints.h"
 #import "FMDatabase.h"
 #import "DatabaseTableNames.h"

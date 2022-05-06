@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Will Baumann. All rights reserved.
 //
 
-#import <FMDB/FMDatabase.h>
+@import FMDB;
 #import "FetchedModelAdapter.h"
 #import "Database.h"
 #import "FetchedModel.h"

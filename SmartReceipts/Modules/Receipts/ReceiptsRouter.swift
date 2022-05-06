@@ -23,7 +23,7 @@ class ReceiptsRouter: Router {
     
     func openImageViewer(for receipt: WBReceipt) {
         Observable<Void>.just(())
-            .delay(0, scheduler: MainScheduler.instance)
+            .delay(.seconds(0), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 let module = AppModules.receiptImageViewer.build()
                 module.router.show(from: self._view.viewController, embedInNavController: false, setupData: receipt)
@@ -32,7 +32,7 @@ class ReceiptsRouter: Router {
     
     func openPDFViewer(for receipt: WBReceipt) {
         Observable<Void>.just(())
-            .delay(0, scheduler: MainScheduler.instance)
+            .delay(.seconds(0), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 let url = URL(fileURLWithPath: receipt.imageFilePath(for: receipt.trip))
                 self.documentViewController = UIDocumentInteractionController(url: url)

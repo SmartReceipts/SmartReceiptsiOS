@@ -115,7 +115,7 @@ extension AdPresentingContainerViewController: GADBannerViewDelegate {
         bannerView.isHidden = false
     }
     
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         bannerView.isHidden = true
         upsellBannerView.isHidden = false
         

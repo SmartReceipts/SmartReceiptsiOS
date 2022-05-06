@@ -8,31 +8,34 @@
 
 import RxSwift
 import Moya
-import Result
+import RxMoya
 
 fileprivate let AUTH_ERROR_CODES = [401,403]
 
-class APIProvider<T: TargetType>: MoyaProvider<T> {
-    override init(endpointClosure: @escaping EndpointClosure = MoyaProvider<T>.defaultEndpointMapping,
-                  requestClosure: @escaping RequestClosure = MoyaProvider<T>.defaultRequestMapping,
-                  stubClosure: @escaping StubClosure = MoyaProvider<T>.neverStub,
-                  callbackQueue: DispatchQueue? = nil,
-                  manager: Manager = MoyaProvider<T>.defaultAlamofireManager(),
-                  plugins: [PluginType] = [],
-                  trackInflights: Bool = false) {
-        
+class APIProvider<Target: TargetType>: MoyaProvider<Target> {
+    override init(
+        endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure = MoyaProvider.defaultEndpointMapping,
+        requestClosure: @escaping MoyaProvider<Target>.RequestClosure = MoyaProvider<Target>.defaultRequestMapping,
+        stubClosure: @escaping MoyaProvider<Target>.StubClosure = MoyaProvider.neverStub,
+        callbackQueue: DispatchQueue? = nil,
+        session: Session = MoyaProvider<Target>.defaultAlamofireSession(),
+        plugins: [PluginType] = [],
+        trackInflights: Bool = false
+    ) {
+       
         var modifiedPlugins = plugins
         modifiedPlugins.append(AuthorizationPlugin())
         
         
         if DebugStates.isDebug {
-            modifiedPlugins.append(NetworkLoggerPlugin(verbose: true))
+            let logger = NetworkLoggerPlugin(configuration: .init(logOptions: .verbose))
+            modifiedPlugins.append(logger)
         }
         
-        super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, callbackQueue: callbackQueue, manager: manager, plugins: modifiedPlugins, trackInflights: trackInflights)
+        super.init(endpointClosure: endpointClosure, requestClosure: requestClosure, stubClosure: stubClosure, callbackQueue: callbackQueue, plugins: modifiedPlugins, trackInflights: trackInflights)
     }
     
-    public func request(_ token: T, callbackQueue: DispatchQueue? = nil) -> Single<Response> {
+    public func request(_ token: Target, callbackQueue: DispatchQueue? = nil) -> Single<Response> {
         return rx.request(token, callbackQueue: callbackQueue).filterSuccessfulStatusCodes()
     }
 }
@@ -42,12 +45,12 @@ class AuthorizationPlugin: PluginType {
     
     func process(_ result: Result<Response, MoyaError>, target: TargetType) -> Result<Response, MoyaError> {
         switch result {
-        case .failure(let error): return Result(error: error)
+        case .failure(let error): return .failure(error)
         case .success(let response):
             let isAuthError = AUTH_ERROR_CODES.contains(response.statusCode)
-            guard isAuthError else { return Result(value: response) }
+            guard isAuthError else { return .success(response) }
             handleTokenError()
-            return Result(error: MoyaError.statusCode(response))
+            return .failure(MoyaError.statusCode(response))
         }
     }
     

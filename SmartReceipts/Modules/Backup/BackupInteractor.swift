@@ -113,7 +113,7 @@ class BackupInteractor: Interactor {
                 database.close()
                 return result
             }).asObservable().flatMap({ receipts -> Observable<WBReceipt> in
-                return receipts.asObservable().delayEach(seconds: 1, scheduler: MainScheduler.instance)
+                return receipts.asObservable().delayEach(.seconds(1), scheduler: MainScheduler.instance)
             }).flatMap({ receipt -> Observable<(WBReceipt, BackupReceiptFile)> in
                 return BackupProvidersManager.shared.downloadReceiptFile(syncId: receipt.syncId)
                     .asObservable()
@@ -134,9 +134,7 @@ class BackupInteractor: Interactor {
                     result ? completable(.completed) : completable(.error(DiskError.createFileError))
                     return Disposables.create()
                 })
-            }).toArray()
-            .asVoid()
-            .asSingle()
+            })
             .asCompletable()
             .subscribe(onCompleted: {
                 hud?.hide()

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Will Baumann. All rights reserved.
 //
 
-#import <FMDB/FMDatabase.h>
+@import FMDB;
 #import "Database+Distances.h"
 #import "DatabaseTableNames.h"
 #import "Database+Functions.h"

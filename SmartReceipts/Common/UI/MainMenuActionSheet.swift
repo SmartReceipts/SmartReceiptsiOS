@@ -68,10 +68,10 @@ class MainMenuActionSheet: ActionSheet, Disposable {
             let authModule = openAuth()
             authModule.successAuth
                 .map({ authModule.close() })
-                .delay(VIEW_CONTROLLER_TRANSITION_DELAY, scheduler: MainScheduler.instance)
+                .delay(.milliseconds(Int(VIEW_CONTROLLER_TRANSITION_DELAY * 1000)), scheduler: MainScheduler.instance)
                 .flatMap({ _ -> Observable<UNAuthorizationStatus> in
                     PushNotificationService.shared.authorizationStatus()
-                }).observeOn(MainScheduler.instance)
+                }).observe(on: MainScheduler.instance)
                 .flatMap({ status -> Observable<Void> in
                     let text = LocalizedString("push_request_alert_text")
                     return status == .notDetermined ? UIAlertController.showInfo(text: text) : Observable<Void>.just(())

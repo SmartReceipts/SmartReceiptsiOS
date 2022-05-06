@@ -17,7 +17,6 @@ fileprivate let INVALID_CREDENTIALS_CODE = 401
 
 class AuthInteractor: Interactor {
     private var authService: AuthServiceInterface
-    private let cognitoService = CognitoService()
     private let bag = DisposeBag()
     
     init(authService: AuthServiceInterface = AuthService.shared) {

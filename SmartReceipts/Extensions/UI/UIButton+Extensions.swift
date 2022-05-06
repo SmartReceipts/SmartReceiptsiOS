@@ -18,7 +18,7 @@ extension UIButton {
 }
 
 extension Reactive where Base: UIButton {
-    public func titleBinder(for controlState: UIControlState = [], animated: Bool = false) -> Binder<String?> {
+    public func titleBinder(for controlState: UIControl.State = [], animated: Bool = false) -> Binder<String?> {
         return Binder(self.base) { button, title -> Void in
             button.set(title: title, for: controlState, animated: animated)
         }

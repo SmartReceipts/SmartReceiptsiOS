@@ -13,6 +13,8 @@ import RxSwift
 import FirebaseCrashlytics
 import SwiftyStoreKit
 import GoogleSignIn
+import GoogleMobileAds
+import AWSS3
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppTheme.customizeOnAppLoad()
         EurekaWhitespaceWorkaround.configureTextCells()
         Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(!DebugStates.isDebug) 
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [kGADSimulatorID as! String]
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [GADSimulatorID]
         
         _ = FileManager.initTripsDirectory()
         
@@ -95,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 Logger.info("Loaded with unknown file")
             }
         } else {
-            return GIDSignIn.sharedInstance().handle(url)
+            return GIDSignIn.sharedInstance.handle(url)
         }
         return true
     }

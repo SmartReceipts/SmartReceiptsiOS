@@ -8,7 +8,7 @@
 
 import Foundation
 import RxSwift
-import GoogleAPIClientForREST
+import GoogleAPIClientForREST_Drive
 import Toaster
 
 let SYNC_FOLDER_NAME = "Smart Receipts"
@@ -29,7 +29,7 @@ class GoogleSyncService: SyncServiceProtocol {
     
     init() {
         syncDatabaseSubject
-            .throttle(1, scheduler: MainScheduler.instance)
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
                 self?.uploadDatabase()
             }).disposed(by: bag)
@@ -176,7 +176,7 @@ class GoogleSyncService: SyncServiceProtocol {
                         Logger.debug("Created Sync Folder")
                     }).do(onError: { error in
                         self.folderLock.unlock()
-                        single(.error(error))
+                        single(.failure(error))
                         Logger.error("Create Sync Folder Error - \(error.localizedDescription)")
                     }).subscribe().disposed(by: self.bag)
             }

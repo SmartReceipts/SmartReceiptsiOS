@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Will Baumann. All rights reserved.
 //
 
-#import <FMDB/FMResultSet.h>
+@import FMDB;
 #import "WBReceipt.h"
 #import "WBTrip.h"
 #import "NSDecimalNumber+WBNumberParse.h"

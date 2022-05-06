@@ -11,8 +11,7 @@ import Viperit
 import RxSwift
 import UserNotifications
 
-fileprivate let ANIMATIONS_DURATION: RxTimeInterval = 0.6
-
+fileprivate let ANIMATIONS_DURATION: RxTimeInterval = .milliseconds(600)
 protocol EditReceiptModuleInterface {
     var removeAction: Observable<WBReceipt> { get }
     var showAttachmentAction: Observable<WBReceipt> { get }

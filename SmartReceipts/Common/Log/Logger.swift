@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CocoaLumberjack.Swift
+import CocoaLumberjackSwift
 import FirebaseCrashlytics
 
 /// Logger wrapper
@@ -47,10 +47,8 @@ final class Logger: NSObject {
         }
         
         // ASL = Apple System Logs
-        if let aslLogger = DDOSLogger.sharedInstance {
-            aslLogger.logFormatter = formatter
-            DDLog.add(aslLogger, with: dynamicLogLevel)
-        }
+        DDOSLogger.sharedInstance.logFormatter = formatter
+        DDLog.add(DDOSLogger.sharedInstance, with: dynamicLogLevel)
         
         // Persistent log file that saves up to 1MB of logs to disk, which can be attached as part of the support email.
         fileLogger.logFormatter = formatter

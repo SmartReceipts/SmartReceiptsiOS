@@ -8,7 +8,7 @@
 
 import Foundation
 import RxSwift
-import GoogleAPIClientForREST
+import GoogleAPIClientForREST_Drive
 
 class GoogleDriveBackupProvider: BackupProvider {
     let backupMetadata = GoogleDriveSyncMetadata()
@@ -121,11 +121,11 @@ class GoogleDriveBackupProvider: BackupProvider {
                         let fileURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(dbName)!
                         try? data.write(to: fileURL)
                         return Database(databasePath: fileURL.absoluteString, tripsFolderPath: FileManager.tripsDirectoryPath)
-                    }).flatMap({ database -> Observable<BackupFetchResult> in
+                    }).flatMap({ database -> Single<BackupFetchResult> in
                         return receiptFiles.asObservable()
                             .filter({ $0.name != SYNC_DB_NAME })
                             // Added to avoid Google Drive requests rate
-                            .delayEach(seconds: 0.2, scheduler: BackgroundScheduler)
+                            .delayEach(.milliseconds(200), scheduler: BackgroundScheduler)
                             .flatMap({ file -> Observable<(GTLRDrive_File, Data)> in
                                 return GoogleDriveService.shared.downloadFile(id: file.identifier!).asObservable()
                                     .map({ (file, $0.data) })

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Will Baumann. All rights reserved.
 //
 
-#import <FMDB/FMDatabaseQueue.h>
+@import FMDB;
 #import "Database.h"
 #import "Constants.h"
 #import "ReceiptFilesManager.h"

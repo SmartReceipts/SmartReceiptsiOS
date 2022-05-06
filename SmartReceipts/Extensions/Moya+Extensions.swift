@@ -9,7 +9,7 @@
 import Moya
 import RxSwift
 
-extension PrimitiveSequence where TraitType == SingleTrait, ElementType == Response {
+extension PrimitiveSequence where Trait == SingleTrait, Element == Response {
     func mapModel<D: Decodable>(_ type: D.Type, atKeyPath keyPath: String? = nil, using decoder: JSONDecoder = .iso8601, failsOnEmptyData: Bool = true) -> Single<D> {
         return flatMap { response -> Single<D> in
             return Single.just(try response.map(type, atKeyPath: keyPath, using: decoder, failsOnEmptyData: failsOnEmptyData))

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Will Baumann. All rights reserved.
 //
 
-#import <FMDB/FMResultSet.h>
+@import FMDB;
 #import "WBCategory.h"
 #import "DatabaseTableNames.h"
 #import "LocalizedString.h"

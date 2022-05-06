@@ -48,7 +48,7 @@ class OCRConfigurationPresenter: Presenter {
     
     private func buy(productId: String) {
         self.interactor.purchase(product: productId)
-            .delay(1, scheduler: MainScheduler.instance)
+            .delay(.seconds(1), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.updateSubscriptionsStatus()
             }).disposed(by: bag)

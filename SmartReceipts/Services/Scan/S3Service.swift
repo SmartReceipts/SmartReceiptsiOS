@@ -15,21 +15,21 @@ fileprivate let FOLDER = "ocr/"
 fileprivate let AMAZON_PREFIX = "https://s3.amazonaws.com/"
 
 class S3Service {
-    private var transferManager: AWSS3TransferManager!
+    private var cognitoService = CognitoService()
     private var credentialsProvider: AWSCognitoCredentialsProvider!
-    private let cognitoService = CognitoService()
+    private let transferUtility: AWSS3TransferUtility!
     private let bag = DisposeBag()
     
     init() {
         credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityProvider: cognitoService)
-        let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider:credentialsProvider)
+        let configuration = AWSServiceConfiguration(region: .USEast1, credentialsProvider: credentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
-        transferManager = AWSS3TransferManager.default()
+        transferUtility = AWSS3TransferUtility.default()
         
         AuthService.shared.loggedInObservable
             .filter({ !$0 })
             .subscribe(onNext: { [weak self] _ in
-                self?.credentialsProvider.clearCredentials()
+                self?.cognitoService.clear()
             }).disposed(by: bag)
     }
     
@@ -43,74 +43,73 @@ class S3Service {
     
     func upload(file url: URL) -> Observable<URL> {
         return Observable<URL>.create { [weak self] observer -> Disposable in
-            if let sSelf = self {
-                let key = FOLDER + UUID().uuidString + "_\(url.lastPathComponent)"
-                let uploadRequest = AWSS3TransferManagerUploadRequest()
-                uploadRequest?.bucket = BUCKET
-                uploadRequest?.key = key
-                uploadRequest?.body = url
-                
-                sSelf.transferManager.cancelAll()
-                sSelf.transferManager.upload(uploadRequest!)
-                    .continueWith(executor: AWSExecutor.mainThread(), block: { (task: AWSTask<AnyObject>) -> Any? in
-                    if let error = task.error  {
+            guard let self = self else { return Disposables.create() }
+            let key = FOLDER + UUID().uuidString + "_\(url.lastPathComponent)"
+            
+            self.transferUtility.uploadFile(
+                url,
+                bucket: BUCKET,
+                key: key,
+                contentType: "image/jpeg",
+                expression: nil,
+                completionHandler: { _, error in
+                    if let error = error  {
                         printError(error, operation: "Upload")
                         observer.onError(error)
                     } else {
-                        Logger.debug("Upload complete for: \(uploadRequest!.key!)")
+                        Logger.debug("Upload complete for: \(key)")
                         var resultURL = URL(string: AMAZON_PREFIX + BUCKET)
-                        resultURL = resultURL!.appendingPathComponent(uploadRequest!.key!)
+                        resultURL = resultURL!.appendingPathComponent(key)
                         observer.onNext(resultURL!)
                         observer.onCompleted()
                     }
-                    
-                    return nil
-                })
-            }
+                }
+            ).continueWith(executor: .mainThread(), block: { task in
+                if let error = task.error  {
+                    printError(error, operation: "Upload")
+                    observer.onError(error)
+                }
+                return nil
+            })
             return Disposables.create()
         }
     }
     
     func downloadImage(_ url: URL, folder: String = FOLDER) -> Observable<UIImage> {
         return Observable<UIImage>.create { [weak self] observer -> Disposable in
-            if let sSelf = self {
-                let downloadingFileURL = URL(fileURLWithPath: NSTemporaryDirectory())
-                    .appendingPathComponent(url.lastPathComponent)
-                
-                let downloadRequest = AWSS3TransferManagerDownloadRequest()
-                downloadRequest!.bucket = BUCKET
-                downloadRequest!.key = folder + url.lastPathComponent
-                downloadRequest!.downloadingFileURL = downloadingFileURL
-                
-                sSelf.transferManager.download(downloadRequest!)
-                    .continueWith(executor: AWSExecutor.mainThread(), block: { (task:AWSTask<AnyObject>) -> Any? in
-                    if let error = task.error  {
+            guard let self = self else { return Disposables.create() }
+            let downloadingFileURL = URL(fileURLWithPath: NSTemporaryDirectory())
+                .appendingPathComponent(url.lastPathComponent)
+            
+            let key = folder + url.lastPathComponent
+            
+            self.transferUtility.download(
+                to: downloadingFileURL,
+                bucket: BUCKET,
+                key: key,
+                expression: nil,
+                completionHandler: {  _, url, data, error in
+                    if let error = error  {
                         printError(error, operation: "Download")
                         observer.onError(error)
                     } else {
-                        Logger.debug("Download complete for: \(downloadRequest!.key!)")
+                        Logger.debug("Download complete for: \(url)")
                         let img = UIImage(data: try! Data(contentsOf: downloadingFileURL))
                         observer.onNext(img!)
                         observer.onCompleted()
                     }
+                }).continueWith(executor: .mainThread(), block: { task in
+                    if let error = task.error  {
+                        printError(error, operation: "Download")
+                        observer.onError(error)
+                    }
                     return nil
                 })
-            }
             return Disposables.create()
         }
     }
 }
 
 fileprivate func printError(_ error: Error, operation: String) {
-    if error.domain == AWSS3TransferManagerErrorDomain,
-        let code = AWSS3TransferManagerErrorType(rawValue: error.code) {
-        switch code {
-        case .cancelled, .paused:
-            break
-        default:
-            Logger.error(operation + " Error: \(error)")
-        }
-    } else {
-        Logger.error(operation + " Error: \(error)")
-    }
+    Logger.error(operation + " Error: \(error)")
 }
