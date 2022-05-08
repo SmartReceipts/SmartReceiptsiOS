@@ -176,6 +176,7 @@
 		714142A12191FFEB004BB7A2 /* RecognitionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714142A02191FFEB004BB7A2 /* RecognitionService.swift */; };
 		71437D6A213BD29600EC8542 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71437D69213BD29600EC8542 /* CustomErrors.swift */; };
 		714788462083CE6500FA5A76 /* PurchaseServiceCustomMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714788452083CE6500FA5A76 /* PurchaseServiceCustomMock.swift */; };
+		7148F77A28265073006BE2FC /* RemoteConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7148F77928265073006BE2FC /* RemoteConfigService.swift */; };
 		714901C11F0598B900772B6F /* CurrencyExchangeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714901C01F0598B900772B6F /* CurrencyExchangeService.swift */; };
 		714A9A731FCD9A27000A025B /* BackupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714A9A721FCD9A27000A025B /* BackupTests.swift */; };
 		714AC77B2041C63B003656DB /* DescribedButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 714AC77A2041C63B003656DB /* DescribedButtonCell.xib */; };
@@ -838,6 +839,7 @@
 		714142A02191FFEB004BB7A2 /* RecognitionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionService.swift; sourceTree = "<group>"; };
 		71437D69213BD29600EC8542 /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
 		714788452083CE6500FA5A76 /* PurchaseServiceCustomMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseServiceCustomMock.swift; sourceTree = "<group>"; };
+		7148F77928265073006BE2FC /* RemoteConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigService.swift; sourceTree = "<group>"; };
 		714901BB1F05632200772B6F /* PaymentMethodTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodTests.swift; sourceTree = "<group>"; };
 		714901C01F0598B900772B6F /* CurrencyExchangeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeService.swift; sourceTree = "<group>"; };
 		714A9A721FCD9A27000A025B /* BackupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupTests.swift; sourceTree = "<group>"; };
@@ -1713,6 +1715,7 @@
 				710A33DB1F827E2500D10344 /* PurchaseService.swift */,
 				718D2DF01F7D459B00A69B6E /* PushNotificationService.swift */,
 				718ADF6420B33823005FEF4F /* AppMonitorService.swift */,
+				7148F77928265073006BE2FC /* RemoteConfigService.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -3898,6 +3901,7 @@
 				714104DF1FF43D7700C334C5 /* WBAbstractPicker.m in Sources */,
 				EAE9DAEB1AF8EA5500F4FE76 /* DistanceLocationColumn.m in Sources */,
 				71BF11D62036214200DD7FBE /* BackupFilePicker.swift in Sources */,
+				7148F77A28265073006BE2FC /* RemoteConfigService.swift in Sources */,
 				718A1C9A21A368F100E010A2 /* RecognitionNotification.swift in Sources */,
 				71FB1D411F195D0D00742FF5 /* PaymentMethodsPresenter.swift in Sources */,
 				EA07BF3D1AF3C885004D17F6 /* NSString+Validation.m in Sources */,

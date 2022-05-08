@@ -19,6 +19,7 @@ import AWSS3
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     static private(set) var instance: AppDelegate!
+    private var remoteConfig: RemoteConfigService! = nil
     var bag = DisposeBag()
 
     var window: UIWindow?
@@ -38,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppDelegate.instance = self
         
         AppMonitorServiceFactory().createAppMonitor().configure()
+        remoteConfig = RemoteConfigService()
         
         AppTheme.customizeOnAppLoad()
         EurekaWhitespaceWorkaround.configureTextCells()

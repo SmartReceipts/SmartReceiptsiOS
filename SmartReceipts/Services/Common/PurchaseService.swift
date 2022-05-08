@@ -312,7 +312,7 @@ class PurchaseService {
             }).mapString()
             .subscribe(onSuccess: { response in
                 Logger.debug(response)
-            }, onError: { error in
+            }, onFailure: { error in
                 Logger.error(error.localizedDescription)
             }).disposed(by: bag)
     }

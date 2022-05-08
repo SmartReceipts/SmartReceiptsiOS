@@ -137,7 +137,8 @@ extension SmartReceiptsAPI: TargetType {
         switch self {
         case .organizations,
              .recognition,
-             .user:
+             .user,
+             .subscriptions:
             return .requestParameters(parameters: authParams, encoding: URLEncoding.queryString)
             
         default:

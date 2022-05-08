@@ -13,14 +13,16 @@ import SafariServices
 class MainMenuActionSheet: ActionSheet, Disposable {
     private weak var viewController: UIViewController?
     var bag: DisposeBag { return sheetViewController.bag }
+    let remoteConfig = RemoteConfigService()
     
     init(openOn viewController: UIViewController) {
+        
         super.init(closable: true)
         self.viewController = viewController
         
         bag.insert(self)
         
-        if FeatureFlags.newSubscription.isEnabled {
+        if remoteConfig.subscriptionsEnabled {
             addAction(title: LocalizedString("menu_main_subscriptions"), image: #imageLiteral(resourceName: "subscriptions"))
                 .debug()
                 .subscribe(onNext: { [weak self] in
