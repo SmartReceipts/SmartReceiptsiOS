@@ -13,9 +13,7 @@ class ScansPurchaseButton: UIButton {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet fileprivate weak var price: UILabel!
-    @IBOutlet fileprivate weak var priceSubtitle: UILabel!
     @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet fileprivate weak var priceBackground: UIView!
  
     private let bag = DisposeBag()
     
@@ -29,24 +27,18 @@ class ScansPurchaseButton: UIButton {
     
         rx.controlEvent([.touchUpInside, .touchUpOutside, .touchCancel])
             .subscribe(onNext: { [unowned self] in
-                self.backgroundColor  = .white
+                self.backgroundColor  = .srViolet2
             }).disposed(by: bag)
         
-        priceBackground.layer.cornerRadius = 12
-        apply(style: .purchaseButton)
+        apply(style: .mainBig)
     }
     
-    func set(purchased: Bool) {
-        if purchased {
-            priceBackground.backgroundColor = .srLightGray
-            priceSubtitle.isHidden = true
-            price.textColor = .srViolet2
-            price.text = "Your Plan"
-        } else {
-            priceBackground.backgroundColor = .srViolet2
-            priceSubtitle.isHidden = false
-            price.textColor = .white
-        }
+    func setScans(count: Int) {
+        let titleFormat = LocalizedString("ocr_configuration_module_purchase_title")
+        title.text = String(format: titleFormat, count)
+        
+        let subtitleFormat = LocalizedString("ocr_configuration_module_purchase_subtitle")
+        subtitle.text = String(format: subtitleFormat, count)
     }
 }
 

@@ -45,10 +45,6 @@ class OCRConfigurationInteractor: Interactor {
                 })
     }
     
-    func checkSubscriptions() -> Observable<SubscriptionValidation> {
-        return purchaseService.validateSubscription()
-    }
-    
     var logout: AnyObserver<Void> {
         return AnyObserver<Void>(eventHandler: { [unowned self] event in
             switch event {

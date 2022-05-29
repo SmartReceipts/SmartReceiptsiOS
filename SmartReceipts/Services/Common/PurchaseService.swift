@@ -11,6 +11,8 @@ import StoreKit
 import Moya
 import SwiftyStoreKit
 
+let PRODUCT_OCR_10 = "ios_ocr_purchase_10"
+let PRODUCT_OCR_50 = "ios_ocr_purchase_50"
 let PRODUCT_STANDARD_SUB = "ios_autorec_1month"
 let PRODUCT_PREMIUM_SUB = "ios_autorec_pro_1month"
 let PRODUCT_PLUS = "ios_plus_sku_2"
@@ -83,7 +85,7 @@ class PurchaseService {
     }
     
     func requestProducts() -> Observable<SKProduct> {
-        let ids: Set = [PRODUCT_PLUS, PRODUCT_STANDARD_SUB, PRODUCT_PREMIUM_SUB]
+        let ids: Set = [PRODUCT_PLUS, PRODUCT_STANDARD_SUB, PRODUCT_PREMIUM_SUB, PRODUCT_OCR_10, PRODUCT_OCR_50]
         return Observable<SKProduct>.create({ observer -> Disposable in
             SwiftyStoreKit.retrieveProductsInfo(ids) { result in
                 result.retrievedProducts.forEach({ observer.onNext($0) })
