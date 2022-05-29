@@ -174,6 +174,11 @@ class PurchaseService {
             return Disposables.create()
         }).do(onNext: { [weak self] _ in
             Logger.debug("Successful purchase: \(prodcutID)")
+            
+            if prodcutID == PRODUCT_PREMIUM_SUB {
+                NotificationCenter.default.post(name: .SmartReceiptsAdsRemoved, object: nil)
+            }
+            
             PurchaseService.analyticsPurchaseSuccess(productID: prodcutID)
             self?.sendReceipt()
         }, onError: { _ in

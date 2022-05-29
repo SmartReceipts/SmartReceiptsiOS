@@ -63,21 +63,19 @@ final class SubscriptionViewModel {
         let hud = PendingHUDView.showFullScreen()
         getPlansWithPurchases()
             .map { $0.sorted { plan, _ in plan.kind == .standard } }
-            .subscribe(
-                onSuccess: { [weak self] plans in
-                    hud.hide()
-                    guard let self = self else { return }
-                    self.state.update { $0.plans = plans }
-                    plans.forEach { plan in
-                        if plan.isPurchased {
-                            self.isPurchasedRelay.accept(true)
-                        }
+            .subscribe(onSuccess: { [weak self] plans in
+                hud.hide()
+                guard let self = self else { return }
+                self.state.update { $0.plans = plans }
+                plans.forEach { plan in
+                    if plan.isPurchased {
+                        self.isPurchasedRelay.accept(true)
                     }
-                }, onError: { error in
-                    hud.hide()
-                    Logger.error(error.localizedDescription)
                 }
-            ).disposed(by: bag)
+            }, onFailure: { error in
+                hud.hide()
+                Logger.error(error.localizedDescription)
+            }).disposed(by: bag)
     }
     
     private func purchase(productId: String) {
