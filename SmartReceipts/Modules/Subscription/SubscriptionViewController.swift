@@ -25,7 +25,6 @@ final class SubscriptionViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.font = .bold40
         label.textColor = .white
-        label.text = LocalizedString("subscription_plan_label")
         
         return label
     }()
@@ -109,9 +108,11 @@ final class SubscriptionViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.sectionInset = .init(top: .zero, left: .zero, bottom: .spacing, right: .zero)
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .srViolet
+        collectionView.backgroundColor = .clear
         collectionView.contentInset = .init(top: .spacing, left: .padding, bottom: .spacing, right: .padding)
+        collectionView.register(PlanCollectionViewCell.self, forCellWithReuseIdentifier: PlanCollectionViewCell.identifier)
         
         return collectionView
     }()
@@ -122,11 +123,33 @@ final class SubscriptionViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .center
         label.alpha = 0.5
-        label.isHidden = true
         label.numberOfLines = 0
         label.text = LocalizedString("subscription_cancel_plan")
         
         return label
+    }()
+    
+    private lazy var authPlanLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.font = .regular16
+        label.textColor = .black
+        label.numberOfLines = 0
+        label.text = LocalizedString("subscription_need_authorization")
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    private lazy var loginButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.backgroundColor = .srViolet
+        button.setTitle(LocalizedString("login_button_text"), for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .regular14
+        button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
+        button.layer.cornerRadius = 5
+        
+        return button
     }()
     
     init(dataSource: SubscriptionDataSource) {
@@ -146,7 +169,9 @@ final class SubscriptionViewController: UIViewController {
             imageStackView,
             labelStackView,
             collectionView,
-            cancelPlanLabel
+            cancelPlanLabel,
+            authPlanLabel,
+            loginButton
         ])
         
         commonInit()
@@ -164,12 +189,11 @@ final class SubscriptionViewController: UIViewController {
     
     private func setupViews() {
         title = LocalizedString("subscription_title")
-        view.backgroundColor = .srViolet
-                
-        collectionView.register(
-            PlanCollectionViewCell.self,
-            forCellWithReuseIdentifier: PlanCollectionViewCell.identifier
-        )
+    }
+    
+    @objc
+    func loginTapped() {
+        outputReplay.accept(.loginTapped)
     }
     
     private func setupLayout() {
@@ -217,6 +241,20 @@ final class SubscriptionViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-40)
             make.bottom.equalToSuperview().offset(-15)
         }
+        
+        authPlanLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(loginButton.snp.top).offset(-10)
+            make.leading.equalToSuperview().offset(40)
+            make.trailing.equalToSuperview().offset(-40)
+        }
+        
+        loginButton.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(60)
+            make.trailing.equalToSuperview().offset(-60)
+            make.height.equalTo(41)
+        }
     }
     
     func bind(_ viewState: Driver<SubscriptionViewController.ViewState>) {
@@ -234,13 +272,37 @@ final class SubscriptionViewController: UIViewController {
                 self.configurePurchaseViewState(state: state)
             })
             .disposed(by: bag)
+        
+        viewState.map(\.authViewState)
+            .drive(onNext: { [weak self] state in
+                guard let self = self else { return }
+                self.configureAuthViewState(state: state)
+            })
+            .disposed(by: bag)
+        
+        viewState.map(\.needUpdatePlansAfterPurchased)
+            .drive(onNext: { [weak self] flag in
+                guard let self = self else { return }
+                if flag { self.collectionView.reloadData() }
+            })
+            .disposed(by: bag)
     }
     
     private func configurePurchaseViewState(state: PurchaseViewState) {
+        choosePlanLabel.text = state.choosePlanTitle
         firstFunctionLabel.text = state.firstFunctionTitle
         secondFunctionLabel.text = state.secondFunctionTitle
         thirdFunctionLabel.text = state.thirdFunctionTitle
         cancelPlanLabel.isHidden = !state.cancelPlanHidden
+    }
+    
+    private func configureAuthViewState(state: AuthViewState) {
+        view.backgroundColor = state.backgroundColor
+        choosePlanLabel.isHidden = state.choosePlanIsHidden
+        labelStackView.isHidden = state.labelStackViewIsHidden
+        imageStackView.isHidden = state.imageStackViewIsHidden
+        authPlanLabel.isHidden = state.authPlanLabelIsHidden
+        loginButton.isHidden = state.loginButtonIsHidden
     }
 }
 

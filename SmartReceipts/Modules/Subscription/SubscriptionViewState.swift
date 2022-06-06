@@ -7,16 +7,28 @@
 //
 
 import Foundation
+import UIKit
 
 extension SubscriptionViewController {
     struct ViewState {
         let collection: [PlanSectionItem]
         var purchaseViewState: PurchaseViewState
+        var authViewState: AuthViewState
+        var needUpdatePlansAfterPurchased: Bool
     }
     
     enum PurchaseViewState {
         case notPurchased
         case purchased
+        
+        var choosePlanTitle: String {
+            switch self {
+            case .notPurchased:
+                return LocalizedString("subscription_plan_label")
+            case .purchased:
+                return LocalizedString("subscription_plan_label")
+            }
+        }
         
         var firstFunctionTitle: String {
             switch self {
@@ -50,6 +62,66 @@ extension SubscriptionViewController {
             case .notPurchased:
                 return false
             case .purchased:
+                return true
+            }
+        }
+    }
+    
+    enum AuthViewState {
+        case notAuth
+        case auth
+        
+        var backgroundColor: UIColor {
+            switch self {
+            case .notAuth:
+                return .white
+            case .auth:
+                return .srViolet
+
+            }
+        }
+        
+        var choosePlanIsHidden: Bool {
+            switch self {
+            case .notAuth:
+                return true
+            case .auth:
+                return false
+            }
+        }
+        
+        var labelStackViewIsHidden: Bool {
+            switch self {
+            case .notAuth:
+                return true
+            case .auth:
+                return false
+            }
+        }
+        
+        var imageStackViewIsHidden: Bool {
+            switch self {
+            case .notAuth:
+                return true
+            case .auth:
+                return false
+            }
+        }
+        
+        var authPlanLabelIsHidden: Bool {
+            switch self {
+            case .notAuth:
+                return false
+            case .auth:
+                return true
+            }
+        }
+        
+        var loginButtonIsHidden: Bool {
+            switch self {
+            case .notAuth:
+                return false
+            case .auth:
                 return true
             }
         }

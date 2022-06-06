@@ -142,6 +142,8 @@
 
 "subscription_premium" = "Premium";
 
+"subscription_need_authorization" = "Debe iniciar sesión para comprar una suscripción";
+
 /* ============= Success Page =============*/
 "success_title" = "¡Éxito!";
 

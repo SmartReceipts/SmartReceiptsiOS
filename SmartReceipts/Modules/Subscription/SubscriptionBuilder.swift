@@ -49,11 +49,17 @@ public enum SubscriptionBuilder {
     ) -> SubscriptionViewController.ViewState {
         let plans = state.plans
         var purchaseViewState: SubscriptionViewController.PurchaseViewState = .notPurchased
+        let authViewState: SubscriptionViewController.AuthViewState = state.isLoggin ? .auth : .notAuth
         plans.forEach { model in
             if model.isPurchased {
                 purchaseViewState = .purchased
             }
         }
-        return .init(collection: [PlanSectionItem(items: plans)], purchaseViewState: purchaseViewState)
+        return .init(
+            collection: [PlanSectionItem(items: plans)],
+            purchaseViewState: purchaseViewState,
+            authViewState: authViewState,
+            needUpdatePlansAfterPurchased: state.needUpdatePlansAfterPurchased
+        )
     }
 }

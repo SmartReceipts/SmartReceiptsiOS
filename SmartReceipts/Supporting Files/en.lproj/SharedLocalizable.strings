@@ -142,6 +142,8 @@
 
 "subscription_premium" = "Premium";
 
+"subscription_need_authorization" = "You must be logged in to purchase a subscription";
+
 /* ============= Success Plan =============*/
 "success_title" = "Success!";
 

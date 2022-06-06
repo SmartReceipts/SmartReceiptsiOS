@@ -142,6 +142,8 @@
 
 "subscription_premium" = "Prime";
 
+"subscription_need_authorization" = "Vous devez être connecté pour acheter un abonnement";
+
 /* ============= Success Page =============*/
 "success_title" = "Succès!";
 
