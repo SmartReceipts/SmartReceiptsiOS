@@ -142,6 +142,8 @@
 
 "subscription_premium" = "פרימיום";
 
+"subscription_need_authorization" = "עליך להיות מחובר כדי לרכוש מנוי";
+
 /* ============= Success Page =============*/
 "success_title" = "הַצלָחָה!";
 

@@ -15,18 +15,27 @@ import Toaster
 
 final class SubscriptionViewModel {
     struct State {
+        var isLoggin: Bool
         var plans: [PlanModel]
+        var needUpdatePlansAfterPurchased: Bool
     }
     
     enum Action {
         case viewDidLoad
         case didSelect(PlanModel)
+        case loginTapped
     }
     
     var output: Driver<State> { state.asDriver() }
         
     private let environment: SubscriptionEnvironment
-    private let state = BehaviorRelay<State>.init(value: State(plans: []))
+    private let state = BehaviorRelay<State>.init(
+        value: State(
+            isLoggin: false,
+            plans: [],
+            needUpdatePlansAfterPurchased: false
+        )
+    )
     private let isPurchasedRelay = BehaviorRelay<Bool>.init(value: false)
     private let bag = DisposeBag()
     
@@ -38,15 +47,18 @@ final class SubscriptionViewModel {
         switch action {
         case .viewDidLoad:
             if environment.authService.isLoggedIn {
+                self.state.update { $0.isLoggin = true }
                 updatePlanSectionItems()
                 return
             }
             environment.router.openLogin()
-                .subscribe { [weak self] in
-                    self?.updatePlanSectionItems()
-                } onError: { error in
+                .subscribe(onCompleted: { [weak self] in
+                    guard let self = self else { return }
+                    self.state.update { $0.isLoggin = true }
+                    self.updatePlanSectionItems()
+                }, onError: { error in
                     Logger.error(error.localizedDescription)
-                }.disposed(by: bag)
+                }).disposed(by: bag)
             
         case .didSelect(let model):
             isPurchasedRelay
@@ -56,6 +68,15 @@ final class SubscriptionViewModel {
                     if !isPurchased { self.purchase(productId: model.id) }
                 })
                 .disposed(by: bag)
+        case .loginTapped:
+            environment.router.openLogin()
+                .subscribe(onCompleted: { [weak self] in
+                    guard let self = self else { return }
+                    self.state.update { $0.isLoggin = true }
+                    self.updatePlanSectionItems()
+                }, onError: { error in
+                    Logger.error(error.localizedDescription)
+                }).disposed(by: bag)
         }
     }
     
@@ -85,6 +106,7 @@ final class SubscriptionViewModel {
                 hud.hide()
                 guard let self = self else { return }
                 self.environment.router.openSuccessPage(updateState: self.updatePlanSectionItems)
+                self.state.update { $0.needUpdatePlansAfterPurchased = true }
                 Logger.debug("Successuful payment: \(purchase.productId)")
             }, onError: { error in
                 hud.hide()

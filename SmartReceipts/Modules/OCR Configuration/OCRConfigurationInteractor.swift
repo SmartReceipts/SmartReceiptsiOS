@@ -50,7 +50,7 @@ class OCRConfigurationInteractor: Interactor {
             switch event {
             case .next:
                 self.authService.logout()
-                    .catchError({ error -> Single<Void> in
+                    .catch({ error -> Single<Void> in
                         self.presenter.errorHandler.onNext(error.localizedDescription)
                         return .never()
                     }).asObservable()

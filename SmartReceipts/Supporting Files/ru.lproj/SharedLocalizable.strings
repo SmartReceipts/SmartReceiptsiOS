@@ -142,6 +142,8 @@
 
 "subscription_premium" = "Премиум";
 
+"subscription_need_authorization" = "Для покупки подписки необходимо пройти авторизацию";
+
 /* ============= Success Page =============*/
 "success_title" = "Успешно!";
 

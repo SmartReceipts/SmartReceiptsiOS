@@ -199,6 +199,8 @@ extension ReceiptsView: TabHasMainAction {
 //MARK: UIDocumentInteractionControllerDelegate
 extension ReceiptsView: UIDocumentInteractionControllerDelegate {
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        UINavigationBar.appearance().barTintColor = .violetMain
+        UINavigationBar.appearance().tintColor = .white
         return navigationController ?? self
     }
 }
