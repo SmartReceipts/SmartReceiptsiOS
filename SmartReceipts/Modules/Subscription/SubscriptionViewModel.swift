@@ -41,6 +41,11 @@ final class SubscriptionViewModel {
     
     init(environment: SubscriptionEnvironment) {
         self.environment = environment
+        AnalyticsManager.sharedManager.record(event: Event.subscriptionShown())
+    }
+    
+    deinit {
+        AnalyticsManager.sharedManager.record(event: Event.subscriptionClose())
     }
     
     func accept(action: Action) {
@@ -51,33 +56,36 @@ final class SubscriptionViewModel {
                 updatePlanSectionItems()
                 return
             }
-            environment.router.openLogin()
-                .subscribe(onCompleted: { [weak self] in
-                    guard let self = self else { return }
-                    self.state.update { $0.isLoggin = true }
-                    self.updatePlanSectionItems()
-                }, onError: { error in
-                    Logger.error(error.localizedDescription)
-                }).disposed(by: bag)
-            
+            openLogin()
         case .didSelect(let model):
             isPurchasedRelay
                 .asObservable()
                 .subscribe(onNext: { [weak self] isPurchased in
                     guard let self = self else { return }
-                    if !isPurchased { self.purchase(productId: model.id) }
+                    if !isPurchased {
+                        self.purchase(productId: model.id)
+                        AnalyticsManager.sharedManager.record(
+                            event: Event.subscriptionTapped(productId: model.id)
+                        )
+                    }
                 })
                 .disposed(by: bag)
         case .loginTapped:
-            environment.router.openLogin()
-                .subscribe(onCompleted: { [weak self] in
-                    guard let self = self else { return }
-                    self.state.update { $0.isLoggin = true }
-                    self.updatePlanSectionItems()
-                }, onError: { error in
-                    Logger.error(error.localizedDescription)
-                }).disposed(by: bag)
+            openLogin()
         }
+    }
+    
+    private func openLogin() {
+        environment.router.openLogin()
+            .subscribe(onCompleted: { [weak self] in
+                guard let self = self else { return }
+                self.state.update { $0.isLoggin = true }
+                self.updatePlanSectionItems()
+                AnalyticsManager.sharedManager.record(event: Event.subscriptionShowLogin())
+            }, onError: { error in
+                Logger.error(error.localizedDescription)
+                AnalyticsManager.sharedManager.record(event: Event.subsctiptionLoginFailed())
+            }).disposed(by: bag)
     }
     
     private func updatePlanSectionItems() {
@@ -108,9 +116,13 @@ final class SubscriptionViewModel {
                 self.environment.router.openSuccessPage(updateState: self.updatePlanSectionItems)
                 self.state.update { $0.needUpdatePlansAfterPurchased = true }
                 Logger.debug("Successuful payment: \(purchase.productId)")
+                AnalyticsManager.sharedManager.record(
+                    event: Event.subscriptionPurchaseSuccess(productId: purchase.productId)
+                )
             }, onError: { error in
                 hud.hide()
                 Logger.warning("Failed to payment: \(error.localizedDescription)")
+                AnalyticsManager.sharedManager.record(event: Event.subscriptionPurchaseFailed())
             }).disposed(by: bag)
     }
 }

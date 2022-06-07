@@ -22,8 +22,10 @@ extension Event {
         case OnError = "OnError"
         case OCR = "OCR"
         case Graphs = "Graphs"
+        case Subscription = "Subscription"
+        case SuccessPlan = "SuccessPlan"
         
-        static let allValues = [Purchases, Navigation, Reports, Receipts, Distance, Generate, Ratings, Informational, OnError, OCR, Graphs]
+        static let allValues = [Purchases, Navigation, Reports, Receipts, Distance, Generate, Ratings, Informational, OnError, OCR, Graphs, Subscription, SuccessPlan]
     }
 }
 
@@ -151,6 +153,22 @@ public extension Event {
         static let GraphsShown = Event(category: .Graphs, name: "GraphsShown")
         static let GraphsShare = Event(category: .Graphs, name: "GraphsShare")
     }
+    
+    struct Subscription {
+        static let SubscriptionShown = Event(category: .Subscription, name: "SubscriptionShown")
+        static let SubscriptionClose = Event(category: .Subscription, name: "SubscriptionClose")
+        static let SubscriptionShowLogin = Event(category: .Subscription, name: "SubscriptionShowLogin")
+        static let SubsctiptionLoginFailed = Event(category: .Subscription, name: "SubscriptionLoginFailed")
+        static let SubscriptionLoginButtonTapped = Event(category: .Subscription, name: "SubscriptionLoginButtonTapped")
+        static let SubscriptionPurchaseFailed = Event(category: Category.Purchases, name: "SubscriptionPurchaseFailed")
+    }
+    
+    struct SuccessPlan {
+        static let SuccessPlanShown = Event(category: .SuccessPlan, name: "SuccessPlanShown")
+        static let SuccessPlanClose = Event(category: .SuccessPlan, name: "SuccessPlanClose")
+        static let SuccessPlanTappedClose = Event(category: .SuccessPlan, name: "SuccessPlanTappedClose")
+        static let SuccessPlanTappedContinue = Event(category: .SuccessPlan, name: "SuccessPlanTappedContinue")
+    }
 }
 
 
@@ -218,6 +236,21 @@ public extension Event {
         return .init(category: .Graphs, name: "Graphs.Selection \(period)-\(model)")
     }
     
+    // MARK: - Event Subscription
+    static func subscriptionShown() -> Event { return Event.Subscription.SubscriptionShown }
+    static func subscriptionClose() -> Event { return Event.Subscription.SubscriptionClose }
+    static func subscriptionTapped(productId: String) -> Event { return .init(category: .Subscription, name: "Subscription.Selection \(productId)") }
+    static func subscriptionShowLogin() -> Event { return Event.Subscription.SubscriptionShowLogin }
+    static func subsctiptionLoginFailed() -> Event { return Event.Subscription.SubsctiptionLoginFailed }
+    static func subscriptionLoginButtonTapped() -> Event { return Event.Subscription.SubscriptionLoginButtonTapped }
+    static func subscriptionPurchaseSuccess(productId: String) -> Event { return .init(category: .Subscription, name: "Subscription.Purchase \(productId)") }
+    static func subscriptionPurchaseFailed() -> Event { return Event.Subscription.SubscriptionPurchaseFailed }
+
+    // MARK: - Event Success Plan
+    static func successPlanShown() -> Event { return Event.SuccessPlan.SuccessPlanShown }
+    static func successPlanClose() -> Event { return Event.SuccessPlan.SuccessPlanClose }
+    static func successPlanTappedClose() -> Event { return Event.SuccessPlan.SuccessPlanTappedClose }
+    static func successPlanTappedContinue() -> Event { return Event.SuccessPlan.SuccessPlanTappedContinue }
 }
 
 // MARK: Database Events
