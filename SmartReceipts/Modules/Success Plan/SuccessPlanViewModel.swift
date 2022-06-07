@@ -15,14 +15,21 @@ final class SuccessPlanViewModel {
     
     init(router: SuccessPlanRouter) {
         self.router = router
+        AnalyticsManager.sharedManager.record(event: Event.successPlanShown())
+    }
+    
+    deinit {
+        AnalyticsManager.sharedManager.record(event: Event.successPlanClose())
     }
     
     func accept(_ action: Action) {
         switch action {
         case .closeDidTap:
             router.open(route: .close)
+            AnalyticsManager.sharedManager.record(event: Event.successPlanTappedClose())
         case .continueDidTap:
             router.open(route: .close)
+            AnalyticsManager.sharedManager.record(event: Event.successPlanTappedContinue())
         }
         
     }
