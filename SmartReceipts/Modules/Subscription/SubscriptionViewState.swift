@@ -13,7 +13,7 @@ extension SubscriptionViewController {
     struct ViewState {
         let collection: [PlanSectionItem]
         var purchaseViewState: PurchaseViewState
-        var authViewState: AuthViewState
+        var authViewState: AuthViewState?
         var needUpdatePlansAfterPurchased: Bool
     }
     
@@ -68,11 +68,14 @@ extension SubscriptionViewController {
     }
     
     enum AuthViewState {
+        case loading
         case notAuth
         case auth
         
         var backgroundColor: UIColor {
             switch self {
+            case .loading:
+                return .white
             case .notAuth:
                 return .white
             case .auth:
@@ -83,6 +86,8 @@ extension SubscriptionViewController {
         
         var choosePlanIsHidden: Bool {
             switch self {
+            case .loading:
+                return true
             case .notAuth:
                 return true
             case .auth:
@@ -92,6 +97,8 @@ extension SubscriptionViewController {
         
         var labelStackViewIsHidden: Bool {
             switch self {
+            case .loading:
+                return true
             case .notAuth:
                 return true
             case .auth:
@@ -101,6 +108,8 @@ extension SubscriptionViewController {
         
         var imageStackViewIsHidden: Bool {
             switch self {
+            case .loading:
+                return true
             case .notAuth:
                 return true
             case .auth:
@@ -110,6 +119,8 @@ extension SubscriptionViewController {
         
         var authPlanLabelIsHidden: Bool {
             switch self {
+            case .loading:
+                return true
             case .notAuth:
                 return false
             case .auth:
@@ -119,6 +130,8 @@ extension SubscriptionViewController {
         
         var loginButtonIsHidden: Bool {
             switch self {
+            case .loading:
+                return true
             case .notAuth:
                 return false
             case .auth:
