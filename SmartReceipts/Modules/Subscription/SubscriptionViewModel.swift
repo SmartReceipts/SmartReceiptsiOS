@@ -15,7 +15,7 @@ import Toaster
 
 final class SubscriptionViewModel {
     struct State {
-        var isLoggin: Bool
+        var isLoggin: LogginState?
         var plans: [PlanModel]
         var needUpdatePlansAfterPurchased: Bool
     }
@@ -26,12 +26,18 @@ final class SubscriptionViewModel {
         case loginTapped
     }
     
+    enum LogginState {
+        case loading
+        case noAuth
+        case auth
+    }
+    
     var output: Driver<State> { state.asDriver() }
         
     private let environment: SubscriptionEnvironment
     private let state = BehaviorRelay<State>.init(
         value: State(
-            isLoggin: false,
+            isLoggin: nil,
             plans: [],
             needUpdatePlansAfterPurchased: false
         )
@@ -51,8 +57,9 @@ final class SubscriptionViewModel {
     func accept(action: Action) {
         switch action {
         case .viewDidLoad:
+            state.update { $0.isLoggin = .noAuth }
             if environment.authService.isLoggedIn {
-                self.state.update { $0.isLoggin = true }
+                state.update { $0.isLoggin = .auth }
                 updatePlanSectionItems()
                 return
             }
@@ -79,7 +86,7 @@ final class SubscriptionViewModel {
         environment.router.openLogin()
             .subscribe(onCompleted: { [weak self] in
                 guard let self = self else { return }
-                self.state.update { $0.isLoggin = true }
+                self.state.update { $0.isLoggin = .auth }
                 self.updatePlanSectionItems()
                 AnalyticsManager.sharedManager.record(event: Event.subscriptionShowLogin())
             }, onError: { error in
@@ -90,11 +97,13 @@ final class SubscriptionViewModel {
     
     private func updatePlanSectionItems() {
         let hud = PendingHUDView.showFullScreen()
+        state.update { $0.isLoggin = .loading }
         getPlansWithPurchases()
             .map { $0.sorted { plan, _ in plan.kind == .standard } }
             .subscribe(onSuccess: { [weak self] plans in
                 hud.hide()
                 guard let self = self else { return }
+                self.state.update { $0.isLoggin = .auth }
                 self.state.update { $0.plans = plans }
                 plans.forEach { plan in
                     if plan.isPurchased {

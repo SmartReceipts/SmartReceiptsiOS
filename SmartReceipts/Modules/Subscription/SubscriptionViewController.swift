@@ -296,7 +296,8 @@ final class SubscriptionViewController: UIViewController {
         cancelPlanLabel.isHidden = !state.cancelPlanHidden
     }
     
-    private func configureAuthViewState(state: AuthViewState) {
+    private func configureAuthViewState(state: AuthViewState?) {
+        guard let state = state else { return }
         view.backgroundColor = state.backgroundColor
         choosePlanLabel.isHidden = state.choosePlanIsHidden
         labelStackView.isHidden = state.labelStackViewIsHidden
