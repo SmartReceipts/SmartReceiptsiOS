@@ -18,6 +18,7 @@ let PRODUCT_PREMIUM_SUB = "ios_autorec_pro_1month"
 let PRODUCT_PLUS = "ios_plus_sku_2"
 
 fileprivate let APPSTORE_INTERACTED = "appstore_interacted"
+fileprivate let CACHED_VALIDATION_EXPIRE = "cached_validation_expireTime"
 
 struct SubscriptionValidation {
     let plusValid: Bool
@@ -51,6 +52,17 @@ class PurchaseService {
             sharedSecret: "d6227a8e8b4442eb8dd138106d11834b"
         )
         
+        let expire = Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: CACHED_VALIDATION_EXPIRE))
+        let valid = expire > Date()
+        if valid {
+            cache(validation: .init(
+                plusValid: valid,
+                plusExpireTime: expire,
+                standardPurchased: false,
+                premiumPurchased: false
+            ))
+        }
+
         authService.loggedInObservable
             .filter({ $0 && !PurchaseService.hasValidPlusSubscriptionValue })
             .flatMap({ _ in
@@ -66,11 +78,18 @@ class PurchaseService {
             .filter({ $0.plusValid })
             .do(onError: { error in
                 Logger.error(error.localizedDescription)
-            }).subscribe(onNext: { validation in
+            }).subscribe(onNext: { [weak self] validation in
+                self?.cache(validation: validation)
                 NotificationCenter.default.post(name: .SmartReceiptsAdsRemoved, object: nil)
             }).disposed(by: bag)
     }
-    
+
+    private func cache(validation: SubscriptionValidation) {
+        cachedValidation = validation
+        guard let interval = validation.plusExpireTime?.timeIntervalSince1970 else { return }
+        UserDefaults.standard.set(interval, forKey: CACHED_VALIDATION_EXPIRE)
+    }
+
     class var hasValidPlusSubscriptionValue: Bool {
         return DebugStates.isDebug && DebugStates.subscription() ? true : (cachedValidation?.plusValid == true || cachedValidation?.premiumPurchased == true)
     }
@@ -140,6 +159,7 @@ class PurchaseService {
         return purchase(prodcutID: PRODUCT_PLUS)
             .do(onNext: { [weak self] _ in
                 self?.markAppStoreInteracted()
+                self?.resetCache()
                 Logger.debug("Successful restore PLUS Subscription")
                 NotificationCenter.default.post(name: .SmartReceiptsAdsRemoved, object: nil)
             }, onError: handleError(_:))
@@ -334,6 +354,12 @@ class PurchaseService {
     
     //MARK: - PurchaseService and Subscription
     
+
+    private func resetCache() {
+        cachedValidation = nil
+        UserDefaults.standard.set(0, forKey: CACHED_VALIDATION_EXPIRE)
+    }
+
     func cacheSubscriptionValidation() {
         validateSubscription()
             .subscribe(onNext: { validation in
@@ -381,9 +407,12 @@ class PurchaseService {
                 observable.onCompleted()
             }
             return Disposables.create()
-        }).catchError({ error -> Observable<SubscriptionValidation> in
+        }).catch({ error -> Observable<SubscriptionValidation> in
             return Observable<SubscriptionValidation>.just(.empty())
         })
+            .do(onNext: { [weak self] in
+                self?.cache(validation: $0)
+            })
     }
     
     func verifySubscription(receipt: ReceiptInfo) -> SubscriptionValidation {
