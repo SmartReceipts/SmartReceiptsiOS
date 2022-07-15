@@ -543,6 +543,8 @@
 
 "remote_backups_list_item_menu_download_images" = "Скачать в ZIP";
 
+"remote_backups_list_no_backups" = "Нет резервных копий";
+
 "remote_backups_list_item_menu_download_images_debug" = "[Debug] Скачать";
 
 "dialog_remote_backup_delete_message" = "Вы уверены, что хотите удалить резервную копию с устройства %@? Эта операция не может быть отменена.";
