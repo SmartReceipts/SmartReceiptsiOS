@@ -543,6 +543,8 @@
 
 "remote_backups_list_item_menu_download_images" = "Download to ZIP";
 
+"remote_backups_list_no_backups" = "No Backups";
+
 "remote_backups_list_item_menu_download_images_debug" = "[Debug] Download";
 
 "dialog_remote_backup_delete_message" = "Are you sure you wish to delete your backup from the %@ device? This operation cannot be undone.";

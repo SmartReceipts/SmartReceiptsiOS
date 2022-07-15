@@ -543,6 +543,8 @@
 
 "remote_backups_list_item_menu_download_images" = "Télécharger en ZIP";
 
+"remote_backups_list_no_backups" = "Aucune Sauvegarde";
+
 "remote_backups_list_item_menu_download_images_debug" = "[Débogage] Télécharger";
 
 "dialog_remote_backup_delete_message" = "Êtes-vous sûr de vouloir supprimer votre sauvegarde de l’appareil %@ ? Cette opération est irréversible.";

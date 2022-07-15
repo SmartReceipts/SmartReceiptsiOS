@@ -4649,7 +4649,7 @@
 			repositoryURL = "https://github.com/google/google-api-objectivec-client-for-rest.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.7.0;
+				minimumVersion = 2.0.0;
 			};
 		};
 		712E4D6A28240A020056F347 /* XCRemoteSwiftPackageReference "GTMAppAuth" */ = {
