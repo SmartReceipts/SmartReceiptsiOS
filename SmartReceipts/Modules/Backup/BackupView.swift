@@ -109,7 +109,7 @@ final class BackupView: UserInterface {
             }).disposed(by: bag)
         
         AppNotificationCenter.didSyncBackup
-            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .debounce(.seconds(2), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [unowned self] in
                 self.updateBackups()
             }).disposed(by: bag)

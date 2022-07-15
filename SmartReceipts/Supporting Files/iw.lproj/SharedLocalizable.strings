@@ -543,6 +543,8 @@
 
 "remote_backups_list_item_menu_download_images" = "הורד כקובץ זיפ";
 
+"remote_backups_list_no_backups" = "אין גיבויים";
+
 "remote_backups_list_item_menu_download_images_debug" = "[Debug] הורד";
 
 "dialog_remote_backup_delete_message" = "אתה בטוח שאתה רוצה למחוק את הגיבויים שלך ממכשיר %@? פעולה זו הינה בלתי הפיכה.";

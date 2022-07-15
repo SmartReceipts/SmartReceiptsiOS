@@ -26,7 +26,10 @@ class GoogleDriveService: NSObject {
     private let bag = DisposeBag()
     
     private var authScopes: [String] {
-        return DebugStates.isDebug ? [kGTLRAuthScopeDrive, kGTLRAuthScopeDriveAppdata] : [kGTLRAuthScopeDriveAppdata]
+        [
+          kGTLRAuthScopeDrive,
+          kGTLRAuthScopeDriveAppdata,
+        ]
     }
     
     private var spaces: String {
@@ -61,20 +64,29 @@ class GoogleDriveService: NSObject {
     }
     
     func signIn() -> Observable<Void> {
-        guard let viewController = UIApplication.shared.topViewCtonroller else { return .never() }
         signInSubject.dispose()
         signInSubject = PublishSubject<Void>()
         return signInSubject.do(onSubscribed: { [weak self] in
             guard let self = self else { return }
-            GIDSignIn.sharedInstance.addScopes(
-                self.authScopes,
-                presenting: viewController,
-                callback: self.signInHandler
-            )
+            guard let viewController = UIApplication.shared.topViewCtonroller else { return }
+
             GIDSignIn.sharedInstance.signIn(
                 with: .init(clientID: GOOGLE_CLIENT_ID),
                 presenting: viewController,
-                callback: self.signInHandler
+                callback: { user, error in
+                  guard let user = user else { self.signInSubject.onError(NSError()); return }
+
+                  if let grantedScopes = user.grantedScopes,
+                      Set(self.authScopes).isSubset(of: Set(grantedScopes)) {
+                    self.signInHandler(user, error: error)
+                  } else {
+                    GIDSignIn.sharedInstance.addScopes(
+                        self.authScopes,
+                        presenting: viewController,
+                        callback: self.signInHandler
+                    )
+                  }
+                }
             )
         })
     }

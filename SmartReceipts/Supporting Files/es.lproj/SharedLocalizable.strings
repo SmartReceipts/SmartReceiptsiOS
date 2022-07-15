@@ -543,6 +543,8 @@
 
 "remote_backups_list_item_menu_download_images" = "Descargar a ZIP";
 
+"remote_backups_list_no_backups" = "Sin Copias de Seguridad";
+
 "remote_backups_list_item_menu_download_images_debug" = "[Depuración] Descargar";
 
 "dialog_remote_backup_delete_message" = "¿Estás seguro que deseas eliminar tu copia de seguridad del dispositivo %@? Esta operación no se puede deshacer.";
