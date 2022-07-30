@@ -64,11 +64,11 @@ class GoogleDriveService: NSObject {
     }
     
     func signIn() -> Observable<Void> {
-        guard let viewController = UIApplication.shared.topViewCtonroller else { return .never() }
         signInSubject.dispose()
         signInSubject = PublishSubject<Void>()
         return signInSubject.do(onSubscribed: { [weak self] in
             guard let self = self else { return }
+            guard let viewController = UIApplication.shared.topViewCtonroller else { return }
 
             GIDSignIn.sharedInstance.signIn(
                 with: .init(clientID: GOOGLE_CLIENT_ID),
