@@ -70,7 +70,9 @@ class GoogleDriveBackupProvider: BackupProvider {
     func downloadDatabase(remoteBackupMetadata: RemoteBackupMetadata) -> Single<Database> {
         return GoogleDriveService.shared.getFiles(inFolderId: remoteBackupMetadata.id)
             .flatMap({ fileList -> Single<Database> in
-                guard let dbFile = fileList.files?.filter({ $0.name == SYNC_DB_NAME }).first else { return Single<Database>.never() }
+              guard let dbFile = fileList.files?.filter({ $0.name == SYNC_DB_NAME }).first else {
+                return Single.error(NSError(domain: "googledrive.db.error", code: 0, userInfo: nil))
+              }
                 return GoogleDriveService.shared.downloadFile(id: dbFile.identifier!)
                     .map({ $0.data })
                     .map({ data -> Database in
