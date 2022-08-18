@@ -6,6 +6,7 @@
 //Copyright © 2018 Will Baumann. All rights reserved.
 //
 
+import GoogleSignIn
 import Foundation
 import Viperit
 import RxSwift
@@ -13,6 +14,7 @@ import Toaster
 import Zip
 
 class BackupInteractor: Interactor {
+    private var googleSignInHUD: PendingHUDView?
     let bag = DisposeBag()
     
     let purchaseService = PurchaseService()
@@ -173,17 +175,9 @@ class BackupInteractor: Interactor {
     
     func saveCurrent(provider: SyncProvider) {
         guard provider == .googleDrive else { setup(provider: provider); return }
-        weak var hud = PendingHUDView.showFullScreen()
-        GoogleDriveService.shared.signIn()
-            .subscribe(onNext: { [weak self, weak hud] in
-                self?.setup(provider: .googleDrive)
-                hud?.hide()
-            }, onError: { [weak self] error in
-                self?.setup(provider: .none)
-                hud?.hide()
-            }).disposed(by: bag)
+        googleSignIn(provider: provider)
     }
-    
+
     func setupUseWifiOnly(enabled: Bool) {
         WBPreferences.setAutobackupWifiOnly(enabled)
     }
@@ -201,6 +195,32 @@ class BackupInteractor: Interactor {
                 Database.sharedInstance().markAllEntriesSynced(false)
                 AppNotificationCenter.postDidSyncBackup()
             })
+    }
+
+    private func googleSignIn(provider: SyncProvider) {
+        let gidSignInButton = GIDSignInButton(frame: CGRect(width: 100, height: 64))
+        gidSignInButton.style = .wide
+        gidSignInButton.colorScheme = .light
+        gidSignInButton.addTarget(self, action: #selector(signIn(_:)), for: .touchUpInside)
+        googleSignInHUD = PendingHUDView.showCustomView(customView: gidSignInButton)
+    }
+
+    @objc
+    private func signIn(_ sender: UIView) {
+        googleSignInHUD?.hide()
+        googleSignIn(with: SyncProvider.current)
+    }
+
+    private func googleSignIn(with provider: SyncProvider) {
+        weak var hud = PendingHUDView.showFullScreen()
+        GoogleDriveService.shared.signIn()
+            .subscribe(onNext: { [weak self, weak hud] in
+                self?.setup(provider: .googleDrive)
+                hud?.hide()
+            }, onError: { [weak self] error in
+                self?.setup(provider: .none)
+                hud?.hide()
+            }).disposed(by: bag)
     }
 }
 

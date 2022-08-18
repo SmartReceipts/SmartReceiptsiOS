@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Whc-8q-ymi">
-                    <rect key="frame" x="172" y="388" width="70" height="120"/>
+                    <rect key="frame" x="172" y="390.5" width="70" height="115"/>
                     <subviews>
                         <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="vAl-qA-eY2" customClass="AnimationView" customModule="Lottie">
                             <rect key="frame" x="6" y="0.0" width="58" height="87"/>
@@ -29,7 +29,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uploading" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lf-hn-APL">
-                            <rect key="frame" x="0.0" y="102" width="70" height="18"/>
+                            <rect key="frame" x="0.0" y="97" width="70" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.039215686274509803" green="0.0039215686274509803" blue="0.078431372549019607" alpha="0.81999999999999995" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -37,12 +37,12 @@
                     </subviews>
                 </stackView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.81999999999999995" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Whc-8q-ymi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GHQ-SI-3u0"/>
                 <constraint firstItem="Whc-8q-ymi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="vEe-Y1-cz4"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="animationView" destination="vAl-qA-eY2" id="bWQ-ur-jnH"/>
                 <outlet property="titleLabel" destination="8lf-hn-APL" id="GLY-Jr-nJ5"/>

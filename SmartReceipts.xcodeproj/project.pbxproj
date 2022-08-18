@@ -825,7 +825,7 @@
 		714104CF1FF43D7700C334C5 /* FetchedPlaceholderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedPlaceholderView.swift; sourceTree = "<group>"; };
 		714104D01FF43D7700C334C5 /* WBDynamicPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBDynamicPicker.h; sourceTree = "<group>"; };
 		714104D11FF43D7700C334C5 /* SuggestionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuggestionView.h; sourceTree = "<group>"; };
-		714104D21FF43D7700C334C5 /* PendingHUDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingHUDView.swift; sourceTree = "<group>"; };
+		714104D21FF43D7700C334C5 /* PendingHUDView.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PendingHUDView.swift; sourceTree = "<group>"; tabWidth = 4; };
 		714104D31FF43D7700C334C5 /* WBAbstractPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBAbstractPicker.h; sourceTree = "<group>"; };
 		714104D41FF43D7700C334C5 /* LaunchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchView.xib; sourceTree = "<group>"; };
 		714104D61FF43D7700C334C5 /* WBActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBActionSheetPicker.h; sourceTree = "<group>"; };
@@ -914,7 +914,7 @@
 		716F07D82034AFDF00166D63 /* BackupDisplayData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupDisplayData.swift; sourceTree = "<group>"; };
 		716F07D92034AFDF00166D63 /* BackupPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupPresenter.swift; sourceTree = "<group>"; };
 		716F07DA2034AFDF00166D63 /* BackupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupRouter.swift; sourceTree = "<group>"; };
-		716F07DB2034AFDF00166D63 /* BackupInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupInteractor.swift; sourceTree = "<group>"; };
+		716F07DB2034AFDF00166D63 /* BackupInteractor.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = BackupInteractor.swift; sourceTree = "<group>"; tabWidth = 4; };
 		716F07DC2034AFDF00166D63 /* BackupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupView.swift; sourceTree = "<group>"; };
 		716F34471EE040E100D0017A /* EditDistance.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditDistance.storyboard; sourceTree = "<group>"; };
 		716F34481EE040E100D0017A /* EditDistanceDisplayData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDistanceDisplayData.swift; sourceTree = "<group>"; };
