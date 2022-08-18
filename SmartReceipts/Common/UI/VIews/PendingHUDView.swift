@@ -40,13 +40,39 @@ class PendingHUDView: UIView {
         hud.layoutIfNeeded()
         return hud
     }
+
+    class func show(on view: UIView, customView: UIView) -> PendingHUDView {
+        let hud = PendingHUDView.loadInstance()!
+
+        hud.titleLabel.isHidden = true
+        hud.animationView.isHidden = true
+
+        hud.addSubview(customView)
+        customView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        customView.layoutIfNeeded()
+
+        hud.frame = view.bounds
+        hud.layoutIfNeeded()
+
+        if !isRunningTests {
+            view.addSubview(hud)
+        }
+
+        return hud
+    }
     
     class func showFullScreen(text: String? = nil) -> PendingHUDView {
         let view = UIApplication.shared.keyWindow!
         return PendingHUDView.show(on: view, text: text)
     }
-    
-    
+
+    class func showCustomView(customView: UIView) -> PendingHUDView {
+        let view = UIApplication.shared.keyWindow!
+        return PendingHUDView.show(on: view, customView: customView)
+    }
+
     func hide() {
         removeFromSuperview()
     }
