@@ -8,9 +8,10 @@
 
 import Foundation
 import Charts
+import UIKit
 
 class PieChart: PieChartView, ChartProtocol {
-    var valueFormatter: IValueFormatter?
+    var valueFormatter: ValueFormatter?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,13 +27,15 @@ class PieChart: PieChartView, ChartProtocol {
     }
     
     func buildChart(dataSet: ChartDataSetProtocol) {
-        let chartDataSet = PieChartDataSet(entries: dataSet.entries, label: nil)
+        let chartDataSet = PieChartDataSet(entries: dataSet.entries, label: "")
         chartDataSet.valueFont = .systemFont(ofSize: 9, weight: .medium)
         chartDataSet.sliceSpace = 2
         chartDataSet.valueLinePart1Length = 0.2
         chartDataSet.yValuePosition = .outsideSlice
         chartDataSet.colors = ChartColorTemplates.vordiplom()
-        chartDataSet.valueFormatter = valueFormatter
+        if let valueFormatter {
+            chartDataSet.valueFormatter = valueFormatter
+        }
         let pieData = PieChartData(dataSet: chartDataSet)
         pieData.setValueFont(.systemFont(ofSize: 12, weight: .medium))
         pieData.setValueTextColor(.black)

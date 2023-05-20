@@ -28,8 +28,8 @@ class CurrencyExchangeServiceTests: XCTestCase {
             .bind(to: observer)
         scheduler.start()
         
-        let correctMessages = [
-            next(0, ExchangeResponse(value: nil, error: .notEnabled))
+        let correctMessages: [Recorded] = [
+            .next(0, ExchangeResponse(value: nil, error: .notEnabled))
         ]
         
         XCTAssertEqual(correctMessages, observer.events)

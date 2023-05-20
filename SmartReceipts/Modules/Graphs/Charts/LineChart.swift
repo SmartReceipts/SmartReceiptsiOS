@@ -8,9 +8,10 @@
 
 import Foundation
 import Charts
+import UIKit
 
 class LineChart: LineChartView, ChartProtocol {
-    var valueFormatter: IValueFormatter?
+    var valueFormatter: ValueFormatter?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,7 +48,9 @@ class LineChart: LineChartView, ChartProtocol {
         
         let chartDataSet = LineChartDataSet(entries: dataSet.entries, label: dataSet.title)
         chartDataSet.valueFont = .systemFont(ofSize: 9, weight: .medium)
-        chartDataSet.valueFormatter = valueFormatter
+        if let valueFormatter {
+            chartDataSet.valueFormatter = valueFormatter
+        }
         chartDataSet.lineWidth = 3
         
         chartDataSet.colors = ChartColorTemplates.material()

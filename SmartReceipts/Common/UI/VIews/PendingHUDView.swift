@@ -13,7 +13,7 @@ import Lottie
 class PendingHUDView: UIView {
     private let bag = DisposeBag()
     
-    @IBOutlet weak var animationView: AnimationView!
+    @IBOutlet weak var animationView: LottieAnimationView!
     @IBOutlet weak var titleLabel: UILabel!
     
     override func awakeFromNib() {
