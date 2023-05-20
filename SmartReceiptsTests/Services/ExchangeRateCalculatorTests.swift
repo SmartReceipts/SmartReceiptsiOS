@@ -41,11 +41,11 @@ class ExchangeRateCalculatorTests: XCTestCase {
         calculator.exchangeRate = -2.57
         calculator.exchangeRate = 0
         
-        let correctMessages = [
-            next(0, 20.0),
-            next(0, 15.0),
-            next(0, -25.7),
-            next(0, 0)
+        let correctMessages: [Recorded] = [
+            .next(0, 20.0),
+            .next(0, 15.0),
+            .next(0, -25.7),
+            .next(0, 0)
         ]
         
         XCTAssertEqual(correctMessages, observer.events)
@@ -70,11 +70,11 @@ class ExchangeRateCalculatorTests: XCTestCase {
         calculator.baseCurrencyPrice = -25.50
         calculator.baseCurrencyPrice = 0
         
-        let correctMessages = [
-            next(0, 4.0),
-            next(0, 3.04),
-            next(0, -5.1),
-            next(0, 0)
+        let correctMessages: [Recorded] = [
+            .next(0, 4.0),
+            .next(0, 3.04),
+            .next(0, -5.1),
+            .next(0, 0)
         ]
         
         XCTAssertEqual(correctMessages, observer.events)
@@ -94,11 +94,11 @@ class ExchangeRateCalculatorTests: XCTestCase {
         calculator.price = -30.60
         calculator.price = 0
         
-        let correctMessages = [
-            next(0, 10.0),
-            next(0, 8.10),
-            next(0, -15.30),
-            next(0, 0)
+        let correctMessages: [Recorded] = [
+            .next(0, 10.0),
+            .next(0, 8.10),
+            .next(0, -15.30),
+            .next(0, 0)
         ]
         
         XCTAssertEqual(correctMessages, observer.events)

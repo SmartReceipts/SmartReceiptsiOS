@@ -78,12 +78,12 @@ class CategoriesModuleTest: XCTestCase {
         
         let scheduler = TestScheduler(initialClock: 0)
         _ = scheduler.createHotObservable([
-            next(0, (category: testCategory, update: true)),
-            next(1, (category: testCategory, update: false))
+            .next(0, (category: testCategory, update: true)),
+            .next(1, (category: testCategory, update: false))
         ]).bind(to:presenter.categoryAction)
         
         _ = scheduler.createHotObservable([
-            next(2, testCategory)
+            .next(2, testCategory)
         ]).bind(to:presenter.deleteSubject)
         
         scheduler.scheduleAt(3) {

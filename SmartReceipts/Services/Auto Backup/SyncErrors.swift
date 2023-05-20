@@ -29,7 +29,7 @@ enum SyncError: Error {
         var errorReason = ""
         if let jsonData = nsError.userInfo["data"] as? Data,
             let json = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: [String: Any]],
-            let errors = json?["error"]?["errors"] as? [[String: Any]],
+           let errors = json["error"]?["errors"] as? [[String: Any]],
             let reason = errors.first?["reason"] as? String {
             
             errorReason = reason

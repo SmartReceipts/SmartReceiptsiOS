@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Will Baumann. All rights reserved.
 //
 
+@import FMDB;
 #import <UIKit/UIKit.h>
-#import <FMDB/FMResultSet.h>
 #import "SmartReceiptsTestsBase.h"
 #import "Database.h"
 #import "DatabaseTestsHelper.h"

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030471BC2A194261000CC95B /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = 030471BB2A194261000CC95B /* FMDB */; };
 		03B4AB7527668DC600958B33 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7427668DC600958B33 /* SubscriptionViewController.swift */; };
 		03B4AB7727668E2000958B33 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7627668E2000958B33 /* SubscriptionViewModel.swift */; };
 		03B4AB7927668E3700958B33 /* SubscriptionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7827668E3700958B33 /* SubscriptionDataSource.swift */; };
@@ -14,6 +15,7 @@
 		03B4AB802766AA6700958B33 /* PlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7F2766AA6700958B33 /* PlanCollectionViewCell.swift */; };
 		03DE1EAA276C519D00DB7A37 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE1EA9276C519D00DB7A37 /* UILabel+Extensions.swift */; };
 		03DE1EAD276C5E7500DB7A37 /* SuccessPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE1EAC276C5E7500DB7A37 /* SuccessPlanViewController.swift */; };
+		03EABFAB2A18272B008D39B8 /* Cuckoo in Frameworks */ = {isa = PBXBuildFile; productRef = 03EABFAA2A18272B008D39B8 /* Cuckoo */; };
 		4D004BB71D272836004DBB19 /* SmartReceiptsFormattableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D004BB61D272836004DBB19 /* SmartReceiptsFormattableString.swift */; };
 		4D29DE84216CEDBA00591F7B /* SharedLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D29DE67216CEDB900591F7B /* SharedLocalizable.strings */; };
 		4D29DE85216CEDBA00591F7B /* SharedLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D29DE6A216CEDB900591F7B /* SharedLocalizable.strings */; };
@@ -1492,8 +1494,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				030471BC2A194261000CC95B /* FMDB in Frameworks */,
 				71DF213B28230253008A2039 /* RxTest in Frameworks */,
 				71DF213528230253008A2039 /* RxBlocking in Frameworks */,
+				03EABFAB2A18272B008D39B8 /* Cuckoo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3233,6 +3237,8 @@
 			packageProductDependencies = (
 				71DF213428230253008A2039 /* RxBlocking */,
 				71DF213A28230253008A2039 /* RxTest */,
+				03EABFAA2A18272B008D39B8 /* Cuckoo */,
+				030471BB2A194261000CC95B /* FMDB */,
 			);
 			productName = SmartReceiptsTests;
 			productReference = EA8D81CF1AEA956600BAC943 /* SmartReceiptsTests.xctest */;
@@ -3275,10 +3281,9 @@
 			};
 			buildConfigurationList = 84F4F33B18CFCCD000F69A35 /* Build configuration list for PBXProject "SmartReceipts" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				uk,
 				ru,
@@ -3461,7 +3466,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# more info: http://stackoverflow.com/questions/24183812/swift-warning-equivalent\nTAGS=\"TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"";
+			shellScript = "# more info: http://stackoverflow.com/questions/24183812/swift-warning-equivalent\nTAGS=\"TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
 		};
 		716D91AA205994F1000D32AF /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3481,7 +3486,7 @@
 		};
 		71C413D21EE6EE78003CE891 /* Cuckoo Tests */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -3535,7 +3540,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "OUTPUT_FILE=\"$PROJECT_DIR/SmartReceiptsTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = $OUTPUT_FILE\"\n\n${PODS_ROOT}/Cuckoo/run generate --testable \"$PROJECT_NAME\" --no-timestamp \\\n--output \"${OUTPUT_FILE}\"\n";
+			shellScript = "OUTPUT_FILE=\"$PROJECT_DIR/SmartReceiptsTests/GeneratedMocks.swift\"\necho \"Generated Mocks File = $OUTPUT_FILE\"\n\ncurl -Lo run https://raw.githubusercontent.com/Brightify/Cuckoo/master/run && chmod +x run\n\n\"${PROJECT_DIR}/run\" --download generate --testable \"$PROJECT_NAME\" --no-timestamp \\\n--output \"${OUTPUT_FILE}\"\n";
 		};
 		EA1E60DA1B2742E40048E688 /* Check localization */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4313,12 +4318,12 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lxml2";
 				PROVISIONING_PROFILE = "e4fc7d77-3f77-4d36-8a1f-43afe97cc65c";
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -4362,13 +4367,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				OTHER_LDFLAGS = "-lxml2";
 				PROVISIONING_PROFILE = "e4fc7d77-3f77-4d36-8a1f-43afe97cc65c";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4396,7 +4401,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartReceipts/SmartReceipts-Prefix.pch";
 				INFOPLIST_FILE = "SmartReceipts/SmartReceipts-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4427,7 +4432,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartReceipts/SmartReceipts-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
@@ -4455,7 +4460,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartReceipts/SmartReceipts-Prefix.pch";
 				INFOPLIST_FILE = "SmartReceipts/SmartReceipts-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4484,7 +4489,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = SR_Dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartReceipts/SmartReceipts-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = "";
 				WRAPPER_EXTENSION = app;
@@ -4536,7 +4541,7 @@
 					"\"$(CONFIGURATION_TEMP_DIR)/$(PROJECT_NAME).build/DerivedSources\"",
 				);
 				INFOPLIST_FILE = SmartReceiptsTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4549,7 +4554,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartReceiptsTests/SmartReceiptsTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartReceipts.app/SmartReceipts";
 			};
 			name = Debug;
@@ -4595,7 +4600,7 @@
 					"\"$(CONFIGURATION_TEMP_DIR)/$(PROJECT_NAME).build/DerivedSources\"",
 				);
 				INFOPLIST_FILE = SmartReceiptsTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4606,7 +4611,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartReceiptsTests/SmartReceiptsTests-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SmartReceipts.app/SmartReceipts";
 			};
 			name = Release;
@@ -4649,7 +4654,7 @@
 			repositoryURL = "https://github.com/google/google-api-objectivec-client-for-rest.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 3.0.0;
 			};
 		};
 		712E4D6A28240A020056F347 /* XCRemoteSwiftPackageReference "GTMAppAuth" */ = {
@@ -4673,7 +4678,7 @@
 			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.4.0;
+				minimumVersion = 10.5.0;
 			};
 		};
 		71DF210D2822EABB008A2039 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -4681,7 +4686,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.15.0;
+				minimumVersion = 10.9.0;
 			};
 		};
 		71DF21182822F650008A2039 /* XCRemoteSwiftPackageReference "Eureka" */ = {
@@ -4689,7 +4694,7 @@
 			repositoryURL = "https://github.com/xmartlabs/Eureka.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.3.6;
+				minimumVersion = 5.4.0;
 			};
 		};
 		71DF211B2822F68B008A2039 /* XCRemoteSwiftPackageReference "Toaster" */ = {
@@ -4713,7 +4718,7 @@
 			repositoryURL = "https://github.com/bizz84/SwiftyStoreKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.15.0;
+				minimumVersion = 0.16.4;
 			};
 		};
 		71DF21242822FCEC008A2039 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
@@ -4721,7 +4726,7 @@
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.1;
+				minimumVersion = 5.6.0;
 			};
 		};
 		71DF21272822FD9A008A2039 /* XCRemoteSwiftPackageReference "Charts" */ = {
@@ -4729,7 +4734,7 @@
 			repositoryURL = "https://github.com/danielgindi/Charts.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.4.0;
+				minimumVersion = 4.1.0;
 			};
 		};
 		71DF212A2822FE97008A2039 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
@@ -4737,7 +4742,7 @@
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.2.1;
+				minimumVersion = 4.2.0;
 			};
 		};
 		71DF212D2822FFC3008A2039 /* XCRemoteSwiftPackageReference "fmdb" */ = {
@@ -4761,7 +4766,7 @@
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
+				minimumVersion = 6.6.0;
 			};
 		};
 		71DF213C282302BC008A2039 /* XCRemoteSwiftPackageReference "RxGesture" */ = {
@@ -4777,7 +4782,7 @@
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				minimumVersion = 5.0.2;
 			};
 		};
 		71DF2142282303E9008A2039 /* XCRemoteSwiftPackageReference "RxOptional" */ = {
@@ -4793,7 +4798,7 @@
 			repositoryURL = "https://github.com/Moya/Moya.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 15.0.0;
+				minimumVersion = 15.0.3;
 			};
 		};
 		71DF2144282304BD008A2039 /* XCRemoteSwiftPackageReference "Cuckoo" */ = {
@@ -4801,7 +4806,7 @@
 			repositoryURL = "https://github.com/Brightify/Cuckoo.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.0;
+				minimumVersion = 1.10.3;
 			};
 		};
 		71DF214928230847008A2039 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -4809,7 +4814,7 @@
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.6.1;
+				minimumVersion = 5.7.0;
 			};
 		};
 		71DF214E282311A8008A2039 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
@@ -4817,7 +4822,7 @@
 			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.7.4;
+				minimumVersion = 3.8.0;
 			};
 		};
 		71DF215128231AE9008A2039 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */ = {
@@ -4825,12 +4830,22 @@
 			repositoryURL = "https://github.com/aws-amplify/aws-sdk-ios-spm";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.12.3;
+				minimumVersion = 2.32.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		030471BB2A194261000CC95B /* FMDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71DF212D2822FFC3008A2039 /* XCRemoteSwiftPackageReference "fmdb" */;
+			productName = FMDB;
+		};
+		03EABFAA2A18272B008D39B8 /* Cuckoo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 71DF2144282304BD008A2039 /* XCRemoteSwiftPackageReference "Cuckoo" */;
+			productName = Cuckoo;
+		};
 		712E4D662824054A0056F347 /* GoogleAPIClientForREST_Drive */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 712E4D652824054A0056F347 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;

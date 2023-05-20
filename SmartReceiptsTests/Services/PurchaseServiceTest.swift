@@ -33,8 +33,16 @@ class PurchaseServiceTest: XCTestCase {
             mock.appStoreReceipt().then({ "qwerty" })
             
             mock.validateSubscription().then({ () -> Observable<SubscriptionValidation> in
-                return Observable<SubscriptionValidation>.just((true, Date()))
+                return Observable<SubscriptionValidation>.just(
+                    SubscriptionValidation(
+                        plusValid: true,
+                        plusExpireTime: Date(),
+                        standardPurchased: false,
+                        premiumPurchased: true
+                    )
+                )
             })
+            
         }
     }
     

@@ -11,12 +11,26 @@ import RxSwift
 
 class PurchaseServiceCustomMockSuccess: PurchaseService {
     override func validateSubscription() -> Observable<SubscriptionValidation> {
-        return Observable<SubscriptionValidation>.just((true, Date()))
+        return Observable<SubscriptionValidation>.just(
+            SubscriptionValidation(
+                plusValid: true,
+                plusExpireTime: Date(),
+                standardPurchased: false,
+                premiumPurchased: true
+            )
+        )
     }
 }
 
 class PurchaseServiceCustomMockFail: PurchaseService {
     override func validateSubscription() -> Observable<SubscriptionValidation> {
-        return Observable<SubscriptionValidation>.just((false, nil))
+        return Observable<SubscriptionValidation>.just(
+            SubscriptionValidation(
+                plusValid: false,
+                plusExpireTime: nil,
+                standardPurchased: false,
+                premiumPurchased: false
+            )
+        )
     }
 }

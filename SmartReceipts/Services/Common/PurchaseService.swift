@@ -355,7 +355,7 @@ class PurchaseService {
     //MARK: - PurchaseService and Subscription
     
 
-    private func resetCache() {
+    func resetCache() {
         cachedValidation = nil
         UserDefaults.standard.set(0, forKey: CACHED_VALIDATION_EXPIRE)
     }

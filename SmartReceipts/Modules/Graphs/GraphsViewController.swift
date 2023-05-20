@@ -27,7 +27,7 @@ class GraphsViewController: UIViewController, Storyboardable {
     
     private var graphsInfoViewController: GraphsInfoViewController?
     
-    private lazy var valueFormatter: IValueFormatter = {
+    private lazy var valueFormatter: ValueFormatter = {
         return DefaultValueFormatter(formatter: numberFormatter)
     }()
     

@@ -78,12 +78,12 @@ class PaymentMethodsModuleTest: XCTestCase {
         
         let scheduler = TestScheduler(initialClock: 0)
         _ = scheduler.createHotObservable([
-            next(0, (pm: testPaymentMethod, update: true)),
-            next(1, (pm: testPaymentMethod, update: false))
+            .next(0, (pm: testPaymentMethod, update: true)),
+            .next(1, (pm: testPaymentMethod, update: false))
         ]).bind(to:presenter.paymentMethodAction)
         
         _ = scheduler.createHotObservable([
-            next(2, testPaymentMethod)
+            .next(2, testPaymentMethod)
         ]).bind(to:presenter.deleteSubject)
         
         scheduler.scheduleAt(3) {

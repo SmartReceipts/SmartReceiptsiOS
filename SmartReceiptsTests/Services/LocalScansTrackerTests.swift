@@ -27,11 +27,11 @@ class LocalScansTrackerTests: XCTestCase {
         let scheduler = TestScheduler(initialClock: 0)
         let countObserver = scheduler.createObserver(Int.self)
         
-        let countCheck = [
-            next(0, 0),
-            next(0, 1),
-            next(0, 10),
-            next(0, 20)
+        let countCheck: [Recorded] = [
+            .next(0, 0),
+            .next(0, 1),
+            .next(0, 10),
+            .next(0, 20)
         ]
         
         scheduler.start()

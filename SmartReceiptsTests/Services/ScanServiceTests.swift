@@ -124,12 +124,12 @@ class ScanServiceTests: XCTestCase {
         let scheduler = TestScheduler(initialClock: 0)
         let statusObserver = scheduler.createObserver(ScanStatus.self)
         
-        let statusCheck = [
-            next(0, ScanStatus.uploading),
-            next(0, ScanStatus.scanning),
-            next(0, ScanStatus.fetching),
-            next(0, ScanStatus.completed),
-            next(0, ScanStatus.completed)
+        let statusCheck: [Recorded] = [
+            .next(0, ScanStatus.uploading),
+            .next(0, ScanStatus.scanning),
+            .next(0, ScanStatus.fetching),
+            .next(0, ScanStatus.completed),
+            .next(0, ScanStatus.completed)
         ]
         scheduler.start()
         scanService.status.bind(to: statusObserver).disposed(by: bag)

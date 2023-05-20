@@ -8,6 +8,7 @@
 
 import Foundation
 import Charts
+import UIKit
 
 protocol ChartDataSetProtocol {
     var xLabels: [String] { get }
@@ -22,13 +23,13 @@ enum ChartType {
 }
 
 protocol ChartProtocol: UIView {
-    var valueFormatter: IValueFormatter? { get set }
+    var valueFormatter: ValueFormatter? { get set }
     func buildChart(dataSet: ChartDataSetProtocol)
     func color(at index: Int) -> UIColor?
 }
 
 class BarChart: BarChartView, ChartProtocol {
-    var valueFormatter: IValueFormatter?
+    var valueFormatter: ValueFormatter?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -68,7 +69,9 @@ class BarChart: BarChartView, ChartProtocol {
         
         let chartDataSet = BarChartDataSet(entries: dataSet.entries, label: dataSet.title)
         chartDataSet.valueFont = .systemFont(ofSize: 9, weight: .medium)
-        chartDataSet.valueFormatter = valueFormatter
+        if let valueFormatter {
+            chartDataSet.valueFormatter = valueFormatter
+        }
         
         chartDataSet.colors = ChartColorTemplates.material()
         let chartData = BarChartData(dataSet: chartDataSet)
