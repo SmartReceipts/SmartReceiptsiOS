@@ -9,6 +9,7 @@
 #import "Database+CSVColumns.h"
 #import "Database+Columns.h"
 #import "DatabaseTableNames.h"
+#import <SmartReceipts-Swift.h>
 
 @interface Database (ColumnsExpose)
 

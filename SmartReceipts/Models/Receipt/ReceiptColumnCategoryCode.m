@@ -8,6 +8,7 @@
 
 #import "ReceiptColumnCategoryCode.h"
 #import "WBReceipt.h"
+#import <SmartReceipts-Swift.h>
 
 @implementation ReceiptColumnCategoryCode
 

@@ -9,6 +9,7 @@
 #import "Column.h"
 #import "WBDateFormatter.h"
 #import "Constants.h"
+#import <SmartReceipts-Swift.h>
 
 @interface Column ()
 

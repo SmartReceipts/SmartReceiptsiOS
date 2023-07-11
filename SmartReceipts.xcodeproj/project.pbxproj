@@ -16,6 +16,7 @@
 		03DE1EAA276C519D00DB7A37 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE1EA9276C519D00DB7A37 /* UILabel+Extensions.swift */; };
 		03DE1EAD276C5E7500DB7A37 /* SuccessPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE1EAC276C5E7500DB7A37 /* SuccessPlanViewController.swift */; };
 		03EABFAB2A18272B008D39B8 /* Cuckoo in Frameworks */ = {isa = PBXBuildFile; productRef = 03EABFAA2A18272B008D39B8 /* Cuckoo */; };
+		4358D76E2A5D2F7B00F31AA5 /* RxOptional in Frameworks */ = {isa = PBXBuildFile; productRef = 4358D76D2A5D2F7B00F31AA5 /* RxOptional */; };
 		4D004BB71D272836004DBB19 /* SmartReceiptsFormattableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D004BB61D272836004DBB19 /* SmartReceiptsFormattableString.swift */; };
 		4D29DE84216CEDBA00591F7B /* SharedLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D29DE67216CEDB900591F7B /* SharedLocalizable.strings */; };
 		4D29DE85216CEDBA00591F7B /* SharedLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4D29DE6A216CEDB900591F7B /* SharedLocalizable.strings */; };
@@ -440,7 +441,6 @@
 		71DF2146282307D4008A2039 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 71DF2145282307D3008A2039 /* Moya */; };
 		71DF2148282307DD008A2039 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 71DF2147282307DD008A2039 /* RxMoya */; };
 		71DF214B28230847008A2039 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 71DF214A28230847008A2039 /* Alamofire */; };
-		71DF214D282308A9008A2039 /* RxOptional in Frameworks */ = {isa = PBXBuildFile; productRef = 71DF214C282308A9008A2039 /* RxOptional */; };
 		71DF2150282311A8008A2039 /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 71DF214F282311A8008A2039 /* CocoaLumberjackSwift */; };
 		71DF215328231AEA008A2039 /* AWSCognitoAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 71DF215228231AEA008A2039 /* AWSCognitoAuth */; };
 		71DF215528231AEA008A2039 /* AWSCore in Frameworks */ = {isa = PBXBuildFile; productRef = 71DF215428231AEA008A2039 /* AWSCore */; };
@@ -1473,6 +1473,7 @@
 				71DF211D2822F68B008A2039 /* Toaster in Frameworks */,
 				71DF21172822EBEE008A2039 /* GoogleMobileAds in Frameworks */,
 				71DF210F2822EABB008A2039 /* FirebaseAnalytics in Frameworks */,
+				4358D76E2A5D2F7B00F31AA5 /* RxOptional in Frameworks */,
 				84A6C82D18F510E5003B876F /* libxml2.dylib in Frameworks */,
 				71DF212C2822FE98008A2039 /* Lottie in Frameworks */,
 				71DF2148282307DD008A2039 /* RxMoya in Frameworks */,
@@ -1482,7 +1483,6 @@
 				71DF2141282302EF008A2039 /* RxDataSources in Frameworks */,
 				84F4F34818CFCCD000F69A35 /* UIKit.framework in Frameworks */,
 				712E4D6C28240A020056F347 /* GTMAppAuth in Frameworks */,
-				71DF214D282308A9008A2039 /* RxOptional in Frameworks */,
 				84F4F34418CFCCD000F69A35 /* Foundation.framework in Frameworks */,
 				71DF212F2822FFC3008A2039 /* FMDB in Frameworks */,
 				712E4D69282408D50056F347 /* GoogleAPIClientForRESTCore in Frameworks */,
@@ -3205,7 +3205,6 @@
 				71DF2145282307D3008A2039 /* Moya */,
 				71DF2147282307DD008A2039 /* RxMoya */,
 				71DF214A28230847008A2039 /* Alamofire */,
-				71DF214C282308A9008A2039 /* RxOptional */,
 				71DF214F282311A8008A2039 /* CocoaLumberjackSwift */,
 				71DF215228231AEA008A2039 /* AWSCognitoAuth */,
 				71DF215428231AEA008A2039 /* AWSCore */,
@@ -3213,6 +3212,7 @@
 				712E4D662824054A0056F347 /* GoogleAPIClientForREST_Drive */,
 				712E4D68282408D50056F347 /* GoogleAPIClientForRESTCore */,
 				712E4D6B28240A020056F347 /* GTMAppAuth */,
+				4358D76D2A5D2F7B00F31AA5 /* RxOptional */,
 			);
 			productName = SmartReceipts;
 			productReference = 84F4F34018CFCCD000F69A35 /* SmartReceipts.app */;
@@ -3307,7 +3307,6 @@
 				71DF213328230253008A2039 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				71DF213C282302BC008A2039 /* XCRemoteSwiftPackageReference "RxGesture" */,
 				71DF213F282302EE008A2039 /* XCRemoteSwiftPackageReference "RxDataSources" */,
-				71DF2142282303E9008A2039 /* XCRemoteSwiftPackageReference "RxOptional" */,
 				71DF214328230469008A2039 /* XCRemoteSwiftPackageReference "Moya" */,
 				71DF2144282304BD008A2039 /* XCRemoteSwiftPackageReference "Cuckoo" */,
 				71DF214928230847008A2039 /* XCRemoteSwiftPackageReference "Alamofire" */,
@@ -3315,6 +3314,7 @@
 				71DF215128231AE9008A2039 /* XCRemoteSwiftPackageReference "aws-sdk-ios-spm" */,
 				712E4D652824054A0056F347 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */,
 				712E4D6A28240A020056F347 /* XCRemoteSwiftPackageReference "GTMAppAuth" */,
+				4358D76C2A5D2F7B00F31AA5 /* XCRemoteSwiftPackageReference "RxOptional" */,
 			);
 			productRefGroup = 84F4F34118CFCCD000F69A35 /* Products */;
 			projectDirPath = "";
@@ -4395,8 +4395,7 @@
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SmartReceipts/SmartReceipts-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = "SmartReceipts/SmartReceipts-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Smart Receipts";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
@@ -4455,8 +4454,7 @@
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SmartReceipts/SmartReceipts-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = "SmartReceipts/SmartReceipts-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Smart Receipts";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
@@ -4510,7 +4508,7 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				EXCLUDED_ARCHS = arm64;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -4654,6 +4652,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4358D76C2A5D2F7B00F31AA5 /* XCRemoteSwiftPackageReference "RxOptional" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxOptional";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		712E4D652824054A0056F347 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/google-api-objectivec-client-for-rest.git";
@@ -4790,14 +4796,6 @@
 				minimumVersion = 5.0.2;
 			};
 		};
-		71DF2142282303E9008A2039 /* XCRemoteSwiftPackageReference "RxOptional" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RxSwiftCommunity/RxOptional";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		71DF214328230469008A2039 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
@@ -4850,6 +4848,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 71DF2144282304BD008A2039 /* XCRemoteSwiftPackageReference "Cuckoo" */;
 			productName = Cuckoo;
+		};
+		4358D76D2A5D2F7B00F31AA5 /* RxOptional */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4358D76C2A5D2F7B00F31AA5 /* XCRemoteSwiftPackageReference "RxOptional" */;
+			productName = RxOptional;
 		};
 		712E4D662824054A0056F347 /* GoogleAPIClientForREST_Drive */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -4985,11 +4988,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 71DF214928230847008A2039 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		71DF214C282308A9008A2039 /* RxOptional */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 71DF2142282303E9008A2039 /* XCRemoteSwiftPackageReference "RxOptional" */;
-			productName = RxOptional;
 		};
 		71DF214F282311A8008A2039 /* CocoaLumberjackSwift */ = {
 			isa = XCSwiftPackageProductDependency;

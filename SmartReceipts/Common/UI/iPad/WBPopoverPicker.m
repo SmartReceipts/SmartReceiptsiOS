@@ -7,6 +7,7 @@
 //
 
 #import "WBPopoverPicker.h"
+#import <UIKit/UIKit.h>
 
 @implementation WBPopoverPicker {
     __weak UIViewController *rootViewController;

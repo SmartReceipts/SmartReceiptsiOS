@@ -7,6 +7,7 @@
 //
 
 #import "DistanceCommentColumn.h"
+#import <SmartReceipts-Swift.h>
 
 @implementation DistanceCommentColumn
 

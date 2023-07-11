@@ -19,6 +19,7 @@
 #import "NSDate+Calculations.h"
 #import "Database+Notify.h"
 #import "ReceiptFilesManager.h"
+#import <SmartReceipts-Swift.h>
 
 @interface WBTrip (Expose)
 

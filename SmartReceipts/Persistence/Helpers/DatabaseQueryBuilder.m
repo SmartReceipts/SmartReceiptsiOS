@@ -8,6 +8,8 @@
 
 #import "DatabaseQueryBuilder.h"
 #import "Constants.h"
+#import <SmartReceipts-Swift.h>
+#import "LoggerMacros-ObjC.h"
 
 typedef NS_ENUM(short, StatementType) {
     InsertStatement = 1,
@@ -78,7 +80,6 @@ typedef NS_ENUM(short, StatementType) {
 
 - (void)addParam:(NSString *)paramName value:(NSObject *)paramValue {
     if (!paramValue) {
-        LOGGER_WARNING(@"Warning: value for %@ not set. Ignoring", paramName);
         return;
     }
     [self.params addObject:paramName];

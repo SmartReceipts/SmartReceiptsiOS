@@ -16,7 +16,6 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-*.xcworkspace
 
 # Secrets, API Keys
 SmartReceipts/Ads/GADConstants.m

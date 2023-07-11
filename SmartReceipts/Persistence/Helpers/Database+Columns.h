@@ -8,6 +8,8 @@
 
 #import "Database.h"
 
+@class Column;
+
 @interface Database (Columns)
 
 - (BOOL)reorderColumn:(Column *)columnOne withColumn:(Column *)columnTwo table:(NSString *)table;

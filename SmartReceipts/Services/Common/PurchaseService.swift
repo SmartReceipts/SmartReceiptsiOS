@@ -362,7 +362,8 @@ class PurchaseService {
 
     func cacheSubscriptionValidation() {
         validateSubscription()
-            .subscribe(onNext: { validation in
+            .subscribe(onNext: { [weak self] validation in
+                self?.cache(validation: validation)
                 Logger.debug("Cached Validation: Valid = \(validation.plusValid), expire: \(String(describing: validation.plusExpireTime))")
             }, onError: { error in
                 Logger.error(error.localizedDescription)
@@ -410,9 +411,6 @@ class PurchaseService {
         }).catch({ error -> Observable<SubscriptionValidation> in
             return Observable<SubscriptionValidation>.just(.empty())
         })
-            .do(onNext: { [weak self] in
-                self?.cache(validation: $0)
-            })
     }
     
     func verifySubscription(receipt: ReceiptInfo) -> SubscriptionValidation {

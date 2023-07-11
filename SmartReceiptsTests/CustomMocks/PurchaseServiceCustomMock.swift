@@ -14,7 +14,7 @@ class PurchaseServiceCustomMockSuccess: PurchaseService {
         return Observable<SubscriptionValidation>.just(
             SubscriptionValidation(
                 plusValid: true,
-                plusExpireTime: Date(),
+                plusExpireTime: Date().addingTimeInterval(300),
                 standardPurchased: false,
                 premiumPurchased: true
             )

@@ -46,12 +46,14 @@
 }
 
 - (void)testSelectAll {
+    XCTAssertEqual(1, self.db.allTrips.count);
+    
     //one added in setup
-    [self.db insertTestTrip:@{}];
-    [self.db insertTestTrip:@{}];
-    [self.db insertTestTrip:@{}];
-    [self.db insertTestTrip:@{}];
-    [self.db insertTestTrip:@{}];
+    [self.db insertTestTrip:@{TripsTable.COLUMN_NAME : @"2"}];
+    [self.db insertTestTrip:@{TripsTable.COLUMN_NAME : @"3"}];
+    [self.db insertTestTrip:@{TripsTable.COLUMN_NAME : @"4"}];
+    [self.db insertTestTrip:@{TripsTable.COLUMN_NAME : @"5"}];
+    [self.db insertTestTrip:@{TripsTable.COLUMN_NAME : @"6"}];
 
     NSArray *allTrips = [self.db allTrips];
     XCTAssertEqual(6, allTrips.count);

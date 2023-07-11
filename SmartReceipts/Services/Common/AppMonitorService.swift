@@ -15,10 +15,10 @@ protocol AppMonitorService {
 
 class AppMonitorServiceFactory {
     func createAppMonitor() -> AppMonitorService {
-        if ProcessInfo.processInfo.environment["Test"] == nil {
-            return FirebaseAppMonitorService()
+        if AppDelegate.isRunningForTest {
+            return NoOpAppMonitorService()
         }
-        return NoOpAppMonitorService()
+        return FirebaseAppMonitorService()
     }
 }
 

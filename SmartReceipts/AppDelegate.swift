@@ -19,7 +19,7 @@ import AWSS3
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     static private(set) var instance: AppDelegate!
-    private var remoteConfig: RemoteConfigService! = nil
+    private var remoteConfig: RemoteConfigService? = nil
     var bag = DisposeBag()
 
     var window: UIWindow?
@@ -38,13 +38,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidFinishLaunching(_ application: UIApplication) {
         AppDelegate.instance = self
         
-        AppMonitorServiceFactory().createAppMonitor().configure()
-        remoteConfig = RemoteConfigService()
+        if !AppDelegate.isRunningForTest {
+            AppMonitorServiceFactory().createAppMonitor().configure()
+            remoteConfig = RemoteConfigService()
+            Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(!DebugStates.isDebug)
+            GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [GADSimulatorID]
+        }
         
         AppTheme.customizeOnAppLoad()
         EurekaWhitespaceWorkaround.configureTextCells()
-        Crashlytics.crashlytics().setCrashlyticsCollectionEnabled(!DebugStates.isDebug) 
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [GADSimulatorID]
         
         _ = FileManager.initTripsDirectory()
         
@@ -120,4 +122,6 @@ extension AppDelegate {
         FileManager.deleteIfExists(filepath: path)
         filePathToAttach = nil
     }
+    
+    static var isRunningForTest: Bool { ProcessInfo.processInfo.environment["Test"] != nil }
 }

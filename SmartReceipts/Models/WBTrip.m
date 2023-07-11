@@ -79,7 +79,6 @@
                                                             error:&error]) {
             return true;
         } else {
-            LOGGER_ERROR(@"Couldn't create trip directory: %@", [error localizedDescription]);
             return false;
         }
     }

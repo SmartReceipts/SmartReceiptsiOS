@@ -9,6 +9,7 @@
 #import "Database+PDFColumns.h"
 #import "DatabaseTableNames.h"
 #import "Database+Columns.h"
+#import <SmartReceipts-Swift.h>
 
 @interface Database (ColumnsExpose)
 
@@ -22,19 +23,16 @@
 
 - (BOOL)createPDFColumnsTable {
     BOOL result = [self createColumnsTableWithName:PDFTable.TABLE_NAME];
-    LOGGER_DEBUG(@"createPDFColumnsTable: %@, success=%d", PDFTable.TABLE_NAME, result);
     return result;
 }
 
 - (NSArray *)allPDFColumns {
     NSArray *result = [self fetchAllColumnsFromTable:PDFTable.TABLE_NAME];
-    LOGGER_DEBUG(@"allPDFColumns: %@", result.description);
     return result;
 }
 
 - (BOOL)replaceAllPDFColumnsWith:(NSArray *)columns {
     BOOL result = [self replaceAllColumnsInTable:PDFTable.TABLE_NAME columns:columns];
-    LOGGER_DEBUG(@"replaceAllPDFColumnsWith: %@, success=%d", columns.description, result);
     return result;
 }
 

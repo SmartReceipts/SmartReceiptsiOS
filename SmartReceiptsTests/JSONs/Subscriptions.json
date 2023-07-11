@@ -4,8 +4,8 @@
             "id": 30,
             "subscription_provider": "Stripe",
             "product_name": "Smart Receipts Plus",
-            "purchased_at": "2020-08-22T22:13:08.000Z",
-            "expires_at_iso8601": "2022-09-22T22:13:08.000Z"
+            "purchased_at": "2022-08-22T22:13:08.000Z",
+            "expires_at_iso8601": "2024-09-22T22:13:08.000Z"
         }
     ]
 }

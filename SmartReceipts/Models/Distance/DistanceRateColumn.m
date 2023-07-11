@@ -7,7 +7,7 @@
 //
 
 #import "DistanceRateColumn.h"
-
+#import <SmartReceipts-Swift.h>
 
 @implementation DistanceRateColumn
 

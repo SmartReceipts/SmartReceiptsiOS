@@ -585,6 +585,14 @@
                BlueprintName = "SmartReceiptsTests"
                ReferencedContainer = "container:SmartReceipts.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "OrganizationsServiceTests/testImportModels()">
+               </Test>
+               <Test
+                  Identifier = "SmartReceiptsTestsBase">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

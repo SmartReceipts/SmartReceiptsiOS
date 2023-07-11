@@ -8,6 +8,7 @@
 
 #import "WBImageUtils.h"
 #import "WBPreferences.h"
+#import <UIKit/UIKit.h>
 
 @implementation WBImageUtils
 

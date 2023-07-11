@@ -256,10 +256,7 @@
 }
 
 - (NSArray *)performObjectsFetchUsingDatabase:(FMDatabase *)database {
-    TICK;
     NSMutableArray *result = [NSMutableArray array];
-    LOGGER_DEBUG(@"Fetch query: '%@'", self.fetchQuery);
-    LOGGER_DEBUG(@"Fetch params: %@", self.fetchParameters);
 
     FMResultSet *resultSet = [database executeQuery:self.fetchQuery withParameterDictionary:self.fetchParameters];
     while ([resultSet next]) {
@@ -275,7 +272,6 @@
         [result addObject:fetched];
     }
     
-    LOGGER_DEBUG(@"Fetch time %@", TOCK);
     
     return [NSArray arrayWithArray:result];
 }

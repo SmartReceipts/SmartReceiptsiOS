@@ -9,6 +9,7 @@
 #import "DistancesToReceiptsConverter.h"
 #import "WBReceipt.h"
 #import "LocalizedString.h"
+#import <SmartReceipts-Swift.h>
 
 @interface DistancesToReceiptsConverter ()
 

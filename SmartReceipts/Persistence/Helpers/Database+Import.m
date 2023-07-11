@@ -18,6 +18,7 @@
 #import "WBCategory.h"
 #import "Database+PDFColumns.h"
 #import "Database+CSVColumns.h"
+#import <SmartReceipts-Swift.h>
 
 @interface Distance (Expose)
 

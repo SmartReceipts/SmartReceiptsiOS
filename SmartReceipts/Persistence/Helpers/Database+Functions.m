@@ -20,7 +20,6 @@
 @implementation Database (Functions)
 
 - (BOOL)executeUpdate:(NSString *)sqlStatement {
-    LOGGER_DEBUG(@"executeUpdate(%@)", sqlStatement);
 
     __block BOOL result;
     [self.databaseQueue inDatabase:^(FMDatabase *db) {
@@ -51,9 +50,7 @@
     __block NSUInteger result;
     [self.databaseQueue inDatabase:^(FMDatabase *db) {
         NSString *countQuery = [NSString stringWithFormat:@"SELECT COUNT(*) FROM %@", tableName];
-        LOGGER_DEBUG(@"Execute query:'%@'", countQuery);
         result = (NSUInteger) [db intForQuery:countQuery];
-        LOGGER_DEBUG(@"Result:%tu", result);
     }];
     return result;
 }
@@ -69,9 +66,6 @@
 - (BOOL)executeQuery:(DatabaseQueryBuilder *)query usingDatabase:(FMDatabase *)database {
     NSString *statement = [query buildStatement];
     NSDictionary *parameters = [query parameters];
-
-    LOGGER_DEBUG(@"Execute update: '%@'", statement);
-    LOGGER_DEBUG(@"With parameters: %@", parameters);
 
     return [database executeUpdate:statement withParameterDictionary:parameters];
 }
@@ -89,8 +83,6 @@
     NSString *statement = [query buildStatement];
     NSDictionary *parameters = [query parameters];
 
-    LOGGER_DEBUG(@"Execute query: '%@'", statement);
-    LOGGER_DEBUG(@"With parameters: %@", parameters);
 
     NSDecimalNumber *result = [NSDecimalNumber zero];
     FMResultSet *resultSet = [db executeQuery:statement withParameterDictionary:parameters];
@@ -105,13 +97,9 @@
 }
 
 - (id <FetchedModel>)executeFetchFor:(Class)fetchedClass withQuery:(DatabaseQueryBuilder *)query {
-    LOGGER_DEBUG(@"executeFetchFor: %@", NSStringFromClass(fetchedClass));
 
     NSString *statement = query.buildStatement;
     NSDictionary *parameters = query.parameters;
-
-    LOGGER_DEBUG(@"Query: '%@'", statement);
-    LOGGER_DEBUG(@"Parameters: %@", parameters);
     __block id <FetchedModel> result = nil;
     [self.databaseQueue inDatabase:^(FMDatabase *db) {
         FMResultSet *resultSet = [db executeQuery:statement withParameterDictionary:parameters];
@@ -146,8 +134,6 @@
     NSString *statement = [query buildStatement];
     NSDictionary *parameters = [query parameters];
 
-    LOGGER_DEBUG(@"Execute query: '%@'", statement);
-    LOGGER_DEBUG(@"With parameters: %@", parameters);
 
     TICK;
 
@@ -159,7 +145,6 @@
         [resultSet close];
     }
     
-    LOGGER_DEBUG(@"Seconds query time %@", TOCK);
 
     return result;
 }

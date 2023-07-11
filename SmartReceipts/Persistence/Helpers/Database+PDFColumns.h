@@ -8,6 +8,8 @@
 
 #import "Database.h"
 
+@class Column;
+
 @interface Database (PDFColumns)
 
 - (BOOL)createPDFColumnsTable;

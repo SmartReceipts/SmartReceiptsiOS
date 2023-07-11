@@ -9,6 +9,7 @@
 #import "ReceiptColumnPaymentMethod.h"
 #import "WBReceipt.h"
 #import "LocalizedString.h"
+#import <SmartReceipts-Swift.h>
 
 @implementation ReceiptColumnPaymentMethod
 

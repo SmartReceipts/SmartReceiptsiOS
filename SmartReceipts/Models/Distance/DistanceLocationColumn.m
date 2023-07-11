@@ -8,6 +8,7 @@
 
 #import "DistanceLocationColumn.h"
 #import "LocalizedString.h"
+#import <SmartReceipts-Swift.h>
 
 @implementation DistanceLocationColumn
 

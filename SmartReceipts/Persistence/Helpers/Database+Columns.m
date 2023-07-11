@@ -13,6 +13,7 @@
 #import "ReceiptColumn.h"
 #import "FMDatabase.h"
 #import "DatabaseQueryBuilder.h"
+#import <SmartReceipts-Swift.h>
 
 @implementation Database (Columns)
 

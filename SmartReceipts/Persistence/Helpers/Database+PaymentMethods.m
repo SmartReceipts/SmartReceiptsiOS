@@ -14,6 +14,8 @@
 #import "DatabaseQueryBuilder.h"
 #import "NSString+Helpers.h"
 #import "LocalizedString.h"
+#import <SmartReceipts-Swift.h>
+
 
 @implementation Database (PaymentMethods)
 

@@ -114,7 +114,6 @@ static NSArray<LegacyResolver *> *_resolvers;
         }
     }
     
-    LOGGER_ERROR(@"Column not found by type: %ld", (long)type);
     return [ReceiptUnknownColumn new];
 }
 
@@ -128,7 +127,6 @@ static NSArray<LegacyResolver *> *_resolvers;
         }
     }
     
-    LOGGER_ERROR(@"Column not found by type: %ld", (long)type);
     result = [ReceiptUnknownColumn new];
     result.uuid = uuid;
     return result;
@@ -150,7 +148,6 @@ static NSArray<LegacyResolver *> *_resolvers;
     }
     
     if (!column) {
-        LOGGER_ERROR(@"Column not found by name: %@", columnName);
         column = [ReceiptUnknownColumn new];
     }
     

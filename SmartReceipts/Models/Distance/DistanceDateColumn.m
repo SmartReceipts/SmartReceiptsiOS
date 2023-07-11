@@ -8,6 +8,7 @@
 
 #import "DistanceDateColumn.h"
 #import "WBDateFormatter.h"
+#import <SmartReceipts-Swift.h>
 
 @implementation DistanceDateColumn
 

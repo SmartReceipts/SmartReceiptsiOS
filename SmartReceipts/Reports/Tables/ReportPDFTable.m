@@ -8,6 +8,7 @@
 
 #import "ReportPDFTable.h"
 #import "Column.h"
+#import <SmartReceipts-Swift.h>
 
 static inline NSString *safeString(NSString *str) {
     return str ? str : @"";
