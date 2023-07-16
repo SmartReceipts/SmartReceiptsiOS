@@ -3175,7 +3175,6 @@
 				84F4F33C18CFCCD000F69A35 /* Sources */,
 				84F4F33D18CFCCD000F69A35 /* Frameworks */,
 				84F4F33E18CFCCD000F69A35 /* Resources */,
-				716D91AA205994F1000D32AF /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -3464,22 +3463,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# more info: http://stackoverflow.com/questions/24183812/swift-warning-equivalent\nTAGS=\"TODO:|FIXME:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
-		};
-		716D91AA205994F1000D32AF /* Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
-			);
-			name = Crashlytics;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
 		};
 		71C413D21EE6EE78003CE891 /* Cuckoo Tests */ = {
 			isa = PBXShellScriptBuildPhase;
