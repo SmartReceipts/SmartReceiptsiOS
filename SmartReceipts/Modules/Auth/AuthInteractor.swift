@@ -33,7 +33,7 @@ class AuthInteractor: Interactor {
             switch event {
             case .next(let credentials):
                 self.authService.login(credentials: credentials)
-                    .catchError({ error -> Single<LoginResponse> in
+                    .catch({ error -> Single<LoginResponse> in
                         if let afError = error as? AFError, afError.responseCode == INVALID_CREDENTIALS_CODE {
                             self.presenter.errorHandler.onNext(LocalizedString("login_failure_credentials_toast"))
                         } else {
@@ -57,7 +57,7 @@ class AuthInteractor: Interactor {
             switch event {
             case .next(let credentials):
                 self.authService.signup(credentials: credentials)
-                    .catchError({ error -> Single<SignupResponse> in
+                    .catch({ error -> Single<SignupResponse> in
                         if let afError = error as? AFError, afError.responseCode == ACCOUNT_ALREADY_EXISTS_CODE {
                             self.presenter.errorHandler.onNext(LocalizedString("sign_up_failure_account_exists_toast"))
                         } else {

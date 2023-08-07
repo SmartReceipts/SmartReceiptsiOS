@@ -8,13 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		030471BC2A194261000CC95B /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = 030471BB2A194261000CC95B /* FMDB */; };
+		0330F1D52A62644000180C64 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 0330F1D42A62644000180C64 /* AlertToast */; };
+		0345ED542A8150280001EE35 /* SecurePasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345ED532A8150280001EE35 /* SecurePasswordField.swift */; };
+		0345ED582A8166210001EE35 /* AuthViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345ED572A8166210001EE35 /* AuthViewOutput.swift */; };
 		03B4AB7527668DC600958B33 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7427668DC600958B33 /* SubscriptionViewController.swift */; };
 		03B4AB7727668E2000958B33 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7627668E2000958B33 /* SubscriptionViewModel.swift */; };
 		03B4AB7927668E3700958B33 /* SubscriptionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7827668E3700958B33 /* SubscriptionDataSource.swift */; };
 		03B4AB7B27668E5B00958B33 /* SubscriptionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7A27668E5B00958B33 /* SubscriptionRouter.swift */; };
 		03B4AB802766AA6700958B33 /* PlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7F2766AA6700958B33 /* PlanCollectionViewCell.swift */; };
+		03DCDDAA2A5F12E100AA24F5 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DCDDA92A5F12E100AA24F5 /* AuthModel.swift */; };
+		03DCDDAD2A5F27D500AA24F5 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DCDDAC2A5F27D500AA24F5 /* AuthClient.swift */; };
 		03DE1EAA276C519D00DB7A37 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE1EA9276C519D00DB7A37 /* UILabel+Extensions.swift */; };
 		03DE1EAD276C5E7500DB7A37 /* SuccessPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE1EAC276C5E7500DB7A37 /* SuccessPlanViewController.swift */; };
+		03E4C2CA2A1B79FC000CCE43 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 03E4C2C92A1B79FC000CCE43 /* ComposableArchitecture */; };
+		03E4C2CF2A1C0071000CCE43 /* AuthViewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4C2CE2A1C0071000CCE43 /* AuthViewScreen.swift */; };
+		03E4C2D32A1C0320000CCE43 /* AuthViewReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E4C2D22A1C0320000CCE43 /* AuthViewReducer.swift */; };
 		03EABFAB2A18272B008D39B8 /* Cuckoo in Frameworks */ = {isa = PBXBuildFile; productRef = 03EABFAA2A18272B008D39B8 /* Cuckoo */; };
 		4358D76E2A5D2F7B00F31AA5 /* RxOptional in Frameworks */ = {isa = PBXBuildFile; productRef = 4358D76D2A5D2F7B00F31AA5 /* RxOptional */; };
 		4D004BB71D272836004DBB19 /* SmartReceiptsFormattableString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D004BB61D272836004DBB19 /* SmartReceiptsFormattableString.swift */; };
@@ -697,13 +705,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0345ED532A8150280001EE35 /* SecurePasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurePasswordField.swift; sourceTree = "<group>"; };
+		0345ED572A8166210001EE35 /* AuthViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewOutput.swift; sourceTree = "<group>"; };
 		03B4AB7427668DC600958B33 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		03B4AB7627668E2000958B33 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
 		03B4AB7827668E3700958B33 /* SubscriptionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDataSource.swift; sourceTree = "<group>"; };
 		03B4AB7A27668E5B00958B33 /* SubscriptionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionRouter.swift; sourceTree = "<group>"; };
 		03B4AB7F2766AA6700958B33 /* PlanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCollectionViewCell.swift; sourceTree = "<group>"; };
+		03DCDDA92A5F12E100AA24F5 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
+		03DCDDAC2A5F27D500AA24F5 /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
 		03DE1EA9276C519D00DB7A37 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		03DE1EAC276C5E7500DB7A37 /* SuccessPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPlanViewController.swift; sourceTree = "<group>"; };
+		03E4C2CE2A1C0071000CCE43 /* AuthViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewScreen.swift; sourceTree = "<group>"; };
+		03E4C2D22A1C0320000CCE43 /* AuthViewReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewReducer.swift; sourceTree = "<group>"; };
 		4D004BB61D272836004DBB19 /* SmartReceiptsFormattableString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartReceiptsFormattableString.swift; sourceTree = "<group>"; };
 		4D29DE68216CEDB900591F7B /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = SharedLocalizable.strings; sourceTree = "<group>"; };
 		4D29DE6B216CEDB900591F7B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = SharedLocalizable.strings; sourceTree = "<group>"; };
@@ -1446,6 +1460,8 @@
 			files = (
 				712E4D672824054A0056F347 /* GoogleAPIClientForREST_Drive in Frameworks */,
 				71DF2146282307D4008A2039 /* Moya in Frameworks */,
+				03E4C2CA2A1B79FC000CCE43 /* ComposableArchitecture in Frameworks */,
+				0330F1D52A62644000180C64 /* AlertToast in Frameworks */,
 				71DF21132822EABB008A2039 /* FirebaseMessaging in Frameworks */,
 				71DF21202822F713008A2039 /* Viperit in Frameworks */,
 				4DF2295619296E170008D359 /* libz.dylib in Frameworks */,
@@ -1527,6 +1543,54 @@
 			path = " Cells";
 			sourceTree = "<group>";
 		};
+		03DCDDA52A5F0CA700AA24F5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				03E4C2CE2A1C0071000CCE43 /* AuthViewScreen.swift */,
+				0345ED532A8150280001EE35 /* SecurePasswordField.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		03DCDDA62A5F0D1000AA24F5 /* Reducer */ = {
+			isa = PBXGroup;
+			children = (
+				03E4C2D22A1C0320000CCE43 /* AuthViewReducer.swift */,
+			);
+			path = Reducer;
+			sourceTree = "<group>";
+		};
+		03DCDDA82A5F12AF00AA24F5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				03DCDDA92A5F12E100AA24F5 /* AuthModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		03DCDDAB2A5F27B800AA24F5 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				03DCDDAC2A5F27D500AA24F5 /* AuthClient.swift */,
+			);
+			path = Client;
+			sourceTree = "<group>";
+		};
+		03DCDDAE2A5F419800AA24F5 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				03DCDDAF2A5F41B600AA24F5 /* Views */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		03DCDDAF2A5F41B600AA24F5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		03DE1EAB276C5D2500DB7A37 /* Success Plan */ = {
 			isa = PBXGroup;
 			children = (
@@ -1536,6 +1600,35 @@
 				F398080527F04B1000BDC207 /* SuccessPlanViewModel.swift */,
 			);
 			path = "Success Plan";
+			sourceTree = "<group>";
+		};
+		03E4C2CB2A1B7A26000CCE43 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				03E4C2CC2A1B7A46000CCE43 /* Modules */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		03E4C2CC2A1B7A46000CCE43 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				03DCDDAE2A5F419800AA24F5 /* Common */,
+				03E4C2CD2A1BEF80000CCE43 /* AuthModule */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		03E4C2CD2A1BEF80000CCE43 /* AuthModule */ = {
+			isa = PBXGroup;
+			children = (
+				03DCDDAB2A5F27B800AA24F5 /* Client */,
+				03DCDDA82A5F12AF00AA24F5 /* Models */,
+				03DCDDA62A5F0D1000AA24F5 /* Reducer */,
+				03DCDDA52A5F0CA700AA24F5 /* Views */,
+				0345ED572A8166210001EE35 /* AuthViewOutput.swift */,
+			);
+			path = AuthModule;
 			sourceTree = "<group>";
 		};
 		4D29DE66216CEDB900591F7B /* uk.lproj */ = {
@@ -2511,6 +2604,7 @@
 		84F4F34918CFCCD000F69A35 /* SmartReceipts */ = {
 			isa = PBXGroup;
 			children = (
+				03E4C2CB2A1B7A26000CCE43 /* SwiftUI */,
 				71AEDDD41EDF7F3300BAC0DD /* Modules */,
 				714901BF1F0598A300772B6F /* Services */,
 				EAF9ADDF1AECF8BF0000AC84 /* Persistence */,
@@ -3212,6 +3306,8 @@
 				712E4D68282408D50056F347 /* GoogleAPIClientForRESTCore */,
 				712E4D6B28240A020056F347 /* GTMAppAuth */,
 				4358D76D2A5D2F7B00F31AA5 /* RxOptional */,
+				03E4C2C92A1B79FC000CCE43 /* ComposableArchitecture */,
+				0330F1D42A62644000180C64 /* AlertToast */,
 			);
 			productName = SmartReceipts;
 			productReference = 84F4F34018CFCCD000F69A35 /* SmartReceipts.app */;
@@ -3314,6 +3410,8 @@
 				712E4D652824054A0056F347 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */,
 				712E4D6A28240A020056F347 /* XCRemoteSwiftPackageReference "GTMAppAuth" */,
 				4358D76C2A5D2F7B00F31AA5 /* XCRemoteSwiftPackageReference "RxOptional" */,
+				03E4C2C82A1B79FC000CCE43 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				0330F1D32A62644000180C64 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = 84F4F34118CFCCD000F69A35 /* Products */;
 			projectDirPath = "";
@@ -3556,6 +3654,7 @@
 				7185AEF61EFC1CC90038ED2A /* ReceiptMoveCopyDisplayData.swift in Sources */,
 				A79FDC711CEA0AB600328DBB /* Global.swift in Sources */,
 				A7F05B981CFB49220079F1AD /* WBReceipt.swift in Sources */,
+				0345ED582A8166210001EE35 /* AuthViewOutput.swift in Sources */,
 				A7F05BD91CFD69640079F1AD /* PricesCollection.swift in Sources */,
 				71DF3A801F509512000CD1D6 /* NotifyMasterSplitViewController.swift in Sources */,
 				719310401EDDC2810065B5AD /* WBImageUtils.m in Sources */,
@@ -3571,6 +3670,7 @@
 				71FA6AC322EE3EEB00FEFB6D /* OrganizationModelsConverter.swift in Sources */,
 				719B1FE11EF603190049BD71 /* ReceiptsView.swift in Sources */,
 				712A84EA1F783E9300D988E7 /* Dictionary+Extensions.swift in Sources */,
+				03DCDDAD2A5F27D500AA24F5 /* AuthClient.swift in Sources */,
 				718ADF6520B33823005FEF4F /* AppMonitorService.swift in Sources */,
 				71ABEBDE22FCC66B00F07596 /* OCRCell.swift in Sources */,
 				7111ADA71F0EC38100DF77ED /* SettingsInteractor.swift in Sources */,
@@ -3593,6 +3693,7 @@
 				EA888A861AFB4FBD00DF2AE6 /* Database+Trips.m in Sources */,
 				A758CE941D01760C00169C7C /* QuickAlertPresenter.swift in Sources */,
 				7190D4531EE88CC40081CB22 /* GenerateReportRouter.swift in Sources */,
+				03DCDDAA2A5F12E100AA24F5 /* AuthModel.swift in Sources */,
 				7167239A1F10540200400BFF /* CustomSegmentedCell.swift in Sources */,
 				EA8D819A1AEA7C3100BAC943 /* ReceiptColumnImagePath.m in Sources */,
 				EA8D81781AEA668100BAC943 /* WBTrip.m in Sources */,
@@ -3778,6 +3879,7 @@
 				719B1FC61EF5E2150049BD71 /* TaxCalculator.swift in Sources */,
 				7165507D218CCAEB007B55FF /* CircleButton.swift in Sources */,
 				EA8D81741AEA668100BAC943 /* WBCategory.m in Sources */,
+				03E4C2CF2A1C0071000CCE43 /* AuthViewScreen.swift in Sources */,
 				719B1FDE1EF603190049BD71 /* ReceiptsInteractor.swift in Sources */,
 				713B7F6D219786ED007220EC /* SubscriptionsResponse.swift in Sources */,
 				EA07BF4D1AF400CA004D17F6 /* Database+Distances.m in Sources */,
@@ -3856,6 +3958,7 @@
 				7111ADAA1F0EC38100DF77ED /* SettingsView.swift in Sources */,
 				716F34511EE040E100D0017A /* EditDistanceRouter.swift in Sources */,
 				EA07BF661AF51854004D17F6 /* FetchedModelAdapter.m in Sources */,
+				03E4C2D32A1C0320000CCE43 /* AuthViewReducer.swift in Sources */,
 				712CE89B232026C600051B5F /* Database+Organizations.swift in Sources */,
 				716138C51FD1CA6700C73FB9 /* PDFPageRenderView.swift in Sources */,
 				71136AD0243899A2003CFC67 /* GraphsViewController.swift in Sources */,
@@ -3941,6 +4044,7 @@
 				718A1C9121A07A0500E010A2 /* UserResponse.swift in Sources */,
 				7190B9161F60427200F6CE7F /* AuthPresenter.swift in Sources */,
 				A7F05BC21CFC42900079F1AD /* ReceiptColumnPrice.swift in Sources */,
+				0345ED542A8150280001EE35 /* SecurePasswordField.swift in Sources */,
 				71E890A322EF6D02002957CC /* AccountAssembly.swift in Sources */,
 				71B4A5E022F38BE2005E5FB2 /* OrganizationCell.swift in Sources */,
 				714042061FF188A70011A0F6 /* ReceiptColumnPriceMinusTax.swift in Sources */,
@@ -4298,7 +4402,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-lxml2";
 				PROVISIONING_PROFILE = "e4fc7d77-3f77-4d36-8a1f-43afe97cc65c";
@@ -4347,7 +4451,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				OTHER_LDFLAGS = "-lxml2";
 				PROVISIONING_PROFILE = "e4fc7d77-3f77-4d36-8a1f-43afe97cc65c";
 				SDKROOT = iphoneos;
@@ -4382,7 +4486,7 @@
 				INFOPLIST_FILE = "SmartReceipts/SmartReceipts-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Smart Receipts";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4441,7 +4545,7 @@
 				INFOPLIST_FILE = "SmartReceipts/SmartReceipts-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Smart Receipts";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4523,7 +4627,7 @@
 					"\"$(CONFIGURATION_TEMP_DIR)/$(PROJECT_NAME).build/DerivedSources\"",
 				);
 				INFOPLIST_FILE = SmartReceiptsTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4585,7 +4689,7 @@
 					"\"$(CONFIGURATION_TEMP_DIR)/$(PROJECT_NAME).build/DerivedSources\"",
 				);
 				INFOPLIST_FILE = SmartReceiptsTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4641,6 +4745,22 @@
 			requirement = {
 				branch = main;
 				kind = branch;
+			};
+		};
+		0330F1D32A62644000180C64 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		03E4C2C82A1B79FC000CCE43 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.0;
 			};
 		};
 		712E4D652824054A0056F347 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */ = {
@@ -4826,6 +4946,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 71DF212D2822FFC3008A2039 /* XCRemoteSwiftPackageReference "fmdb" */;
 			productName = FMDB;
+		};
+		0330F1D42A62644000180C64 /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0330F1D32A62644000180C64 /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
+		03E4C2C92A1B79FC000CCE43 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03E4C2C82A1B79FC000CCE43 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
 		};
 		03EABFAA2A18272B008D39B8 /* Cuckoo */ = {
 			isa = XCSwiftPackageProductDependency;
