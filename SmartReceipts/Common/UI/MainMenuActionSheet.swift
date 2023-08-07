@@ -9,6 +9,8 @@
 import UIKit
 import RxSwift
 import SafariServices
+import SwiftUI
+import ComposableArchitecture
 
 class MainMenuActionSheet: ActionSheet, Disposable {
     private weak var viewController: UIViewController?
@@ -55,10 +57,17 @@ class MainMenuActionSheet: ActionSheet, Disposable {
         #endif
     }
     
-    private func openAuth() -> AuthModuleInterface {
-        let module = AppModules.auth.build()
-        openInNavigationController(module.view.viewController)
-        return module.interface(AuthModuleInterface.self)
+    private func openAuth() -> AuthViewOutput {
+        let authViewOutput = AuthViewOutput()
+        let authView = AuthViewScreen(
+            store: Store(initialState: AuthViewReducer.State()) {
+            AuthViewReducer(authViewOutput: authViewOutput)
+        })
+        let authController = UIHostingController(rootView: authView)
+        authViewOutput.viewController = authController
+        authController.modalPresentationStyle = .fullScreen
+        viewController?.present(authController, animated: true)
+        return authViewOutput
     }
     
     private func openAutoScans() {

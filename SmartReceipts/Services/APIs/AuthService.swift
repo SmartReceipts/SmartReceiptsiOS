@@ -28,6 +28,9 @@ protocol AuthServiceInterface {
     func logout() -> Single<Void>
     func getUser() -> Single<User>
     func saveDevice(token: String) -> Single<Void>
+    
+    func asyncLogin(credentials: Credentials) async throws -> LoginResponse
+    func asyncSignup(credentials: Credentials) async throws -> SignupResponse
 }
 
 class AuthService: AuthServiceInterface {
@@ -118,6 +121,34 @@ class AuthService: AuthServiceInterface {
     
     func saveDevice(token: String) -> Single<Void> {
         return apiProvider.request(.saveDevice(token: token)).map({ _ in  })
+    }
+    
+    func asyncLogin(credentials: Credentials) async throws -> LoginResponse {
+        do {
+            let loginResponse = try await loginRequest(credentials: credentials)
+            save(token: loginResponse.token, email: credentials.email, id: loginResponse.id)
+            return loginResponse
+        } catch {
+            throw error
+        }
+    }
+    
+    private func loginRequest(credentials: Credentials) async throws -> LoginResponse {
+        try await apiProvider.asyncRequest(.login(credentials: credentials))
+    }
+    
+    func asyncSignup(credentials: Credentials) async throws -> SignupResponse {
+        do {
+            let signupResponse = try await signupRequest(credentials: credentials)
+            save(token: signupResponse.token, email: credentials.email, id: signupResponse.id)
+            return signupResponse
+        } catch {
+            throw error
+        }
+    }
+    
+    private func signupRequest(credentials: Credentials) async throws -> SignupResponse {
+        try await apiProvider.asyncRequest(.signup(credentials: credentials))
     }
     
     private func save(token: String, email: String, id: String?) {

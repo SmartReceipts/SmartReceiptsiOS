@@ -38,6 +38,23 @@ class APIProvider<Target: TargetType>: MoyaProvider<Target> {
     public func request(_ token: Target, callbackQueue: DispatchQueue? = nil) -> Single<Response> {
         return rx.request(token, callbackQueue: callbackQueue).filterSuccessfulStatusCodes()
     }
+    
+    public func asyncRequest<T: Decodable>(_ target: Target) async throws -> T {
+        return try await withCheckedThrowingContinuation { continuation in
+            request(target) { result in
+                switch result {
+                case .success(let response):
+                    guard let res = try? JSONDecoder().decode(T.self, from: response.data) else {
+                        continuation.resume(throwing: MoyaError.jsonMapping(response))
+                        return
+                    }
+                    continuation.resume(returning: res)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
 }
 
 class AuthorizationPlugin: PluginType {
