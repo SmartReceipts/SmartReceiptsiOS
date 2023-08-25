@@ -29,11 +29,11 @@ protocol AuthServiceInterface {
     func getUser() -> Single<User>
     func saveDevice(token: String) -> Single<Void>
     
-    func asyncLogin(credentials: Credentials) async throws -> LoginResponse
-    func asyncSignup(credentials: Credentials) async throws -> SignupResponse
+    func login(credentials: Credentials) async throws -> LoginResponse
+    func signup(credentials: Credentials) async throws -> SignupResponse
 }
 
-class AuthService: AuthServiceInterface {
+final class AuthService: AuthServiceInterface {
     private let tokenVar = BehaviorRelay<String>(value: UserDefaults.standard.string(forKey: AUTH_TOKEN_KEY) ?? "")
     private let emailVar = BehaviorRelay<String>(value: UserDefaults.standard.string(forKey: AUTH_EMAIL_KEY) ?? "")
     private let idVar = BehaviorRelay<String>(value: UserDefaults.standard.string(forKey: AUTH_ID_KEY) ?? "")
@@ -123,7 +123,7 @@ class AuthService: AuthServiceInterface {
         return apiProvider.request(.saveDevice(token: token)).map({ _ in  })
     }
     
-    func asyncLogin(credentials: Credentials) async throws -> LoginResponse {
+    func login(credentials: Credentials) async throws -> LoginResponse {
         do {
             let loginResponse = try await loginRequest(credentials: credentials)
             save(token: loginResponse.token, email: credentials.email, id: loginResponse.id)
@@ -137,7 +137,7 @@ class AuthService: AuthServiceInterface {
         try await apiProvider.asyncRequest(.login(credentials: credentials))
     }
     
-    func asyncSignup(credentials: Credentials) async throws -> SignupResponse {
+    func signup(credentials: Credentials) async throws -> SignupResponse {
         do {
             let signupResponse = try await signupRequest(credentials: credentials)
             save(token: signupResponse.token, email: credentials.email, id: signupResponse.id)

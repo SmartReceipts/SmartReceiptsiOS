@@ -16,12 +16,8 @@ struct AuthClient {
 
 extension AuthClient: DependencyKey {
     static var liveValue = AuthClient(
-        login: { credentials in
-            try await AuthService.shared.asyncLogin(credentials: credentials)
-        },
-        signup: { credentials in
-            try await AuthService.shared.asyncSignup(credentials: credentials)
-        }
+        login: { try await AuthService.shared.login(credentials: $0) },
+        signup: { try await AuthService.shared.signup(credentials: $0) }
     )
 }
 
