@@ -34,6 +34,7 @@ struct SecurePasswordField: View {
                 Image(systemName: self.isSecured ? "eye.slash" : "eye")
                     .accentColor(.gray)
             }
+            .padding(.trailing, 5)
         }
     }
 }

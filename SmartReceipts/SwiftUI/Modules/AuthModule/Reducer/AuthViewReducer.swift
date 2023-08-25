@@ -9,6 +9,7 @@
 import ComposableArchitecture
 import Moya
 import RxSwift
+import Toaster
 
 struct AuthViewReducer: ReducerProtocol {
     private let authViewOutput: AuthViewOutput
@@ -18,17 +19,15 @@ struct AuthViewReducer: ReducerProtocol {
         self.authViewOutput = authViewOutput
     }
     
-    
     struct State: Equatable {
         var alert: AlertState<Action>? = nil
         var email: String = ""
         var password: String = ""
         var isLoading: Bool = false
-        var isLoginSuccess: Bool = false
-        var isSignupSuccess: Bool = false
         var loginFieldsHint: String = LocalizedString("login_fields_hint_email")
         var isValidEmail: Bool = false
         var isValidPassword: Bool = false
+        var toast: Toast? = nil
     }
     
     enum Action: Equatable {
@@ -41,8 +40,6 @@ struct AuthViewReducer: ReducerProtocol {
         case didLoginResult
         case didSignupResult
         case isLoadingChanged(Bool)
-        case isLoginSuccessChanged(Bool)
-        case isSignupSuccessChanged(Bool)
     }
     
     func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -73,7 +70,7 @@ struct AuthViewReducer: ReducerProtocol {
             return .task { [email=state.email, password=state.password] in
                 do {
                     let response = try await authClient.login(.init(email, password))
-                    guard response.token != "" else { return .showAlertError("токен пустой") }
+                    guard response.token != "" else { return .showAlertError(LocalizedString("login_failure_toast")) }
                     return .didLoginResult
                 } catch {
                     if let moyaError = error as? MoyaError,
@@ -87,8 +84,8 @@ struct AuthViewReducer: ReducerProtocol {
             }
         case .didLoginResult:
             state.isLoading = false
-            state.isLoginSuccess = true
-            self.authViewOutput.successAuthSubject.onNext(())
+            state.toast = Toast(text: LocalizedString("login_success_toast"))
+            authViewOutput.successAuthSubject.onNext(())
             return .none
         case let .showAlertError(errorMessage):
             state.isLoading = false
@@ -122,20 +119,14 @@ struct AuthViewReducer: ReducerProtocol {
             }
         case .didSignupResult:
             state.isLoading = false
-            state.isSignupSuccess = true
-            self.authViewOutput.successAuthSubject.onNext(())
+            state.toast = Toast(text: LocalizedString("sign_up_success_toast"))
+            authViewOutput.successAuthSubject.onNext(())
             return .none
         case .alertDismissed:
             state.alert = nil
             return .none
         case let .isLoadingChanged(flag):
             state.isLoading = flag
-            return .none
-        case let .isLoginSuccessChanged(flag):
-            state.isLoginSuccess = flag
-            return .none
-        case let .isSignupSuccessChanged(flag):
-            state.isSignupSuccess = flag
             return .none
         }
     }

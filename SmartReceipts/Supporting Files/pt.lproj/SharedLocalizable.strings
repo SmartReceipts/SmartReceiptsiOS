@@ -28,6 +28,8 @@
 
 "menu_main_my_account" = "Minha conta";
 
+"menu_main_auth" = "Autorização";
+
 /* ================ General Strings ================== */
 "add" = "Adicionar";
 
@@ -606,9 +608,9 @@
 
 "sign_up_failure_toast" = "Falha ao registrar-se";
 
-"login_failure_credentials_toast" = "Erro: nome de usuário ou senha incorretos";
+"login_failure_credentials_toast" = "Nome de usuário ou senha incorretos";
 
-"sign_up_failure_account_exists_toast" = "Erro: esse e-mail já existe - Tente conectar-se";
+"sign_up_failure_account_exists_toast" = "Esse e-mail já existe - Tente conectar-se";
 
 "logout_button_text" = "Sair";
 

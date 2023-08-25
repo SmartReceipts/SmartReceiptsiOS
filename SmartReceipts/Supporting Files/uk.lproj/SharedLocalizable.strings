@@ -28,6 +28,8 @@
 
 "menu_main_my_account" = "Мій аккаунт";
 
+"menu_main_auth" = "Авторизація";
+
 /* ================ General Strings ================== */
 "add" = "Додати";
 
@@ -606,9 +608,9 @@
 
 "sign_up_failure_toast" = "Зареєструватися не вдалося";
 
-"login_failure_credentials_toast" = "Помилка: Неправильне ім'я користувача або пароль";
+"login_failure_credentials_toast" = "Неправильне ім'я користувача або пароль";
 
-"sign_up_failure_account_exists_toast" = "Помилка: Ця електронна адреса вже існує. Спробуйте увійти до системи";
+"sign_up_failure_account_exists_toast" = "Ця електронна адреса вже існує. Спробуйте увійти до системи";
 
 "logout_button_text" = "Вийти";
 

@@ -28,6 +28,8 @@
 
 "menu_main_my_account" = "Мой аккаунт";
 
+"menu_main_auth" = "Авторизация";
+
 /* ================ General Strings ================== */
 "add" = "Добавить";
 
@@ -606,9 +608,9 @@
 
 "sign_up_failure_toast" = "Не удалось зарегистрироваться";
 
-"login_failure_credentials_toast" = "Ошибка: Неправильное имя пользователя или пароль";
+"login_failure_credentials_toast" = "Неправильное имя пользователя или пароль";
 
-"sign_up_failure_account_exists_toast" = "Ошибка: Этот адрес уже существует. Попробуйте войти в систему";
+"sign_up_failure_account_exists_toast" = "Этот адрес уже существует. Попробуйте войти в систему";
 
 "logout_button_text" = "Выйти";
 

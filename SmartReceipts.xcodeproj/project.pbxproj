@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		030471BC2A194261000CC95B /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = 030471BB2A194261000CC95B /* FMDB */; };
-		0330F1D52A62644000180C64 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 0330F1D42A62644000180C64 /* AlertToast */; };
+		031523082A987A7C00F6B22B /* HudSUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031523072A987A7C00F6B22B /* HudSUIView.swift */; };
+		0315230A2A98A8AE00F6B22B /* ToastSUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031523092A98A8AE00F6B22B /* ToastSUIView.swift */; };
 		0345ED542A8150280001EE35 /* SecurePasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345ED532A8150280001EE35 /* SecurePasswordField.swift */; };
 		0345ED582A8166210001EE35 /* AuthViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345ED572A8166210001EE35 /* AuthViewOutput.swift */; };
 		03B4AB7527668DC600958B33 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7427668DC600958B33 /* SubscriptionViewController.swift */; };
@@ -705,6 +706,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		031523072A987A7C00F6B22B /* HudSUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudSUIView.swift; sourceTree = "<group>"; };
+		031523092A98A8AE00F6B22B /* ToastSUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastSUIView.swift; sourceTree = "<group>"; };
 		0345ED532A8150280001EE35 /* SecurePasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurePasswordField.swift; sourceTree = "<group>"; };
 		0345ED572A8166210001EE35 /* AuthViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewOutput.swift; sourceTree = "<group>"; };
 		03B4AB7427668DC600958B33 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
@@ -1461,7 +1464,6 @@
 				712E4D672824054A0056F347 /* GoogleAPIClientForREST_Drive in Frameworks */,
 				71DF2146282307D4008A2039 /* Moya in Frameworks */,
 				03E4C2CA2A1B79FC000CCE43 /* ComposableArchitecture in Frameworks */,
-				0330F1D52A62644000180C64 /* AlertToast in Frameworks */,
 				71DF21132822EABB008A2039 /* FirebaseMessaging in Frameworks */,
 				71DF21202822F713008A2039 /* Viperit in Frameworks */,
 				4DF2295619296E170008D359 /* libz.dylib in Frameworks */,
@@ -1548,6 +1550,8 @@
 			children = (
 				03E4C2CE2A1C0071000CCE43 /* AuthViewScreen.swift */,
 				0345ED532A8150280001EE35 /* SecurePasswordField.swift */,
+				031523072A987A7C00F6B22B /* HudSUIView.swift */,
+				031523092A98A8AE00F6B22B /* ToastSUIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3307,7 +3311,6 @@
 				712E4D6B28240A020056F347 /* GTMAppAuth */,
 				4358D76D2A5D2F7B00F31AA5 /* RxOptional */,
 				03E4C2C92A1B79FC000CCE43 /* ComposableArchitecture */,
-				0330F1D42A62644000180C64 /* AlertToast */,
 			);
 			productName = SmartReceipts;
 			productReference = 84F4F34018CFCCD000F69A35 /* SmartReceipts.app */;
@@ -3411,7 +3414,6 @@
 				712E4D6A28240A020056F347 /* XCRemoteSwiftPackageReference "GTMAppAuth" */,
 				4358D76C2A5D2F7B00F31AA5 /* XCRemoteSwiftPackageReference "RxOptional" */,
 				03E4C2C82A1B79FC000CCE43 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
-				0330F1D32A62644000180C64 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = 84F4F34118CFCCD000F69A35 /* Products */;
 			projectDirPath = "";
@@ -3788,6 +3790,7 @@
 				7190D4501EE88CC40081CB22 /* GenerateReportDisplayData.swift in Sources */,
 				71F9989921AC4E4200320256 /* Array+Extensions.swift in Sources */,
 				71B4A5D922F38745005E5FB2 /* Making.swift in Sources */,
+				0315230A2A98A8AE00F6B22B /* ToastSUIView.swift in Sources */,
 				71ACA7CE1F5C58290024903E /* DebugStates.swift in Sources */,
 				EA3C968E1AEBA4F600A2A5F9 /* ReportCSVTable.m in Sources */,
 				A7F05BD31CFD54430079F1AD /* Logger.swift in Sources */,
@@ -3931,6 +3934,7 @@
 				71B488C21EF42AF7008872E2 /* NoTripsViewController.swift in Sources */,
 				EA07BF531AF4CD26004D17F6 /* Database+PaymentMethods.m in Sources */,
 				716138C11FD1BD0500C73FB9 /* PDFImageView.swift in Sources */,
+				031523082A987A7C00F6B22B /* HudSUIView.swift in Sources */,
 				570515A31E02EB5500BB8FE4 /* Event+Categories.swift in Sources */,
 				7170DEEB23DB6BD100BF7961 /* FetchedTableViewDataSource.swift in Sources */,
 				714042081FF18A230011A0F6 /* ReceiptColumnExchangedPriceMinusTax.swift in Sources */,
@@ -4739,28 +4743,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		4358D76C2A5D2F7B00F31AA5 /* XCRemoteSwiftPackageReference "RxOptional" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RxSwiftCommunity/RxOptional";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-		0330F1D32A62644000180C64 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elai950/AlertToast.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		03E4C2C82A1B79FC000CCE43 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.9.0;
+			};
+		};
+		4358D76C2A5D2F7B00F31AA5 /* XCRemoteSwiftPackageReference "RxOptional" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxOptional";
+			requirement = {
+				branch = main;
+				kind = branch;
 			};
 		};
 		712E4D652824054A0056F347 /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */ = {
@@ -4946,11 +4942,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 71DF212D2822FFC3008A2039 /* XCRemoteSwiftPackageReference "fmdb" */;
 			productName = FMDB;
-		};
-		0330F1D42A62644000180C64 /* AlertToast */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0330F1D32A62644000180C64 /* XCRemoteSwiftPackageReference "AlertToast" */;
-			productName = AlertToast;
 		};
 		03E4C2C92A1B79FC000CCE43 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;

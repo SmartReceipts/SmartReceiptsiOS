@@ -28,6 +28,8 @@
 
 "menu_main_my_account" = "Mein Konto";
 
+"menu_main_auth" = "Genehmigung";
+
 /* ================ General Strings ================== */
 "add" = "Hinzufügen";
 
@@ -606,9 +608,9 @@
 
 "sign_up_failure_toast" = "Anmeldung gescheitert";
 
-"login_failure_credentials_toast" = "Fehler: Falscher Benutzername oder Passwort";
+"login_failure_credentials_toast" = "Falscher Benutzername oder Passwort";
 
-"sign_up_failure_account_exists_toast" = "Fehler: Diese E-Mail ist bereits vorhanden - Versuchen Sie einzuloggen";
+"sign_up_failure_account_exists_toast" = "Diese E-Mail ist bereits vorhanden - Versuchen Sie einzuloggen";
 
 "logout_button_text" = "Ausloggen";
 

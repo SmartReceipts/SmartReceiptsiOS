@@ -8,7 +8,7 @@
 
 import ComposableArchitecture
 import SwiftUI
-import AlertToast
+import Toaster
 
 struct AuthViewScreen: View {
     var store: StoreOf<AuthViewReducer>
@@ -34,6 +34,7 @@ struct AuthViewScreen: View {
                             send: AuthViewReducer.Action.usernameChanged
                         )
                     )
+                    .font(.system(size: 14))
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     
@@ -44,6 +45,7 @@ struct AuthViewScreen: View {
                             send: AuthViewReducer.Action.passwordChanged
                         )
                     )
+                    .font(.system(size: 14))
                     
                     HStack {
                         Button {
@@ -55,7 +57,7 @@ struct AuthViewScreen: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, minHeight: 41)
                         .background(Color(UIColor.srViolet))
-                        .clipShape(Capsule())
+                        .cornerRadius(5)
                         
                         Button {
                             viewStore.send(.signButtonTapped)
@@ -66,56 +68,36 @@ struct AuthViewScreen: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity, minHeight: 41)
                         .background(Color(UIColor.srViolet))
-                        .clipShape(Capsule())
+                        .cornerRadius(5)
                     }
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, 16)
                     
                     Spacer()
                 }
-                .toast(
-                    isPresenting: viewStore.binding(
-                        get: \.isLoading,
-                        send: AuthViewReducer.Action.isLoadingChanged
-                    ),
-                    alert: {
-                        AlertToast(displayMode: .hud, type: .loading)
-                    })
-                .toast(
-                    isPresenting: viewStore.binding(
-                        get: \.isLoginSuccess,
-                        send: AuthViewReducer.Action.isLoginSuccessChanged
-                    ),
-                    duration: 3,
-                    alert: {
-                        AlertToast(
-                            displayMode: .banner(.pop),
-                            type: .complete(.green),
-                            title: LocalizedString("login_success_toast")
+                .overlay {
+                    if viewStore.isLoading {
+                        HudSUIView(
+                            isLoading: viewStore.binding(
+                                get: \.isLoading,
+                                send: AuthViewReducer.Action.isLoadingChanged
+                            )
                         )
+                        .frame(width: 58, height: 87)
                     }
-                )
-                .toast(
-                    isPresenting: viewStore.binding(
-                        get: \.isSignupSuccess,
-                        send: AuthViewReducer.Action.isSignupSuccessChanged
-                    ),
-                    duration: 3,
-                    alert: {
-                        AlertToast(
-                            displayMode: .banner(.pop),
-                            type: .complete(.green),
-                            title: LocalizedString("sign_up_success_toast")
-                        )
+                }
+                .overlay {
+                    if let toast = viewStore.toast {
+                        ToastSUIView(toast: toast)
                     }
-                )
+                }
                 .alert(
                     self.store.scope(state: \.alert, action: { $0 }),
                     dismiss: .alertDismissed
                 )
                 .padding([.top, .horizontal], 24)
                 .textFieldStyle(.roundedBorder)
-                .navigationBarTitle("Auth", displayMode: .inline)
+                .navigationBarTitle(LocalizedString("menu_main_auth"), displayMode: .inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
