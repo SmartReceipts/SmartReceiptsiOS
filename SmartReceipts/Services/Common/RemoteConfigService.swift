@@ -12,7 +12,7 @@ import Firebase
 import StoreKit
 
 class RemoteConfigService {
-    private(set) var subscriptionsEnabled: Bool = false
+    private(set) var subscriptionsEnabled: Bool = true
     private let remoteConfig = RemoteConfig.remoteConfig()
     
     init() {

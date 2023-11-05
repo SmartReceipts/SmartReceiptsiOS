@@ -15,7 +15,7 @@ class FeatureFlags {
     static var useProdEndpoints = Feature(true)
     static var driveAppDataFolder = Feature(true)
     static var graphs = Feature(true)
-    static var newSubscription = Feature(false)
+    static var newSubscription = Feature(true)
 }
 
 class Feature {
