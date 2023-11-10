@@ -36,7 +36,7 @@ extension Observable {
     }
     
     func delayEach(_ interval: RxTimeInterval, scheduler: SchedulerType) -> Observable<Element> {
-        return RxSwift.Observable.zip(self, Observable<Int>.interval(interval, scheduler: scheduler)).map({ $0.0 })
+        self.concatMap { Observable.empty().delay(interval, scheduler: scheduler).startWith($0) }
     }
 }
 
