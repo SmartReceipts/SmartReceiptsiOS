@@ -24,6 +24,7 @@ final class SubscriptionViewModel {
         case viewDidLoad
         case didSelect(PlanModel)
         case loginTapped
+        case openSubscriptions
     }
     
     enum LogginState {
@@ -63,22 +64,15 @@ final class SubscriptionViewModel {
                 updatePlanSectionItems()
                 return
             }
-            openLogin()
         case .didSelect(let model):
-            isPurchasedRelay
-                .asObservable()
-                .subscribe(onNext: { [weak self] isPurchased in
-                    guard let self = self else { return }
-                    if !isPurchased {
-                        self.purchase(productId: model.id)
-                        AnalyticsManager.sharedManager.record(
-                            event: Event.subscriptionTapped(productId: model.id)
-                        )
-                    }
-                })
-                .disposed(by: bag)
+            purchase(productId: model.id)
+            AnalyticsManager.sharedManager.record(
+                event: Event.subscriptionTapped(productId: model.id)
+            )
         case .loginTapped:
             openLogin()
+        case .openSubscriptions:
+            environment.router.openSubscriptions()
         }
     }
     
@@ -99,40 +93,48 @@ final class SubscriptionViewModel {
         let hud = PendingHUDView.showFullScreen()
         state.update { $0.isLoggin = .loading }
         getPlansWithPurchases()
-            .map { $0.sorted { plan, _ in plan.kind == .standard } }
-            .subscribe(onSuccess: { [weak self] plans in
+            .map { $0.sorted { plan, _ in plan.kind == .premium } }
+            .debug("UPDATE PLAN SECTION ITEMS")
+            .subscribe(with: self, onSuccess: { viewModel, plans in
                 hud.hide()
-                guard let self = self else { return }
-                self.state.update { $0.isLoggin = .auth }
-                self.state.update { $0.plans = plans }
-                plans.forEach { plan in
-                    if plan.isPurchased {
-                        self.isPurchasedRelay.accept(true)
-                    }
-                }
-            }, onFailure: { error in
+                viewModel.state.update { $0.isLoggin = .auth }
+                viewModel.state.update { $0.plans = plans }
+            }, onFailure: { viewModel, error in
                 hud.hide()
                 Logger.error(error.localizedDescription)
-            }).disposed(by: bag)
+                viewModel.environment.router.handlerError(
+                    errorMessage: error.localizedDescription,
+                    retryAction: { viewModel.updatePlanSectionItems() }
+                )
+            })
+            .disposed(by: bag)
     }
     
     private func purchase(productId: String) {
         let hud = PendingHUDView.showFullScreen()
         environment.purchaseService.purchase(prodcutID: productId)
-            .subscribe(onNext: { [weak self] purchase in
+            .subscribe(with: self, onNext: { viewModel, purchase in
                 hud.hide()
-                guard let self = self else { return }
-                self.environment.router.openSuccessPage(updateState: self.updatePlanSectionItems)
-                self.state.update { $0.needUpdatePlansAfterPurchased = true }
-                Logger.debug("Successuful payment: \(purchase.productId)")
-                AnalyticsManager.sharedManager.record(
-                    event: Event.subscriptionPurchaseSuccess(productId: purchase.productId)
-                )
-            }, onError: { error in
+                viewModel.environment.purchaseService.markAppStoreInteracted()
+                viewModel.environment.purchaseService.resetCache()
+            }, onError: { viewModel, error in
                 hud.hide()
                 Logger.warning("Failed to payment: \(error.localizedDescription)")
+                viewModel.environment.router.handlerError(
+                    errorMessage: error.localizedDescription,
+                    retryAction: { viewModel.purchase(productId: productId) }
+                )
                 AnalyticsManager.sharedManager.record(event: Event.subscriptionPurchaseFailed())
-            }).disposed(by: bag)
+            }, onCompleted: { viewModel in
+                hud.hide()
+                viewModel.environment.router.openSuccessPage(updateState: viewModel.updatePlanSectionItems)
+                viewModel.state.update { $0.needUpdatePlansAfterPurchased = true }
+                Logger.debug("Successuful payment: \(productId)")
+                AnalyticsManager.sharedManager.record(
+                    event: Event.subscriptionPurchaseSuccess(productId: productId)
+                )
+            })
+            .disposed(by: bag)
     }
 }
 
@@ -162,8 +164,8 @@ extension SubscriptionViewModel {
         return environment.purchaseService.requestMobilePurchasesV2(receiptString: receiptString)
             .map({ purchases -> [PlanModel] in
                 let sortedPurchases = purchases.sorted(by: { $0.purchaseTime < $1.purchaseTime })
-                let standardPurchase = sortedPurchases.first(where: { $0.productId == PRODUCT_STANDARD_SUB })
-                let premiumPurchase = sortedPurchases.first(where: { $0.productId == PRODUCT_PREMIUM_SUB })
+                let standardPurchase = sortedPurchases.last(where: { $0.productId == PRODUCT_STANDARD_SUB })
+                let premiumPurchase = sortedPurchases.last(where: { $0.productId == PRODUCT_PREMIUM_SUB })
                 var plansModel = [PlanModel]()
                 
                 plansModel.append(PlanModel(

@@ -26,7 +26,7 @@ enum SmartReceiptsAPI {
 
 extension SmartReceiptsAPI: TargetType {
     var baseURL: URL {
-        let prefix = FeatureFlags.useProdEndpoints.isEnabled ? "www" : "beta"
+        let prefix = FeatureFlags.useProdEndpoints.isEnabled ? "www" : "staging"
         return URL(string: "https://\(prefix).smartreceipts.co/api")!
     }
 

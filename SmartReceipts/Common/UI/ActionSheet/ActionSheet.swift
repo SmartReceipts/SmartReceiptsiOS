@@ -92,7 +92,7 @@ class ActionSheetViewController: UIViewController, Storyboardable, Containerable
 
 class ActionButtonView: UIButton {
     
-    convenience init(title: String, image: UIImage? = nil, style: Style) {
+    convenience init(title: String, image: UIImage? = nil, style: Style, isEnabledGradient: Bool = false) {
         self.init(type: .system)
         setImage(image, for: .normal)
         tintColor = style.color
@@ -100,7 +100,7 @@ class ActionButtonView: UIButton {
         
         titleLabel?.font = .regular16
         
-        backgroundColor = .srBGR
+        backgroundColor = style.backgroundColor
         layer.cornerRadius = 12
         
         heightAnchor.constraint(equalToConstant: Constants.buttonHeight).isActive = true
@@ -124,12 +124,20 @@ class ActionButtonView: UIButton {
     }
     
     enum Style {
-        case normal, destructive
+        case normal, destructive, violet
         
         var color: UIColor {
             switch self {
             case .normal: return .srViolet2
             case .destructive: return .red
+            case .violet: return .white
+            }
+        }
+        
+        var backgroundColor: UIColor {
+            switch self {
+            case .normal, .destructive: return .srBGR
+            case .violet: return .srViolet
             }
         }
     }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,7 @@
 		03B4AB7927668E3700958B33 /* SubscriptionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7827668E3700958B33 /* SubscriptionDataSource.swift */; };
 		03B4AB7B27668E5B00958B33 /* SubscriptionRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7A27668E5B00958B33 /* SubscriptionRouter.swift */; };
 		03B4AB802766AA6700958B33 /* PlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7F2766AA6700958B33 /* PlanCollectionViewCell.swift */; };
+		03CB1AA12B1E3E380051812E /* AuthButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CB1AA02B1E3E370051812E /* AuthButtonStyle.swift */; };
 		03DCDDAA2A5F12E100AA24F5 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DCDDA92A5F12E100AA24F5 /* AuthModel.swift */; };
 		03DCDDAD2A5F27D500AA24F5 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DCDDAC2A5F27D500AA24F5 /* AuthClient.swift */; };
 		03DE1EAA276C519D00DB7A37 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DE1EA9276C519D00DB7A37 /* UILabel+Extensions.swift */; };
@@ -715,6 +716,7 @@
 		03B4AB7827668E3700958B33 /* SubscriptionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDataSource.swift; sourceTree = "<group>"; };
 		03B4AB7A27668E5B00958B33 /* SubscriptionRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionRouter.swift; sourceTree = "<group>"; };
 		03B4AB7F2766AA6700958B33 /* PlanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanCollectionViewCell.swift; sourceTree = "<group>"; };
+		03CB1AA02B1E3E370051812E /* AuthButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButtonStyle.swift; sourceTree = "<group>"; };
 		03DCDDA92A5F12E100AA24F5 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		03DCDDAC2A5F27D500AA24F5 /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
 		03DE1EA9276C519D00DB7A37 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
@@ -1552,6 +1554,7 @@
 				0345ED532A8150280001EE35 /* SecurePasswordField.swift */,
 				031523072A987A7C00F6B22B /* HudSUIView.swift */,
 				031523092A98A8AE00F6B22B /* ToastSUIView.swift */,
+				03CB1AA02B1E3E370051812E /* AuthButtonStyle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3676,6 +3679,7 @@
 				718ADF6520B33823005FEF4F /* AppMonitorService.swift in Sources */,
 				71ABEBDE22FCC66B00F07596 /* OCRCell.swift in Sources */,
 				7111ADA71F0EC38100DF77ED /* SettingsInteractor.swift in Sources */,
+				03CB1AA12B1E3E380051812E /* AuthButtonStyle.swift in Sources */,
 				EA8D81B51AEA7CD200BAC943 /* ReceiptColumnReceiptIndex.m in Sources */,
 				71BC45511F9FB38C003A5BD5 /* LocalScansTracker.swift in Sources */,
 				A7F05BAA1CFC07FD0079F1AD /* NumberFormatter+Extansions.swift in Sources */,

@@ -286,6 +286,14 @@ final class SubscriptionViewController: UIViewController {
                 if flag { self.collectionView.reloadData() }
             })
             .disposed(by: bag)
+        cancelPlanLabel
+            .rx
+            .tapGesture()
+            .when(.recognized)
+            .subscribe(with: self, onNext: { controller, _ in
+                controller.outputReplay.accept(.openSubscriptions)
+            })
+            .disposed(by: bag)
     }
     
     private func configurePurchaseViewState(state: PurchaseViewState) {
