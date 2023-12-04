@@ -102,7 +102,6 @@ final class PlanCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupLayout() {
-        
         stackView.snp.makeConstraints { make in
             make.leading.equalTo(contentView.snp.leading).offset(24)
             make.top.equalTo(contentView.snp.top).offset(24)
@@ -143,10 +142,12 @@ final class PlanCollectionViewCell: UICollectionViewCell {
         priceLabel.backgroundColor = UIColor.init(red: 244/255, green: 244/255, blue: 244/255, alpha: 1)
         priceLabel.text = LocalizedString("subscription_your_plan")
         priceLabel.textColor = .srViolet
-        priceLabel.font = .bold22
+        priceLabel.font = .bold20
     }
     
     private func updateStateCellNotPurchased() {
+        priceLabel.backgroundColor = .srViolet
+        priceLabel.textColor = .white
         priceLabel.setAttributedTitle(
             bigText: model.price,
             smallText: LocalizedString("subscription_price")

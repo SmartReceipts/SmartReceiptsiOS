@@ -25,11 +25,16 @@ class MainMenuActionSheet: ActionSheet, Disposable {
         bag.insert(self)
         
         if remoteConfig.subscriptionsEnabled {
-            addAction(title: LocalizedString("menu_main_subscriptions"), image: #imageLiteral(resourceName: "subscriptions"))
-                .debug()
-                .subscribe(onNext: { [weak self] in
-                    self?.openSubscriptions()
-                }).disposed(by: bag)
+            addAction(
+                title: LocalizedString("menu_main_subscriptions"),
+                image: #imageLiteral(resourceName: "subscriptions"),
+                style: .violet
+            )
+            .debug()
+            .subscribe(onNext: { [weak self] in
+                self?.openSubscriptions()
+            })
+            .disposed(by: bag)
         }
         
         addAction(title: LocalizedString("menu_main_settings"), image: #imageLiteral(resourceName: "settings"))
@@ -65,7 +70,6 @@ class MainMenuActionSheet: ActionSheet, Disposable {
         })
         let authController = UIHostingController(rootView: authView)
         authViewOutput.viewController = authController
-        authController.modalPresentationStyle = .fullScreen
         viewController?.present(authController, animated: true)
         return authViewOutput
     }

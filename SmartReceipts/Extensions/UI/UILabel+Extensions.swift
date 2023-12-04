@@ -12,7 +12,7 @@ extension UILabel {
     
     func setAttributedTitle(bigText: String, smallText: String) {
         let fullText = "\(bigText)\n\(smallText)"
-        let fontBig = UIFont.systemFont(ofSize: 22, weight: .bold)
+        let fontBig = UIFont.systemFont(ofSize: 20, weight: .bold)
         let fontSmall = UIFont.systemFont(ofSize: 12, weight: .regular)
         let attributedString = NSMutableAttributedString(string: fullText, attributes: nil)
         

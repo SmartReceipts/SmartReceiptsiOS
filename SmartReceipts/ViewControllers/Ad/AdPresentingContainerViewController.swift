@@ -108,14 +108,14 @@ class AdPresentingContainerViewController: UIViewController {
 
 extension AdPresentingContainerViewController: GADBannerViewDelegate {
     
-    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
         bannerView.adSize = getAdSize()
         adContainerHeight.constant = BANNER_HEIGHT
         view.layoutSubviewsAnimated()
         bannerView.isHidden = false
     }
     
-    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         bannerView.isHidden = true
         upsellBannerView.isHidden = false
         

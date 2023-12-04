@@ -172,6 +172,7 @@ class PurchaseService {
                 case .success(let purchase):
                     Logger.debug("Purchase Success: \(purchase.productId)")
                     observer.onNext(purchase)
+                    observer.onCompleted()
                 case .deferred(let purchase):
                     Logger.debug("Purchase Deferred: \(purchase.productId)")
                     observer.onError(PurchaseError.deferredPurchase)
@@ -179,7 +180,7 @@ class PurchaseService {
                     switch error.code {
                     case .unknown: Logger.error("Unknown error. Please contact support")
                     case .clientInvalid: Logger.error("Not allowed to make the payment")
-                    case .paymentCancelled: break
+                    case .paymentCancelled: Logger.error("User cancelled the request")
                     case .paymentInvalid: Logger.error("The purchase identifier was invalid")
                     case .paymentNotAllowed: Logger.error("The device is not allowed to make the payment")
                     case .storeProductNotAvailable: Logger.error("The product is not available in the current storefront")
@@ -233,7 +234,7 @@ class PurchaseService {
     }
     
     func completeTransactions() {
-        SwiftyStoreKit.completeTransactions(atomically: false) { purchases in
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
                 case .purchased, .restored:

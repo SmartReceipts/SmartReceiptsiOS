@@ -32,6 +32,9 @@ struct SecurePasswordField: View {
                 isSecured.toggle()
             }) {
                 Image(systemName: self.isSecured ? "eye.slash" : "eye")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
                     .accentColor(.gray)
             }
             .padding(.trailing, 5)
