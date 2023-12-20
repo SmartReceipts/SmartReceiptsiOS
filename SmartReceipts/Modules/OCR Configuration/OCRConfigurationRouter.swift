@@ -10,6 +10,11 @@ import Foundation
 import Viperit
 
 class OCRConfigurationRouter: Router {
+    func openSubscriptionPage() {
+        let vc = SubscriptionBuilder.build() as! SubscriptionViewController
+        vc.modalPresentationStyle = .overFullScreen
+        _view.viewController.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: - VIPER COMPONENTS API (Auto-generated code)

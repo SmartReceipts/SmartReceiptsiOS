@@ -225,6 +225,8 @@
 
 "ocr_configuration_information_line3" = "Para tentar o OCR, todos os novos usuários recebem 2 varreduras gratuitas! Lembre-se de que o OCR é um recurso opcional e pode ser desativado a qualquer momento.";
 
+"ocr_open_subcription_button_text" = "Selecione a assinatura para experimentar mais";
+
 /* ================ Categories ================== */
 "category_null" = "<Categoria>";
 

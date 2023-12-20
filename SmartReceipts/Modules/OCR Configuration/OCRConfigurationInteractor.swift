@@ -15,34 +15,15 @@ import Toaster
 
 class OCRConfigurationInteractor: Interactor {
     private let bag = DisposeBag()
-    private var purchaseService: PurchaseService!
     private var authService: AuthService!
     
     required init() {
-        purchaseService = PurchaseService()
         authService = .shared
     }
     
-    init(purchaseService: PurchaseService, authService: AuthService = .shared) {
+    init(authService: AuthService = .shared) {
         super.init()
-        self.purchaseService = purchaseService
         self.authService = authService
-    }
-    
-    func requestProducts() -> Observable<SKProduct> {
-        return purchaseService.requestProducts()
-    }
-    
-    func purchase(product: String) -> Observable<PurchaseDetails> {
-        let hud = PendingHUDView.showFullScreen()
-        return purchaseService.purchase(prodcutID: product)
-                .do(onNext: { _ in
-                    hud.hide()
-                    let text = LocalizedString("purchase_succeeded")
-                    Toast.show(text)
-                }, onError: { error in
-                    hud.hide()
-                })
     }
     
     var logout: AnyObserver<Void> {

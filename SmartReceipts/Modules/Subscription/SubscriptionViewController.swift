@@ -177,11 +177,7 @@ final class SubscriptionViewController: UIViewController {
         commonInit()
         outputReplay.accept(.viewDidLoad)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
+
     private func commonInit() {
         setupViews()
         setupLayout()
@@ -198,7 +194,7 @@ final class SubscriptionViewController: UIViewController {
     
     private func setupLayout() {
         choosePlanLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalToSuperview().offset(68)
         }
         
@@ -239,7 +235,7 @@ final class SubscriptionViewController: UIViewController {
         cancelPlanLabel.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(40)
             make.trailing.equalToSuperview().offset(-40)
-            make.bottom.equalToSuperview().offset(-15)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
         
         authPlanLabel.snp.makeConstraints { make in
