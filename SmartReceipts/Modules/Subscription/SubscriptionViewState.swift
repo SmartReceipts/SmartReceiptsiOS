@@ -80,7 +80,6 @@ extension SubscriptionViewController {
                 return .white
             case .auth:
                 return .srViolet
-
             }
         }
         

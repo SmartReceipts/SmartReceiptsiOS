@@ -12,13 +12,7 @@ import RxSwift
 import RxCocoa
 
 //MARK: - Public Interface Protocol
-protocol OCRConfigurationViewInterface {
-    var buy10ocr: Observable<Void> { get }
-    var buy50ocr: Observable<Void> { get }
-    
-    var OCR10Price: AnyObserver<String> { get }
-    var OCR50Price: AnyObserver<String> { get }
-    
+protocol OCRConfigurationViewInterface {    
     func updateScansCount()
     
     var logoutTap: Observable<Void> { get }
@@ -32,27 +26,23 @@ final class OCRConfigurationView: UserInterface {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var autoScansLabel: UILabel!
     @IBOutlet private weak var saveImagesLabel: UILabel!
-    @IBOutlet private weak var availablePurchases: UILabel!
     @IBOutlet private weak var closeButton: UIBarButtonItem!
-    @IBOutlet fileprivate weak var scans10button: ScansPurchaseButton!
-    @IBOutlet fileprivate weak var scans50button: ScansPurchaseButton!
     
     @IBOutlet fileprivate weak var autoScans: UISwitch!
     @IBOutlet fileprivate weak var allowSaveImages: UISwitch!
     @IBOutlet fileprivate weak var logoutButton: UIBarButtonItem!
+    @IBOutlet weak var openSubscriptionButton: UIButton!
     
     private let bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         localizeLabels()
-    
-        scans10button.setScans(count: 10)
-        scans50button.setScans(count: 50)
         
         autoScans.isOn = WBPreferences.automaticScansEnabled()
         allowSaveImages.isOn = WBPreferences.allowSaveImageForAccuracy()
         
+        setupView()
         configureRx()
     }
     
@@ -62,6 +52,11 @@ final class OCRConfigurationView: UserInterface {
             .subscribe(onSuccess: { [weak self] in
                 self?.setTitle($0, subtitle: AuthService.shared.email)
             }).disposed(by: bag)
+    }
+    
+    private func setupView() {
+        openSubscriptionButton.layer.cornerRadius = 8
+        openSubscriptionButton.clipsToBounds = true
     }
     
     private func configureRx() {
@@ -84,11 +79,16 @@ final class OCRConfigurationView: UserInterface {
             .subscribe(onNext: { [unowned self] in
                 self.dismiss(animated: true, completion: nil)
             }).disposed(by: bag)
+        
+        openSubscriptionButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.presenter.openSubscriptionPage()
+            })
+            .disposed(by: bag)
     }
     
     private func localizeLabels() {
         titleLabel.text = LocalizedString("ocr_configuration_welcome")
-        availablePurchases.text = LocalizedString("ocr_configuration_available_purchases")
         autoScansLabel.text = LocalizedString("ocr_is_enabled")
         saveImagesLabel.text = LocalizedString("ocr_save_scans_to_improve_results")
         logoutButton.title = LocalizedString("logout_button_text")
@@ -100,17 +100,12 @@ final class OCRConfigurationView: UserInterface {
                                           LocalizedString("ocr_configuration_information_line2"),
                                           LocalizedString("ocr_configuration_information_line3"))
         descriptionLabel.text = localizedDescription
+        openSubscriptionButton.setTitle(LocalizedString("ocr_open_subcription_button_text"), for: .normal)
     }
 }
 
 //MARK: - Public interface
 extension OCRConfigurationView: OCRConfigurationViewInterface {
-    var buy10ocr: Observable<Void> { return scans10button.rx.tap.asObservable() }
-    var buy50ocr: Observable<Void> { return scans50button.rx.tap.asObservable() }
-    
-    var OCR10Price: AnyObserver<String> { return scans10button.rx.price }
-    var OCR50Price: AnyObserver<String> { return scans50button.rx.price }
-    
     var successLogoutHandler: AnyObserver<Void> {
         return AnyObserver<Void>(eventHandler: { [weak self] event in
             switch event {

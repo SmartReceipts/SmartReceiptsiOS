@@ -28,6 +28,7 @@ final class PlanCollectionViewCell: UICollectionViewCell {
         let label = UILabel(frame: .zero)
         label.font = .bold28
         label.textColor = .srViolet
+        label.lineBreakMode = .byTruncatingTail
         
         return label
     }()
@@ -36,6 +37,8 @@ final class PlanCollectionViewCell: UICollectionViewCell {
         let label = UILabel(frame: .zero)
         label.font = .regular14
         label.textColor = .srViolet
+        label.numberOfLines = 2
+        label.lineBreakMode = .byTruncatingTail
 
         return label
     }()
@@ -66,6 +69,7 @@ final class PlanCollectionViewCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .center
+        label.textInsets 
         
         label.clipsToBounds = true
         label.layer.cornerRadius = 12
@@ -103,24 +107,23 @@ final class PlanCollectionViewCell: UICollectionViewCell {
     
     private func setupLayout() {
         stackView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView.snp.leading).offset(24)
-            make.top.equalTo(contentView.snp.top).offset(24)
-            make.bottom.equalTo(contentView.snp.bottom).offset(-22)
-            make.trailing.equalTo(premiumImageView.snp.leading).offset(-6)
+            make.leading.equalToSuperview().offset(24)
+            make.top.equalToSuperview().offset(24)
+            make.bottom.equalToSuperview().offset(-22)
         }
         
         premiumImageView.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(29)
-            make.leading.equalTo(stackView.snp.trailing).offset(6)
+            make.top.equalToSuperview().offset(29)
+            make.leading.equalTo(nameLabel.snp.trailing).offset(6)
             make.width.equalTo(24)
             make.height.equalTo(24)
         }
         
         priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(25)
-            make.leading.equalTo(premiumImageView.snp.trailing).offset(22)
-            make.trailing.equalTo(contentView.snp.trailing).offset(-24)
-            make.bottom.equalTo(contentView.snp.bottom).offset(-26)
+            make.top.equalToSuperview().offset(25)
+            make.leading.equalTo(stackView.snp.trailing).offset(56)
+            make.trailing.equalToSuperview().offset(-24)
+            make.bottom.equalToSuperview().offset(-26)
         }
     }
     

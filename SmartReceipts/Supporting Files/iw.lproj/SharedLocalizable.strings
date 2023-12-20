@@ -225,6 +225,8 @@
 
 "ocr_configuration_information_line3" = "To try OCR, all new users get 2 free scans! Please remember that OCR is an optional feature and can be disabled at any time.";
 
+"ocr_open_subcription_button_text" = "בחר מנוי כדי לנסות יותר";
+
 /* ================ Categories ================== */
 "category_null" = "<קטגוריה>";
 

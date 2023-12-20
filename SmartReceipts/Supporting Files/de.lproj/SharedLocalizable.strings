@@ -225,6 +225,8 @@
 
 "ocr_configuration_information_line3" = "Um OCR auzuprobieren, erhalten alle neuen Benutzer 2 kostenlose Scans! Bitte beachten Sie, dass OCR eine optionale Funktion ist und jederzeit deaktiviert werden kann.";
 
+"ocr_open_subcription_button_text" = "Wählen Sie ein Abonnement aus, um mehr auszuprobieren";
+
 /* ================ Categories ================== */
 "category_null" = "<Kategorie>";
 

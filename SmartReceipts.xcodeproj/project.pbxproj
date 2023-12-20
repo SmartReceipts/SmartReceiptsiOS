@@ -1583,21 +1583,6 @@
 			path = Client;
 			sourceTree = "<group>";
 		};
-		03DCDDAE2A5F419800AA24F5 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				03DCDDAF2A5F41B600AA24F5 /* Views */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		03DCDDAF2A5F41B600AA24F5 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		03DE1EAB276C5D2500DB7A37 /* Success Plan */ = {
 			isa = PBXGroup;
 			children = (
@@ -1620,7 +1605,6 @@
 		03E4C2CC2A1B7A46000CCE43 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				03DCDDAE2A5F419800AA24F5 /* Common */,
 				03E4C2CD2A1BEF80000CCE43 /* AuthModule */,
 			);
 			path = Modules;

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5d-L5-IgL">
-                                <rect key="frame" x="0.0" y="44" width="320" height="596"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="576"/>
                                 <subviews>
                                     <view contentMode="scaleAspectFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X1N-pM-HX2">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="599"/>
@@ -70,138 +71,45 @@ To try OCR, all new users get 2 free scans!</string>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tNz-Z1-pxa" customClass="ScansPurchaseButton" customModule="SmartReceipts" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="515" width="288" height="44"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" text="50 OCR Scans (Smart Receipts)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1F-kt-0p7">
-                                                        <rect key="frame" x="8" y="3" width="237" height="20"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchase 10 Automatic Scans of Receipts (OCR)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="YXt-nR-z0f">
-                                                        <rect key="frame" x="8" y="26" width="272" height="16"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBP-fg-b45">
-                                                        <rect key="frame" x="253" y="3" width="27" height="20"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="bLy-2t-sER">
-                                                        <rect key="frame" x="252" y="3" width="20" height="20"/>
-                                                    </activityIndicatorView>
-                                                </subviews>
-                                                <color key="backgroundColor" red="0.18823529410000001" green="0.1058823529" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <constraints>
-                                                    <constraint firstItem="d1F-kt-0p7" firstAttribute="top" secondItem="tNz-Z1-pxa" secondAttribute="top" constant="3" id="541-XA-3I7"/>
-                                                    <constraint firstAttribute="trailing" secondItem="eBP-fg-b45" secondAttribute="trailing" constant="8" id="6hU-Mu-PnY"/>
-                                                    <constraint firstAttribute="trailing" secondItem="bLy-2t-sER" secondAttribute="trailing" constant="16" id="EaN-Sa-7R3"/>
-                                                    <constraint firstItem="YXt-nR-z0f" firstAttribute="top" secondItem="d1F-kt-0p7" secondAttribute="bottom" constant="3" id="TQs-NV-3e7"/>
-                                                    <constraint firstItem="d1F-kt-0p7" firstAttribute="leading" secondItem="tNz-Z1-pxa" secondAttribute="leading" constant="8" id="VIZ-Js-w81"/>
-                                                    <constraint firstAttribute="height" constant="44" id="XWS-s7-t1p"/>
-                                                    <constraint firstItem="YXt-nR-z0f" firstAttribute="leading" secondItem="tNz-Z1-pxa" secondAttribute="leading" constant="8" id="cHs-8g-T1s"/>
-                                                    <constraint firstItem="eBP-fg-b45" firstAttribute="centerY" secondItem="d1F-kt-0p7" secondAttribute="centerY" id="knw-qG-EH2"/>
-                                                    <constraint firstAttribute="trailing" secondItem="YXt-nR-z0f" secondAttribute="trailing" constant="8" id="nrH-V7-pe6"/>
-                                                    <constraint firstItem="eBP-fg-b45" firstAttribute="leading" secondItem="d1F-kt-0p7" secondAttribute="trailing" constant="8" id="sc3-PH-Zah"/>
-                                                    <constraint firstItem="bLy-2t-sER" firstAttribute="centerY" secondItem="d1F-kt-0p7" secondAttribute="centerY" id="u6A-T8-5Z5"/>
-                                                </constraints>
-                                                <connections>
-                                                    <outlet property="activityIndicator" destination="bLy-2t-sER" id="hLP-fk-1YI"/>
-                                                    <outlet property="price" destination="eBP-fg-b45" id="I76-5Y-lAx"/>
-                                                    <outlet property="subtitle" destination="YXt-nR-z0f" id="5X2-Sp-L0S"/>
-                                                    <outlet property="title" destination="d1F-kt-0p7" id="rkD-1O-taB"/>
-                                                </connections>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0dC-cs-CAa" customClass="ScansPurchaseButton" customModule="SmartReceipts" customModuleProvider="target">
-                                                <rect key="frame" x="16" y="455" width="288" height="44"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="500" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" text="10 OCR Scans (Smart Receipts)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYH-Hy-VHA">
-                                                        <rect key="frame" x="8" y="3" width="235" height="20"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchase 10 Automatic Scans of Receipts (OCR)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="baK-7S-7dZ">
-                                                        <rect key="frame" x="8" y="26" width="272" height="16"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fae-RS-vgj">
-                                                        <rect key="frame" x="251" y="3" width="29" height="20"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="xfX-pX-rDM">
-                                                        <rect key="frame" x="252" y="3" width="20" height="20"/>
-                                                    </activityIndicatorView>
-                                                </subviews>
-                                                <color key="backgroundColor" red="0.18823529410000001" green="0.1058823529" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <constraints>
-                                                    <constraint firstItem="Fae-RS-vgj" firstAttribute="leading" secondItem="zYH-Hy-VHA" secondAttribute="trailing" constant="8" id="5VM-8v-0Aa"/>
-                                                    <constraint firstAttribute="trailing" secondItem="baK-7S-7dZ" secondAttribute="trailing" constant="8" id="5bW-Jb-Ioi"/>
-                                                    <constraint firstItem="zYH-Hy-VHA" firstAttribute="top" secondItem="0dC-cs-CAa" secondAttribute="top" constant="3" id="7Se-HH-xA7"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Fae-RS-vgj" secondAttribute="trailing" constant="8" id="G3K-b0-czD"/>
-                                                    <constraint firstItem="baK-7S-7dZ" firstAttribute="leading" secondItem="0dC-cs-CAa" secondAttribute="leading" constant="8" id="PAQ-4J-XvZ"/>
-                                                    <constraint firstAttribute="height" constant="44" id="SbW-RI-tuF"/>
-                                                    <constraint firstAttribute="trailing" secondItem="xfX-pX-rDM" secondAttribute="trailing" constant="16" id="ZKp-Gb-aC5"/>
-                                                    <constraint firstItem="Fae-RS-vgj" firstAttribute="centerY" secondItem="zYH-Hy-VHA" secondAttribute="centerY" id="cNY-LZ-ZaT"/>
-                                                    <constraint firstItem="baK-7S-7dZ" firstAttribute="top" secondItem="zYH-Hy-VHA" secondAttribute="bottom" constant="3" id="dqy-34-bZg"/>
-                                                    <constraint firstItem="xfX-pX-rDM" firstAttribute="centerY" secondItem="zYH-Hy-VHA" secondAttribute="centerY" id="i6h-3d-uZM"/>
-                                                    <constraint firstItem="zYH-Hy-VHA" firstAttribute="leading" secondItem="0dC-cs-CAa" secondAttribute="leading" constant="8" id="jxf-an-qC1"/>
-                                                </constraints>
-                                                <connections>
-                                                    <outlet property="activityIndicator" destination="xfX-pX-rDM" id="Kfd-Mp-9or"/>
-                                                    <outlet property="price" destination="Fae-RS-vgj" id="NbB-Og-ocz"/>
-                                                    <outlet property="subtitle" destination="baK-7S-7dZ" id="BRX-Xq-59e"/>
-                                                    <outlet property="title" destination="zYH-Hy-VHA" id="7Jw-iA-sfB"/>
-                                                </connections>
-                                            </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Purchases - Tap to Buy:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogS-OY-kJv">
-                                                <rect key="frame" x="16" y="418" width="258.5" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allow us to save images to improve accuracy?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHC-vY-BPq">
                                                 <rect key="frame" x="16" y="354" width="231" height="33.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aog-as-OBb">
+                                                <rect key="frame" x="16" y="533" width="288" height="50"/>
+                                                <color key="backgroundColor" name="c_Violet2"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="Vqv-9Z-wfo"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Select subcription to try more">
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="tNz-Z1-pxa" secondAttribute="trailing" constant="16" id="3W4-rq-Wsf"/>
-                                            <constraint firstItem="0dC-cs-CAa" firstAttribute="top" secondItem="ogS-OY-kJv" secondAttribute="bottom" constant="16" id="5zK-5x-k3o"/>
                                             <constraint firstItem="reE-ir-Wvr" firstAttribute="top" secondItem="VMI-xq-cpv" secondAttribute="bottom" constant="16" id="94b-PZ-VMn"/>
-                                            <constraint firstItem="0dC-cs-CAa" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="Ct7-PX-ByZ"/>
                                             <constraint firstItem="1LH-ps-UJx" firstAttribute="top" secondItem="reE-ir-Wvr" secondAttribute="bottom" constant="8" id="F1g-7C-lyy"/>
                                             <constraint firstItem="YOD-34-ock" firstAttribute="centerY" secondItem="reE-ir-Wvr" secondAttribute="centerY" id="GYo-60-sIo"/>
-                                            <constraint firstAttribute="trailing" secondItem="0dC-cs-CAa" secondAttribute="trailing" constant="16" id="H1y-gf-UnQ"/>
                                             <constraint firstAttribute="trailing" secondItem="reE-ir-Wvr" secondAttribute="trailing" constant="16" id="HjL-FH-9o2"/>
-                                            <constraint firstAttribute="bottom" secondItem="tNz-Z1-pxa" secondAttribute="bottom" priority="990" constant="40" id="Ikj-gr-hr7"/>
                                             <constraint firstItem="1LH-ps-UJx" firstAttribute="leading" secondItem="jHC-vY-BPq" secondAttribute="trailing" constant="8" id="JYp-0H-gav"/>
                                             <constraint firstItem="YOD-34-ock" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="Kan-2c-MJT"/>
                                             <constraint firstItem="hpf-uN-9yQ" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="L7M-qz-PCi"/>
-                                            <constraint firstItem="tNz-Z1-pxa" firstAttribute="top" secondItem="0dC-cs-CAa" secondAttribute="bottom" constant="16" id="MOA-f5-vK7"/>
                                             <constraint firstItem="reE-ir-Wvr" firstAttribute="leading" secondItem="YOD-34-ock" secondAttribute="trailing" constant="8" id="Ndd-DV-obO"/>
+                                            <constraint firstItem="aog-as-OBb" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="RXU-zm-q2i"/>
                                             <constraint firstItem="CJG-kY-Toe" firstAttribute="top" secondItem="X1N-pM-HX2" secondAttribute="top" constant="20" id="TBB-5u-bXY"/>
-                                            <constraint firstItem="ogS-OY-kJv" firstAttribute="top" secondItem="hpf-uN-9yQ" secondAttribute="bottom" constant="16" id="VvQ-yy-UfB"/>
                                             <constraint firstItem="jHC-vY-BPq" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="WLr-4A-8EY"/>
                                             <constraint firstItem="CJG-kY-Toe" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="cQE-bB-2af"/>
                                             <constraint firstItem="jHC-vY-BPq" firstAttribute="centerY" secondItem="1LH-ps-UJx" secondAttribute="centerY" id="gPT-5E-WAc"/>
-                                            <constraint firstItem="tNz-Z1-pxa" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="jHw-8e-qZT"/>
-                                            <constraint firstItem="ogS-OY-kJv" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="k2P-SH-SgQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="aog-as-OBb" secondAttribute="bottom" constant="16" id="gy1-H3-bIE"/>
                                             <constraint firstAttribute="trailing" secondItem="1LH-ps-UJx" secondAttribute="trailing" constant="16" id="lBN-c1-x83"/>
                                             <constraint firstItem="VMI-xq-cpv" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="nv1-GO-3AJ"/>
                                             <constraint firstItem="hpf-uN-9yQ" firstAttribute="bottom" secondItem="1LH-ps-UJx" secondAttribute="bottom" constant="16" id="ozJ-V8-bXj"/>
                                             <constraint firstAttribute="trailing" secondItem="VMI-xq-cpv" secondAttribute="trailing" constant="16" id="rOj-Bd-DCV"/>
+                                            <constraint firstAttribute="trailing" secondItem="aog-as-OBb" secondAttribute="trailing" constant="16" id="uzt-zZ-SRl"/>
                                             <constraint firstAttribute="trailing" secondItem="hpf-uN-9yQ" secondAttribute="trailing" constant="16" id="vEL-eG-e9w"/>
                                             <constraint firstItem="VMI-xq-cpv" firstAttribute="top" secondItem="CJG-kY-Toe" secondAttribute="bottom" constant="8" id="ver-gb-2vR"/>
                                         </constraints>
@@ -211,9 +119,12 @@ To try OCR, all new users get 2 free scans!</string>
                                     <constraint firstAttribute="bottom" secondItem="X1N-pM-HX2" secondAttribute="bottom" id="AfI-Ad-CIY"/>
                                     <constraint firstItem="X1N-pM-HX2" firstAttribute="top" secondItem="b5d-L5-IgL" secondAttribute="top" id="E1P-Xk-sNb"/>
                                     <constraint firstItem="X1N-pM-HX2" firstAttribute="leading" secondItem="b5d-L5-IgL" secondAttribute="leading" id="Ss0-Wh-wQ5"/>
+                                    <constraint firstItem="X1N-pM-HX2" firstAttribute="bottom" secondItem="5pt-kC-bQz" secondAttribute="bottom" id="Tsv-dU-5qo"/>
                                     <constraint firstItem="X1N-pM-HX2" firstAttribute="centerX" secondItem="b5d-L5-IgL" secondAttribute="centerX" id="fHE-Za-KvJ"/>
                                     <constraint firstAttribute="trailing" secondItem="X1N-pM-HX2" secondAttribute="trailing" id="tKz-gM-SRV"/>
                                 </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="2mY-Ue-QHL"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="5pt-kC-bQz"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -235,22 +146,23 @@ To try OCR, all new users get 2 free scans!</string>
                         <outlet property="allowSaveImages" destination="1LH-ps-UJx" id="583-9i-i01"/>
                         <outlet property="autoScans" destination="reE-ir-Wvr" id="Hnz-Pd-9CV"/>
                         <outlet property="autoScansLabel" destination="YOD-34-ock" id="tb1-cq-ihw"/>
-                        <outlet property="availablePurchases" destination="ogS-OY-kJv" id="mZR-XJ-bEd"/>
                         <outlet property="closeButton" destination="yL2-Ak-nBw" id="tmY-E0-7dX"/>
                         <outlet property="descriptionLabel" destination="VMI-xq-cpv" id="Jbb-of-ejZ"/>
                         <outlet property="logoutButton" destination="rmD-D8-Kiu" id="Upg-b3-10O"/>
+                        <outlet property="openSubscriptionButton" destination="aog-as-OBb" id="DpN-2m-YZl"/>
                         <outlet property="saveImagesLabel" destination="jHC-vY-BPq" id="fgd-GF-R7l"/>
-                        <outlet property="scans10button" destination="0dC-cs-CAa" id="FDJ-ZS-p2z"/>
-                        <outlet property="scans50button" destination="tNz-Z1-pxa" id="hoh-5h-gpG"/>
                         <outlet property="titleLabel" destination="CJG-kY-Toe" id="wJM-b9-9p4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nXm-AG-NXG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="290.625" y="351.76056338028167"/>
+            <point key="canvasLocation" x="289.60000000000002" y="351.72413793103453"/>
         </scene>
     </scenes>
     <resources>
         <image name="close_button" width="14" height="14"/>
+        <namedColor name="c_Violet2">
+            <color red="0.18823529411764706" green="0.10588235294117647" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
