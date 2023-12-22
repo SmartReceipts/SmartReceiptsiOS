@@ -185,11 +185,21 @@ final class SubscriptionViewController: UIViewController {
     
     private func setupViews() {
         title = LocalizedString("subscription_title")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage.init(imageLiteralResourceName: "close_button"),
+            style: .plain,
+            target: self, action: #selector(close)
+        )
     }
     
     @objc
     func loginTapped() {
         outputReplay.accept(.loginTapped)
+    }
+    
+    @objc
+    func close() {
+        outputReplay.accept(.close)
     }
     
     private func setupLayout() {

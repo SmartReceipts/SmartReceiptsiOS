@@ -105,18 +105,12 @@ final class SuccessPlanViewController: UIViewController {
     }
     
     private func setupViews() {
+        title = LocalizedString("subscription_title")
         view.backgroundColor = .srViolet
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: closeButton)
     }
     
     private func setupLayout() {
-        closeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(36)
-            make.leading.equalToSuperview().offset(16)
-            make.width.equalTo(30)
-            make.height.equalTo(30)
-        }
-        
         backgroundImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(83)
             make.trailing.equalToSuperview().offset(-18)
