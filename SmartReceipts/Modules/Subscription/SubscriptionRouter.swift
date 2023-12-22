@@ -34,9 +34,9 @@ final class SubscriptionRouter {
     }
     
     func openSuccessPage(updateState: @escaping (() -> Void)) {
-        let successPlanVc = SuccessPlanBuilder.build() as! SuccessPlanViewController
-        successPlanVc.modalPresentationStyle = .overFullScreen
-        moduleViewController.present(successPlanVc, animated: true, completion: { updateState() })
+        let vc = SuccessPlanBuilder.build()
+        let nc = UINavigationController(rootViewController: vc)
+        moduleViewController.present(nc, animated: true, completion: { updateState() })
     }
     
     func handlerError(errorMessage: String, retryAction: (() -> Void)? = nil) {
@@ -64,5 +64,9 @@ final class SubscriptionRouter {
     func openSubscriptions() {
         let subscriptionsUrl = URL(string: "https://apps.apple.com/account/subscriptions")!
         UIApplication.shared.open(subscriptionsUrl, options: [:])
+    }
+    
+    func close() {
+        moduleViewController.dismiss(animated: true)
     }
 }

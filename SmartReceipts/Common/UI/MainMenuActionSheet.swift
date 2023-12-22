@@ -98,8 +98,9 @@ class MainMenuActionSheet: ActionSheet, Disposable {
     }
     
     private func openSubscriptions() {
-        let vc = SubscriptionBuilder.build() as! SubscriptionViewController
-        viewController?.navigationController?.pushViewController(vc, animated: true)
+        let vc = SubscriptionBuilder.build()
+        let nc = UINavigationController(rootViewController: vc)
+        viewController?.present(nc, animated: true)
     }
     
     private func openSettings() {

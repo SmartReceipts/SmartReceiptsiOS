@@ -25,6 +25,7 @@ final class SubscriptionViewModel {
         case didSelect(PlanModel)
         case loginTapped
         case openSubscriptions
+        case close
     }
     
     enum LogginState {
@@ -73,6 +74,8 @@ final class SubscriptionViewModel {
             openLogin()
         case .openSubscriptions:
             environment.router.openSubscriptions()
+        case .close:
+            environment.router.close()
         }
     }
     
