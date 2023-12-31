@@ -44,7 +44,6 @@ final class SubscriptionViewModel {
             needUpdatePlansAfterPurchased: false
         )
     )
-    private let isPurchasedRelay = BehaviorRelay<Bool>.init(value: false)
     private let bag = DisposeBag()
     
     init(environment: SubscriptionEnvironment) {
@@ -66,6 +65,7 @@ final class SubscriptionViewModel {
                 return
             }
         case .didSelect(let model):
+            guard !model.isPurchased else { return }
             purchase(productId: model.id)
             AnalyticsManager.sharedManager.record(
                 event: Event.subscriptionTapped(productId: model.id)
