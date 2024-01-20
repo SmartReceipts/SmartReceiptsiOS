@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
@@ -21,13 +21,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5d-L5-IgL">
-                                <rect key="frame" x="0.0" y="64" width="320" height="576"/>
+                                <rect key="frame" x="0.0" y="91" width="320" height="515"/>
                                 <subviews>
                                     <view contentMode="scaleAspectFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X1N-pM-HX2">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="599"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="515"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="900" verticalCompressionResistancePriority="600" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMI-xq-cpv">
-                                                <rect key="frame" x="16" y="49" width="288" height="251"/>
+                                                <rect key="frame" x="16" y="48.999999999999986" width="288" height="250.66666666666663"/>
                                                 <string key="text">Smart Receipts has integrated with Taggun to provide automatic scanning (ie OCR) services, which can extract receipt metadata like the price, tax, date, and merchant name from your photos. 
 We use a combination of Google Vision and Machine Learning to quickly (often in 5 seconds or less) deliver results, which will become increasingly accurate over time. Since these services have a per-usage charge, we will charge for each receipt scan below. 
 To try OCR, all new users get 2 free scans!</string>
@@ -36,27 +36,27 @@ To try OCR, all new users get 2 free scans!</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hpf-uN-9yQ">
-                                                <rect key="frame" x="16" y="401" width="288" height="1"/>
+                                                <rect key="frame" x="16" y="400.66666666666669" width="288" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="0hd-Pf-sb0"/>
                                                 </constraints>
                                             </view>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1LH-ps-UJx">
-                                                <rect key="frame" x="255" y="355" width="51" height="31"/>
+                                                <rect key="frame" x="255" y="354.66666666666669" width="51" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="49" id="dnI-9M-WR8"/>
                                                 </constraints>
                                                 <color key="onTintColor" red="0.18823529410000001" green="0.1058823529" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Automatic Scans (OCR)?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOD-34-ock">
-                                                <rect key="frame" x="16" y="323" width="231" height="17"/>
+                                                <rect key="frame" x="16" y="322.66666666666669" width="231" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="reE-ir-Wvr">
-                                                <rect key="frame" x="255" y="316" width="51" height="31"/>
+                                                <rect key="frame" x="255" y="315.66666666666669" width="51" height="31"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="49" id="dcm-hp-aQv"/>
                                                 </constraints>
@@ -72,13 +72,13 @@ To try OCR, all new users get 2 free scans!</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allow us to save images to improve accuracy?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHC-vY-BPq">
-                                                <rect key="frame" x="16" y="354" width="231" height="33.5"/>
+                                                <rect key="frame" x="16" y="353.33333333333331" width="231" height="33.666666666666686"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aog-as-OBb">
-                                                <rect key="frame" x="16" y="533" width="288" height="50"/>
+                                                <rect key="frame" x="16" y="449" width="288" height="50"/>
                                                 <color key="backgroundColor" name="c_Violet2"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Vqv-9Z-wfo"/>
@@ -88,27 +88,131 @@ To try OCR, all new users get 2 free scans!</string>
                                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </buttonConfiguration>
                                             </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HCc-mT-NX6" userLabel="Scans10 button" customClass="ScansPurchaseButton" customModule="SmartReceipts" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="454.66666666666663" width="288" height="44"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10 OCR Scans (Smart Receipts)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfF-2T-FhW">
+                                                        <rect key="frame" x="8" y="3" width="234.66666666666666" height="20"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchase 10 Automatic Scans of Receipts (OCR)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Unq-WQ-irC">
+                                                        <rect key="frame" x="8" y="26" width="272" height="16"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="RSs-kf-hNl">
+                                                        <rect key="frame" x="252" y="3" width="20" height="20"/>
+                                                    </activityIndicatorView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzl-8H-KHa">
+                                                        <rect key="frame" x="250.66666666666669" y="13" width="0.0" height="0.0"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" name="c_Violet2"/>
+                                                <constraints>
+                                                    <constraint firstItem="cfF-2T-FhW" firstAttribute="top" secondItem="HCc-mT-NX6" secondAttribute="top" constant="3" id="Fkd-qW-Gzk"/>
+                                                    <constraint firstAttribute="trailing" secondItem="RSs-kf-hNl" secondAttribute="trailing" constant="16" id="N8I-D9-0En"/>
+                                                    <constraint firstItem="RSs-kf-hNl" firstAttribute="centerY" secondItem="cfF-2T-FhW" secondAttribute="centerY" id="VU0-aF-EEi"/>
+                                                    <constraint firstItem="cfF-2T-FhW" firstAttribute="leading" secondItem="HCc-mT-NX6" secondAttribute="leading" constant="8" id="axN-Fj-ddA"/>
+                                                    <constraint firstItem="Unq-WQ-irC" firstAttribute="top" secondItem="cfF-2T-FhW" secondAttribute="bottom" constant="3" id="eHF-wU-U1b"/>
+                                                    <constraint firstItem="wzl-8H-KHa" firstAttribute="centerY" secondItem="cfF-2T-FhW" secondAttribute="centerY" id="fsl-9r-fSw"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Unq-WQ-irC" secondAttribute="trailing" constant="8" id="ldF-QU-B5I"/>
+                                                    <constraint firstItem="wzl-8H-KHa" firstAttribute="leading" secondItem="cfF-2T-FhW" secondAttribute="trailing" constant="8" id="pOt-FW-Zjb"/>
+                                                    <constraint firstAttribute="height" constant="44" id="tCb-Nx-77D"/>
+                                                    <constraint firstItem="Unq-WQ-irC" firstAttribute="leading" secondItem="HCc-mT-NX6" secondAttribute="leading" constant="8" id="zHA-NU-sge"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="activityIndicator" destination="RSs-kf-hNl" id="1ef-Yb-FzC"/>
+                                                    <outlet property="price" destination="wzl-8H-KHa" id="s6A-3O-gB8"/>
+                                                    <outlet property="subtitle" destination="Unq-WQ-irC" id="2O0-Rj-SKo"/>
+                                                    <outlet property="title" destination="cfF-2T-FhW" id="C4c-fi-v2J"/>
+                                                </connections>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMB-cV-uak" userLabel="Scans50 button" customClass="ScansPurchaseButton" customModule="SmartReceipts" customModuleProvider="target">
+                                                <rect key="frame" x="16" y="501.66666666666663" width="288" height="44"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50 OCR Scans (Smart Receipts)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vy6-gd-xbL">
+                                                        <rect key="frame" x="8" y="3" width="236.66666666666666" height="20"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchase 10 Automatic Scans of Receipts (OCR)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ua0-e9-b5U">
+                                                        <rect key="frame" x="8" y="26" width="272" height="16"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="35O-Sz-4Ux">
+                                                        <rect key="frame" x="252" y="3" width="20" height="20"/>
+                                                    </activityIndicatorView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7G6-yd-o58">
+                                                        <rect key="frame" x="252.66666666666669" y="13" width="0.0" height="0.0"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" name="c_Violet2"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="35O-Sz-4Ux" secondAttribute="trailing" constant="16" id="4bJ-JB-cHF"/>
+                                                    <constraint firstItem="7G6-yd-o58" firstAttribute="leading" secondItem="vy6-gd-xbL" secondAttribute="trailing" constant="8" id="8vi-NF-3Mj"/>
+                                                    <constraint firstItem="35O-Sz-4Ux" firstAttribute="centerY" secondItem="vy6-gd-xbL" secondAttribute="centerY" id="Mq7-ow-Jlg"/>
+                                                    <constraint firstItem="vy6-gd-xbL" firstAttribute="leading" secondItem="gMB-cV-uak" secondAttribute="leading" constant="8" id="R59-JN-fRf"/>
+                                                    <constraint firstItem="vy6-gd-xbL" firstAttribute="top" secondItem="gMB-cV-uak" secondAttribute="top" constant="3" id="Z22-FB-2LK"/>
+                                                    <constraint firstAttribute="height" constant="44" id="nQS-ut-QpG"/>
+                                                    <constraint firstAttribute="trailing" secondItem="ua0-e9-b5U" secondAttribute="trailing" constant="8" id="ob6-PG-sFX"/>
+                                                    <constraint firstItem="ua0-e9-b5U" firstAttribute="leading" secondItem="gMB-cV-uak" secondAttribute="leading" constant="8" id="pyK-WI-feV"/>
+                                                    <constraint firstItem="ua0-e9-b5U" firstAttribute="top" secondItem="vy6-gd-xbL" secondAttribute="bottom" constant="3" id="s8k-tX-LFT"/>
+                                                    <constraint firstItem="7G6-yd-o58" firstAttribute="centerY" secondItem="vy6-gd-xbL" secondAttribute="centerY" id="wxn-0o-N4W"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="activityIndicator" destination="35O-Sz-4Ux" id="ily-Uk-uid"/>
+                                                    <outlet property="price" destination="7G6-yd-o58" id="zOP-ZV-nM3"/>
+                                                    <outlet property="subtitle" destination="ua0-e9-b5U" id="Xxn-Jy-wt2"/>
+                                                    <outlet property="title" destination="vy6-gd-xbL" id="ZRE-Cf-Uff"/>
+                                                </connections>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available Purchases - Tap to Buy:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FcT-gO-K2h">
+                                                <rect key="frame" x="16" y="417.66666666666669" width="259" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="reE-ir-Wvr" firstAttribute="top" secondItem="VMI-xq-cpv" secondAttribute="bottom" constant="16" id="94b-PZ-VMn"/>
                                             <constraint firstItem="1LH-ps-UJx" firstAttribute="top" secondItem="reE-ir-Wvr" secondAttribute="bottom" constant="8" id="F1g-7C-lyy"/>
+                                            <constraint firstAttribute="trailing" secondItem="HCc-mT-NX6" secondAttribute="trailing" constant="16" id="GHF-Y5-opa"/>
                                             <constraint firstItem="YOD-34-ock" firstAttribute="centerY" secondItem="reE-ir-Wvr" secondAttribute="centerY" id="GYo-60-sIo"/>
                                             <constraint firstAttribute="trailing" secondItem="reE-ir-Wvr" secondAttribute="trailing" constant="16" id="HjL-FH-9o2"/>
                                             <constraint firstItem="1LH-ps-UJx" firstAttribute="leading" secondItem="jHC-vY-BPq" secondAttribute="trailing" constant="8" id="JYp-0H-gav"/>
                                             <constraint firstItem="YOD-34-ock" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="Kan-2c-MJT"/>
                                             <constraint firstItem="hpf-uN-9yQ" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="L7M-qz-PCi"/>
                                             <constraint firstItem="reE-ir-Wvr" firstAttribute="leading" secondItem="YOD-34-ock" secondAttribute="trailing" constant="8" id="Ndd-DV-obO"/>
+                                            <constraint firstAttribute="trailing" secondItem="gMB-cV-uak" secondAttribute="trailing" constant="16" id="Nfv-gG-4h8"/>
+                                            <constraint firstItem="gMB-cV-uak" firstAttribute="top" secondItem="HCc-mT-NX6" secondAttribute="bottom" constant="3" id="RLg-lF-rsZ"/>
                                             <constraint firstItem="aog-as-OBb" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="RXU-zm-q2i"/>
                                             <constraint firstItem="CJG-kY-Toe" firstAttribute="top" secondItem="X1N-pM-HX2" secondAttribute="top" constant="20" id="TBB-5u-bXY"/>
                                             <constraint firstItem="jHC-vY-BPq" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="WLr-4A-8EY"/>
                                             <constraint firstItem="CJG-kY-Toe" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="cQE-bB-2af"/>
+                                            <constraint firstItem="HCc-mT-NX6" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="czG-2P-sdG"/>
+                                            <constraint firstItem="HCc-mT-NX6" firstAttribute="top" secondItem="FcT-gO-K2h" secondAttribute="bottom" constant="16" id="d0K-dB-wsh"/>
                                             <constraint firstItem="jHC-vY-BPq" firstAttribute="centerY" secondItem="1LH-ps-UJx" secondAttribute="centerY" id="gPT-5E-WAc"/>
                                             <constraint firstAttribute="bottom" secondItem="aog-as-OBb" secondAttribute="bottom" constant="16" id="gy1-H3-bIE"/>
                                             <constraint firstAttribute="trailing" secondItem="1LH-ps-UJx" secondAttribute="trailing" constant="16" id="lBN-c1-x83"/>
+                                            <constraint firstItem="gMB-cV-uak" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="njR-YO-51T"/>
                                             <constraint firstItem="VMI-xq-cpv" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="nv1-GO-3AJ"/>
                                             <constraint firstItem="hpf-uN-9yQ" firstAttribute="bottom" secondItem="1LH-ps-UJx" secondAttribute="bottom" constant="16" id="ozJ-V8-bXj"/>
+                                            <constraint firstItem="FcT-gO-K2h" firstAttribute="top" secondItem="hpf-uN-9yQ" secondAttribute="bottom" constant="16" id="pad-YE-h0E"/>
                                             <constraint firstAttribute="trailing" secondItem="VMI-xq-cpv" secondAttribute="trailing" constant="16" id="rOj-Bd-DCV"/>
+                                            <constraint firstItem="FcT-gO-K2h" firstAttribute="leading" secondItem="X1N-pM-HX2" secondAttribute="leading" constant="16" id="ss6-Rj-W3E"/>
                                             <constraint firstAttribute="trailing" secondItem="aog-as-OBb" secondAttribute="trailing" constant="16" id="uzt-zZ-SRl"/>
                                             <constraint firstAttribute="trailing" secondItem="hpf-uN-9yQ" secondAttribute="trailing" constant="16" id="vEL-eG-e9w"/>
                                             <constraint firstItem="VMI-xq-cpv" firstAttribute="top" secondItem="CJG-kY-Toe" secondAttribute="bottom" constant="8" id="ver-gb-2vR"/>
@@ -146,11 +250,14 @@ To try OCR, all new users get 2 free scans!</string>
                         <outlet property="allowSaveImages" destination="1LH-ps-UJx" id="583-9i-i01"/>
                         <outlet property="autoScans" destination="reE-ir-Wvr" id="Hnz-Pd-9CV"/>
                         <outlet property="autoScansLabel" destination="YOD-34-ock" id="tb1-cq-ihw"/>
+                        <outlet property="availablePurchases" destination="FcT-gO-K2h" id="whU-pw-4Ui"/>
                         <outlet property="closeButton" destination="yL2-Ak-nBw" id="tmY-E0-7dX"/>
                         <outlet property="descriptionLabel" destination="VMI-xq-cpv" id="Jbb-of-ejZ"/>
                         <outlet property="logoutButton" destination="rmD-D8-Kiu" id="Upg-b3-10O"/>
                         <outlet property="openSubscriptionButton" destination="aog-as-OBb" id="DpN-2m-YZl"/>
                         <outlet property="saveImagesLabel" destination="jHC-vY-BPq" id="fgd-GF-R7l"/>
+                        <outlet property="scans10button" destination="HCc-mT-NX6" id="JRn-Xd-c6M"/>
+                        <outlet property="scans50button" destination="gMB-cV-uak" id="ovo-eg-2OG"/>
                         <outlet property="titleLabel" destination="CJG-kY-Toe" id="wJM-b9-9p4"/>
                     </connections>
                 </viewController>

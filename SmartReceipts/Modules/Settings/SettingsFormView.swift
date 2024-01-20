@@ -13,7 +13,7 @@ import FirebaseCrashlytics
 
 fileprivate let IMAGE_OPTIONS = [512, 1024, 2048, 0]
 
-class SettingsFormView: FormViewController {
+final class SettingsFormView: FormViewController {
     private var hasValidSubscription = false
     
     weak var openModuleSubject: PublishSubject<SettingsRoutes>!
@@ -58,6 +58,9 @@ class SettingsFormView: FormViewController {
         <<< PurchaseButtonRow() { [unowned self] row in
             row.title = LocalizedString("pro_subscription")
             self.purchaseRow = row
+            row.hidden = Condition.function([], { form in
+                FeatureFlags.newSubscription.isEnabled
+            })
         }.onCellSelection({ [unowned self] _, row in
             if !row.isPurchased() {
                 self.hud = PendingHUDView.showFullScreen()
@@ -77,6 +80,9 @@ class SettingsFormView: FormViewController {
             
         <<< ButtonRow() { row in
             row.title = LocalizedString("settings_purchase_restore_label")
+            row.hidden = Condition.function([], { form in
+                FeatureFlags.newSubscription.isEnabled
+            })
         }.cellUpdate({ cell, row in
             cell.textLabel?.textColor = AppTheme.primaryColor
         }).onCellSelection({ [unowned self] _, _ in
@@ -92,6 +98,17 @@ class SettingsFormView: FormViewController {
                 }, onError: { error in
                     self.alertSubject.onNext((title: LocalizedString("purchase_unavailable"), message: error.localizedDescription))
                 }).disposed(by: self.bag)
+        })
+        
+        <<< ButtonRow() { row in
+            row.title = LocalizedString("ocr_open_subcription_button_text")
+            row.hidden = Condition.function([], { form in
+                !FeatureFlags.newSubscription.isEnabled
+            })
+        }.cellUpdate({ cell, row in
+            cell.textLabel?.textColor = AppTheme.primaryColor
+        }).onCellSelection({ [unowned self] _, _ in
+            self.openModuleSubject.onNext(.subscription)
         })
         
         +++ Section(LocalizedString("pref_pro_header"))
