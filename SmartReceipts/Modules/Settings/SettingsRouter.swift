@@ -25,6 +25,8 @@ class SettingsRouter: Router {
             openPaymentMethods()
         case .categories:
             openCategories()
+        case .subscription:
+            openSubscriptionPage()
         }
     }
     
@@ -52,6 +54,12 @@ class SettingsRouter: Router {
         module.router.show(from: _view.viewController)
     }
     
+    func openSubscriptionPage() {
+        let vc = SubscriptionBuilder.build()
+        let nc = UINavigationController(rootViewController: vc)
+        _view.viewController.present(nc, animated: true)
+    }
+    
     private func open(url: String) {
         guard let url = URL(string: url) else { return }
         if UIApplication.shared.canOpenURL(url) {
@@ -77,6 +85,7 @@ enum SettingsRoutes {
     case categories
     case about
     case termsOfUse
+    case subscription
 }
 
 // Helper function inserted by Swift 4.2 migrator.
