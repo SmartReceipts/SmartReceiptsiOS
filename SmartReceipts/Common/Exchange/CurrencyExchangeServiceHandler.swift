@@ -26,7 +26,7 @@ public protocol CurrencyExchangeServiceHandler {
 public extension CurrencyExchangeServiceHandler {
     // For some reason it only works if the function isn't declared as part of the protocol, but is defined in an extension to the protocol.
     func exchangeRate(_ base: String, target: String, onDate date: Date, forceRefresh: Bool = false, completion: @escaping ExchangeResultClosure) {
-        if (!PurchaseService.hasValidPlusSubscriptionValue) {
+        if (!PurchaseService.hasValidAllSubscription) {
             Logger.debug("No subscription, no exchange")
             completion(.notEnabled, nil)
             return

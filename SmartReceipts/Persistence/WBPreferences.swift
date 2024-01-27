@@ -23,7 +23,7 @@ extension WBPreferences {
     }
     
     @objc static func isPDFFooterUnlocked() -> Bool {
-        return PurchaseService.hasValidPlusSubscriptionValue
+        return PurchaseService.hasValidAllSubscription
     }
     
     static var languages: [LanguageAlias] = {

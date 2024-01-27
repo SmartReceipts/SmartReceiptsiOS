@@ -61,7 +61,7 @@ class TooltipService {
     }
     
     func backupPlusReminder() -> String? {
-        if PurchaseService.hasValidPlusSubscriptionValue && !marked(key: Keys.REMINDER_PLUS_BACKUP) {
+        if PurchaseService.hasValidAllSubscription && !marked(key: Keys.REMINDER_PLUS_BACKUP) {
             return LocalizedString("tooltip_automatic_backups_recovery_hint")
         }
         return nil

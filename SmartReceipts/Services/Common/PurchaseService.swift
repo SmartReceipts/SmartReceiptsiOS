@@ -64,7 +64,7 @@ class PurchaseService {
         }
 
         authService.loggedInObservable
-            .filter({ $0 && !PurchaseService.hasValidPlusSubscriptionValue })
+            .filter({ $0 && !PurchaseService.hasValidAllSubscription })
             .flatMap({ _ in
                 return apiProvider.request(.subscriptions).mapModel(SubscriptionsResponse.self)
             }).map({ response -> SubscriptionModel? in
@@ -92,6 +92,10 @@ class PurchaseService {
 
     class var hasValidPlusSubscriptionValue: Bool {
         return DebugStates.isDebug && DebugStates.subscription() ? true : (cachedValidation?.plusValid == true || cachedValidation?.premiumPurchased == true)
+    }
+    
+    static var hasValidAllSubscription: Bool {
+        DebugStates.isDebug && DebugStates.subscription() ? true : (cachedValidation?.plusValid == true || cachedValidation?.premiumPurchased == true || cachedValidation?.standardPurchased == true)
     }
     
     func cacheProducts() {
