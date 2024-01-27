@@ -12,7 +12,7 @@ import RxSwift
 class CurrencyExchangeService {
     func exchangeRate(_ base: String, target: String, onDate date: Date, forceRefresh: Bool = false) -> Observable<ExchangeResponse> {
         return Observable<ExchangeResponse>.create { observer -> Disposable in
-            if !PurchaseService.hasValidPlusSubscriptionValue {
+            if !PurchaseService.hasValidAllSubscription {
                 Logger.debug("No subscription, no exchange")
                 observer.onNext(ExchangeResponse(value: nil, error: .notEnabled))
                 return Disposables.create()

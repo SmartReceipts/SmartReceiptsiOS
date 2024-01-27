@@ -43,21 +43,34 @@ class AdPresentingContainerViewController: UIViewController {
             .do(onNext: {
                 AnalyticsManager.sharedManager.record(event: Event.Purchases.AdUpsellTapped)
             }).subscribe(onNext: { [unowned self] in
-                let hud = PendingHUDView.showFullScreen()
-                _ = self.purchaseService.purchasePlusSubscription().do(onNext: { _ in
-                    hud.hide()
-                }, onError: { _ in
-                    hud.hide()
-                }).subscribe()
+                if FeatureFlags.newSubscription.isEnabled {
+                    openSubscriptionPage()
+                } else {
+                    purchasePlusSubscription()
+                }
             }).disposed(by: bag)
         
         NotificationCenter.default.addObserver(self, selector: #selector(checkAdsStatus), name: .SmartReceiptsAdsRemoved, object: nil)
     }
     
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         bannerView?.adSize = getAdSize()
+    }
+    
+    private func purchasePlusSubscription() {
+        let hud = PendingHUDView.showFullScreen()
+        _ = self.purchaseService.purchasePlusSubscription().do(onNext: { _ in
+            hud.hide()
+        }, onError: { _ in
+            hud.hide()
+        }).subscribe()
+    }
+    
+    private func openSubscriptionPage() {
+        let vc = SubscriptionBuilder.build()
+        let nc = UINavigationController(rootViewController: vc)
+        present(nc, animated: true)
     }
     
     private func loadAd() {

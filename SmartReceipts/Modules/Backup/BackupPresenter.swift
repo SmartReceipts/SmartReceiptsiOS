@@ -75,6 +75,9 @@ class BackupPresenter: Presenter {
         interactor.setupUseWifiOnly(enabled: enabled)
     }
     
+    func openSubscriptionPage() {
+        router.openSubscriptionPage()
+    }
 }
 
 

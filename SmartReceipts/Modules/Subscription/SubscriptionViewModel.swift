@@ -59,11 +59,17 @@ final class SubscriptionViewModel {
         switch action {
         case .viewDidLoad:
             state.update { $0.isLoggin = .noAuth }
-            if environment.authService.isLoggedIn {
-                state.update { $0.isLoggin = .auth }
-                updatePlanSectionItems()
-                return
-            }
+            environment.authService
+                .loggedInObservable
+                .subscribe(with: self, onNext: { viewModel, flag in
+                    guard flag else {
+                        viewModel.openLogin()
+                        return
+                    }
+                    viewModel.state.update { $0.isLoggin = .auth }
+                    viewModel.updatePlanSectionItems()
+                })
+                .disposed(by: bag)
         case .didSelect(let model):
             guard !model.isPurchased else { return }
             purchase(productId: model.id)

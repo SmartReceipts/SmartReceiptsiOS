@@ -20,6 +20,11 @@ class BackupRouter: Router {
             }).disposed(by: bag)
     }
     
+    func openSubscriptionPage() {
+        let vc = SubscriptionBuilder.build()
+        let nc = UINavigationController(rootViewController: vc)
+        _view.viewController.present(nc, animated: true)
+    }
 }
 
 // MARK: - VIPER COMPONENTS API (Auto-generated code)

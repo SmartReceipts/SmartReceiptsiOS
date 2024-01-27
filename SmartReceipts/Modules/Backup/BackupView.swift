@@ -95,7 +95,7 @@ final class BackupView: UserInterface {
         
         configureButton.rx.tap
             .subscribe(onNext: { [unowned self] in
-                if self.presenter.hasValidSubscription() {
+                 if self.presenter.hasValidSubscription() {
                     self.openBackupServiceSelector()
                 } else {
                     self.openBackupServiceSelectorAfterPurchase()
@@ -120,7 +120,7 @@ final class BackupView: UserInterface {
             view.removeFromSuperview()
         }
         
-        let activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.color = AppTheme.primaryColor
         activityIndicator.startAnimating()
         backupsView.addArrangedSubview(activityIndicator)
@@ -143,7 +143,7 @@ final class BackupView: UserInterface {
                         self?.openActions(for: backup, item: backupItem)
                     }).disposed(by: self.bag)
                 }
-            }, onError: { error in
+            }, onFailure: { error in
                 Logger.error(error.localizedDescription)
             }).disposed(by: bag)
     }
@@ -217,15 +217,20 @@ final class BackupView: UserInterface {
     }
     
     private func openBackupServiceSelectorAfterPurchase() {
+        if FeatureFlags.newSubscription.isEnabled {
+            presenter.openSubscriptionPage()
+        } else {
+            purchaseSubscriptionPlus()
+        }
+    }
+        
+    private func purchaseSubscriptionPlus() {
         let hud = PendingHUDView.showFullScreen()
-        presenter.purchaseSubscription()
-            .do(onNext: { _ in
-                hud.hide()
-            }, onError: { _ in
-                hud.hide()
-            }).subscribe(onNext: { [weak self] in
-                self?.openBackupServiceSelector()
-            }).disposed(by: bag)
+        _ = presenter.purchaseSubscription().do(onNext: { _ in
+            hud.hide()
+        }, onError: { _ in
+            hud.hide()
+        }).subscribe()
     }
     
     private func configureLayers() {
