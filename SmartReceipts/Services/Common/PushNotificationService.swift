@@ -44,7 +44,7 @@ class PushNotificationService: NSObject {
             }
             UIApplication.shared.registerForRemoteNotifications()
             return Disposables.create()
-        }).subscribeOn(MainScheduler.instance)
+        }).subscribe(on: MainScheduler.instance)
     }
     
     func authorizationStatus() -> Observable<UNAuthorizationStatus> {
@@ -72,7 +72,7 @@ class PushNotificationService: NSObject {
         AuthService.shared.saveDevice(token: token)
             .subscribe(onSuccess: {
                 Logger.debug("FCM Token uploaded")
-            }, onError: { error in
+            }, onFailure: { error in
                 Logger.error("Token Upload Error: \(error.localizedDescription))")
             }).disposed(by: bag)
     }

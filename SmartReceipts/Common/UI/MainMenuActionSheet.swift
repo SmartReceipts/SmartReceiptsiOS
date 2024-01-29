@@ -11,6 +11,7 @@ import RxSwift
 import SafariServices
 import SwiftUI
 import ComposableArchitecture
+import Toaster
 
 class MainMenuActionSheet: ActionSheet, Disposable {
     private weak var viewController: UIViewController?
@@ -98,9 +99,21 @@ class MainMenuActionSheet: ActionSheet, Disposable {
     }
     
     private func openSubscriptions() {
-        let vc = SubscriptionBuilder.build()
-        let nc = UINavigationController(rootViewController: vc)
-        viewController?.present(nc, animated: true)
+        if AuthService.shared.isLoggedIn {
+            let vc = SubscriptionBuilder.build()
+            let nc = UINavigationController(rootViewController: vc)
+            viewController?.present(nc, animated: true)
+        } else {
+            let authModule = openAuth()
+            authModule.successAuth
+                .map({ authModule.close() })
+                .delay(.milliseconds(Int(VIEW_CONTROLLER_TRANSITION_DELAY * 1000)), scheduler: MainScheduler.instance)
+                .observe(on: MainScheduler.instance)
+                .subscribe(onNext: { [weak self] in
+                    self?.openSubscriptions()
+                })
+                .disposed(by: bag)
+        }
     }
     
     private func openSettings() {

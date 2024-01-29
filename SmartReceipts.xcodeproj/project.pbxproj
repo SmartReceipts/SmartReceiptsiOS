@@ -10,6 +10,7 @@
 		030471BC2A194261000CC95B /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = 030471BB2A194261000CC95B /* FMDB */; };
 		031523082A987A7C00F6B22B /* HudSUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031523072A987A7C00F6B22B /* HudSUIView.swift */; };
 		0315230A2A98A8AE00F6B22B /* ToastSUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031523092A98A8AE00F6B22B /* ToastSUIView.swift */; };
+		03196F982B67FA31004EB782 /* AuthViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03196F972B67FA31004EB782 /* AuthViewBuilder.swift */; };
 		0345ED542A8150280001EE35 /* SecurePasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345ED532A8150280001EE35 /* SecurePasswordField.swift */; };
 		0345ED582A8166210001EE35 /* AuthViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345ED572A8166210001EE35 /* AuthViewOutput.swift */; };
 		03B4AB7527668DC600958B33 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7427668DC600958B33 /* SubscriptionViewController.swift */; };
@@ -709,6 +710,7 @@
 /* Begin PBXFileReference section */
 		031523072A987A7C00F6B22B /* HudSUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudSUIView.swift; sourceTree = "<group>"; };
 		031523092A98A8AE00F6B22B /* ToastSUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastSUIView.swift; sourceTree = "<group>"; };
+		03196F972B67FA31004EB782 /* AuthViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewBuilder.swift; sourceTree = "<group>"; };
 		0345ED532A8150280001EE35 /* SecurePasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurePasswordField.swift; sourceTree = "<group>"; };
 		0345ED572A8166210001EE35 /* AuthViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewOutput.swift; sourceTree = "<group>"; };
 		03B4AB7427668DC600958B33 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
@@ -1618,6 +1620,7 @@
 				03DCDDA62A5F0D1000AA24F5 /* Reducer */,
 				03DCDDA52A5F0CA700AA24F5 /* Views */,
 				0345ED572A8166210001EE35 /* AuthViewOutput.swift */,
+				03196F972B67FA31004EB782 /* AuthViewBuilder.swift */,
 			);
 			path = AuthModule;
 			sourceTree = "<group>";
@@ -3630,6 +3633,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03196F982B67FA31004EB782 /* AuthViewBuilder.swift in Sources */,
 				7159BA0A1F06F9B6004EABAA /* ExchangeRateCell.swift in Sources */,
 				A78214FD1CFFE8E900FD644A /* NSDate+Extensions.swift in Sources */,
 				A7F05BDF1CFD8FEC0079F1AD /* Database.swift in Sources */,
