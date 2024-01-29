@@ -9,6 +9,7 @@
 import Foundation
 import Viperit
 import RxSwift
+import Toaster
 
 class BackupRouter: Router {
     private let bag = DisposeBag()
@@ -21,9 +22,22 @@ class BackupRouter: Router {
     }
     
     func openSubscriptionPage() {
-        let vc = SubscriptionBuilder.build()
-        let nc = UINavigationController(rootViewController: vc)
-        _view.viewController.present(nc, animated: true)
+        let viewController = _view.viewController
+        if AuthService.shared.isLoggedIn {
+            let vc = SubscriptionBuilder.build()
+            let nc = UINavigationController(rootViewController: vc)
+            viewController.present(nc, animated: true)
+        } else {
+            let authModule = AuthViewBuilder.build(from: viewController)
+            authModule.successAuth
+                .map({ authModule.close() })
+                .delay(.milliseconds(Int(VIEW_CONTROLLER_TRANSITION_DELAY * 1000)), scheduler: MainScheduler.instance)
+                .observe(on: MainScheduler.instance)
+                .subscribe(onNext: { [weak self] in
+                    self?.openSubscriptionPage()
+                })
+                .disposed(by: bag)
+        }
     }
 }
 

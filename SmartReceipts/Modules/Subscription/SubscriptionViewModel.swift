@@ -50,16 +50,7 @@ final class SubscriptionViewModel {
     func accept(action: Action) {
         switch action {
         case .viewDidLoad:
-            environment.authService
-                .loggedInObservable
-                .subscribe(with: self, onNext: { viewModel, flag in
-                    guard flag else {
-                        viewModel.openLogin()
-                        return
-                    }
-                    viewModel.updatePlanSectionItems()
-                })
-                .disposed(by: bag)
+            loadingPlanSectionItems()
         case .didSelect(let model):
             guard !model.isPurchased else { return }
             purchase(productId: model.id)
@@ -73,19 +64,7 @@ final class SubscriptionViewModel {
         }
     }
     
-    private func openLogin() {
-        environment.router.openLogin()
-            .subscribe(onCompleted: { [weak self] in
-                guard let self = self else { return }
-                self.updatePlanSectionItems()
-                AnalyticsManager.sharedManager.record(event: Event.subscriptionShowLogin())
-            }, onError: { error in
-                Logger.error(error.localizedDescription)
-                AnalyticsManager.sharedManager.record(event: Event.subsctiptionLoginFailed())
-            }).disposed(by: bag)
-    }
-    
-    private func updatePlanSectionItems() {
+    private func loadingPlanSectionItems() {
         let hud = PendingHUDView.showFullScreen()
         state.update { $0.isLoading = true }
         getPlansWithPurchases()
@@ -101,7 +80,7 @@ final class SubscriptionViewModel {
                 Logger.error(error.localizedDescription)
                 viewModel.environment.router.handlerError(
                     errorMessage: error.localizedDescription,
-                    retryAction: { viewModel.updatePlanSectionItems() }
+                    retryAction: { viewModel.loadingPlanSectionItems() }
                 )
             })
             .disposed(by: bag)
@@ -124,7 +103,7 @@ final class SubscriptionViewModel {
                 AnalyticsManager.sharedManager.record(event: Event.subscriptionPurchaseFailed())
             }, onCompleted: { viewModel in
                 hud.hide()
-                viewModel.environment.router.openSuccessPage(updateState: viewModel.updatePlanSectionItems)
+                viewModel.environment.router.openSuccessPage(updateState: viewModel.loadingPlanSectionItems)
                 viewModel.state.update { $0.needUpdatePlansAfterPurchased = true }
                 Logger.debug("Successuful payment: \(productId)")
                 AnalyticsManager.sharedManager.record(

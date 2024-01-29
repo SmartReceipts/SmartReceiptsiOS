@@ -14,27 +14,7 @@ import Toaster
 
 final class SubscriptionRouter {
     weak var moduleViewController: UIViewController!
-    
-    func openLogin() -> Completable {
-        let authViewOutput = AuthViewOutput()
-        let authView = AuthViewScreen(
-            store: Store(initialState: AuthViewReducer.State()) {
-            AuthViewReducer(authViewOutput: authViewOutput)
-        })
-        let authController = UIHostingController(rootView: authView)
-        authViewOutput.viewController = authController
-        moduleViewController.present(authController, animated: true)
-        Toast.show(LocalizedString("subscription_need_authorization"))
-        return Completable.create { [weak authViewOutput] event -> Disposable in
-                _ = authViewOutput?.successAuth.subscribe(onNext: {
-                    event(.completed)
-                })
-                return Disposables.create()
-            }.do(onCompleted: { [weak authController] in
-                authController?.dismiss(animated: true, completion: nil)
-            })
-    }
-    
+
     func openSuccessPage(updateState: @escaping (() -> Void)) {
         let vc = SuccessPlanBuilder.build()
         let nc = UINavigationController(rootViewController: vc)
