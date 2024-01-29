@@ -11,11 +11,10 @@ import RxSwift
 import RxCocoa
 import StoreKit
 import SwiftyStoreKit
-import Toaster
 
 final class SubscriptionViewModel {
     struct State {
-        var isLoggin: LogginState?
+        var isLoading: Bool
         var plans: [PlanModel]
         var needUpdatePlansAfterPurchased: Bool
     }
@@ -23,15 +22,8 @@ final class SubscriptionViewModel {
     enum Action {
         case viewDidLoad
         case didSelect(PlanModel)
-        case loginTapped
         case openSubscriptions
         case close
-    }
-    
-    enum LogginState {
-        case loading
-        case noAuth
-        case auth
     }
     
     var output: Driver<State> { state.asDriver() }
@@ -39,7 +31,7 @@ final class SubscriptionViewModel {
     private let environment: SubscriptionEnvironment
     private let state = BehaviorRelay<State>.init(
         value: State(
-            isLoggin: nil,
+            isLoading: true,
             plans: [],
             needUpdatePlansAfterPurchased: false
         )
@@ -58,7 +50,6 @@ final class SubscriptionViewModel {
     func accept(action: Action) {
         switch action {
         case .viewDidLoad:
-            state.update { $0.isLoggin = .noAuth }
             environment.authService
                 .loggedInObservable
                 .subscribe(with: self, onNext: { viewModel, flag in
@@ -66,7 +57,6 @@ final class SubscriptionViewModel {
                         viewModel.openLogin()
                         return
                     }
-                    viewModel.state.update { $0.isLoggin = .auth }
                     viewModel.updatePlanSectionItems()
                 })
                 .disposed(by: bag)
@@ -76,8 +66,6 @@ final class SubscriptionViewModel {
             AnalyticsManager.sharedManager.record(
                 event: Event.subscriptionTapped(productId: model.id)
             )
-        case .loginTapped:
-            openLogin()
         case .openSubscriptions:
             environment.router.openSubscriptions()
         case .close:
@@ -89,7 +77,6 @@ final class SubscriptionViewModel {
         environment.router.openLogin()
             .subscribe(onCompleted: { [weak self] in
                 guard let self = self else { return }
-                self.state.update { $0.isLoggin = .auth }
                 self.updatePlanSectionItems()
                 AnalyticsManager.sharedManager.record(event: Event.subscriptionShowLogin())
             }, onError: { error in
@@ -100,16 +87,17 @@ final class SubscriptionViewModel {
     
     private func updatePlanSectionItems() {
         let hud = PendingHUDView.showFullScreen()
-        state.update { $0.isLoggin = .loading }
+        state.update { $0.isLoading = true }
         getPlansWithPurchases()
             .map { $0.sorted { plan, _ in plan.kind == .premium } }
             .debug("UPDATE PLAN SECTION ITEMS")
             .subscribe(with: self, onSuccess: { viewModel, plans in
                 hud.hide()
-                viewModel.state.update { $0.isLoggin = .auth }
+                viewModel.state.update { $0.isLoading = false }
                 viewModel.state.update { $0.plans = plans }
             }, onFailure: { viewModel, error in
                 hud.hide()
+                viewModel.state.update { $0.isLoading = false }
                 Logger.error(error.localizedDescription)
                 viewModel.environment.router.handlerError(
                     errorMessage: error.localizedDescription,

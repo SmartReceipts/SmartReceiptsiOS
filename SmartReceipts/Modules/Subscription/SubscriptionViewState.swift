@@ -13,7 +13,7 @@ extension SubscriptionViewController {
     struct ViewState {
         let collection: [PlanSectionItem]
         var purchaseViewState: PurchaseViewState
-        var authViewState: AuthViewState?
+        var contentViewState: ContentViewState?
         var needUpdatePlansAfterPurchased: Bool
     }
     
@@ -67,29 +67,15 @@ extension SubscriptionViewController {
         }
     }
     
-    enum AuthViewState {
+    enum ContentViewState {
         case loading
-        case notAuth
-        case auth
-        
-        var backgroundColor: UIColor {
-            switch self {
-            case .loading:
-                return .white
-            case .notAuth:
-                return .white
-            case .auth:
-                return .srViolet
-            }
-        }
+        case loaded
         
         var choosePlanIsHidden: Bool {
             switch self {
             case .loading:
                 return true
-            case .notAuth:
-                return true
-            case .auth:
+            case .loaded:
                 return false
             }
         }
@@ -98,9 +84,7 @@ extension SubscriptionViewController {
             switch self {
             case .loading:
                 return true
-            case .notAuth:
-                return true
-            case .auth:
+            case .loaded:
                 return false
             }
         }
@@ -109,32 +93,8 @@ extension SubscriptionViewController {
             switch self {
             case .loading:
                 return true
-            case .notAuth:
-                return true
-            case .auth:
+            case .loaded:
                 return false
-            }
-        }
-        
-        var authPlanLabelIsHidden: Bool {
-            switch self {
-            case .loading:
-                return true
-            case .notAuth:
-                return false
-            case .auth:
-                return true
-            }
-        }
-        
-        var loginButtonIsHidden: Bool {
-            switch self {
-            case .loading:
-                return true
-            case .notAuth:
-                return false
-            case .auth:
-                return true
             }
         }
     }

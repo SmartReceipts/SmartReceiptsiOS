@@ -10,6 +10,7 @@ import ComposableArchitecture
 import RxSwift
 import SwiftUI
 import UIKit
+import Toaster
 
 final class SubscriptionRouter {
     weak var moduleViewController: UIViewController!
@@ -23,6 +24,7 @@ final class SubscriptionRouter {
         let authController = UIHostingController(rootView: authView)
         authViewOutput.viewController = authController
         moduleViewController.present(authController, animated: true)
+        Toast.show(LocalizedString("subscription_need_authorization"))
         return Completable.create { [weak authViewOutput] event -> Disposable in
                 _ = authViewOutput?.successAuth.subscribe(onNext: {
                     event(.completed)

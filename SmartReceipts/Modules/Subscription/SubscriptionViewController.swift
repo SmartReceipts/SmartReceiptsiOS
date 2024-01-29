@@ -129,29 +129,6 @@ final class SubscriptionViewController: UIViewController {
         return label
     }()
     
-    private lazy var authPlanLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.font = .regular16
-        label.textColor = .black
-        label.numberOfLines = 0
-        label.text = LocalizedString("subscription_need_authorization")
-        label.textAlignment = .center
-        
-        return label
-    }()
-    
-    private lazy var loginButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.backgroundColor = .srViolet
-        button.setTitle(LocalizedString("login_button_text"), for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .regular14
-        button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
-        button.layer.cornerRadius = 5
-        
-        return button
-    }()
-    
     init(dataSource: SubscriptionDataSource) {
         self.dataSource = dataSource
         super.init(nibName: nil, bundle: nil)
@@ -169,9 +146,7 @@ final class SubscriptionViewController: UIViewController {
             imageStackView,
             labelStackView,
             collectionView,
-            cancelPlanLabel,
-            authPlanLabel,
-            loginButton
+            cancelPlanLabel
         ])
         
         commonInit()
@@ -185,16 +160,12 @@ final class SubscriptionViewController: UIViewController {
     
     private func setupViews() {
         title = LocalizedString("subscription_title")
+        view.backgroundColor = .srViolet
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage.init(imageLiteralResourceName: "close_button"),
             style: .plain,
             target: self, action: #selector(close)
         )
-    }
-    
-    @objc
-    func loginTapped() {
-        outputReplay.accept(.loginTapped)
     }
     
     @objc
@@ -247,20 +218,6 @@ final class SubscriptionViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-40)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
-        
-        authPlanLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(loginButton.snp.top).offset(-10)
-            make.leading.equalToSuperview().offset(40)
-            make.trailing.equalToSuperview().offset(-40)
-        }
-        
-        loginButton.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(60)
-            make.trailing.equalToSuperview().offset(-60)
-            make.height.equalTo(41)
-        }
     }
     
     func bind(_ viewState: Driver<SubscriptionViewController.ViewState>) {
@@ -279,10 +236,10 @@ final class SubscriptionViewController: UIViewController {
             })
             .disposed(by: bag)
         
-        viewState.map(\.authViewState)
+        viewState.map(\.contentViewState)
             .drive(onNext: { [weak self] state in
                 guard let self = self else { return }
-                self.configureAuthViewState(state: state)
+                self.configureContentViewState(state: state)
             })
             .disposed(by: bag)
         
@@ -292,6 +249,7 @@ final class SubscriptionViewController: UIViewController {
                 if flag { self.collectionView.reloadData() }
             })
             .disposed(by: bag)
+        
         cancelPlanLabel
             .rx
             .tapGesture()
@@ -310,14 +268,11 @@ final class SubscriptionViewController: UIViewController {
         cancelPlanLabel.isHidden = !state.cancelPlanHidden
     }
     
-    private func configureAuthViewState(state: AuthViewState?) {
+    private func configureContentViewState(state: ContentViewState?) {
         guard let state = state else { return }
-        view.backgroundColor = state.backgroundColor
         choosePlanLabel.isHidden = state.choosePlanIsHidden
         labelStackView.isHidden = state.labelStackViewIsHidden
         imageStackView.isHidden = state.imageStackViewIsHidden
-        authPlanLabel.isHidden = state.authPlanLabelIsHidden
-        loginButton.isHidden = state.loginButtonIsHidden
     }
 }
 
