@@ -18,6 +18,7 @@ enum AuthViewBuilder {
         })
         let authController = UIHostingController(rootView: authView)
         authViewOutput.viewController = authController
+        authViewOutput.showToast()
         viewController?.present(authController, animated: true)
         return authViewOutput
     }

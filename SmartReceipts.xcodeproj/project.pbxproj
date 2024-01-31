@@ -11,6 +11,7 @@
 		031523082A987A7C00F6B22B /* HudSUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031523072A987A7C00F6B22B /* HudSUIView.swift */; };
 		0315230A2A98A8AE00F6B22B /* ToastSUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031523092A98A8AE00F6B22B /* ToastSUIView.swift */; };
 		03196F982B67FA31004EB782 /* AuthViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03196F972B67FA31004EB782 /* AuthViewBuilder.swift */; };
+		03196F9A2B6AC06C004EB782 /* Reactive+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03196F992B6AC06C004EB782 /* Reactive+UIViewController.swift */; };
 		0345ED542A8150280001EE35 /* SecurePasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345ED532A8150280001EE35 /* SecurePasswordField.swift */; };
 		0345ED582A8166210001EE35 /* AuthViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345ED572A8166210001EE35 /* AuthViewOutput.swift */; };
 		03B4AB7527668DC600958B33 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7427668DC600958B33 /* SubscriptionViewController.swift */; };
@@ -711,6 +712,7 @@
 		031523072A987A7C00F6B22B /* HudSUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HudSUIView.swift; sourceTree = "<group>"; };
 		031523092A98A8AE00F6B22B /* ToastSUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastSUIView.swift; sourceTree = "<group>"; };
 		03196F972B67FA31004EB782 /* AuthViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewBuilder.swift; sourceTree = "<group>"; };
+		03196F992B6AC06C004EB782 /* Reactive+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+UIViewController.swift"; sourceTree = "<group>"; };
 		0345ED532A8150280001EE35 /* SecurePasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurePasswordField.swift; sourceTree = "<group>"; };
 		0345ED572A8166210001EE35 /* AuthViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewOutput.swift; sourceTree = "<group>"; };
 		03B4AB7427668DC600958B33 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
@@ -2837,6 +2839,7 @@
 				71D7596823EB3B8A00EBFD45 /* NotificationName+Extensions.swift */,
 				71D7FA352304AA73001F36E1 /* UI */,
 				F306DB3B28019A9700EA3DC9 /* BahavierRelay+Extensions.swift */,
+				03196F992B6AC06C004EB782 /* Reactive+UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -4002,6 +4005,7 @@
 				7151F9DF20E6DE1B00C4E894 /* BackupProvider.swift in Sources */,
 				718AAC17212039F500290183 /* DistanceCell.swift in Sources */,
 				EA8D819D1AEA7C4200BAC943 /* ReceiptColumnComment.m in Sources */,
+				03196F9A2B6AC06C004EB782 /* Reactive+UIViewController.swift in Sources */,
 				71C014271F1AB14A005472B3 /* CategoriesView.swift in Sources */,
 				7134DACC2106776B006BDCAA /* AppNotificationCenter.swift in Sources */,
 				71F2B1CA2039EC5100581E65 /* InlinePickerButtonCell.swift in Sources */,

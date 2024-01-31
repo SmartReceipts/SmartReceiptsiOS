@@ -53,6 +53,10 @@ class AdPresentingContainerViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(checkAdsStatus), name: .SmartReceiptsAdsRemoved, object: nil)
     }
     
+    deinit {
+        Logger.debug("AdPresentingContainerViewController deinit")
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         bannerView?.adSize = getAdSize()
@@ -68,9 +72,21 @@ class AdPresentingContainerViewController: UIViewController {
     }
     
     private func openSubscriptionPage() {
-        let vc = SubscriptionBuilder.build()
-        let nc = UINavigationController(rootViewController: vc)
-        present(nc, animated: true)
+        if AuthService.shared.isLoggedIn {
+            let vc = SubscriptionBuilder.build()
+            let nc = UINavigationController(rootViewController: vc)
+            present(nc, animated: true)
+        } else {
+            let authModule = AuthViewBuilder.build(from: self)
+            authModule.successAuth
+                .map({ authModule.close() })
+                .delay(.milliseconds(Int(VIEW_CONTROLLER_TRANSITION_DELAY * 1000)), scheduler: MainScheduler.instance)
+                .observe(on: MainScheduler.instance)
+                .subscribe(onNext: { [weak self] in
+                    self?.openSubscriptionPage()
+                })
+                .disposed(by: bag)
+        }
     }
     
     private func loadAd() {
@@ -93,7 +109,7 @@ class AdPresentingContainerViewController: UIViewController {
     @objc private func checkAdsStatus() {
         purchaseService.validateSubscription().subscribe(onNext: { [unowned self] validation in
             if validation.adsRemoved {
-                Logger.debug("Remove Ads")
+                Logger.debug("Removoe Ads")
 
                 self.adContainerHeight.constant = 0
                 self.view.layoutSubviewsAnimated()
@@ -112,10 +128,6 @@ class AdPresentingContainerViewController: UIViewController {
                 self.loadAd()
             }
         }).disposed(by: bag)
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
 }
 
