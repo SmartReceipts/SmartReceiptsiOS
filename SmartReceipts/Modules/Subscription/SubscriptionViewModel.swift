@@ -109,6 +109,7 @@ final class SubscriptionViewModel {
                 AnalyticsManager.sharedManager.record(
                     event: Event.subscriptionPurchaseSuccess(productId: productId)
                 )
+                viewModel.environment.purchaseService.cacheSubscriptionValidation()
             })
             .disposed(by: bag)
     }

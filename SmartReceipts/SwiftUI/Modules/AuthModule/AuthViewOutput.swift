@@ -7,8 +7,10 @@
 //
 
 import RxSwift
+import Toaster
 
 final class AuthViewOutput {
+    private let bag = DisposeBag()
     var successAuth: Observable<Void> { return successAuthSubject.asObservable() }
     let successAuthSubject = PublishSubject<Void>()
 
@@ -16,5 +18,13 @@ final class AuthViewOutput {
     
     func close() {
         viewController?.dismiss(animated: true)
+    }
+    
+    func showToast() {
+        viewController?.rx.viewWillAppear
+            .subscribe(onNext: { _ in
+                Toast.show(LocalizedString("subscription_need_authorization"))
+        })
+        .disposed(by: bag)
     }
 }

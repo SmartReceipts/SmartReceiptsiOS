@@ -83,6 +83,12 @@ class PurchaseService {
                 NotificationCenter.default.post(name: .SmartReceiptsAdsRemoved, object: nil)
             }).disposed(by: bag)
     }
+    
+    deinit {
+        Logger.debug("PurchaseService deinit")
+    }
+    
+    static let shared = PurchaseService()
 
     private func cache(validation: SubscriptionValidation) {
         cachedValidation = validation
@@ -238,10 +244,14 @@ class PurchaseService {
     }
     
     func completeTransactions() {
-        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+        SwiftyStoreKit.completeTransactions(atomically: false) { purchases in
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
                 case .purchased, .restored:
+                    if purchase.needsFinishTransaction {
+                        // Deliver content from server, then:
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
                     if purchase.productId == PRODUCT_PLUS || purchase.productId == PRODUCT_PREMIUM_SUB {
                         NotificationCenter.default.post(name: .SmartReceiptsAdsRemoved, object: nil)
                     }
@@ -369,7 +379,7 @@ class PurchaseService {
         validateSubscription()
             .subscribe(onNext: { [weak self] validation in
                 self?.cache(validation: validation)
-                Logger.debug("Cached Validation: Valid = \(validation.plusValid), expire: \(String(describing: validation.plusExpireTime))")
+                Logger.debug("Cached Validation: Valid = \(validation.plusValid), expire: \(String(describing: validation.plusExpireTime)), standardPurchased: \(validation.standardPurchased), premiumPurchased: \(validation.premiumPurchased)")
             }, onError: { error in
                 Logger.error(error.localizedDescription)
             }).disposed(by: bag)

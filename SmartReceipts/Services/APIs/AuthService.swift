@@ -50,6 +50,10 @@ final class AuthService: AuthServiceInterface {
         isLoggedInVar = BehaviorRelay<Bool>(value: loggedIn)
     }
     
+    deinit {
+        Logger.debug("AuthService deinit")
+    }
+    
     static let shared = AuthService()
     
     var loggedInObservable: Observable<Bool> {
@@ -170,6 +174,7 @@ final class AuthService: AuthServiceInterface {
         emailVar.accept("")
         idVar.accept("")
         isLoggedInVar.accept(false)
+        PurchaseService.shared.resetCache()
     }
 }
 
