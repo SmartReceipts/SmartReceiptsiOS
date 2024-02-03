@@ -146,6 +146,8 @@
 
 "subscription_need_authorization" = "Você deve estar logado para comprar uma assinatura";
 
+"subscription_error_label" = "Falha ao obter assinaturas.\nPor favor, tente novamente mais tarde";
+
 /* ============= Success Page =============*/
 "success_title" = "Sucesso!";
 

@@ -129,6 +129,29 @@ final class SubscriptionViewController: UIViewController {
         return label
     }()
     
+    private lazy var errorLabel: UILabel = {
+         let label = UILabel(frame: .zero)
+         label.font = .regular16
+         label.textColor = .white
+         label.numberOfLines = 0
+         label.text = LocalizedString("subscription_error_label")
+         label.textAlignment = .center
+         
+         return label
+     }()
+     
+     private lazy var retryButton: UIButton = {
+         let button = UIButton(frame: .zero)
+         button.backgroundColor = .white
+         button.setTitle(LocalizedString("exchange_rate_retrieve_error_retry_button"), for: .normal)
+         button.setTitleColor(.srViolet, for: .normal)
+         button.titleLabel?.font = .regular14
+         button.addTarget(self, action: #selector(retryTapped), for: .touchUpInside)
+         button.layer.cornerRadius = 5
+         
+         return button
+     }()
+    
     init(dataSource: SubscriptionDataSource) {
         self.dataSource = dataSource
         super.init(nibName: nil, bundle: nil)
@@ -146,7 +169,9 @@ final class SubscriptionViewController: UIViewController {
             imageStackView,
             labelStackView,
             collectionView,
-            cancelPlanLabel
+            cancelPlanLabel,
+            errorLabel,
+            retryButton
         ])
         
         commonInit()
@@ -166,6 +191,11 @@ final class SubscriptionViewController: UIViewController {
             style: .plain,
             target: self, action: #selector(close)
         )
+    }
+    
+    @objc
+    func retryTapped() {
+        outputReplay.accept(.retryTapped)
     }
     
     @objc
@@ -218,6 +248,20 @@ final class SubscriptionViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-40)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom)
         }
+        
+        errorLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(retryButton.snp.top).offset(-10)
+            make.leading.equalToSuperview().offset(40)
+            make.trailing.equalToSuperview().offset(-40)
+        }
+        
+        retryButton.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(60)
+            make.trailing.equalToSuperview().offset(-60)
+            make.height.equalTo(41)
+        }
     }
     
     func bind(_ viewState: Driver<SubscriptionViewController.ViewState>) {
@@ -225,7 +269,15 @@ final class SubscriptionViewController: UIViewController {
             .setDelegate(self)
             .disposed(by: bag)
                 
-        viewState.map(\.collection)
+        viewState.map(\.contentViewState)
+            .flatMap({
+                switch $0 {
+                case let .loaded(plans):
+                    return .just(plans)
+                case .loading, .error:
+                    return .empty()
+                }
+            })
             .drive(collectionView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
         
@@ -268,11 +320,12 @@ final class SubscriptionViewController: UIViewController {
         cancelPlanLabel.isHidden = !state.cancelPlanHidden
     }
     
-    private func configureContentViewState(state: ContentViewState?) {
-        guard let state = state else { return }
+    private func configureContentViewState(state: ContentViewState) {
         choosePlanLabel.isHidden = state.choosePlanIsHidden
         labelStackView.isHidden = state.labelStackViewIsHidden
         imageStackView.isHidden = state.imageStackViewIsHidden
+        errorLabel.isHidden = state.errorLabelIsHidden
+        retryButton.isHidden = state.retryButtonIsHidden
     }
 }
 

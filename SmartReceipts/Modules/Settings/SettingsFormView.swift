@@ -14,8 +14,6 @@ import FirebaseCrashlytics
 fileprivate let IMAGE_OPTIONS = [512, 1024, 2048, 0]
 
 final class SettingsFormView: FormViewController {
-    private var hasValidSubscription = false
-    
     weak var openModuleSubject: PublishSubject<SettingsRoutes>!
     weak var alertSubject: PublishSubject<AlertTuple>!
     weak var settingsView: SettingsView!
@@ -27,14 +25,16 @@ final class SettingsFormView: FormViewController {
     fileprivate let bag = DisposeBag()
     
     private let dateFormats: [String]
+    private let hasValidSubscription: Bool
     
     var hud: PendingHUDView?
     var showOption: ShowSettingsOption?
     
-    init(settingsView: SettingsView, dateFormats: [String]) {
-        self.dateFormats = dateFormats
-        super.init(nibName: nil, bundle: nil)
+    init(settingsView: SettingsView, dateFormats: [String], hasValidSubscription: Bool) {
         self.settingsView = settingsView
+        self.dateFormats = dateFormats
+        self.hasValidSubscription = hasValidSubscription
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -592,7 +592,6 @@ final class SettingsFormView: FormViewController {
     }
     
     private func setupPurchased(expireDate: Date?) {
-        hasValidSubscription = true
         purchaseRow.markPurchased()
         purchaseRow.setSubscriptionEnd(date: expireDate)
         footerRow.isEnabled = true
@@ -674,7 +673,7 @@ extension SettingsFormView {
             value = intVal
         } else {
             if let stringValue = selectedOption {
-                value = options.index(of: stringValue) ?? 0
+                value = options.firstIndex(of: stringValue) ?? 0
             }
         }
         
@@ -713,5 +712,3 @@ extension SettingsFormView {
         })
     }
 }
-
-

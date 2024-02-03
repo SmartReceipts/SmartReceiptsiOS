@@ -47,23 +47,24 @@ public enum SubscriptionBuilder {
     private static func convert(
         state: SubscriptionViewModel.State
     ) -> SubscriptionViewController.ViewState {
-        let plans = state.plans
         var purchaseViewState: SubscriptionViewController.PurchaseViewState = .notPurchased
-        var contentViewState: SubscriptionViewController.ContentViewState? = nil
-        if state.isLoading {
+        var contentViewState: SubscriptionViewController.ContentViewState = .loading
+        switch state.subscriptionState {
+        case .loading:
             contentViewState = .loading
-        } else {
-            contentViewState = .loaded
-        }
-        plans.forEach { model in
-            if model.isPurchased {
-                purchaseViewState = .purchased
+        case .loaded(let plans):
+            contentViewState = .loaded([PlanSectionItem(items: plans)])
+            plans.forEach { model in
+                if model.isPurchased {
+                    purchaseViewState = .purchased
+                }
             }
+        case .error(let errorString):
+            contentViewState = .error(errorString)
         }
         return .init(
-            collection: [PlanSectionItem(items: plans)],
-            purchaseViewState: purchaseViewState,
             contentViewState: contentViewState,
+            purchaseViewState: purchaseViewState,
             needUpdatePlansAfterPurchased: state.needUpdatePlansAfterPurchased
         )
     }

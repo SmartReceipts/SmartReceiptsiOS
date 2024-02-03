@@ -146,6 +146,8 @@
 
 "subscription_need_authorization" = "You must be logged in to purchase a subscription";
 
+"subscription_error_label" = "Failed to get subscriptions.\nPlease try again later";
+
 /* ============= Success Plan =============*/
 "success_title" = "Success!";
 

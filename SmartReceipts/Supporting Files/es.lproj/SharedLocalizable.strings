@@ -146,6 +146,8 @@
 
 "subscription_need_authorization" = "Debe iniciar sesión para comprar una suscripción";
 
+"subscription_error_label" = "No se pudieron obtener suscripciones.\nPor favor, inténtelo de nuevo más tarde";
+
 /* ============= Success Page =============*/
 "success_title" = "¡Éxito!";
 

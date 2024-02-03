@@ -31,7 +31,11 @@ final class SettingsView: UserInterface {
         super.viewDidLoad()
         navigationItem.title = LocalizedString("menu_main_settings")
         
-        formView = SettingsFormView(settingsView: self, dateFormats: displayData.formats)
+        formView = SettingsFormView(
+            settingsView: self,
+            dateFormats: displayData.formats,
+            hasValidSubscription: presenter.hasValidSubscription()
+        )
         formView.showOption = displayData.showSettingsOption
         formView.openModuleSubject = presenter.openModuleSubject
         formView.alertSubject = presenter.alertSubject

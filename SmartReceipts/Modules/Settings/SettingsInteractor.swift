@@ -36,6 +36,10 @@ class SettingsInteractor: Interactor {
     func subscriptionValidation() -> Observable<SubscriptionValidation> {
         return purchaseService.validateSubscription()
     }
+    
+    func hasValidSubscription() -> Bool {
+        return PurchaseService.hasValidAllSubscription
+    }
 }
 
 // MARK: - VIPER COMPONENTS API (Auto-generated code)

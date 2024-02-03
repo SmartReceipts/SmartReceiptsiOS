@@ -146,6 +146,8 @@
 
 "subscription_need_authorization" = "Sie müssen angemeldet sein, um ein Abonnement zu erwerben";
 
+"subscription_error_label" = "Es konnten keine Abonnements abgerufen werden.\nBitte versuchen Sie es später noch einmal";
+
 /* ============= Success Page =============*/
 "success_title" = "Erfolg!";
 

@@ -248,10 +248,6 @@ class PurchaseService {
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
                 case .purchased, .restored:
-                    if purchase.needsFinishTransaction {
-                        // Deliver content from server, then:
-                        SwiftyStoreKit.finishTransaction(purchase.transaction)
-                    }
                     if purchase.productId == PRODUCT_PLUS || purchase.productId == PRODUCT_PREMIUM_SUB {
                         NotificationCenter.default.post(name: .SmartReceiptsAdsRemoved, object: nil)
                     }

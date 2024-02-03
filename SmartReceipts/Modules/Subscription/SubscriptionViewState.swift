@@ -11,9 +11,9 @@ import UIKit
 
 extension SubscriptionViewController {
     struct ViewState {
-        let collection: [PlanSectionItem]
+//        let collection: [PlanSectionItem]
+        var contentViewState: ContentViewState
         var purchaseViewState: PurchaseViewState
-        var contentViewState: ContentViewState?
         var needUpdatePlansAfterPurchased: Bool
     }
     
@@ -69,11 +69,12 @@ extension SubscriptionViewController {
     
     enum ContentViewState {
         case loading
-        case loaded
+        case loaded([PlanSectionItem])
+        case error(String)
         
         var choosePlanIsHidden: Bool {
             switch self {
-            case .loading:
+            case .loading, .error:
                 return true
             case .loaded:
                 return false
@@ -82,7 +83,7 @@ extension SubscriptionViewController {
         
         var labelStackViewIsHidden: Bool {
             switch self {
-            case .loading:
+            case .loading, .error:
                 return true
             case .loaded:
                 return false
@@ -91,9 +92,27 @@ extension SubscriptionViewController {
         
         var imageStackViewIsHidden: Bool {
             switch self {
-            case .loading:
+            case .loading, .error:
                 return true
             case .loaded:
+                return false
+            }
+        }
+        
+        var errorLabelIsHidden: Bool {
+            switch self {
+            case .loading, .loaded:
+                return true
+            case .error:
+                return false
+            }
+        }
+        
+        var retryButtonIsHidden: Bool {
+            switch self {
+            case .loading, .loaded:
+                return true
+            case .error:
                 return false
             }
         }

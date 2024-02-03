@@ -146,6 +146,8 @@
 
 "subscription_need_authorization" = "עליך להיות מחובר כדי לרכוש מנוי";
 
+"subscription_error_label" = "קבלת המנויים נכשלה.\nבבקשה נסה שוב מאוחר יותר";
+
 /* ============= Success Page =============*/
 "success_title" = "הַצלָחָה!";
 

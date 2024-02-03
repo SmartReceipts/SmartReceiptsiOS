@@ -146,6 +146,8 @@
 
 "subscription_need_authorization" = "Vous devez être connecté pour acheter un abonnement";
 
+"subscription_error_label" = "Échec de l'obtention des abonnements.\nVeuillez réessayer plus tard";
+
 /* ============= Success Page =============*/
 "success_title" = "Succès!";
 
