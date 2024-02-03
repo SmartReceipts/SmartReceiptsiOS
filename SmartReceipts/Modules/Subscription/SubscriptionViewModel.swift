@@ -14,9 +14,14 @@ import SwiftyStoreKit
 
 final class SubscriptionViewModel {
     struct State {
-        var isLoading: Bool
-        var plans: [PlanModel]
+        var subscriptionState: SubscriptionState
         var needUpdatePlansAfterPurchased: Bool
+    }
+    
+    enum SubscriptionState {
+        case loading
+        case loaded(plans: [PlanModel])
+        case error(String)
     }
     
     enum Action {
@@ -24,6 +29,7 @@ final class SubscriptionViewModel {
         case didSelect(PlanModel)
         case openSubscriptions
         case close
+        case retryTapped
     }
     
     var output: Driver<State> { state.asDriver() }
@@ -31,8 +37,7 @@ final class SubscriptionViewModel {
     private let environment: SubscriptionEnvironment
     private let state = BehaviorRelay<State>.init(
         value: State(
-            isLoading: true,
-            plans: [],
+            subscriptionState: .loading,
             needUpdatePlansAfterPurchased: false
         )
     )
@@ -45,6 +50,7 @@ final class SubscriptionViewModel {
     
     deinit {
         AnalyticsManager.sharedManager.record(event: Event.subscriptionClose())
+        NotificationCenter.default.removeObserver(self)
     }
     
     func accept(action: Action) {
@@ -61,27 +67,24 @@ final class SubscriptionViewModel {
             environment.router.openSubscriptions()
         case .close:
             environment.router.close()
+        case .retryTapped:
+            loadingPlanSectionItems()
         }
     }
     
     private func loadingPlanSectionItems() {
         let hud = PendingHUDView.showFullScreen()
-        state.update { $0.isLoading = true }
+        state.update { $0.subscriptionState = .loading }
         getPlansWithPurchases()
             .map { $0.sorted { plan, _ in plan.kind == .premium } }
             .debug("UPDATE PLAN SECTION ITEMS")
             .subscribe(with: self, onSuccess: { viewModel, plans in
                 hud.hide()
-                viewModel.state.update { $0.isLoading = false }
-                viewModel.state.update { $0.plans = plans }
+                viewModel.state.update { $0.subscriptionState = .loaded(plans: plans) }
             }, onFailure: { viewModel, error in
                 hud.hide()
-                viewModel.state.update { $0.isLoading = false }
+                viewModel.state.update { $0.subscriptionState = .error(error.localizedDescription) }
                 Logger.error(error.localizedDescription)
-                viewModel.environment.router.handlerError(
-                    errorMessage: error.localizedDescription,
-                    retryAction: { viewModel.loadingPlanSectionItems() }
-                )
             })
             .disposed(by: bag)
     }
@@ -103,9 +106,12 @@ final class SubscriptionViewModel {
                 AnalyticsManager.sharedManager.record(event: Event.subscriptionPurchaseFailed())
             }, onCompleted: { viewModel in
                 hud.hide()
+                if productId == PRODUCT_PREMIUM_SUB {
+                    NotificationCenter.default.post(name: .SmartReceiptsAdsRemoved, object: nil)
+                }
                 viewModel.environment.router.openSuccessPage(updateState: viewModel.loadingPlanSectionItems)
                 viewModel.state.update { $0.needUpdatePlansAfterPurchased = true }
-                Logger.debug("Successuful payment: \(productId)")
+                Logger.debug("Successful payment: \(productId)")
                 AnalyticsManager.sharedManager.record(
                     event: Event.subscriptionPurchaseSuccess(productId: productId)
                 )

@@ -54,6 +54,7 @@ class AdPresentingContainerViewController: UIViewController {
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         Logger.debug("AdPresentingContainerViewController deinit")
     }
     
@@ -109,7 +110,7 @@ class AdPresentingContainerViewController: UIViewController {
     @objc private func checkAdsStatus() {
         purchaseService.validateSubscription().subscribe(onNext: { [unowned self] validation in
             if validation.adsRemoved {
-                Logger.debug("Removoe Ads")
+                Logger.debug("Remove Ads")
 
                 self.adContainerHeight.constant = 0
                 self.view.layoutSubviewsAnimated()

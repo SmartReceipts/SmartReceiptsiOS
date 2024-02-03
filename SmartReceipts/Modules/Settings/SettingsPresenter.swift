@@ -55,6 +55,10 @@ class SettingsPresenter: Presenter {
     func subscriptionValidation() -> Observable<SubscriptionValidation> {
         return interactor.subscriptionValidation()
     }
+    
+    func hasValidSubscription() -> Bool {
+        return interactor.hasValidSubscription()
+    }
 }
 
 enum ShowSettingsOption {
