@@ -14,6 +14,7 @@
 		03196F9A2B6AC06C004EB782 /* Reactive+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03196F992B6AC06C004EB782 /* Reactive+UIViewController.swift */; };
 		0345ED542A8150280001EE35 /* SecurePasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345ED532A8150280001EE35 /* SecurePasswordField.swift */; };
 		0345ED582A8166210001EE35 /* AuthViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345ED572A8166210001EE35 /* AuthViewOutput.swift */; };
+		03A7E96A2B7182D600F3474E /* RxSwift+TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A7E9692B7182D600F3474E /* RxSwift+TypeAlias.swift */; };
 		03B4AB7527668DC600958B33 /* SubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7427668DC600958B33 /* SubscriptionViewController.swift */; };
 		03B4AB7727668E2000958B33 /* SubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7627668E2000958B33 /* SubscriptionViewModel.swift */; };
 		03B4AB7927668E3700958B33 /* SubscriptionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B4AB7827668E3700958B33 /* SubscriptionDataSource.swift */; };
@@ -715,6 +716,7 @@
 		03196F992B6AC06C004EB782 /* Reactive+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+UIViewController.swift"; sourceTree = "<group>"; };
 		0345ED532A8150280001EE35 /* SecurePasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurePasswordField.swift; sourceTree = "<group>"; };
 		0345ED572A8166210001EE35 /* AuthViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewOutput.swift; sourceTree = "<group>"; };
+		03A7E9692B7182D600F3474E /* RxSwift+TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxSwift+TypeAlias.swift"; sourceTree = "<group>"; };
 		03B4AB7427668DC600958B33 /* SubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewController.swift; sourceTree = "<group>"; };
 		03B4AB7627668E2000958B33 /* SubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionViewModel.swift; sourceTree = "<group>"; };
 		03B4AB7827668E3700958B33 /* SubscriptionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDataSource.swift; sourceTree = "<group>"; };
@@ -3117,6 +3119,7 @@
 				EAD15C7C1B0881FE003BB1F3 /* ReceiptFilesManagerTest.m */,
 				7182CDD21F08F37200EAA320 /* MatchableExtensions.swift */,
 				715606901FAFB3C500E09760 /* TestableExtensions.swift */,
+				03A7E9692B7182D600F3474E /* RxSwift+TypeAlias.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -4129,6 +4132,7 @@
 				7123483321418F6D0038AAE5 /* CurrencyExchangeServiceTests.swift in Sources */,
 				A744E5141CEC45A700D838C7 /* DatabaseCategoriesImportTests.swift in Sources */,
 				7123482421418F690038AAE5 /* GenerateReportModuleTest.swift in Sources */,
+				03A7E96A2B7182D600F3474E /* RxSwift+TypeAlias.swift in Sources */,
 				7123483B21418F6D0038AAE5 /* MigrationServiceTest.swift in Sources */,
 				7139EDE221A4943D000C4BE6 /* Moya+Extensions.swift in Sources */,
 				7123481521418F610038AAE5 /* MigrationServiceTestable.swift in Sources */,
