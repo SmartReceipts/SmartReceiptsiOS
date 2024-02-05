@@ -6310,6 +6310,26 @@ import Viperit
     }
     
     
+    
+    
+    
+     override func openSubscriptionPage()  {
+        
+    return cuckoo_manager.call(
+    """
+    openSubscriptionPage()
+    """,
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                super.openSubscriptionPage()
+                ,
+            defaultCall: __defaultImplStub!.openSubscriptionPage())
+        
+    }
+    
+    
 
      struct __StubbingProxy_OCRConfigurationPresenter: Cuckoo.StubbingProxy {
         private let cuckoo_manager: Cuckoo.MockManager
@@ -6340,6 +6360,17 @@ import Viperit
             return .init(stub: cuckoo_manager.createStub(for: MockOCRConfigurationPresenter.self, method:
     """
     viewHasLoaded()
+    """, parameterMatchers: matchers))
+        }
+        
+        
+        
+        
+        func openSubscriptionPage() -> Cuckoo.ClassStubNoReturnFunction<()> {
+            let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+            return .init(stub: cuckoo_manager.createStub(for: MockOCRConfigurationPresenter.self, method:
+    """
+    openSubscriptionPage()
     """, parameterMatchers: matchers))
         }
         
@@ -6386,6 +6417,18 @@ import Viperit
         }
         
         
+        
+        
+        @discardableResult
+        func openSubscriptionPage() -> Cuckoo.__DoNotUse<(), Void> {
+            let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+            return cuckoo_manager.verify(
+    """
+    openSubscriptionPage()
+    """, callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+        }
+        
+        
     }
 }
 
@@ -6422,6 +6465,14 @@ import Viperit
     
     
      override func viewHasLoaded()   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+    
+    
+    
+    
+     override func openSubscriptionPage()   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -6475,12 +6526,43 @@ import Viperit
     
 
     
+    
+    
+    
+     override func openSubscriptionPage()  {
+        
+    return cuckoo_manager.call(
+    """
+    openSubscriptionPage()
+    """,
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                super.openSubscriptionPage()
+                ,
+            defaultCall: __defaultImplStub!.openSubscriptionPage())
+        
+    }
+    
+    
 
      struct __StubbingProxy_OCRConfigurationRouter: Cuckoo.StubbingProxy {
         private let cuckoo_manager: Cuckoo.MockManager
     
          init(manager: Cuckoo.MockManager) {
             self.cuckoo_manager = manager
+        }
+        
+        
+        
+        
+        func openSubscriptionPage() -> Cuckoo.ClassStubNoReturnFunction<()> {
+            let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+            return .init(stub: cuckoo_manager.createStub(for: MockOCRConfigurationRouter.self, method:
+    """
+    openSubscriptionPage()
+    """, parameterMatchers: matchers))
         }
         
         
@@ -6500,6 +6582,18 @@ import Viperit
         
     
         
+        
+        
+        @discardableResult
+        func openSubscriptionPage() -> Cuckoo.__DoNotUse<(), Void> {
+            let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+            return cuckoo_manager.verify(
+    """
+    openSubscriptionPage()
+    """, callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+        }
+        
+        
     }
 }
 
@@ -6509,6 +6603,14 @@ import Viperit
 
     
 
+    
+    
+    
+    
+     override func openSubscriptionPage()   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
     
 }
 

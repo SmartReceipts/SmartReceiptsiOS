@@ -51,6 +51,22 @@ class AuthServiceTestable: AuthServiceInterface {
         return negative ? .error(MockAuthError.testError) : .just(())
     }
     
+    func login(credentials: SmartReceipts.Credentials) async throws -> SmartReceipts.LoginResponse {
+        if negative {
+            throw MockAuthError.testError
+        } else {
+            LoginResponse(id: id, token: token)
+        }
+    }
+    
+    func signup(credentials: SmartReceipts.Credentials) async throws -> SmartReceipts.SignupResponse {
+        if negative {
+            throw MockAuthError.testError
+        } else {
+            SignupResponse(id: id, token: token)
+        }
+    }
+    
     enum MockAuthError: Error {
         case testError
     }
