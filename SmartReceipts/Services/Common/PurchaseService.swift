@@ -180,9 +180,17 @@ class PurchaseService {
             SwiftyStoreKit.purchaseProduct(prodcutID, atomically: true) { result in
                 switch result {
                 case .success(let purchase):
+                    let downloads = purchase.transaction.downloads
+                    if !downloads.isEmpty {
+                        SwiftyStoreKit.start(downloads)
+                    }
                     Logger.debug("Purchase Success: \(purchase.productId)")
                     observer.onNext(purchase)
                     observer.onCompleted()
+                    // Deliver content from server, then:
+                    if purchase.needsFinishTransaction {
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
                 case .deferred(let purchase):
                     Logger.debug("Purchase Deferred: \(purchase.productId)")
                     observer.onError(PurchaseError.deferredPurchase)
@@ -248,6 +256,10 @@ class PurchaseService {
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
                 case .purchased, .restored:
+                    if purchase.needsFinishTransaction {
+                        // Deliver content from server, then:
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
                     if purchase.productId == PRODUCT_PLUS || purchase.productId == PRODUCT_PREMIUM_SUB {
                         NotificationCenter.default.post(name: .SmartReceiptsAdsRemoved, object: nil)
                     }
@@ -402,8 +414,6 @@ class PurchaseService {
     func forceValidateSubscription() -> Observable<SubscriptionValidation> {
         if DebugStates.subscription() {
             return Observable<SubscriptionValidation>.just(.init(plusValid: true, plusExpireTime: nil, standardPurchased: true, premiumPurchased: true))
-        } else if let validation = cachedValidation {
-            return Observable<SubscriptionValidation>.just(validation)
         }
         
         return Observable<SubscriptionValidation>.create({ [weak self] observable -> Disposable in

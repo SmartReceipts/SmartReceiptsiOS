@@ -45,6 +45,7 @@ final class SubscriptionViewModel {
     
     init(environment: SubscriptionEnvironment) {
         self.environment = environment
+        environment.purchaseService.cacheSubscriptionValidation()
         AnalyticsManager.sharedManager.record(event: Event.subscriptionShown())
     }
     
