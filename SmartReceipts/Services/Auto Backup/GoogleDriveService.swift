@@ -74,7 +74,15 @@ class GoogleDriveService: NSObject {
                 with: .init(clientID: GOOGLE_CLIENT_ID),
                 presenting: viewController,
                 callback: { user, error in
-                  guard let user = user else { self.signInSubject.onError(NSError()); return }
+                    guard let user = user else {
+                        let error = NSError(
+                            domain:kGIDSignInErrorDomain,
+                            code:GIDSignInError.canceled.rawValue,
+                            userInfo:nil
+                        )
+                        self.signInSubject.onError(error)
+                        return
+                    }
 
                   if let grantedScopes = user.grantedScopes,
                       Set(self.authScopes).isSubset(of: Set(grantedScopes)) {

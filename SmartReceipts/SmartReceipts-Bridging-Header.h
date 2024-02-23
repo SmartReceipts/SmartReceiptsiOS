@@ -44,7 +44,6 @@
 #import "WBTextUtils.h"
 #import "WBImageUtils.h"
 #import "FetchedModelAdapterDelegate.h"
-#import "RateApplication.h"
 #import "DistanceColumn.h"
 #import "ReportCSVTable.h"
 #import "ReportPDFTable.h"

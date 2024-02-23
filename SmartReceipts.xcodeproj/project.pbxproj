@@ -12,6 +12,7 @@
 		0315230A2A98A8AE00F6B22B /* ToastSUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031523092A98A8AE00F6B22B /* ToastSUIView.swift */; };
 		03196F982B67FA31004EB782 /* AuthViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03196F972B67FA31004EB782 /* AuthViewBuilder.swift */; };
 		03196F9A2B6AC06C004EB782 /* Reactive+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03196F992B6AC06C004EB782 /* Reactive+UIViewController.swift */; };
+		0319FD4C2B7F6053002A7BD6 /* RateApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0319FD4B2B7F6053002A7BD6 /* RateApplicationManager.swift */; };
 		0345ED542A8150280001EE35 /* SecurePasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345ED532A8150280001EE35 /* SecurePasswordField.swift */; };
 		0345ED582A8166210001EE35 /* AuthViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0345ED572A8166210001EE35 /* AuthViewOutput.swift */; };
 		03A7E96A2B7182D600F3474E /* RxSwift+TypeAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A7E9692B7182D600F3474E /* RxSwift+TypeAlias.swift */; };
@@ -65,7 +66,6 @@
 		57580D1C1DFAB58B0090C488 /* UIDevice+DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 57580D1B1DFAB58B0090C488 /* UIDevice+DeviceInfo.m */; };
 		57580D1F1DFAB6AB0090C488 /* UIApplication+AppVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 57580D1E1DFAB6AB0090C488 /* UIApplication+AppVersion.m */; };
 		5762EA841ECDC2600032411A /* TripFullPDFGeneratorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5762EA831ECDC2600032411A /* TripFullPDFGeneratorTest.swift */; };
-		57691F001E10613500F78859 /* RateApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 57691EFF1E10613500F78859 /* RateApplication.m */; };
 		5785A4EF1E09DA0100C3CA0C /* AnalyticsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5785A4EE1E09DA0100C3CA0C /* AnalyticsLogger.swift */; };
 		579DDFB21E2E4223004937F7 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579DDFB11E2E4223004937F7 /* UIImage+Extensions.swift */; };
 		57A8058D1E9672C000E68049 /* DatabaseUpgrade15Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57A8058C1E9672C000E68049 /* DatabaseUpgrade15Tests.swift */; };
@@ -714,6 +714,7 @@
 		031523092A98A8AE00F6B22B /* ToastSUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastSUIView.swift; sourceTree = "<group>"; };
 		03196F972B67FA31004EB782 /* AuthViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewBuilder.swift; sourceTree = "<group>"; };
 		03196F992B6AC06C004EB782 /* Reactive+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+UIViewController.swift"; sourceTree = "<group>"; };
+		0319FD4B2B7F6053002A7BD6 /* RateApplicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateApplicationManager.swift; sourceTree = "<group>"; };
 		0345ED532A8150280001EE35 /* SecurePasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurePasswordField.swift; sourceTree = "<group>"; };
 		0345ED572A8166210001EE35 /* AuthViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewOutput.swift; sourceTree = "<group>"; };
 		03A7E9692B7182D600F3474E /* RxSwift+TypeAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxSwift+TypeAlias.swift"; sourceTree = "<group>"; };
@@ -769,8 +770,6 @@
 		57580D1D1DFAB6AB0090C488 /* UIApplication+AppVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+AppVersion.h"; sourceTree = "<group>"; };
 		57580D1E1DFAB6AB0090C488 /* UIApplication+AppVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+AppVersion.m"; sourceTree = "<group>"; };
 		5762EA831ECDC2600032411A /* TripFullPDFGeneratorTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripFullPDFGeneratorTest.swift; sourceTree = "<group>"; };
-		57691EFE1E10613500F78859 /* RateApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateApplication.h; sourceTree = "<group>"; };
-		57691EFF1E10613500F78859 /* RateApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateApplication.m; sourceTree = "<group>"; };
 		5785A4EE1E09DA0100C3CA0C /* AnalyticsLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsLogger.swift; sourceTree = "<group>"; };
 		579DDFB11E2E4223004937F7 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		57A8058C1E9672C000E68049 /* DatabaseUpgrade15Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseUpgrade15Tests.swift; sourceTree = "<group>"; };
@@ -2859,8 +2858,6 @@
 				EA888A751AFA3D3F00DF2AE6 /* NumberInputValidation.m */,
 				EA00D00B1B0629BE00C87678 /* ProperNameInputValidation.h */,
 				EA00D00C1B0629BE00C87678 /* ProperNameInputValidation.m */,
-				57691EFE1E10613500F78859 /* RateApplication.h */,
-				57691EFF1E10613500F78859 /* RateApplication.m */,
 				EAD15C781B0881C2003BB1F3 /* ReceiptFilesManager.h */,
 				EAD15C791B0881C2003BB1F3 /* ReceiptFilesManager.m */,
 				A7D6CDE61D05524200998FEF /* ReportAssetsGenerator.swift */,
@@ -2880,6 +2877,7 @@
 				71ACA7B91F5B5A830024903E /* FeatureFlags.swift */,
 				71ACA7CD1F5C58290024903E /* DebugStates.swift */,
 				71AD6367219AD86200515A5E /* EurekaWhitespaceWorkaround.swift */,
+				0319FD4B2B7F6053002A7BD6 /* RateApplicationManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -3822,6 +3820,7 @@
 				71871504224FDEB70061D493 /* DatabaseUpgradeToVersion13.swift in Sources */,
 				710EEE1522EA641D0025435A /* OrganizationsResponse.swift in Sources */,
 				71F4683B1EEF2E55009F6CE7 /* Viperit+Extensions.swift in Sources */,
+				0319FD4C2B7F6053002A7BD6 /* RateApplicationManager.swift in Sources */,
 				EA8D81DD1AEA965D00BAC943 /* WBReportUtils.m in Sources */,
 				A7B6FC5D1CF5E26D00CD53F1 /* ReceiptColumnExchangeRate.swift in Sources */,
 				714DE89E2051C82E0066EA6F /* HorizontalPickerCell.swift in Sources */,
@@ -3980,7 +3979,6 @@
 				717DDB98203B59A7000486C3 /* PickerButtonCell.swift in Sources */,
 				A7F05BBC1CFC31520079F1AD /* WBCurrency+Extensions.swift in Sources */,
 				718714FD224FDEB70061D493 /* DatabaseUpgradeToVersion19.swift in Sources */,
-				57691F001E10613500F78859 /* RateApplication.m in Sources */,
 				71ACA7BA1F5B5A830024903E /* FeatureFlags.swift in Sources */,
 				710D98A21FE573540088B9BA /* UIView+Extensions.swift in Sources */,
 				A78214FB1CFFE86000FD644A /* ExchangeRate.swift in Sources */,

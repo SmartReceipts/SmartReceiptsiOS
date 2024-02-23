@@ -58,7 +58,7 @@ extension AppDelegate {
         dataQueue.async {
             self.dataImport = DataImport(inputFile: from.path, output: FileManager.documentsPath)
             _ = self.dataImport.execute(overwrite: overwrite)
-                .subscribeOn(MainScheduler.instance)
+                .subscribe(on: MainScheduler.instance)
                 .subscribe(onNext: {
                     SyncService.shared.trySyncData()
                     hud.hide()
@@ -85,7 +85,7 @@ extension AppDelegate {
         purchaseService.logPurchases()
         purchaseService.completeTransactions()
         
-        RateApplication.sharedInstance().markAppLaunch()
+        RateApplicationManager.shared.markAppLaunch()
         PushNotificationService.shared.initialize()
         ScansPurchaseTracker.shared.initialize()
         GoogleDriveService.shared.initialize()
