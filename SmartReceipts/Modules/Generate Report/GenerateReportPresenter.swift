@@ -11,6 +11,7 @@ import Viperit
 import RxSwift
 
 class GenerateReportPresenter: Presenter {
+    private let rateApplicationManager: RateApplicationManager = .shared
     
     override func viewHasLoaded() {
         interactor.trackConfigureReportEvent()
@@ -56,6 +57,10 @@ class GenerateReportPresenter: Presenter {
     }
     
     func presentInterstitialAd() {
+        guard rateApplicationManager.generatedReportFlag() else {
+            rateApplicationManager.markAppGeneratedReport()
+            return
+        }
         router.openInterstitialAd()
     }
 }

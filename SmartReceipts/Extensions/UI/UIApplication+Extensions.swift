@@ -34,4 +34,17 @@ extension UIApplication {
             return 0
         }
     }
+    
+    var foregroundActiveScene: UIWindowScene? {
+        connectedScenes
+            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
+    }
+    
+    var rootViewController: UIViewController? {
+        foregroundActiveScene?
+            .windows
+            .filter({ $0.isKeyWindow })
+            .first?
+            .rootViewController
+    }
 }

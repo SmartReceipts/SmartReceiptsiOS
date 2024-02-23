@@ -39,18 +39,6 @@ class AuthServiceTestable: AuthServiceInterface {
         return negative ? .error(MockAuthError.testError) : .just(SignupResponse(id: id, token: token))
     }
     
-    func logout() -> Single<Void> {
-        return negative ? .error(MockAuthError.testError) : .just(())
-    }
-    
-    func getUser() -> Single<User> {
-        return negative ? .error(MockAuthError.testError) : .never()
-    }
-    
-    func saveDevice(token: String) -> Single<Void> {
-        return negative ? .error(MockAuthError.testError) : .just(())
-    }
-    
     func login(credentials: SmartReceipts.Credentials) async throws -> SmartReceipts.LoginResponse {
         if negative {
             throw MockAuthError.testError
@@ -65,6 +53,18 @@ class AuthServiceTestable: AuthServiceInterface {
         } else {
             SignupResponse(id: id, token: token)
         }
+    }
+
+    func logout() -> Single<Void> {
+        return negative ? .error(MockAuthError.testError) : .just(())
+    }
+    
+    func getUser() -> Single<User> {
+        return negative ? .error(MockAuthError.testError) : .never()
+    }
+    
+    func saveDevice(token: String) -> Single<Void> {
+        return negative ? .error(MockAuthError.testError) : .just(())
     }
     
     enum MockAuthError: Error {

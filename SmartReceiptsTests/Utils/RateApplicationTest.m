@@ -8,30 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "RateApplication.h"
 #import "Constants.h"
 #import "NSDate+Calculations.h"
-
-@interface RateApplication (TestExpose)
-
-- (id)initSingleton;
-- (void)reset;
-- (void)setLaunchCount:(NSUInteger)count;
-- (void)setFirstLaunchDate:(NSDate *)date;
-- (void)rateLater;
-- (BOOL)shouldShowRateDialog;
-- (NSInteger)launchCount;
-- (NSInteger)launchTarget;
-- (void)markRatePressed;
-- (void)markNoPressed;
-- (NSDate *)firstLaunchDate;
-
-
-@end
+#import "SmartReceipts-Swift.h"
+@class RateApplicationManager;
 
 @interface RateApplicationTest : XCTestCase
 
-@property (nonatomic, strong) RateApplication *rate;
+@property (nonatomic, strong) RateApplicationManager *rate;
 
 @end
 
@@ -40,7 +24,7 @@
 - (void)setUp {
     [super setUp];
 
-    self.rate = [[RateApplication alloc] initSingleton];
+    self.rate = [[RateApplicationManager alloc] init];
     [self.rate reset];
     [self.rate setLaunchCount:SmartReceiptTargetLaunchesForAppRating];
     [self.rate setFirstLaunchDate:[[NSDate date] dateByAddingDays:-8]];

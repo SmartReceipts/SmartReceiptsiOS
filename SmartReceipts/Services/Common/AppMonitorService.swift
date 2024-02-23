@@ -45,7 +45,7 @@ class FirebaseAppMonitorService: AppMonitorService {
     private func setupCustomExceptionHandler() {
         // Catches most but not all fatal errors
         NSSetUncaughtExceptionHandler { exception in
-            RateApplication.sharedInstance().markAppCrash()
+            RateApplicationManager.shared.markAppCrash()
             
             var message = exception.description
             message += "\n"
