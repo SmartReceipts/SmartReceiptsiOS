@@ -43,7 +43,7 @@ class AdPresentingContainerViewController: UIViewController {
             .do(onNext: {
                 AnalyticsManager.sharedManager.record(event: Event.Purchases.AdUpsellTapped)
             }).subscribe(onNext: { [unowned self] in
-                if FeatureFlags.newSubscription.isEnabled {
+                if RemoteConfigService.shared.subscriptionsEnabled {
                     openSubscriptionPage()
                 } else {
                     purchasePlusSubscription()

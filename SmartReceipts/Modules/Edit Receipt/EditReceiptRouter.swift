@@ -8,8 +8,10 @@
 
 import Foundation
 import Viperit
+import GoogleMobileAds
 
 class EditReceiptRouter: Router {
+    private let interstitialAdsManager = InterstitialAdsManagerImpl()
     
     func openSettings() {
         let settingsVC = MainStoryboard().instantiateViewController(withIdentifier: "SettingsOverflow")
@@ -20,6 +22,10 @@ class EditReceiptRouter: Router {
     
     func close(){
         _view.viewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func done(completion: (() -> Void)? = nil) {
+        _view.viewController.dismiss(animated: true, completion: completion)
     }
     
     func openAuth() -> AuthModuleInterface {
@@ -41,6 +47,20 @@ class EditReceiptRouter: Router {
     func openCategories() {
         let module = AppModules.categories.build()
         module.router.show(from: _view.viewController)
+    }
+    
+    func prepareInterstitialAd() {
+        interstitialAdsManager.prepareAds()
+    }
+
+    func openInterstitialAd() {
+        guard let numberOfShowAd = RemoteConfigService.shared.numberOfShowAd,
+              let receipts = Database.sharedInstance().allReceipts(for: WBPreferences.lastOpenedTrip),
+              receipts.count.isMultiple(of: numberOfShowAd)
+        else {
+            return
+        }
+        interstitialAdsManager.openInterstitialAd()
     }
 }
 

@@ -67,6 +67,8 @@ class EditReceiptPresenter: Presenter {
                     self?.router.openAutoScans()
                 })
         }).disposed(by: bag)
+        
+        router.prepareInterstitialAd()
     }
     
     override func setupView(data: Any) {
@@ -83,12 +85,16 @@ class EditReceiptPresenter: Presenter {
         router.close()
     }
     
+    func done() {
+        router.done(completion: router.openInterstitialAd)
+    }
+    
     func present(errorDescription: String) {
         router.openAlert(title: nil, message: errorDescription)
     }
     
     func tooltipText() -> String? {
-        return interactor.tooltipText()
+        interactor.tooltipText()
     }
 }
 

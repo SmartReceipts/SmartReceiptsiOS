@@ -427,7 +427,7 @@ class EditReceiptFormView: FormViewController, QuickAlertPresenter {
         guard let exchangeRow = form.rowBy(tag: EXCHANGE_RATE_TAG) as? ExchangeRateRow else { return }
         CurrencyExchangeService()
             .exchangeRate(trip.defaultCurrency.code, target: receipt.currency.code, onDate: receipt.date)
-            .observeOn(MainScheduler.instance)
+            .observe(on: MainScheduler.instance)
             .bind(to: exchangeRow.responseSubject)
             .disposed(by: bag)
         
