@@ -16,7 +16,6 @@ import Toaster
 class MainMenuActionSheet: ActionSheet, Disposable {
     private weak var viewController: UIViewController?
     var bag: DisposeBag { return sheetViewController.bag }
-    let remoteConfig = RemoteConfigService()
     
     init(openOn viewController: UIViewController) {
         
@@ -25,7 +24,7 @@ class MainMenuActionSheet: ActionSheet, Disposable {
         
         bag.insert(self)
         
-        if remoteConfig.subscriptionsEnabled {
+        if RemoteConfigService.shared.subscriptionsEnabled {
             addAction(
                 title: LocalizedString("menu_main_subscriptions"),
                 image: #imageLiteral(resourceName: "subscriptions"),

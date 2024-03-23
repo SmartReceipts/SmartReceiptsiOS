@@ -11,30 +11,11 @@ import Viperit
 import GoogleMobileAds
 
 class GenerateReportRouter: Router {
-    private var interstitial: GADInterstitialAd?
-    private var intersttialDelegate: InerstitialDelegate?
+    private let interstitialAdsManager = InterstitialAdsManagerImpl()
     
     func prepareAds() {
-        guard !PurchaseService.hasValidPlusSubscriptionValue else { return }
-        updateAd()
+        interstitialAdsManager.prepareAds()
     }
-
-    func updateAd() {
-        intersttialDelegate = InerstitialDelegate(updateClosure: updateAd)
-        let request = GADRequest()
-        GADInterstitialAd.load(
-            withAdUnitID: AD_UNIT_ID_INTERSTITIAL,
-            request: request,
-            completionHandler: { [weak self] ad, error in
-                if let error = error {
-                    Logger.debug("Failed to load interstitial ad with error: \(error.localizedDescription)")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3.0, execute: { self?.updateAd() })
-                    return
-                }
-                self?.interstitial = ad
-            })
-    }
-
     
     func close() {
         _view.viewController.dismiss(animated: true, completion: nil)
@@ -76,9 +57,7 @@ class GenerateReportRouter: Router {
     }
     
     func openInterstitialAd() {
-        guard !PurchaseService.hasValidPlusSubscriptionValue else { return }
-        interstitial?.fullScreenContentDelegate = intersttialDelegate
-        interstitial?.present(fromRootViewController: _view.viewController)
+        interstitialAdsManager.prepareAds()
     }
 }
 
@@ -86,17 +65,5 @@ class GenerateReportRouter: Router {
 private extension GenerateReportRouter {
     var presenter: GenerateReportPresenter {
         return _presenter as! GenerateReportPresenter
-    }
-}
-
-private class InerstitialDelegate: NSObject, GADFullScreenContentDelegate {
-    private var updateClosure: VoidBlock
-    
-    init(updateClosure: @escaping VoidBlock) {
-        self.updateClosure = updateClosure
-    }
-    
-    func interstitialWillDismissScreen(_ ad: GADInterstitialAd) {
-        updateClosure()
     }
 }

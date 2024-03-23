@@ -34,7 +34,7 @@ class EditDistanceInteractor: Interactor {
         
         if database.save(distance) {
             Logger.debug("Distance has been \(asNewDistance ? "updated" : "added")")
-            presenter.close()
+            presenter.done()
         } else {
             Logger.error("Distance can't be \(asNewDistance ? "updated" : "added")")
         }

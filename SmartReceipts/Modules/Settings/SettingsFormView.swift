@@ -59,7 +59,7 @@ final class SettingsFormView: FormViewController {
             row.title = LocalizedString("pro_subscription")
             self.purchaseRow = row
             row.hidden = Condition.function([], { form in
-                FeatureFlags.newSubscription.isEnabled
+                RemoteConfigService.shared.subscriptionsEnabled
             })
         }.onCellSelection({ [unowned self] _, row in
             if !row.isPurchased() {
@@ -81,7 +81,7 @@ final class SettingsFormView: FormViewController {
         <<< ButtonRow() { row in
             row.title = LocalizedString("settings_purchase_restore_label")
             row.hidden = Condition.function([], { form in
-                FeatureFlags.newSubscription.isEnabled
+                RemoteConfigService.shared.subscriptionsEnabled
             })
         }.cellUpdate({ cell, row in
             cell.textLabel?.textColor = AppTheme.primaryColor
@@ -103,7 +103,7 @@ final class SettingsFormView: FormViewController {
         <<< ButtonRow() { row in
             row.title = LocalizedString("ocr_open_subcription_button_text")
             row.hidden = Condition.function([], { form in
-                !FeatureFlags.newSubscription.isEnabled
+                !RemoteConfigService.shared.subscriptionsEnabled
             })
         }.cellUpdate({ cell, row in
             cell.textLabel?.textColor = AppTheme.primaryColor

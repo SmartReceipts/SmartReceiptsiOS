@@ -217,7 +217,7 @@ final class BackupView: UserInterface {
     }
     
     private func openBackupServiceSelectorAfterPurchase() {
-        if FeatureFlags.newSubscription.isEnabled {
+        if RemoteConfigService.shared.subscriptionsEnabled {
             presenter.openSubscriptionPage()
         } else {
             purchaseSubscriptionPlus()

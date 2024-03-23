@@ -16,12 +16,24 @@ class EditDistancePresenter: Presenter {
         }
     }
     
+    override func viewHasLoaded() {
+        router.prepareInterstitialAd()
+    }
+    
     func save(distance: Distance, asNewDistance: Bool) {
         interactor.save(distance: distance, asNewDistance: asNewDistance)
     }
     
     func close() {
         router.close()
+    }
+    
+    func done() {
+        router.done(completion: router.openInterstitialAd)
+    }
+    
+    func prepareInterstitialAd() {
+        router.prepareInterstitialAd()
     }
 }
 

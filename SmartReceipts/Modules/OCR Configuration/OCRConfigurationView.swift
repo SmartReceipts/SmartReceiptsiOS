@@ -70,7 +70,7 @@ final class OCRConfigurationView: UserInterface {
     }
     
     private func configureView() {
-        if FeatureFlags.newSubscription.isEnabled {
+        if RemoteConfigService.shared.subscriptionsEnabled {
             openSubscriptionButton.isHidden = false
             availablePurchases.isHidden = true
             scans10button.isHidden = true

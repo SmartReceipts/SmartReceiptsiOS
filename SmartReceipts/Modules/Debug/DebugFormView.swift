@@ -68,7 +68,7 @@ class DebugFormView: FormViewController {
         
         <<< SwitchRow() { row in
             row.title = "Use new subscription"
-            row.value = FeatureFlags.newSubscription.isEnabled
+            row.value = RemoteConfigService.shared.subscriptionsEnabled
         }.onChange({ row in
             FeatureFlags.newSubscription = Feature(row.value!)
         })
